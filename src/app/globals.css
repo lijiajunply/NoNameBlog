@@ -181,3 +181,159 @@ figure[data-rehype-pretty-code-figure] figcaption[data-rehype-pretty-code-title]
   border-top-right-radius: 0;
 }
 
+
+/* Language indicator for code blocks */
+figure[data-rehype-pretty-code-figure] {
+  position: relative;
+}
+
+figure[data-rehype-pretty-code-figure] pre[data-language] {
+  position: relative;
+}
+
+figure[data-rehype-pretty-code-figure] pre[data-language]::before {
+  content: attr(data-language);
+  position: absolute;
+  top: 0.25rem;
+  right: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  font-weight: 500;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+  background-color: transparent;
+  user-select: none;
+  opacity: 0.5;
+  transition: opacity 0.2s ease-in-out;
+  pointer-events: none;
+}
+
+figure[data-rehype-pretty-code-figure]:hover pre[data-language]::before {
+  opacity: 1;
+}
+
+/* Adjust language indicator position when there is a title */
+figure[data-rehype-pretty-code-figure] figcaption[data-rehype-pretty-code-title] + pre[data-language]::before {
+  top: 0.25rem;
+}
+
+/* Custom language labels for specific languages */
+figure[data-rehype-pretty-code-figure] pre[data-language="csharp"]::before {
+  content: "C#";
+}
+
+figure[data-rehype-pretty-code-figure] pre[data-language="cpp"]::before {
+  content: "C++";
+}
+
+figure[data-rehype-pretty-code-figure] pre[data-language="javascript"]::before {
+  content: "JS";
+}
+
+figure[data-rehype-pretty-code-figure] pre[data-language="typescript"]::before {
+  content: "TS";
+}
+
+figure[data-rehype-pretty-code-figure] pre[data-language="markdown"]::before {
+  content: "MD";
+}
+
+
+/* Mac style window dots for code blocks without title */
+figure[data-rehype-pretty-code-figure] {
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--foreground) 8%, transparent);
+}
+
+figure[data-rehype-pretty-code-figure] pre {
+  margin: 0;
+  border: none;
+  border-radius: 0;
+}
+
+figure[data-rehype-pretty-code-figure] > pre:first-child::after {
+  content: "";
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 50%;
+  background-color: #ff5f56;
+  box-shadow: 1.25rem 0 0 #ffbd2e, 2.5rem 0 0 #27c93f;
+  pointer-events: none;
+}
+
+figure[data-rehype-pretty-code-figure] > pre:first-child {
+  padding-top: 2.75rem;
+}
+
+/* Fix macOS buttons spacing and title */
+figcaption[data-rehype-pretty-code-title] {
+  position: relative;
+  text-align: center;
+  border: none;
+  border-bottom: 1px solid color-mix(in srgb, var(--foreground) 8%, transparent);
+  border-radius: 0;
+}
+
+figcaption[data-rehype-pretty-code-title]::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 1rem;
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 50%;
+  background-color: #ff5f56;
+  box-shadow: 1.25rem 0 0 #ffbd2e, 2.5rem 0 0 #27c93f;
+  pointer-events: none;
+}
+
+
+/* Align language label for Mac window styling */
+figure[data-rehype-pretty-code-figure] > pre:first-child[data-language]::before {
+  top: 0.75rem;
+}
+
+figure[data-rehype-pretty-code-figure] figcaption[data-rehype-pretty-code-title] + pre[data-language]::before {
+  top: 0.5rem;
+}
+
+
+/* Adjust Mac window dots to look more like native Mac window controls */
+figure[data-rehype-pretty-code-figure] > pre:first-child::after,
+figcaption[data-rehype-pretty-code-title]::before {
+  width: 12px;
+  height: 12px;
+  box-shadow: 20px 0 0 #ffbd2e, 40px 0 0 #27c93f;
+  background-color: #ff5f56;
+}
+
+figure[data-rehype-pretty-code-figure] > pre:first-child::after {
+  top: 15px;
+  left: 15px;
+}
+
+figcaption[data-rehype-pretty-code-title]::before {
+  left: 15px;
+}
+
+figure[data-rehype-pretty-code-figure] > pre:first-child {
+  padding-top: 3.5rem;
+}
+
+figure[data-rehype-pretty-code-figure] > pre:first-child[data-language]::before {
+  top: 12px;
+}
+
+
+/* Mac dots hover state */
+figure[data-rehype-pretty-code-figure]:hover > pre:first-child::after,
+figure[data-rehype-pretty-code-figure]:hover figcaption[data-rehype-pretty-code-title]::before {
+  /* optional: you can add an image url or svg here to show the inside symbols like x - + on hover if you want */
+}
+
