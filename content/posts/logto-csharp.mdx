@@ -1,0 +1,142 @@
+---
+title: "使用Logto提供Blazor登录服务"
+date: "2024-09-20"
+summary: "在 Blazor 中接入 Logto 实现 OAuth2 登录。"
+tags:
+  - "CSharp"
+  - "推荐"
+category: "CSharp更多库分享"
+draft: false
+---
+
+# 前言
+我之前在Blazor上一直用的都是自己写的登录系统。但是构建一个自己的登录服务真的好累，重点是每个服务都要写一套登录系统，就很累。
+那么有没有一种比较简单的登录系统构建方法呢？
+有的，使用单点登录(OAuth2)。
+不知道各位有没有遇到过这样的界面：
+![](/notion-images/logto-csharp/001-cccede246945.png)
+像这样的，我们只需要跳转到特定的网站，然后登录完成之后在跳回来就行了。这样我们只需要写一个登陆页面，然后再让其他网站接入这个服务就OK了。
+那有没有一种比较简单的构建方法呢？有的。这就是我们今天要讲的Logto。
+# Logto
+Logto是一个用于构建简单登录系统的工具。它可以帮助开发者实现单点登录（OAuth2）功能，使得用户只需要在一个地方登录，就可以访问多个相关的网站或服务⁠⁠。
+![](/notion-images/logto-csharp/002-0cae00c02cab.png)
+这个官网写的还可以。
+那我们该怎么接入Logto呢？
+## 部署并初始化Logto服务
+> 这里假设使用的是服务器方案
+我们在服务器中输入这个代码：
+```shell
+curl -fsSL https://raw.githubusercontent.com/logto-io/logto/HEAD/docker-compose.yml
+docker compose -p logto -f - up
+```
+然后就可以了
+或者如果你使用的是Saas服务（例如Zeabur），那么可以去网站找一下有没有模板可以直接生成的。
+### 初始化Logto
+我们现在打开logto的控制台（一般是在9090端口）。
+![](/notion-images/logto-csharp/003-451f156fff15.png)
+（不得不说，这个页面写的还挺好看的）
+然后点击按钮“Create account”，进行管理员账号注册。
+![](/notion-images/logto-csharp/004-943745f84e62.png)
+注册成功之后就会来到这样的页面。
+![](/notion-images/logto-csharp/005-e1d975c7cba6.png)
+# 在Blazor上进行配置
+这里我们使用Blazor Server：
+首先，下载相关库:
+```shell
+dotnet add package Logto.AspNetCore.Authentication
+```
+然后，在Program.cs上面进行依赖注入：
+```c#
+builder.Services.AddLogtoAuthentication(options =>
+{
+    options.Endpoint = "你的地址";
+    options.AppId = "这个待会儿再说";
+    options.AppSecret = "这个待会儿再说";
+    options.CallbackPath = "/Foo";
+    options.SignedOutCallbackPath = "/Bar";
+});
+```
+然后再添加两个页面：
+```c#
+app.MapGet("/SignIn", async context =>
+{
+    if (!(context.User.Identity?.IsAuthenticated ?? false))
+    {
+        await context.ChallengeAsync(new AuthenticationProperties { RedirectUri = "/" });
+    }
+    else
+    {
+        context.Response.Redirect("/");
+    }
+});
+
+app.MapGet("/SignOut", async context =>
+{
+    if (context.User.Identity?.IsAuthenticated ?? false)
+    {
+        await context.SignOutAsync(new AuthenticationProperties { RedirectUri = "/" });
+    }
+    else
+    {
+        context.Response.Redirect("/");
+    }
+});
+```
+之后我们进行登录登出操作，就可以跳转到这两个页面，从而跳转到对应的接口上进行操作。
+最后我们可以在主页上面试验一下：
+```c#
+@page "/"
+
+@using Microsoft.AspNetCore.Components.Authorization
+@using System.Security.Claims
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject NavigationManager NavigationManager
+
+<p>Is authenticated: @User?.Identity?.IsAuthenticated</p>
+@if (User?.Identity?.IsAuthenticated == true)
+{
+    <button @onclick="SignOut">Sign out</button>
+}
+else
+{
+    <button @onclick="SignIn">Sign in</button>
+}
+
+@code {
+    private ClaimsPrincipal? User { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        User = authState.User;
+    }
+
+    private void SignIn()
+    {
+        NavigationManager.NavigateTo("/SignIn", forceLoad: true);
+    }
+
+    private void SignOut()
+    {
+        NavigationManager.NavigateTo("/SignOut", forceLoad: true);
+    }
+}
+```
+但是还没完，我们还得回到Logto Console，配置一下应用。
+# 在Logto上添加应用
+我们现在回到控制台上面，并点击”Applications”，进行应用添加操作。
+选择下方的Blazor Server方案，并填写你的应用名称和介绍。
+![](/notion-images/logto-csharp/006-5d48bb5622af.png)
+然后就会蹦出来一个基础教程的界面，我们点击右下角的按钮：
+![](/notion-images/logto-csharp/007-7ac1e688862b.png)
+然后就成功创建了一个应用。
+接下来就是在下面这里填上你的回调路径和登出回调路径配置一下，就是前面Program.cs上面写的那个。
+![](/notion-images/logto-csharp/008-94cf6d425826.png)
+然后复制**App ID**和**App Secrets**到Program.cs。
+现在，终于完成了所有的配置。当然记得，点一下保存按钮。
+# 最后
+我们现在来测试一下：
+![](/notion-images/logto-csharp/009-8ffc4dabf579.png)
+点击之后，我们就来到了Logto的登陆界面：
+![](/notion-images/logto-csharp/010-5d7257dd9895.png)
+OK了！

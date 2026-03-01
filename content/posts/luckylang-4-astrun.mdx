@@ -1,0 +1,152 @@
+---
+title: "4.书写Run函数"
+date: "2023-09-28"
+summary: "脚本语言系列：Run 函数与变量管理器实现。"
+tags:
+  - "开发"
+  - "CSharp"
+category: "如何用Csharp写一个脚本语言？"
+draft: false
+---
+
+# 书写Run函数
+上一章我们已经写好了二元运算，这一期我们首先看一下我们目前最需要的东西是什么？
+我们在上一期中书写二元运算的时候，是不是一直在用GetValue这个函数，如果你没用，那么请你好好看看你的代码，应该是出了问题（当然也有可能是你自己已经写好了相关的东西）。
+GetValue方法，对于值类型当然不用去改变，但是，标识符呢？
+因此，我们需要首先构建一个变量管理器来管理我们的变量。
+## 变量管理器
+因为我们在这里不需要使用到指针，也就是我们不打算实现指针，所以我们在这里使用一个字典来储存就好了，我们声明一下：
+```c#
+public Dictionary<string,Value> Variates{ get; set; } = new ()
+```
+之所以使用 `<string,Value>而不是<ID,Value>是因为这样能方便我们储存变量，如果我们使用ID的话，就不容易实现复写。`
+那我们现在写两个接口:Get和Post
+- Get:将ID传进去，输出Value
+- Post:将ID和Value传进去，并录入到字典中
+看一下实例：
+```c#
+    public void Post(ID id,Value value)
+    {
+        var a = Variates.Keys;
+        if (a.Any(x => id.IdName == x))
+            Variates[id.IdName] = value;
+        else
+            Variates.Add(id.IdName,value);
+    }
+    public Value Get(ID id)
+    {
+        var a = Variates.Keys;
+        if (a.Any(x => id.IdName == x))
+            return Variates[id.IdName];
+        return null;
+    }
+```
+我们还要照顾到for,while,if这些语句，因为在语句内生成的变量，最后都需要删除，所以我们还需要使用一个List `<int>来标记这些：`
+```c#
+public List<int> Chirdren { get; set; } = new List<int>();
+```
+和Add()，Remove()
+```c#
+    public void Add() => Chirdren.Add(Variates.Count-1);
+    public void Remove()
+    {
+        int a = Chirdren.Last();
+        Chirdren.RemoveAt(Chirdren.Count -1);
+        var b = Variates.Keys.ToArray();
+        for (int i = Variates.Count -1; i > a; i++)
+        {
+            var c = b[i];
+            Variates.Remove(c);
+        }
+		}
+```
+OK，那么现在我们差不多完成了变量管理器的内容。
+## 编写Run函数
+在编写Run函数之前，我们还需要重构一下GetValue()，为了节省内存开支，我们使用ref，这样我们只用一张表就可以了。
+现在我们来开始编写Run函数。首先我们在Statement类中编写：
+```c#
+public virtual void Run(ref VariateManager Manager){}
+```
+再来实现各语句的Run方法。
+首先的是Set语句：
+```c#
+public override void   Run(ref VariateManager Manager)
+    {
+        var a = Expression.GetValue(ref Manager);
+        Manager.Post(Id,a);
+    }
+```
+然后是for和while语句：
+```c#
+// for
+public override void Run(ref VariateManager Manager)
+    {
+        Manager.Add();
+        Set.Run(ref Manager);
+        while (true)
+        {
+            var a = Expr.GetValue(ref Manager);
+            if (a is BoolValue)
+            {
+                if ((bool)a.TheValue)
+                {
+                    Block.Run(ref Manager);
+                    State.Run(ref Manager);
+                }
+                else
+                    break;
+            }
+            else
+                break;
+        }
+        Manager.Remove();
+    }
+// while
+public override void Run(ref VariateManager Manager)
+    {
+        Manager.Add();
+        while (true)
+        {
+            var a = Expr.GetValue(ref Manager);
+            if (a is BoolValue)
+            {
+                if ((bool)a.TheValue)
+                {
+                    Block.Run(ref Manager);
+                }else break;
+            }else break;
+        }
+        Manager.Remove();
+    }
+```
+if语句需要构建一个IfBlock来进行，每一个if语句都代表着一个主句，若干个else if句，一个或没有else句：
+```c#
+//ifstatement
+public override void Run(ref VariateManager Manager)
+    {
+        bool isPass = false;
+        If.Run(ref Manager,ref isPass);
+        foreach (var ifBlock in Elif)
+            ifBlock.Run(ref Manager,ref isPass);
+        if (!isPass&&Else is not null)
+            Else.Run(ref Manager);
+    }
+//ifblock
+public void Run(ref VariateManager Manager,ref bool isPass)
+    {
+        if (isPass)
+            return;
+        var a = Expr.GetValue(ref Manager);
+        if (a is BoolValue)
+        {
+            if ((bool)a.TheValue)
+            {
+                Manager.Add();
+                Block.Run(ref Manager);
+                Manager.Remove();
+                isPass = true;
+            }
+        }
+    }
+```
+现在我们完成了Run函数的构建。这也代表着我们现在只剩最后一步了。

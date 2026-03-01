@@ -1,0 +1,135 @@
+---
+title: "C#应该怎么才能连接数据库？"
+date: "2023-10-24"
+summary: "EF Core 在桌面与 Web 场景下连接数据库的入门实践。"
+tags:
+  - "开发"
+  - "CSharp"
+category: "Csharp操作"
+draft: false
+---
+
+我们在很多应用上都要使用到很多的数据操作，也需要储存大量的数据。
+对于C#而言，我们可以使用Ado.Net(直接使用sql语句来操作数据)跟EF(OPM，通过使用C#代码来操作数据库)
+那么这篇文章便围绕着EF来进行。
+# 简单使用EF来进行数据库操作
+我们这次使用sqlite来储存我们的数据
+所以我们需要先引用一下库:
+```c#
+dotnet add package Microsoft.EntityFrameworkCore.Sqlite
+```
+然后我们先创建一个储存数据的类（Model）:
+```c#
+public class Member{
+		[Key]
+		public int Key{get;set;}
+		public string Name{get;set;}
+		public string UserId{get;set;}
+}
+```
+然后我们还需要写一个类来处理C#跟数据库的交互，这种类一般都继承自DbContext:
+```c#
+public class MemberContext : DbContext
+{
+    public DbSet<Member> Members{ get; set; }
+
+    public string DbPath { get; }
+
+    public MemberContext()
+    {
+        var folder = Environment.SpecialFolder.LocalApplicationData;
+        var path = Environment.GetFolderPath(folder);
+        DbPath = System.IO.Path.Join(path, "Member.db");
+    }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder options)
+        => options.UseSqlite($"Data Source={DbPath}");
+}
+```
+# 在Web应用中使用Ef
+对于Web应用，我们也常常使用这样的方式：
+```c#
+public class MemberContext : DbContext
+{
+    public DbSet<Member> Members{ get; set; }
+		
+		public MemberContext(DbContextOptions<MemberContext> options)
+        : base(options) { }
+}
+```
+然后在Program.cs中：
+```c#
+builder.Services.AddDbContextFactory<BlogContext>(opt =>
+        opt.UseSqlite("string"));
+```
+我们经常会将连接符放在配置文件(Json)上，一般这样子做(appsettings.json)：
+```json
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "AllowedHosts": "*",
+  "ConnectionStrings": {
+    "SQLite": "Data Source=Data.db"
+  }
+}
+```
+然后将上面的代码改成：
+```c#
+builder.Services.AddDbContextFactory<BlogContext>(opt =>
+        opt.UseSqlite(builder.Configuration.GetConnectionString("SQLite")));
+```
+# 项目迁移
+前面两种场景都适用：
+在控制台输入以下指令：
+```shell
+dotnet tool install --global dotnet-ef
+dotnet add package Microsoft.EntityFrameworkCore.Design
+dotnet ef migrations add InitialCreate
+dotnet ef database update
+```
+然后就可以了！
+# 基本使用
+## 普通场景
+```shell
+using System;
+using System.Linq;
+
+using var db = new MemberContext();
+
+Console.WriteLine($"Database path: {db.DbPath}.");
+
+// 创建
+db.Add(new Member(){UserId = "string"});
+db.SaveChanges();
+
+// Read
+var member = db.Members
+    .OrderBy(b => b.Name)
+    .First();
+
+// Update
+member.UserId = "string1";
+db.SaveChanges();
+
+// Delete
+db.Remove(member);
+db.SaveChanges();
+```
+## Web场景
+我们在Program.cs中已经依赖注入了工厂类，那么我们现在在Razor文件(这里假设我们使用的是Blazor Server框架)里头用inject一下就行。
+```c#
+@inject IDbContextFactory<MemberContext> DbFactory
+```
+然后只要使用下面这个语句就可以正常使用了：
+```c#
+var context = await DbFactory.CreateDbContextAsync();
+```
+---
+# 结尾
+这次我们使用了Ef Core来进行连接数据库
+微软文档：
+[入门 - EF Core \| Microsoft Learn](https://learn.microsoft.com/zh-cn/ef/core/get-started/overview/first-app?tabs=netcore-cli)

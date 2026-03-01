@@ -1,0 +1,48 @@
+---
+title: "如何修改Windows系统的用户名"
+date: "2025-02-27"
+summary: "Windows 用户目录与本地账户名修改流程。"
+tags:
+  - "开发"
+category: "心情随笔"
+draft: false
+---
+
+> 即使到了2025年，也还有很多软件不支持中文路径。（尤其是一些框架，能生成项目，但就是死活不能构建和运行）
+	或许很多人都遇到过这种问题，但是出Bug的时候也没明说。最后也只能放弃
+	所以这篇文章要解决的正是这个问题——因为用户名为中文所引发的各种问题。
+## 修改系统用户名
+首先按下 `Win+R` 进入到 `运行` 中：
+![](/notion-images/how-to-windows/001-8f35c576071e.png)
+然后再输入 `regedit` ，进入到注册表编辑器中：
+![](/notion-images/how-to-windows/2da27799672a.png)
+直接在上方路径搜索中，搜索：
+```plain text
+HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\ProfileList
+```
+接下来直接找到名字最长的那个文件夹，打开之后找到 `ProfileImagePath`:
+![](/notion-images/how-to-windows/002-b325dc9fa08f.png)
+然后直接进行编辑（双击ProfileImagePath）：
+![](/notion-images/how-to-windows/003-6655e8a42e50.png)
+改成 `C:\Users\<你的名字>` （记得改成英文，建议不要有空格）。例如我要改成LuckyFish，那么就是 `C:\Users\LuckyFish`
+之后点击确定。重启电脑。
+## 重启之后
+重启之后会提示无法登录到账户，这很正常，因为此时你的C:，而你在注册表中修改了新的用户名，这会使得Windows无法找到你的用户文件夹，进而也无法读取你的各种设置。这时候我们不要点击注销，只需点击隐藏即可。
+![](/notion-images/how-to-windows/004-5ac7546770dd.png)
+转自知乎，https://zhuanlan.zhihu.com/p/707348679
+进入到 `C:\Users` ，将原先的用户文件夹名称改为你现在设置的名称。
+到现在就基本上OK了。但是有个问题，就是现在你登录时的名字还是你原来的名字。而且在设置中你还叫这个名字。
+## 本地账户更改
+因为前面其实只是更改用户文件夹而已，所以我们还得再改一下本地账户：
+1. 使用 `Win+R` ，输入 `netplwiz`
+2. 在用户组中点击你的用户
+	![](/notion-images/how-to-windows/005-a86c74e7935a.png)
+3. 直接更改名称即可
+## 微软账户重新登录
+如果你是使用的微软账户的话，那么请在 `设置  ➡️ 账户 ➡️ 你的信息 ➡️相关设置 ➡️ 账户` 中，先点击改为本地用户登录，再登录微软账户即可。
+要是想加个照片，直接选择一张或者你现场拍一张即可。
+![](/notion-images/how-to-windows/006-4e267866f0b2.png)
+## 还有一些事情
+当然，你还得去改几个东西。
+例如如果你之前改过环境变量的话，记得去改一下。
+还有就是我改完名字遇到过的，VS Code的问题。有可能会不能在文件管理器中使用vscode打开文件。这里你重新安装一下即可。

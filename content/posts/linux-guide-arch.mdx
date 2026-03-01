@@ -1,0 +1,103 @@
+---
+title: "Linux指南（arch系篇）"
+date: "2023-11-02"
+summary: "Arch 系 Linux 安装与常见配置指引。"
+tags:
+  - "Linux"
+category: "Linux指南"
+draft: false
+---
+
+## **前言**
+之前我写过一个回答：[为什么好多人在吹Manjaro？](https://www.zhihu.com/question/483301201/answer/2091002234)
+然后想了想，既然有好多人都想尝试一下arch系，为什么不能写一篇这样的文章呢？
+开干！！！
+
+## **一 安装**
+先等等吧
+
+### **二 配置**
+### **0 关于manjaro最新版没有网卡驱动的问题（2022.11.16）**
+联想小新pro16（2022版）的网卡比较新，而manjaro最新版现在内核版本才5.15，不支持
+更新到5.19就行了
+
+### **1 yay 和 paru**
+
+```shell
+sudo pacman -S yay
+sudo pacman -S paru
+```
+
+### **2 换成国内源**
+
+```shell
+ sudo pacman-mirrors -i -c China -m rank # 更新镜像源排名，选择延迟小的
+ sudo nano /etc/pacman.conf
+```
+
+在文件末尾写上：
+
+```shell
+[archlinuxcn]
+Server = https://mirrors.ustc.edu.cn/archlinuxcn/$arch
+```
+
+其实清华的也不错，但是我更推荐中科大的，因为清华的东西少，而且有点慢
+清华的：
+
+```shell
+[archlinuxcn]
+Server = https://mirrors.tuna.tsinghua.edu.cn/archlinuxcn/$arch
+```
+
+保存之后在终端上输入：
+
+```shell
+sudo pacman -Syy && sudo pacman -S archlinuxcn-keyring
+```
+
+当然你也可以试试其他的源：
+[GitHub - archlinuxcn/mirrorlist-repo: Arch Linux CN Community repo mirrors list](https://link.zhihu.com/?target=https%3A//github.com/archlinuxcn/mirrorlist-repo)
+
+### **3 输入法**
+直接：
+
+```shell
+yay -S fcitx-sogoupinyin
+```
+
+就行了
+比Ubuntu简单多了
+
+### **4 安装腾讯系软件**
+4.1 tim
+
+```shell
+yay -S deepin-wine-tim
+```
+
+4.2 qq
+
+```shell
+yay -S deepin-wine-qq
+```
+
+4.3 微信
+
+```shell
+yay -S deepin-wine-wechat
+```
+
+### **5 wps**
+先安装字体：
+
+```shell
+yay -S wps-office wps-office-mui-zh-cn wps-office-fonts ttf-wps-fonts
+yay -S ttf-ms-fonts
+```
+
+再安装软件：
+
+```shell
+yay -S wps-office-cn
+```

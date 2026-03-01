@@ -1,0 +1,67 @@
+---
+title: "MySQL? PostgreSQL!"
+date: "2024-05-07"
+summary: "在 EF Core 场景下从 MySQL 迁移 PostgreSQL 的经验与踩坑记录。"
+tags:
+  - "开发"
+category: "CSharp更多库分享"
+draft: false
+---
+
+# 前言
+其实我一开始一直使用EF Core的时候，我一直是Sqlite(开发环境)+MySQL(生产环境)，但是最后我在使用Zeabur时，发现了一件非常离谱的事情：
+MySQL即使不用，就挂着，一天也要0.06美元！
+这笔账各位得这么算：我一个月一共就5美元的免费额度，也就是说，我每天就只能使用5/30 = 0.16 美元。而如果我这里每天就要0.06的基础开销，那也就是说我其他的加起来就只能用0.1美元。而我又不止这个项目，那就真的太捉襟见肘了。
+因此我不能使用MySQL这个数据库了，虽然他确实很优秀，但是省钱方面实在不算优秀。
+## 省钱的PostgreSQL
+当我再找新的替代品的时候，我突然看到之知乎有人在说，国内喜欢MySQL而国外更喜欢使用PostgreSQL。
+那就用这个试试吧！
+于是我就把PostgreSQL服务部署到了我的云服务器上，然后惊讶的发现：
+**这东西是真的省钱呀！**
+我们前面说到MySQL基础开销是0.06是吧，然而PostgreSQL的开销却是接近于0，在日常使用中也是在0.01上。
+哇塞，这东西是真的省钱！
+于是我将我几个项目的数据库都改成了PostgreSQL，效果还是很不错的，而且重点是省钱呀各位。
+# 在EF Core使用PostgreSQL
+前面我也提到了，我写的项目中大部分的技术栈就是Blazor+Asp.Net CCore Webapi 或者Vue+Asp.Net Core WebApi。总而言之就是我都是使用的C#(dotnet平台)。那么我需要连接数据库最好的方案就是EF Core了。
+首先我们需要安装EF Core到项目上，
+但是换成PostgreSQL之后我终于深刻的体会到了，什么叫便宜没好货。
+## 问题1：EF Core中PostgreSQL不能使用自增主键
+一般来说，在EF Core中当我们使用Int类型的主键，EF Core会未我们自动设置成自增主键，就比如说下面这个类型：
+```c#
+   	[Column(TypeName = "varchar(20)")] public string Title { get; set; } = "";
+    [Column(TypeName = "varchar(200)")] public string Description { get; set; } = "";
+    [Column(TypeName = "varchar(20)")] public string StartTime { get; set; } = "";
+    [Column(TypeName = "varchar(20)")] public string EndTime { get; set; } = "";
+    
+    [Column(TypeName = "boolean")] public bool Status { get; set; }
+
+    [Key] public int Id { get; init; }
+```
+生成的对应的SQL语句就是：
+```sql
+CREATE TABLE "Tools" (
+    "Id" INTEGER NOT NULL CONSTRAINT "PK_Tools" PRIMARY KEY AUTOINCREMENT,
+    "Name" varchar(20) NOT NULL,
+    "Url" varchar(64) NOT NULL,
+    "IconUrl" varchar(64) NOT NULL,
+    "Description" varchar(64) NOT NULL,
+    "Tag" varchar(64) NULL
+);
+```
+按道理确实如此，我在开发环境使用Sqlite完全可以，因为在生成Tools表语句中给Id这个行设置了AUTOINCREMENT（自动增加）。但是在PostgreSQL中却不能使用。
+后来在询问过社团AI后才知道，PostgreSQL 使用的是序列（sequence）来生成自增主键，而不是像其他数据库（如 SQL Server）那样使用自动增长列（auto-increment column）。
+所以我们还得写一个序列来实现：
+在DbContext类中加入这段代码：
+```c#
+      	 modelBuilder.HasSequence<int>("ToolModelId")
+            .StartsAt(1)
+            .IncrementsBy(1);
+        modelBuilder.Entity<ToolModel>()
+            .Property(o => o.Id)
+            .HasDefaultValueSql("nextval('\"ToolModelId\"')");
+```
+这样的话就可以了。
+不过这个时候就有问题了，我开发模式使用的是Sqlite，但是Sqlite不能使用序列。
+完蛋，这下子是真的遇到麻烦事了。
+我也不知道各位是怎么解决这个问题的，我也不想自己下个pgsql或者MySQL当开发模式。毕竟每次开发的时候都要挂着个服务，就怪废事儿的。
+所以我最后的做法是，直接使用String来当主键。

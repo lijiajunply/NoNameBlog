@@ -1,0 +1,98 @@
+---
+title: "Python计算机二级（4.5）"
+date: "2023-11-02"
+summary: "函数章节练习：数值函数手写实现。"
+tags:
+  - "开发"
+  - "Python"
+category: "Python二级"
+draft: false
+---
+
+## **零、前言**
+上一期我们学了函数，那么今天我们来练习一下。
+不记得了就回顾一下
+## **一、自己写数值运算函数**
+让我们回顾一下：
+<table>
+<tr>
+<td>**abs()**</td>
+<td>**求绝对值**</td>
+</tr>
+<tr>
+<td>divmod()</td>
+<td>计算商与余数的函数</td>
+</tr>
+<tr>
+<td>pow()</td>
+<td>计算幂次方运算的函数，相当于x\*\*y</td>
+</tr>
+<tr>
+<td>round()</td>
+<td>返回浮点数x的四舍五入值。形如round(x,y)，其中y表示约到第几位</td>
+</tr>
+</table>
+### **1.abs()**
+绝对值的话就是判断一下是否为正负就行。
+
+```python
+def ABS(x):
+    if(x<0):
+        return -x
+    return x
+print(ABS(-1))
+
+output:
+1
+```
+### **2.divmod()**
+
+```python
+def DIVMOD(x,y):
+    return x//y,x%y
+print(DIVMOD(1,2))
+
+output;
+（0，1）
+```
+### **3.pow()**
+
+```python
+def POW(x,y,z=0):    
+    if z == 0:
+        return x**y
+    return x**y%z
+print(POW(2,10))
+print(POW(2,10,3))
+```
+因为%0会报错，所以我们干脆在这里令%0为本身（其实是因为我不知道 a%? = a ）
+### **4.round()**
+
+```python
+def _round(x:float,y:int):
+    _int = str(x).split('.')[0]
+    z = str(x).split('.')[1]
+    i = 0
+    w = z[0:y]       
+    if int(z[y]) >=5:
+        t = list(w)
+        t[y-1] = str(int(w[y-1])+1)
+        w = ''.join(t)            
+    return int(_int) + int(w)/(10**(y))
+print(_round(20.12345,4))
+
+output:
+20.1235
+```
+## **二、下一章**
+这一章不难吧！
+只要你认真看，就一定可以学会！
+放心，后面的内容很简单的，而且也快讲完了。
+先来看看下一章的内容吧：
+> 五、组合数据类型
+	1、组合数据类型的基本概念;
+	2、列表类型:定义、索引、切片;
+	3、列表类型的操作:列表的操作函数、列表的操作方法;
+	4、字典类型:定义、索引;
+	5、字典类型的操作:字典的操作函数、字典的操作方法。
+比起前面的，这些不是很难嘛！
