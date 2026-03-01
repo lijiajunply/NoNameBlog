@@ -18,6 +18,7 @@ export const friendSchema = z.object({
   description: z.string().min(1),
   avatar: z.string().optional(),
   order: z.number().int().optional(),
+  category: z.string().default("其他"),
 });
 
 export type Friend = z.infer<typeof friendSchema>;

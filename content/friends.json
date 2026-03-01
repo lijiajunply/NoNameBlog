@@ -1,16 +1,34 @@
 [
   {
-    "name": "Example Dev",
-    "url": "https://example.com",
-    "description": "分享前端与设计系统实践",
-    "avatar": "https://dummyimage.com/80x80/e5e7eb/111827.png&text=ED",
-    "order": 1
+    "name": "LuckyFish",
+    "url": "https://blog.luckyfishes.com/",
+    "description": "正在自建博客框架中",
+    "avatar": "https://q1.qlogo.cn/g?b=qq&nk=2383690354&s=4",
+    "order": 3,
+    "category": "个人博客"
   },
   {
-    "name": "Static Notes",
-    "url": "https://example.org",
-    "description": "专注静态站点与内容工作流",
-    "avatar": "https://dummyimage.com/80x80/d1d5db/111827.png&text=SN",
-    "order": 2
+    "name": "GuuGuai",
+    "url": "https://blog.guuguai.site/",
+    "description": "一个什么都可能会写的博客",
+    "avatar": "https://cravatar.cn/avatar/646331BFF8F19A0E05679C3CC0FC54D6",
+    "order": 1,
+    "category": "个人博客"
+  },
+  {
+    "name": "纸鹿本鹿",
+    "url": "https://blog.zhilu.site/",
+    "description": "纸鹿至麓不知路，支炉制露不止漉",
+    "avatar": "https://avatars.githubusercontent.com/u/73089601?v=4",
+    "order": 2,
+    "category": "个人博客"
+  },
+  {
+    "name": "西建大iOS Club",
+    "url": "https://www.xauat.site/",
+    "description": "西建大较大和较为知名的科技类社团",
+    "avatar": "https://p.qlogo.cn/gh/952954710/952954710/100/",
+    "order": 2,
+    "category": "组织机构"
   }
 ]
