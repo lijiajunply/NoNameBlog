@@ -6,12 +6,13 @@ import { ChartTooltip } from "@/components/charts/tooltip";
 import { XAxis } from "@/components/charts/x-axis";
 import { PostCard } from "@/components/post-card";
 import { Badge } from "@/components/ui/badge";
-import { getAllCategories, getAllPosts, getAllTags } from "@/lib/content/posts";
+import { getAllPosts, getAllTags } from "@/lib/content/posts";
 
 export default function HomePage() {
   const posts = getAllPosts();
-  const categories = getAllCategories().slice(0, 6);
-  const tags = getAllTags().slice(0, 10);
+  const tags = getAllTags();
+  const heroTags = tags.slice(0, 6);
+  const bottomTags = tags.slice(0, 20);
   const chartData = [
     { date: "2025-08-01", posts: 1, tags: 2 },
     { date: "2025-09-01", posts: 2, tags: 3 },
@@ -49,15 +50,15 @@ export default function HomePage() {
             </p>
             
             <div className="mt-8 flex flex-wrap gap-2.5">
-              {categories.map((category) => (
+              {heroTags.map((tag) => (
                 <Link
-                  key={category.name}
-                  href={`/categories/${encodeURIComponent(category.name)}`}
+                  key={tag.name}
+                  href={`/tags/${encodeURIComponent(tag.name)}`}
                   className="transition-transform hover:scale-105 active:scale-95"
                 >
                   <Badge className="flex items-center gap-1.5 rounded-xl border-black/5 bg-white/60 px-3.5 py-1.5 text-sm font-medium text-neutral-700 shadow-sm backdrop-blur-sm hover:bg-white/80 dark:border-white/10 dark:bg-white/5 dark:text-neutral-200 dark:hover:bg-white/10">
-                    <Icon icon="ph:folder-duotone" className="h-4 w-4" />
-                    {category.name}
+                    <Icon icon="ph:hash-duotone" className="h-4 w-4" />
+                    {tag.name}
                   </Badge>
                 </Link>
               ))}
@@ -123,7 +124,7 @@ export default function HomePage() {
           </h2>
         </div>
         <div className="flex flex-wrap gap-3 px-2">
-          {tags.map((tag) => (
+          {bottomTags.map((tag) => (
             <Link key={tag.name} href={`/tags/${encodeURIComponent(tag.name)}`}>
               <div className="group flex items-center gap-2 rounded-xl border border-neutral-200/60 bg-white px-4 py-2 text-sm font-medium text-neutral-700 shadow-sm transition-all duration-300 hover:border-neutral-300 hover:bg-neutral-50 hover:shadow-md dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-300 dark:hover:border-neutral-700 dark:hover:bg-neutral-800">
                 <Icon icon="ph:hash-duotone" className="text-neutral-400 transition-colors group-hover:text-neutral-600 dark:text-neutral-500 dark:group-hover:text-neutral-300" />

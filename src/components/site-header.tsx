@@ -3,8 +3,7 @@ import { ThemeToggle } from "@/components/theme-toggle";
 
 const navItems = [
   { href: "/", label: "首页" },
-  { href: "/categories", label: "分类" },
-  { href: "/tags", label: "标签" },
+  { href: "/tags", label: "分类/标签" },
   { href: "/about", label: "关于" },
   { href: "/friends", label: "友链" },
   { href: "/search", label: "搜索" },

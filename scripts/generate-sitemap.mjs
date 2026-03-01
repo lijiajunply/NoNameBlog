@@ -23,22 +23,18 @@ function getPostSlugs() {
     .filter((post) => !post.draft);
 
   const postRoutes = posts.map((post) => `/posts/${post.slug}/`);
-  const categoryRoutes = [
-    ...new Set(
-      posts.map((post) => `/categories/${encodeURIComponent(post.category)}/`),
-    ),
-  ];
   const tagRoutes = [
     ...new Set(
       posts.flatMap((post) =>
-        post.tags.map((tag) => `/tags/${encodeURIComponent(tag)}/`),
+        [post.category, ...post.tags]
+          .filter(Boolean)
+          .map((tag) => `/tags/${encodeURIComponent(tag)}/`),
       ),
     ),
   ];
 
   return {
     postRoutes,
-    categoryRoutes,
     tagRoutes,
   };
 }
@@ -48,14 +44,12 @@ const staticRoutes = [
   "/about/",
   "/friends/",
   "/search/",
-  "/categories/",
   "/tags/",
 ];
 const routes = getPostSlugs();
 const urls = [
   ...staticRoutes,
   ...routes.postRoutes,
-  ...routes.categoryRoutes,
   ...routes.tagRoutes,
 ];
 

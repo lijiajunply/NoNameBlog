@@ -44,6 +44,7 @@ export default async function PostPage({ params }: PostPageProps) {
   }
 
   const content = await renderMdx(post.content);
+  const allTopics = Array.from(new Set([post.frontmatter.category, ...post.frontmatter.tags])).filter(Boolean);
 
   return (
     <article className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_240px]">
@@ -53,7 +54,6 @@ export default async function PostPage({ params }: PostPageProps) {
             <span>{formatDate(post.frontmatter.date)}</span>
             <span>·</span>
             <span>{post.readingTime}</span>
-            <Badge>{post.frontmatter.category}</Badge>
           </div>
           <h1
             className="text-3xl font-semibold tracking-tight text-neutral-900 md:text-4xl dark:text-white"
@@ -65,9 +65,9 @@ export default async function PostPage({ params }: PostPageProps) {
             {post.frontmatter.summary}
           </p>
           <div className="flex flex-wrap gap-2">
-            {post.frontmatter.tags.map((tag) => (
-              <Link key={tag} href={`/tags/${encodeURIComponent(tag)}`}>
-                <Badge>#{tag}</Badge>
+            {allTopics.map((topic) => (
+              <Link key={topic} href={`/tags/${encodeURIComponent(topic)}`}>
+                <Badge>#{topic}</Badge>
               </Link>
             ))}
           </div>

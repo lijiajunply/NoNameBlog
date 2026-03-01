@@ -5,19 +5,203 @@
     <link>https://example.com</link>
     <description>一个简约的静态技术博客，记录开发与思考。</description>
       <item>
-        <title>Apple 风格界面设计笔记</title>
-        <link>https://example.com/posts/apple-like-design-notes/</link>
-        <guid>https://example.com/posts/apple-like-design-notes/</guid>
-        <pubDate>Mon, 02 Mar 2026 00:00:00 GMT</pubDate>
-        <description>从留白、层级、色彩与动效四个角度，总结 Apple 风格在网页中的可落地策略。</description>
+        <title>数据结构（三）二叉树</title>
+        <link>https://example.com/posts/datastructure-3/</link>
+        <guid>https://example.com/posts/datastructure-3/</guid>
+        <pubDate>Thu, 07 Aug 2025 00:00:00 GMT</pubDate>
+        <description>二叉树遍历与核心概念笔记。</description>
       </item>
 
       <item>
-        <title>你好，NoName Blog</title>
-        <link>https://example.com/posts/hello-noname-blog/</link>
-        <guid>https://example.com/posts/hello-noname-blog/</guid>
-        <pubDate>Sun, 01 Mar 2026 00:00:00 GMT</pubDate>
-        <description>这是博客的第一篇文章，介绍这个静态博客的设计目标与技术实现。</description>
+        <title>动态规划</title>
+        <link>https://example.com/posts/datastructure-5/</link>
+        <guid>https://example.com/posts/datastructure-5/</guid>
+        <pubDate>Thu, 07 Aug 2025 00:00:00 GMT</pubDate>
+        <description>动态规划的基本概念简述。</description>
+      </item>
+
+      <item>
+        <title>当我升级到了 .Net 9之后，为什么会经常崩溃</title>
+        <link>https://example.com/posts/dotnet-9-crash/</link>
+        <guid>https://example.com/posts/dotnet-9-crash/</guid>
+        <pubDate>Mon, 03 Mar 2025 00:00:00 GMT</pubDate>
+        <description>关于 .Net 9 升级后稳定性问题的记录。</description>
+      </item>
+
+      <item>
+        <title>浮点数的世界（一）：深入解析Float、Double与Decimal</title>
+        <link>https://example.com/posts/float1/</link>
+        <guid>https://example.com/posts/float1/</guid>
+        <pubDate>Thu, 27 Feb 2025 00:00:00 GMT</pubDate>
+        <description>从二进制表示出发理解浮点误差与 Decimal 的适用场景。</description>
+      </item>
+
+      <item>
+        <title>如何修改Windows系统的用户名</title>
+        <link>https://example.com/posts/how-to-windows/</link>
+        <guid>https://example.com/posts/how-to-windows/</guid>
+        <pubDate>Thu, 27 Feb 2025 00:00:00 GMT</pubDate>
+        <description>Windows 用户目录与本地账户名修改流程。</description>
+      </item>
+
+      <item>
+        <title>这里有个在线Markdown编辑器，要不要试一下</title>
+        <link>https://example.com/posts/md-site-use/</link>
+        <guid>https://example.com/posts/md-site-use/</guid>
+        <pubDate>Mon, 18 Nov 2024 00:00:00 GMT</pubDate>
+        <description>开源项目 md 的使用体验与功能介绍。</description>
+      </item>
+
+      <item>
+        <title>快来用Markdown！</title>
+        <link>https://example.com/posts/md-start/</link>
+        <guid>https://example.com/posts/md-start/</guid>
+        <pubDate>Mon, 18 Nov 2024 00:00:00 GMT</pubDate>
+        <description>Markdown 基础语法与写作效率实践。</description>
+      </item>
+
+      <item>
+        <title>Edge &amp; 谷歌浏览器插件推荐</title>
+        <link>https://example.com/posts/plugin-recommendations/</link>
+        <guid>https://example.com/posts/plugin-recommendations/</guid>
+        <pubDate>Mon, 18 Nov 2024 00:00:00 GMT</pubDate>
+        <description>常用浏览器扩展的安装与推荐清单。</description>
+      </item>
+
+      <item>
+        <title>使用Logto提供Blazor登录服务</title>
+        <link>https://example.com/posts/logto-csharp/</link>
+        <guid>https://example.com/posts/logto-csharp/</guid>
+        <pubDate>Fri, 20 Sep 2024 00:00:00 GMT</pubDate>
+        <description>在 Blazor 中接入 Logto 实现 OAuth2 登录。</description>
+      </item>
+
+      <item>
+        <title>MySQL? PostgreSQL!</title>
+        <link>https://example.com/posts/efcore-error/</link>
+        <guid>https://example.com/posts/efcore-error/</guid>
+        <pubDate>Tue, 07 May 2024 00:00:00 GMT</pubDate>
+        <description>在 EF Core 场景下从 MySQL 迁移 PostgreSQL 的经验与踩坑记录。</description>
+      </item>
+
+      <item>
+        <title>数据结构（一）链表</title>
+        <link>https://example.com/posts/datastructure-1-factorypattern/</link>
+        <guid>https://example.com/posts/datastructure-1-factorypattern/</guid>
+        <pubDate>Thu, 28 Mar 2024 00:00:00 GMT</pubDate>
+        <description>链表基础与删除节点问题的 C# 实现。</description>
+      </item>
+
+      <item>
+        <title>建大er看这！校园邮箱（教育邮箱）注册方法来啦！</title>
+        <link>https://example.com/posts/xauat-1/</link>
+        <guid>https://example.com/posts/xauat-1/</guid>
+        <pubDate>Thu, 28 Mar 2024 00:00:00 GMT</pubDate>
+        <description>校园邮箱注册流程与相关学习资源说明。</description>
+      </item>
+
+      <item>
+        <title>Avalonia（四）MVVM架构实战——文件浏览器</title>
+        <link>https://example.com/posts/avalonia-4-mvvmpractice-fileviewer/</link>
+        <guid>https://example.com/posts/avalonia-4-mvvmpractice-fileviewer/</guid>
+        <pubDate>Tue, 02 Jan 2024 00:00:00 GMT</pubDate>
+        <description>基于 MVVM 实现文件浏览器的完整实践。</description>
+      </item>
+
+      <item>
+        <title>Avalonia（五）使用其他主题来写一个待办事项软件</title>
+        <link>https://example.com/posts/avalonia-5-fluenttodo/</link>
+        <guid>https://example.com/posts/avalonia-5-fluenttodo/</guid>
+        <pubDate>Tue, 02 Jan 2024 00:00:00 GMT</pubDate>
+        <description>使用 FluentAvalonia 主题搭建 Todo 应用。</description>
+      </item>
+
+      <item>
+        <title>Avalonia（三）普通架构实战——计算器</title>
+        <link>https://example.com/posts/avalonia-3-practice-calculator/</link>
+        <guid>https://example.com/posts/avalonia-3-practice-calculator/</guid>
+        <pubDate>Fri, 29 Dec 2023 00:00:00 GMT</pubDate>
+        <description>使用普通架构实现 Avalonia 计算器应用。</description>
+      </item>
+
+      <item>
+        <title>Avalonia（二）简单介绍一下项目</title>
+        <link>https://example.com/posts/avalonia-2-initproj/</link>
+        <guid>https://example.com/posts/avalonia-2-initproj/</guid>
+        <pubDate>Thu, 28 Dec 2023 00:00:00 GMT</pubDate>
+        <description>Avalonia 项目结构与 MVVM 基础说明。</description>
+      </item>
+
+      <item>
+        <title>Linux指南（arch系篇）</title>
+        <link>https://example.com/posts/linux-guide-arch/</link>
+        <guid>https://example.com/posts/linux-guide-arch/</guid>
+        <pubDate>Thu, 02 Nov 2023 00:00:00 GMT</pubDate>
+        <description>Arch 系 Linux 安装与常见配置指引。</description>
+      </item>
+
+      <item>
+        <title>Python计算机二级（4.5）</title>
+        <link>https://example.com/posts/python-2level-4.5/</link>
+        <guid>https://example.com/posts/python-2level-4.5/</guid>
+        <pubDate>Thu, 02 Nov 2023 00:00:00 GMT</pubDate>
+        <description>函数章节练习：数值函数手写实现。</description>
+      </item>
+
+      <item>
+        <title>Python计算机二级（五）</title>
+        <link>https://example.com/posts/python-2level-5/</link>
+        <guid>https://example.com/posts/python-2level-5/</guid>
+        <pubDate>Thu, 02 Nov 2023 00:00:00 GMT</pubDate>
+        <description>组合数据类型（集合、列表、字典）的知识点整理。</description>
+      </item>
+
+      <item>
+        <title>C#应该怎么才能连接数据库？</title>
+        <link>https://example.com/posts/cs-sql/</link>
+        <guid>https://example.com/posts/cs-sql/</guid>
+        <pubDate>Tue, 24 Oct 2023 00:00:00 GMT</pubDate>
+        <description>EF Core 在桌面与 Web 场景下连接数据库的入门实践。</description>
+      </item>
+
+      <item>
+        <title>4.书写Run函数</title>
+        <link>https://example.com/posts/luckylang-4-astrun/</link>
+        <guid>https://example.com/posts/luckylang-4-astrun/</guid>
+        <pubDate>Thu, 28 Sep 2023 00:00:00 GMT</pubDate>
+        <description>脚本语言系列：Run 函数与变量管理器实现。</description>
+      </item>
+
+      <item>
+        <title>各种排序的特点</title>
+        <link>https://example.com/posts/characteristics-of-various-sorting/</link>
+        <guid>https://example.com/posts/characteristics-of-various-sorting/</guid>
+        <pubDate>Fri, 02 Jul 2021 00:00:00 GMT</pubDate>
+        <description>常见排序算法的时间复杂度、空间复杂度与稳定性对比。</description>
+      </item>
+
+      <item>
+        <title>数据结构（二）数组</title>
+        <link>https://example.com/posts/datastructure-2/</link>
+        <guid>https://example.com/posts/datastructure-2/</guid>
+        <pubDate>Fri, 02 Jul 2021 00:00:00 GMT</pubDate>
+        <description>数组章节的基础笔记与简要说明。</description>
+      </item>
+
+      <item>
+        <title>贪心算法</title>
+        <link>https://example.com/posts/datastructure-4/</link>
+        <guid>https://example.com/posts/datastructure-4/</guid>
+        <pubDate>Fri, 02 Jul 2021 00:00:00 GMT</pubDate>
+        <description>贪心策略的核心思路与典型题目练习。</description>
+      </item>
+
+      <item>
+        <title>为什么人们会讨厌社会达尔文主义</title>
+        <link>https://example.com/posts/social-darwinism/</link>
+        <guid>https://example.com/posts/social-darwinism/</guid>
+        <pubDate>Fri, 02 Jul 2021 00:00:00 GMT</pubDate>
+        <description>围绕社会达尔文主义的个人思考。</description>
       </item>
   </channel>
 </rss>

@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { siteConfig } from "@/config/site";
-import { getAllCategories, getAllPosts, getAllTags } from "./posts";
+import { getAllPosts, getAllTags } from "./posts";
 
 function toUrl(loc: string) {
   return `  <url><loc>${loc}</loc></url>`;
@@ -13,18 +13,14 @@ export function generateSitemapXml() {
     "/about",
     "/friends",
     "/search",
-    "/categories",
     "/tags",
   ];
   const postPages = getAllPosts().map((post) => `/posts/${post.slug}`);
-  const categoryPages = getAllCategories().map(
-    (category) => `/categories/${encodeURIComponent(category.name)}`,
-  );
   const tagPages = getAllTags().map(
     (tag) => `/tags/${encodeURIComponent(tag.name)}`,
   );
 
-  const urls = [...staticPages, ...postPages, ...categoryPages, ...tagPages]
+  const urls = [...staticPages, ...postPages, ...tagPages]
     .map((route) => `${siteConfig.siteUrl}${route}/`)
     .map(toUrl)
     .join("\n");

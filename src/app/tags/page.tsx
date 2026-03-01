@@ -8,7 +8,7 @@ export default function TagsPage() {
   return (
     <div className="space-y-6">
       <h1 className="text-3xl font-semibold tracking-tight text-neutral-900 dark:text-white">
-        标签
+        分类 / 标签
       </h1>
       <div className="flex flex-wrap gap-3">
         {tags.map((tag) => (
