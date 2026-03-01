@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Icon } from "@iconify/react";
 import AreaChart, { Area } from "@/components/charts/area-chart";
 import { Grid } from "@/components/charts/grid";
 import { ChartTooltip } from "@/components/charts/tooltip";
@@ -23,77 +24,114 @@ export default function HomePage() {
   ];
 
   return (
-    <div className="space-y-10">
-      <section className="rounded-3xl border border-neutral-200/70 bg-white/75 p-8 shadow-[0_15px_50px_-35px_rgba(0,0,0,0.45)] backdrop-blur-xl md:p-12 dark:border-neutral-800/80 dark:bg-neutral-900/75">
-        <div className="grid items-end gap-8 lg:grid-cols-[1.1fr_1fr]">
-          <div>
-            <p className="text-sm uppercase tracking-[0.22em] text-neutral-500">
-              静态博客
-            </p>
-            <h1 className="mt-3 max-w-3xl text-4xl leading-tight font-semibold tracking-tight text-neutral-900 md:text-5xl dark:text-white">
-              用内容驱动设计，用系统思维写博客。
+    <div className="space-y-16">
+      {/* Hero Section - Apple/macOS Glassmorphism Style */}
+      <section className="relative overflow-hidden rounded-[2.5rem] border border-black/5 bg-white/60 p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] backdrop-blur-3xl md:p-14 dark:border-white/10 dark:bg-black/40 dark:shadow-[0_8px_30px_rgb(0,0,0,0.1)]">
+        {/* Subtle background gradients for visual depth */}
+        <div className="pointer-events-none absolute -top-40 -right-40 -z-10 h-125 w-125 rounded-full bg-blue-500/10 blur-3xl dark:bg-blue-500/20" />
+        <div className="pointer-events-none absolute -bottom-40 -left-40 -z-10 h-125 w-125 rounded-full bg-purple-500/10 blur-3xl dark:bg-purple-500/20" />
+        
+        <div className="grid items-center gap-12 lg:grid-cols-[1.2fr_1fr]">
+          <div className="flex flex-col justify-center">
+            <div className="mb-6 flex w-fit items-center gap-2 rounded-full border border-black/5 bg-white/50 px-3 py-1 text-xs font-medium text-neutral-600 backdrop-blur-md dark:border-white/10 dark:bg-black/50 dark:text-neutral-300">
+              <Icon icon="ph:sparkle-duotone" className="text-blue-500" />
+              <span>没有名字的博客</span>
+            </div>
+            
+            <h1 className="text-4xl font-semibold leading-[1.15] tracking-tight text-neutral-900 md:text-5xl lg:text-[3.5rem] dark:text-white">
+              内容驱动设计，
+              <br className="hidden md:block" />
+              <span className="text-neutral-500 dark:text-neutral-400">系统思维写作。</span>
             </h1>
-            <p className="mt-5 max-w-2xl text-neutral-600 dark:text-neutral-300">
-              这里记录前端工程、设计系统和产品实现细节。界面追求简约、克制和可读性。
+            
+            <p className="mt-6 max-w-xl text-lg leading-relaxed text-neutral-600 dark:text-neutral-400">
+              记录前端工程、设计系统和产品实现细节。追求简约、克制和可读性的阅读体验。
             </p>
-            <div className="mt-7 flex flex-wrap gap-2">
+            
+            <div className="mt-8 flex flex-wrap gap-2.5">
               {categories.map((category) => (
                 <Link
                   key={category.name}
                   href={`/categories/${encodeURIComponent(category.name)}`}
+                  className="transition-transform hover:scale-105 active:scale-95"
                 >
-                  <Badge>{category.name}</Badge>
+                  <Badge className="flex items-center gap-1.5 rounded-xl border-black/5 bg-white/60 px-3.5 py-1.5 text-sm font-medium text-neutral-700 shadow-sm backdrop-blur-sm hover:bg-white/80 dark:border-white/10 dark:bg-white/5 dark:text-neutral-200 dark:hover:bg-white/10">
+                    <Icon icon="ph:folder-duotone" className="h-4 w-4" />
+                    {category.name}
+                  </Badge>
                 </Link>
               ))}
             </div>
           </div>
-          <div className="rounded-2xl border border-neutral-200/80 bg-white/70 p-4 dark:border-neutral-800 dark:bg-neutral-900/70">
-            <p className="mb-3 text-sm text-neutral-500">
-              内容增长趋势（bklit）
-            </p>
-            <AreaChart
-              data={chartData}
-              margin={{ top: 24, right: 16, bottom: 28, left: 8 }}
-            >
-              <Grid horizontal numTicksRows={4} />
-              <Area
-                dataKey="posts"
-                fill="var(--chart-line-primary)"
-                fillOpacity={0.35}
-              />
-              <Area
-                dataKey="tags"
-                fill="var(--chart-line-secondary)"
-                fillOpacity={0.15}
-              />
-              <ChartTooltip />
-              <XAxis numTicks={5} />
-            </AreaChart>
+          
+          <div className="group relative w-full overflow-hidden rounded-3xl border border-black/5 bg-white/50 p-6 shadow-sm backdrop-blur-xl transition-all duration-300 hover:bg-white/70 hover:shadow-md dark:border-white/10 dark:bg-black/50 dark:hover:bg-black/60">
+            <div className="w-full">
+              <AreaChart
+                data={chartData}
+                margin={{ top: 10, right: 10, bottom: 20, left: 10 }}
+              >
+                <Grid horizontal numTicksRows={4} />
+                <Area
+                  dataKey="posts"
+                  fill="var(--chart-line-primary)"
+                  fillOpacity={0.2}
+                  stroke="var(--chart-line-primary)"
+                  strokeWidth={2}
+                />
+                <Area
+                  dataKey="tags"
+                  fill="var(--chart-line-secondary)"
+                  fillOpacity={0.1}
+                  stroke="var(--chart-line-secondary)"
+                  strokeWidth={2}
+                />
+                <ChartTooltip />
+                <XAxis numTicks={5} />
+              </AreaChart>
+            </div>
           </div>
         </div>
       </section>
 
-      <section>
-        <h2 className="mb-5 text-xl font-semibold tracking-tight text-neutral-900 dark:text-white">
-          最新文章
-        </h2>
-        <div className="space-y-4">
+      {/* Latest Posts Section */}
+      <section className="space-y-6">
+        <div className="flex items-center gap-3 px-2">
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-neutral-100 text-neutral-700 dark:bg-neutral-800 dark:text-neutral-300">
+            <Icon icon="ph:article-duotone" className="h-5 w-5" />
+          </div>
+          <h2 className="text-2xl font-semibold tracking-tight text-neutral-900 dark:text-white">
+            最新文章
+          </h2>
+        </div>
+        <div className="grid gap-5">
           {posts.map((post) => (
-            <PostCard key={post.slug} post={post} />
+            <div key={post.slug} className="transition-transform duration-300 hover:-translate-y-1">
+              <PostCard post={post} />
+            </div>
           ))}
         </div>
       </section>
 
-      <section>
-        <h2 className="mb-4 text-xl font-semibold tracking-tight text-neutral-900 dark:text-white">
-          热门标签
-        </h2>
-        <div className="flex flex-wrap gap-2">
+      {/* Tags Section */}
+      <section className="space-y-6">
+        <div className="flex items-center gap-3 px-2">
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-neutral-100 text-neutral-700 dark:bg-neutral-800 dark:text-neutral-300">
+            <Icon icon="ph:hash-duotone" className="h-5 w-5" />
+          </div>
+          <h2 className="text-2xl font-semibold tracking-tight text-neutral-900 dark:text-white">
+            探索话题
+          </h2>
+        </div>
+        <div className="flex flex-wrap gap-3 px-2">
           {tags.map((tag) => (
             <Link key={tag.name} href={`/tags/${encodeURIComponent(tag.name)}`}>
-              <Badge>
-                #{tag.name} · {tag.count}
-              </Badge>
+              <div className="group flex items-center gap-2 rounded-xl border border-neutral-200/60 bg-white px-4 py-2 text-sm font-medium text-neutral-700 shadow-sm transition-all duration-300 hover:border-neutral-300 hover:bg-neutral-50 hover:shadow-md dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-300 dark:hover:border-neutral-700 dark:hover:bg-neutral-800">
+                <Icon icon="ph:hash-duotone" className="text-neutral-400 transition-colors group-hover:text-neutral-600 dark:text-neutral-500 dark:group-hover:text-neutral-300" />
+                <span>{tag.name}</span>
+                <span className="ml-1 flex h-5 min-w-5 items-center justify-center rounded-md bg-neutral-100 px-1.5 text-xs text-neutral-500 dark:bg-neutral-800 dark:text-neutral-400">
+                  {tag.count}
+                </span>
+              </div>
             </Link>
           ))}
         </div>
