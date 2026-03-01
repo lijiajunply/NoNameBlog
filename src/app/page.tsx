@@ -1,65 +1,103 @@
-import Image from "next/image";
+import Link from "next/link";
+import AreaChart, { Area } from "@/components/charts/area-chart";
+import { Grid } from "@/components/charts/grid";
+import { ChartTooltip } from "@/components/charts/tooltip";
+import { XAxis } from "@/components/charts/x-axis";
+import { PostCard } from "@/components/post-card";
+import { Badge } from "@/components/ui/badge";
+import { getAllCategories, getAllPosts, getAllTags } from "@/lib/content/posts";
 
-export default function Home() {
+export default function HomePage() {
+  const posts = getAllPosts();
+  const categories = getAllCategories().slice(0, 6);
+  const tags = getAllTags().slice(0, 10);
+  const chartData = [
+    { date: "2025-08-01", posts: 1, tags: 2 },
+    { date: "2025-09-01", posts: 2, tags: 3 },
+    { date: "2025-10-01", posts: 2, tags: 4 },
+    { date: "2025-11-01", posts: 3, tags: 5 },
+    { date: "2025-12-01", posts: 3, tags: 7 },
+    { date: "2026-01-01", posts: 4, tags: 8 },
+    { date: "2026-02-01", posts: 5, tags: 10 },
+    { date: "2026-03-01", posts: posts.length, tags: tags.length + 6 },
+  ];
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+    <div className="space-y-10">
+      <section className="rounded-3xl border border-neutral-200/70 bg-white/75 p-8 shadow-[0_15px_50px_-35px_rgba(0,0,0,0.45)] backdrop-blur-xl md:p-12 dark:border-neutral-800/80 dark:bg-neutral-900/75">
+        <div className="grid items-end gap-8 lg:grid-cols-[1.1fr_1fr]">
+          <div>
+            <p className="text-sm uppercase tracking-[0.22em] text-neutral-500">
+              静态博客
+            </p>
+            <h1 className="mt-3 max-w-3xl text-4xl leading-tight font-semibold tracking-tight text-neutral-900 md:text-5xl dark:text-white">
+              用内容驱动设计，用系统思维写博客。
+            </h1>
+            <p className="mt-5 max-w-2xl text-neutral-600 dark:text-neutral-300">
+              这里记录前端工程、设计系统和产品实现细节。界面追求简约、克制和可读性。
+            </p>
+            <div className="mt-7 flex flex-wrap gap-2">
+              {categories.map((category) => (
+                <Link
+                  key={category.name}
+                  href={`/categories/${encodeURIComponent(category.name)}`}
+                >
+                  <Badge>{category.name}</Badge>
+                </Link>
+              ))}
+            </div>
+          </div>
+          <div className="rounded-2xl border border-neutral-200/80 bg-white/70 p-4 dark:border-neutral-800 dark:bg-neutral-900/70">
+            <p className="mb-3 text-sm text-neutral-500">
+              内容增长趋势（bklit）
+            </p>
+            <AreaChart
+              data={chartData}
+              margin={{ top: 24, right: 16, bottom: 28, left: 8 }}
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+              <Grid horizontal numTicksRows={4} />
+              <Area
+                dataKey="posts"
+                fill="var(--chart-line-primary)"
+                fillOpacity={0.35}
+              />
+              <Area
+                dataKey="tags"
+                fill="var(--chart-line-secondary)"
+                fillOpacity={0.15}
+              />
+              <ChartTooltip />
+              <XAxis numTicks={5} />
+            </AreaChart>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </section>
+
+      <section>
+        <h2 className="mb-5 text-xl font-semibold tracking-tight text-neutral-900 dark:text-white">
+          最新文章
+        </h2>
+        <div className="space-y-4">
+          {posts.map((post) => (
+            <PostCard key={post.slug} post={post} />
+          ))}
         </div>
-      </main>
+      </section>
+
+      <section>
+        <h2 className="mb-4 text-xl font-semibold tracking-tight text-neutral-900 dark:text-white">
+          热门标签
+        </h2>
+        <div className="flex flex-wrap gap-2">
+          {tags.map((tag) => (
+            <Link key={tag.name} href={`/tags/${encodeURIComponent(tag.name)}`}>
+              <Badge>
+                #{tag.name} · {tag.count}
+              </Badge>
+            </Link>
+          ))}
+        </div>
+      </section>
     </div>
   );
 }

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://example.com/</loc></url>
+  <url><loc>https://example.com/about/</loc></url>
+  <url><loc>https://example.com/friends/</loc></url>
+  <url><loc>https://example.com/search/</loc></url>
+  <url><loc>https://example.com/categories/</loc></url>
+  <url><loc>https://example.com/tags/</loc></url>
+  <url><loc>https://example.com/posts/apple-like-design-notes/</loc></url>
+  <url><loc>https://example.com/posts/hello-noname-blog/</loc></url>
+  <url><loc>https://example.com/categories/%E8%AE%BE%E8%AE%A1/</loc></url>
+  <url><loc>https://example.com/categories/%E5%BC%80%E5%8F%91%E6%97%A5%E5%BF%97/</loc></url>
+  <url><loc>https://example.com/tags/Design/</loc></url>
+  <url><loc>https://example.com/tags/UX/</loc></url>
+  <url><loc>https://example.com/tags/Next.js/</loc></url>
+  <url><loc>https://example.com/tags/Tailwind/</loc></url>
+  <url><loc>https://example.com/tags/MDX/</loc></url>
+</urlset>

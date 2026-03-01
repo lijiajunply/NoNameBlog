@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0">
+  <channel>
+    <title>NoName Blog</title>
+    <link>https://example.com</link>
+    <description>一个简约的静态技术博客，记录开发与思考。</description>
+      <item>
+        <title>Apple 风格界面设计笔记</title>
+        <link>https://example.com/posts/apple-like-design-notes/</link>
+        <guid>https://example.com/posts/apple-like-design-notes/</guid>
+        <pubDate>Mon, 02 Mar 2026 00:00:00 GMT</pubDate>
+        <description>从留白、层级、色彩与动效四个角度，总结 Apple 风格在网页中的可落地策略。</description>
+      </item>
+
+      <item>
+        <title>你好，NoName Blog</title>
+        <link>https://example.com/posts/hello-noname-blog/</link>
+        <guid>https://example.com/posts/hello-noname-blog/</guid>
+        <pubDate>Sun, 01 Mar 2026 00:00:00 GMT</pubDate>
+        <description>这是博客的第一篇文章，介绍这个静态博客的设计目标与技术实现。</description>
+      </item>
+  </channel>
+</rss>

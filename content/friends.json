@@ -1,0 +1,16 @@
+[
+  {
+    "name": "Example Dev",
+    "url": "https://example.com",
+    "description": "分享前端与设计系统实践",
+    "avatar": "https://dummyimage.com/80x80/e5e7eb/111827.png&text=ED",
+    "order": 1
+  },
+  {
+    "name": "Static Notes",
+    "url": "https://example.org",
+    "description": "专注静态站点与内容工作流",
+    "avatar": "https://dummyimage.com/80x80/d1d5db/111827.png&text=SN",
+    "order": 2
+  }
+]
