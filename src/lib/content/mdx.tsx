@@ -105,7 +105,7 @@ const prettyCodeOptions = {
     dark: "github-dark",
     light: "github-light",
   },
-  keepBackground: false,
+  keepBackground: true,
 };
 
 export async function renderMdx(source: string) {

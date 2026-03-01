@@ -129,3 +129,55 @@ code {
   text-decoration: underline;
   text-underline-offset: 3px;
 }
+
+/* Syntax highlighting for rehype-pretty-code */
+html span[style*="--shiki-"] {
+  color: var(--shiki-light) !important;
+}
+
+html.dark span[style*="--shiki-"] {
+  color: var(--shiki-dark) !important;
+}
+
+/* Ensure code block text color respects the theme */
+html pre[data-theme] {
+  color: var(--shiki-light) !important;
+}
+
+html.dark pre[data-theme] {
+  color: var(--shiki-dark) !important;
+}
+
+
+/* Override prose pre background with shiki background */
+html .prose pre[data-theme] {
+  background-color: var(--shiki-light-bg) !important;
+}
+
+html.dark .prose pre[data-theme] {
+  background-color: var(--shiki-dark-bg) !important;
+}
+
+
+figure[data-rehype-pretty-code-figure] pre {
+  margin: 0;
+}
+
+
+figcaption[data-rehype-pretty-code-title] {
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+  background-color: color-mix(in srgb, var(--foreground) 4%, transparent);
+  border: 1px solid color-mix(in srgb, var(--foreground) 8%, transparent);
+  border-bottom: none;
+  border-top-left-radius: var(--radius-md);
+  border-top-right-radius: var(--radius-md);
+  font-family: var(--font-mono);
+  color: var(--muted-foreground);
+}
+
+figure[data-rehype-pretty-code-figure] figcaption[data-rehype-pretty-code-title] + pre {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+

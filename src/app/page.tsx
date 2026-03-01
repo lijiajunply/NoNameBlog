@@ -12,7 +12,6 @@ export default function HomePage() {
   const posts = getAllPosts();
   const tags = getAllTags();
   const heroTags = tags.slice(0, 6);
-  const bottomTags = tags.slice(0, 20);
   const chartData = [
     { date: "2025-08-01", posts: 1, tags: 2 },
     { date: "2025-09-01", posts: 2, tags: 3 },
@@ -109,31 +108,6 @@ export default function HomePage() {
             <div key={post.slug} className="transition-transform duration-300 hover:-translate-y-1">
               <PostCard post={post} />
             </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Tags Section */}
-      <section className="space-y-6">
-        <div className="flex items-center gap-3 px-2">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-neutral-100 text-neutral-700 dark:bg-neutral-800 dark:text-neutral-300">
-            <Icon icon="ph:hash-duotone" className="h-5 w-5" />
-          </div>
-          <h2 className="text-2xl font-semibold tracking-tight text-neutral-900 dark:text-white">
-            探索话题
-          </h2>
-        </div>
-        <div className="flex flex-wrap gap-3 px-2">
-          {bottomTags.map((tag) => (
-            <Link key={tag.name} href={`/tags/${encodeURIComponent(tag.name)}`}>
-              <div className="group flex items-center gap-2 rounded-xl border border-neutral-200/60 bg-white px-4 py-2 text-sm font-medium text-neutral-700 shadow-sm transition-all duration-300 hover:border-neutral-300 hover:bg-neutral-50 hover:shadow-md dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-300 dark:hover:border-neutral-700 dark:hover:bg-neutral-800">
-                <Icon icon="ph:hash-duotone" className="text-neutral-400 transition-colors group-hover:text-neutral-600 dark:text-neutral-500 dark:group-hover:text-neutral-300" />
-                <span>{tag.name}</span>
-                <span className="ml-1 flex h-5 min-w-5 items-center justify-center rounded-md bg-neutral-100 px-1.5 text-xs text-neutral-500 dark:bg-neutral-800 dark:text-neutral-400">
-                  {tag.count}
-                </span>
-              </div>
-            </Link>
           ))}
         </div>
       </section>
