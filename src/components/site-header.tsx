@@ -229,7 +229,9 @@ export function SiteHeader() {
                         <Icon icon="mingcute:close-line" className="h-4 w-4" />
                       </button>
                     </div>
-                    <SearchBox />
+                    <div className="search-modal-body">
+                      <SearchBox />
+                    </div>
                   </motion.div>
                 </motion.div>
               )}

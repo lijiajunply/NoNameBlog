@@ -148,7 +148,6 @@ html.dark pre[data-theme] {
   color: var(--shiki-dark) !important;
 }
 
-
 /* Override prose pre background with shiki background */
 html .prose pre[data-theme] {
   background-color: var(--shiki-light-bg) !important;
@@ -158,11 +157,9 @@ html.dark .prose pre[data-theme] {
   background-color: var(--shiki-dark-bg) !important;
 }
 
-
 figure[data-rehype-pretty-code-figure] pre {
   margin: 0;
 }
-
 
 figcaption[data-rehype-pretty-code-title] {
   padding: 0.5rem 1rem;
@@ -176,11 +173,12 @@ figcaption[data-rehype-pretty-code-title] {
   color: var(--muted-foreground);
 }
 
-figure[data-rehype-pretty-code-figure] figcaption[data-rehype-pretty-code-title] + pre {
+figure[data-rehype-pretty-code-figure]
+  figcaption[data-rehype-pretty-code-title]
+  + pre {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
-
 
 /* Language indicator for code blocks */
 figure[data-rehype-pretty-code-figure] {
@@ -214,7 +212,8 @@ figure[data-rehype-pretty-code-figure]:hover pre[data-language]::before {
 }
 
 /* Adjust language indicator position when there is a title */
-figure[data-rehype-pretty-code-figure] figcaption[data-rehype-pretty-code-title] + pre[data-language]::before {
+figure[data-rehype-pretty-code-figure] figcaption[data-rehype-pretty-code-title]
+  + pre[data-language]::before {
   top: 0.25rem;
 }
 
@@ -239,7 +238,6 @@ figure[data-rehype-pretty-code-figure] pre[data-language="markdown"]::before {
   content: "MD";
 }
 
-
 /* Mac style window dots for code blocks without title */
 figure[data-rehype-pretty-code-figure] {
   border-radius: var(--radius-md);
@@ -262,7 +260,9 @@ figure[data-rehype-pretty-code-figure] > pre:first-child::after {
   height: 0.75rem;
   border-radius: 50%;
   background-color: #ff5f56;
-  box-shadow: 1.25rem 0 0 #ffbd2e, 2.5rem 0 0 #27c93f;
+  box-shadow:
+    1.25rem 0 0 #ffbd2e,
+    2.5rem 0 0 #27c93f;
   pointer-events: none;
 }
 
@@ -279,6 +279,21 @@ figcaption[data-rehype-pretty-code-title] {
   border-radius: 0;
 }
 
+/* Make search results scrollable inside the global search modal */
+.search-modal-body .pagefind-ui__results {
+  max-height: min(58vh, 640px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding-right: 0.25rem;
+}
+
+.search-modal-body .pagefind-ui__results-area {
+  max-height: min(58vh, 640px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding-right: 0.25rem;
+}
+
 figcaption[data-rehype-pretty-code-title]::before {
   content: "";
   position: absolute;
@@ -289,27 +304,32 @@ figcaption[data-rehype-pretty-code-title]::before {
   height: 0.75rem;
   border-radius: 50%;
   background-color: #ff5f56;
-  box-shadow: 1.25rem 0 0 #ffbd2e, 2.5rem 0 0 #27c93f;
+  box-shadow:
+    1.25rem 0 0 #ffbd2e,
+    2.5rem 0 0 #27c93f;
   pointer-events: none;
 }
 
-
 /* Align language label for Mac window styling */
-figure[data-rehype-pretty-code-figure] > pre:first-child[data-language]::before {
+figure[data-rehype-pretty-code-figure]
+> pre:first-child[data-language]::before {
   top: 0.75rem;
 }
 
-figure[data-rehype-pretty-code-figure] figcaption[data-rehype-pretty-code-title] + pre[data-language]::before {
+figure[data-rehype-pretty-code-figure]
+  figcaption[data-rehype-pretty-code-title]
+  + pre[data-language]::before {
   top: 0.5rem;
 }
-
 
 /* Adjust Mac window dots to look more like native Mac window controls */
 figure[data-rehype-pretty-code-figure] > pre:first-child::after,
 figcaption[data-rehype-pretty-code-title]::before {
   width: 12px;
   height: 12px;
-  box-shadow: 20px 0 0 #ffbd2e, 40px 0 0 #27c93f;
+  box-shadow:
+    20px 0 0 #ffbd2e,
+    40px 0 0 #27c93f;
   background-color: #ff5f56;
 }
 
@@ -326,14 +346,14 @@ figure[data-rehype-pretty-code-figure] > pre:first-child {
   padding-top: 3.5rem;
 }
 
-figure[data-rehype-pretty-code-figure] > pre:first-child[data-language]::before {
+figure[data-rehype-pretty-code-figure]
+  > pre:first-child[data-language]::before {
   top: 12px;
 }
 
-
 /* Mac dots hover state */
 figure[data-rehype-pretty-code-figure]:hover > pre:first-child::after,
-figure[data-rehype-pretty-code-figure]:hover figcaption[data-rehype-pretty-code-title]::before {
+figure[data-rehype-pretty-code-figure]:hover
+  figcaption[data-rehype-pretty-code-title]::before {
   /* optional: you can add an image url or svg here to show the inside symbols like x - + on hover if you want */
 }
-
