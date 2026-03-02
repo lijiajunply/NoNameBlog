@@ -44,7 +44,7 @@ export default async function PostPage({ params }: PostPageProps) {
   }
 
   const content = await renderMdx(post.content);
-  const allTopics = Array.from(new Set([post.frontmatter.category, ...post.frontmatter.tags])).filter(Boolean);
+  const { category, tags } = post.frontmatter;
 
   return (
     <article className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_240px]">
@@ -65,9 +65,14 @@ export default async function PostPage({ params }: PostPageProps) {
             {post.frontmatter.summary}
           </p>
           <div className="flex flex-wrap gap-2">
-            {allTopics.map((topic) => (
-              <Link key={topic} href={`/tags/${encodeURIComponent(topic)}`}>
-                <Badge>#{topic}</Badge>
+            {category ? (
+              <Link href={`/categories/${encodeURIComponent(category)}`}>
+                <Badge>分类: {category}</Badge>
+              </Link>
+            ) : null}
+            {tags.map((tag) => (
+              <Link key={tag} href={`/tags/${encodeURIComponent(tag)}`}>
+                <Badge>#{tag}</Badge>
               </Link>
             ))}
           </div>

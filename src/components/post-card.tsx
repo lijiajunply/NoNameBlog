@@ -5,7 +5,7 @@ import type { Post } from "@/lib/content/posts";
 import { formatDate } from "@/lib/utils";
 
 export function PostCard({ post }: { post: Post }) {
-  const allTopics = Array.from(new Set([post.frontmatter.category, ...post.frontmatter.tags])).filter(Boolean);
+  const { category, tags } = post.frontmatter;
 
   return (
     <Card className="group p-6 md:p-7">
@@ -21,10 +21,17 @@ export function PostCard({ post }: { post: Post }) {
         {post.frontmatter.summary}
       </p>
       <div className="mt-5 flex flex-wrap gap-2">
-        {allTopics.map((topic) => (
-          <Link key={topic} href={`/tags/${encodeURIComponent(topic)}`}>
+        {category ? (
+          <Link href={`/categories/${encodeURIComponent(category)}`}>
             <Badge className="transition-colors hover:border-neutral-300 hover:text-neutral-800 dark:hover:border-neutral-600 dark:hover:text-neutral-100">
-              #{topic}
+              分类: {category}
+            </Badge>
+          </Link>
+        ) : null}
+        {tags.map((tag) => (
+          <Link key={tag} href={`/tags/${encodeURIComponent(tag)}`}>
+            <Badge className="transition-colors hover:border-neutral-300 hover:text-neutral-800 dark:hover:border-neutral-600 dark:hover:text-neutral-100">
+              #{tag}
             </Badge>
           </Link>
         ))}

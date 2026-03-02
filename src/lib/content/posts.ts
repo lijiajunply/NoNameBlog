@@ -85,10 +85,9 @@ export function getAllTags() {
   const map = new Map<string, number>();
 
   for (const post of getAllPosts()) {
-    const topics = new Set([post.frontmatter.category, ...post.frontmatter.tags]);
-    for (const topic of topics) {
-      if (topic) {
-        map.set(topic, (map.get(topic) ?? 0) + 1);
+    for (const tag of post.frontmatter.tags) {
+      if (tag) {
+        map.set(tag, (map.get(tag) ?? 0) + 1);
       }
     }
   }
@@ -98,11 +97,27 @@ export function getAllTags() {
     .toSorted((a, b) => b.count - a.count || a.name.localeCompare(b.name));
 }
 
+export function getAllCategories() {
+  const map = new Map<string, number>();
+
+  for (const post of getAllPosts()) {
+    const category = post.frontmatter.category;
+    if (category) {
+      map.set(category, (map.get(category) ?? 0) + 1);
+    }
+  }
+
+  return [...map.entries()]
+    .map(([name, count]) => ({ name, count }))
+    .toSorted((a, b) => b.count - a.count || a.name.localeCompare(b.name));
+}
+
 export function getPostsByTag(tag: string) {
-  return getAllPosts().filter(
-    (post) =>
-      post.frontmatter.category === tag || post.frontmatter.tags.includes(tag),
-  );
+  return getAllPosts().filter((post) => post.frontmatter.tags.includes(tag));
+}
+
+export function getPostsByCategory(category: string) {
+  return getAllPosts().filter((post) => post.frontmatter.category === category);
 }
 
 export function getAboutPageSource() {
