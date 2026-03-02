@@ -44,10 +44,6 @@ export default function HomePage() {
               <span className="text-neutral-500 dark:text-neutral-400">系统思维写作。</span>
             </h1>
             
-            <p className="mt-6 max-w-xl text-lg leading-relaxed text-neutral-600 dark:text-neutral-400">
-              记录前端工程、设计系统和产品实现细节。追求简约、克制和可读性的阅读体验。
-            </p>
-            
             <div className="mt-8 flex flex-wrap gap-2.5">
               {heroTags.map((tag) => (
                 <Link
