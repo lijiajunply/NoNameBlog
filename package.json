@@ -6,8 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "postbuild": "node scripts/generate-rss.mjs && node scripts/generate-sitemap.mjs && cp public/rss.xml out/rss.xml && cp public/sitemap.xml out/sitemap.xml && pagefind --site out",
-    "start": "next start",
-    "serve:out": "serve out",
+    "start": "serve -s out -l tcp://0.0.0.0:${PORT:-3000}",
+    "serve:out": "serve -s out -l 3000",
     "lint": "biome check",
     "format": "biome format --write"
   },
@@ -40,6 +40,7 @@
     "remark-gfm": "^4.0.1",
     "remark-parse": "^11.0.0",
     "remark-rehype": "^11.1.2",
+    "serve": "^14.2.5",
     "tailwind-merge": "^3.5.0",
     "unified": "^11.0.5",
     "unist-util-visit": "^5.1.0",
@@ -53,7 +54,6 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "pagefind": "^1.4.0",
-    "serve": "^14.2.5",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
