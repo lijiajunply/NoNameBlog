@@ -47,7 +47,7 @@ export default async function PostPage({params}: PostPageProps) {
     const {category, tags} = post.frontmatter;
 
     return (
-        <article className={`grid gap-8 ${post.content.length > 0 ? "lg:grid-cols-[minmax(0,1fr)_240px]" : ""}`}>
+        <article className={`grid gap-8 ${post.headings.length > 0 ? "lg:grid-cols-[minmax(0,1fr)_240px]" : ""}`}>
             <section
                 className="rounded-3xl border border-neutral-200/70 bg-white/75 p-7 md:p-10 dark:border-neutral-800/80 dark:bg-neutral-900/75">
                 <div className="mb-6 space-y-4">
