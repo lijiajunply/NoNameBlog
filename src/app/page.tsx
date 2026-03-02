@@ -1,5 +1,5 @@
-import Link from "next/link";
 import { Icon } from "@iconify/react";
+import Link from "next/link";
 import AreaChart, { Area } from "@/components/charts/area-chart";
 import { Grid } from "@/components/charts/grid";
 import { ChartTooltip } from "@/components/charts/tooltip";
@@ -8,10 +8,14 @@ import { PostCard } from "@/components/post-card";
 import { Badge } from "@/components/ui/badge";
 import { getAllPosts, getAllTags } from "@/lib/content/posts";
 
+const POSTS_PER_PAGE = 8;
+
 export default function HomePage() {
   const posts = getAllPosts();
   const tags = getAllTags();
   const heroTags = tags.slice(0, 6);
+  const pagedPosts = posts.slice(0, POSTS_PER_PAGE);
+  const totalPages = Math.ceil(posts.length / POSTS_PER_PAGE);
   const chartData = [
     { date: "2025-08-01", posts: 1, tags: 2 },
     { date: "2025-09-01", posts: 2, tags: 3 },
@@ -30,20 +34,22 @@ export default function HomePage() {
         {/* Subtle background gradients for visual depth */}
         <div className="pointer-events-none absolute -top-40 -right-40 -z-10 h-125 w-125 rounded-full bg-blue-500/10 blur-3xl dark:bg-blue-500/20" />
         <div className="pointer-events-none absolute -bottom-40 -left-40 -z-10 h-125 w-125 rounded-full bg-purple-500/10 blur-3xl dark:bg-purple-500/20" />
-        
+
         <div className="grid items-center gap-12 lg:grid-cols-[1.2fr_1fr]">
           <div className="flex flex-col justify-center">
             <div className="mb-6 flex w-fit items-center gap-2 rounded-full border border-black/5 bg-white/50 px-3 py-1 text-xs font-medium text-neutral-600 backdrop-blur-md dark:border-white/10 dark:bg-black/50 dark:text-neutral-300">
               <Icon icon="ph:sparkle-duotone" className="text-blue-500" />
               <span>没有名字的博客</span>
             </div>
-            
+
             <h1 className="text-4xl font-semibold leading-[1.15] tracking-tight text-neutral-900 md:text-5xl lg:text-[3.5rem] dark:text-white">
               内容驱动设计，
               <br className="hidden md:block" />
-              <span className="text-neutral-500 dark:text-neutral-400">系统思维写作。</span>
+              <span className="text-neutral-500 dark:text-neutral-400">
+                系统思维写作。
+              </span>
             </h1>
-            
+
             <div className="mt-8 flex flex-wrap gap-2.5">
               {heroTags.map((tag) => (
                 <Link
@@ -59,7 +65,7 @@ export default function HomePage() {
               ))}
             </div>
           </div>
-          
+
           <div className="group relative w-full overflow-hidden rounded-3xl border border-black/5 bg-white/50 p-6 shadow-sm backdrop-blur-xl transition-all duration-300 hover:bg-white/70 hover:shadow-md dark:border-white/10 dark:bg-black/50 dark:hover:bg-black/60">
             <div className="w-full">
               <AreaChart
@@ -100,12 +106,29 @@ export default function HomePage() {
           </h2>
         </div>
         <div className="grid gap-5">
-          {posts.map((post) => (
-            <div key={post.slug} className="transition-transform duration-300 hover:-translate-y-1">
+          {pagedPosts.map((post) => (
+            <div
+              key={post.slug}
+              className="transition-transform duration-300 hover:-translate-y-1"
+            >
               <PostCard post={post} />
             </div>
           ))}
         </div>
+        {totalPages > 1 ? (
+          <div className="flex items-center justify-between gap-3 pt-2">
+            <span className="text-sm text-neutral-500 dark:text-neutral-400">
+              第 1 / {totalPages} 页
+            </span>
+            <Link
+              href="/page/2/"
+              className="inline-flex items-center gap-1 rounded-xl border border-neutral-200 bg-white px-3 py-2 text-sm font-medium text-neutral-700 transition-colors hover:bg-neutral-100 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-200 dark:hover:bg-neutral-800"
+            >
+              下一页
+              <Icon icon="ph:arrow-right" className="h-4 w-4" />
+            </Link>
+          </div>
+        ) : null}
       </section>
     </div>
   );
