@@ -25,7 +25,6 @@ export default function StatsPage() {
   const tags = getAllTags();
   const categories = getAllCategories();
   const monthlyCumulative = getMonthlyCumulativeStats();
-  const gaMeasurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID?.trim();
   const latestMonth = monthlyCumulative[monthlyCumulative.length - 1];
   const latestPostDate = posts[0]?.frontmatter.date;
 
@@ -108,46 +107,6 @@ export default function StatsPage() {
           <ChartTooltip />
           <XAxis numTicks={6} />
         </AreaChart>
-      </section>
-
-      <section className="rounded-3xl border border-black/5 bg-white/70 p-6 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-neutral-900/70">
-        <div className="flex items-center gap-3">
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-neutral-100 text-neutral-700 dark:bg-neutral-800 dark:text-neutral-300">
-            <Icon icon="mingcute:google-line" className="h-4 w-4" />
-          </div>
-          <h2 className="text-xl font-semibold text-neutral-900 dark:text-white">
-            Google Analytics 接入状态
-          </h2>
-        </div>
-
-        {gaMeasurementId ? (
-          <div className="mt-4 space-y-2 text-sm text-neutral-600 dark:text-neutral-300">
-            <p>
-              已检测到 <code>NEXT_PUBLIC_GA_MEASUREMENT_ID</code>，站点已注入
-              gtag.js。
-            </p>
-            <p>
-              当前 Measurement ID:{" "}
-              <code className="rounded bg-neutral-100 px-1.5 py-0.5 dark:bg-neutral-800">
-                {gaMeasurementId}
-              </code>
-            </p>
-            <p>下一步可以接入 GA Data API，把 PV/UV/来源等数据拉到该页面展示。</p>
-          </div>
-        ) : (
-          <div className="mt-4 space-y-2 text-sm text-neutral-600 dark:text-neutral-300">
-            <p>
-              尚未配置 GA。请在环境变量中设置{" "}
-              <code>NEXT_PUBLIC_GA_MEASUREMENT_ID</code>。
-            </p>
-            <p>
-              例如：
-              <code className="ml-1 rounded bg-neutral-100 px-1.5 py-0.5 dark:bg-neutral-800">
-                NEXT_PUBLIC_GA_MEASUREMENT_ID=G-XXXXXXXXXX
-              </code>
-            </p>
-          </div>
-        )}
       </section>
     </div>
   );
