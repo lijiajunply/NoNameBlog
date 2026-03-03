@@ -16,10 +16,8 @@ export default async function AboutPage() {
   const content = await renderMdx(source);
 
   return (
-    <article className="rounded-3xl p-7 md:p-10">
-      <div className="prose prose-neutral max-w-none dark:prose-invert">
-        {content}
-      </div>
+    <article className="prose prose-neutral max-w-none dark:prose-invert">
+      {content}
     </article>
   );
 }
