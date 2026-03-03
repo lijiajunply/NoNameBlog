@@ -8,7 +8,7 @@ export function PostCard({ post }: { post: Post }) {
   const { category, tags } = post.frontmatter;
 
   return (
-    <Card className="group p-6 md:p-7">
+    <Card className="group p-6 md:p-7 rounded-[30px]!">
       <div className="mb-4 flex flex-wrap items-center gap-2 text-xs text-neutral-500">
         <span>{formatDate(post.frontmatter.date)}</span>
         <span>·</span>

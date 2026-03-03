@@ -1,6 +1,7 @@
 "use client";
 
 import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
 import { GitHubCalendar } from "react-github-calendar";
 import { cn } from "@/lib/utils";
 
@@ -16,6 +17,11 @@ export function GitHubCalendarCard({
   className,
 }: GitHubCalendarCardProps) {
   const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   return (
     <section
@@ -40,22 +46,26 @@ export function GitHubCalendarCard({
 
       <div className="overflow-x-auto">
         <div className="min-w-[760px]">
-          <GitHubCalendar
-            username={username}
-            year={year}
-            colorScheme={resolvedTheme === "dark" ? "dark" : "light"}
-            blockSize={12}
-            blockMargin={4}
-            fontSize={13}
-            showWeekdayLabels
-            labels={{
-              totalCount: "{{count}} 次贡献（过去一年）",
-            }}
-            theme={{
-              light: ["#f3f4f6", "#dbeafe", "#93c5fd", "#3b82f6", "#1d4ed8"],
-              dark: ["#27272a", "#1e3a8a", "#1d4ed8", "#60a5fa", "#bfdbfe"],
-            }}
-          />
+          {mounted ? (
+            <GitHubCalendar
+              username={username}
+              year={year}
+              colorScheme={resolvedTheme === "dark" ? "dark" : "light"}
+              blockSize={12}
+              blockMargin={4}
+              fontSize={13}
+              showWeekdayLabels
+              labels={{
+                totalCount: "{{count}} 次贡献（过去一年）",
+              }}
+              theme={{
+                light: ["#f3f4f6", "#dbeafe", "#93c5fd", "#3b82f6", "#1d4ed8"],
+                dark: ["#27272a", "#1e3a8a", "#1d4ed8", "#60a5fa", "#bfdbfe"],
+              }}
+            />
+          ) : (
+            <div className="h-[150px] rounded-xl border border-neutral-200/80 bg-neutral-50/60 dark:border-neutral-800/80 dark:bg-neutral-900/50" />
+          )}
         </div>
       </div>
     </section>
