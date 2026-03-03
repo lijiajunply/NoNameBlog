@@ -3,12 +3,13 @@ import path from "node:path";
 import matter from "gray-matter";
 
 const siteUrl = "https://blog.luckyfishes.site";
+const POSTS_PER_PAGE = 8;
 
-function getPostSlugs() {
+function getVisiblePosts() {
   const dir = path.join(process.cwd(), "content/posts");
   const files = fs.readdirSync(dir).filter((file) => file.endsWith(".mdx"));
 
-  const posts = files
+  return files
     .map((file) => {
       const slug = file.replace(/\.mdx$/, "");
       const source = fs.readFileSync(path.join(dir, file), "utf8");
@@ -21,22 +22,6 @@ function getPostSlugs() {
       };
     })
     .filter((post) => !post.draft);
-
-  const postRoutes = posts.map((post) => `/posts/${post.slug}/`);
-  const tagRoutes = [
-    ...new Set(
-      posts.flatMap((post) =>
-        [post.category, ...post.tags]
-          .filter(Boolean)
-          .map((tag) => `/tags/${encodeURIComponent(tag)}/`),
-      ),
-    ),
-  ];
-
-  return {
-    postRoutes,
-    tagRoutes,
-  };
 }
 
 const staticRoutes = [
@@ -45,13 +30,36 @@ const staticRoutes = [
   "/friends/",
   "/stats/",
   "/search/",
-  "/tags/",
 ];
-const routes = getPostSlugs();
+const posts = getVisiblePosts();
+const postRoutes = posts.map((post) => `/posts/${post.slug}/`);
+const tagRoutes = [
+  ...new Set(
+    posts.flatMap((post) =>
+      post.tags.filter(Boolean).map((tag) => `/tags/${encodeURIComponent(tag)}/`),
+    ),
+  ),
+];
+const categoryRoutes = [
+  ...new Set(
+    posts
+      .map((post) => post.category)
+      .filter(Boolean)
+      .map((category) => `/categories/${encodeURIComponent(category)}/`),
+  ),
+];
+const totalPages = Math.ceil(posts.length / POSTS_PER_PAGE);
+const paginationRoutes =
+  totalPages > 1
+    ? Array.from({ length: totalPages - 1 }, (_, index) => `/page/${index + 2}/`)
+    : [];
+
 const urls = [
   ...staticRoutes,
-  ...routes.postRoutes,
-  ...routes.tagRoutes,
+  ...paginationRoutes,
+  ...postRoutes,
+  ...tagRoutes,
+  ...categoryRoutes,
 ];
 
 const xml = `<?xml version="1.0" encoding="UTF-8"?>

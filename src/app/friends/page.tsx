@@ -1,8 +1,18 @@
 import fs from "node:fs";
 import path from "node:path";
+import type { Metadata } from "next";
 import Link from "next/link";
 import {type Friend, friendSchema} from "@/lib/content/schema";
 import {Icon} from "@iconify/react";
+import {siteConfig} from "@/config/site";
+
+export const metadata: Metadata = {
+    title: "友链",
+    description: "朋友们的网站与项目推荐。",
+    alternates: {
+        canonical: `${siteConfig.siteUrl}/friends/`,
+    },
+};
 
 function getFriends(): Friend[] {
     const fullPath = path.join(process.cwd(), "content/friends.json");

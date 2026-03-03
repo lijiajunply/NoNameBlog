@@ -21,14 +21,6 @@
       </item>
 
       <item>
-        <title>当我升级到了 .Net 9之后，为什么会经常崩溃</title>
-        <link>https://blog.luckyfishes.site/posts/dotnet-9-crash/</link>
-        <guid>https://blog.luckyfishes.site/posts/dotnet-9-crash/</guid>
-        <pubDate>Mon, 03 Mar 2025 00:00:00 GMT</pubDate>
-        <description>关于 .Net 9 升级后稳定性问题的记录。</description>
-      </item>
-
-      <item>
         <title>浮点数的世界（一）：深入解析Float、Double与Decimal</title>
         <link>https://blog.luckyfishes.site/posts/float1/</link>
         <guid>https://blog.luckyfishes.site/posts/float1/</guid>

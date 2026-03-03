@@ -3,6 +3,8 @@ import path from "node:path";
 import { siteConfig } from "@/config/site";
 import { getAllCategories, getAllPosts, getAllTags } from "./posts";
 
+const POSTS_PER_PAGE = 8;
+
 function toUrl(loc: string) {
   return `  <url><loc>${loc}</loc></url>`;
 }
@@ -14,18 +16,28 @@ export function generateSitemapXml() {
     "/friends",
     "/stats",
     "/search",
-    "/tags",
-    "/categories",
   ];
-  const postPages = getAllPosts().map((post) => `/posts/${post.slug}`);
+  const posts = getAllPosts();
+  const postPages = posts.map((post) => `/posts/${post.slug}`);
   const tagPages = getAllTags().map(
     (tag) => `/tags/${encodeURIComponent(tag.name)}`,
   );
   const categoryPages = getAllCategories().map(
     (category) => `/categories/${encodeURIComponent(category.name)}`,
   );
+  const totalPages = Math.ceil(posts.length / POSTS_PER_PAGE);
+  const paginationPages =
+    totalPages > 1
+      ? Array.from({ length: totalPages - 1 }, (_, index) => `/page/${index + 2}`)
+      : [];
 
-  const urls = [...staticPages, ...postPages, ...tagPages, ...categoryPages]
+  const urls = [
+    ...staticPages,
+    ...paginationPages,
+    ...postPages,
+    ...tagPages,
+    ...categoryPages,
+  ]
     .map((route) => `${siteConfig.siteUrl}${route}/`)
     .map(toUrl)
     .join("\n");

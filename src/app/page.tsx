@@ -1,4 +1,5 @@
 import {Icon} from "@iconify/react";
+import type { Metadata } from "next";
 import Link from "next/link";
 import AreaChart, {Area} from "@/components/charts/area-chart";
 import {Grid} from "@/components/charts/grid";
@@ -6,9 +7,18 @@ import {ChartTooltip} from "@/components/charts/tooltip";
 import {XAxis} from "@/components/charts/x-axis";
 import {PostCard} from "@/components/post-card";
 import {Badge} from "@/components/ui/badge";
+import {siteConfig} from "@/config/site";
 import {getAllPosts, getAllTags, getMonthlyCumulativeStats} from "@/lib/content/posts";
 
 const POSTS_PER_PAGE = 8;
+
+export const metadata: Metadata = {
+    title: "首页",
+    description: "浏览最新文章、热门标签与博客更新趋势。",
+    alternates: {
+        canonical: `${siteConfig.siteUrl}/`,
+    },
+};
 
 export default function HomePage() {
     const posts = getAllPosts();

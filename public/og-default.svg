@@ -1,0 +1,17 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0F172A"/>
+      <stop offset="1" stop-color="#1E293B"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="80" y1="100" x2="1120" y2="540" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#22D3EE" stop-opacity="0.38"/>
+      <stop offset="1" stop-color="#38BDF8" stop-opacity="0.18"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect x="56" y="56" width="1088" height="518" rx="28" fill="url(#accent)" stroke="#334155" stroke-width="2"/>
+  <text x="104" y="272" fill="#E2E8F0" font-size="72" font-family="ui-sans-serif, -apple-system, Segoe UI, sans-serif" font-weight="700">NoName Blog</text>
+  <text x="104" y="338" fill="#CBD5E1" font-size="36" font-family="ui-sans-serif, -apple-system, Segoe UI, sans-serif">一条鱼的自言自语</text>
+  <text x="104" y="502" fill="#94A3B8" font-size="28" font-family="ui-sans-serif, -apple-system, Segoe UI, sans-serif">blog.luckyfishes.site</text>
+</svg>
