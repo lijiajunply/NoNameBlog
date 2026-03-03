@@ -3,7 +3,7 @@ import path from "node:path";
 import matter from "gray-matter";
 
 const site = {
-  siteUrl: "https://example.com",
+  siteUrl: "https://blog.luckyfishes.site",
   siteName: "NoName Blog",
   description: "一个简约的静态技术博客，记录开发与思考。",
 };

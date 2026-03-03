@@ -2,7 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
 
-const siteUrl = "https://example.com";
+const siteUrl = "https://blog.luckyfishes.site";
 
 function getPostSlugs() {
   const dir = path.join(process.cwd(), "content/posts");
