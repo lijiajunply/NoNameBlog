@@ -1,16 +1,16 @@
 import { compileMDX } from "next-mdx-remote/rsc";
-import type { ReactNode, ComponentProps } from "react";
+import type { ReactNode } from "react";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypePrettyCode from "rehype-pretty-code";
 import rehypeSlug from "rehype-slug";
 import remarkGfm from "remark-gfm";
-import { cn } from "@/lib/utils";
-
-import { AreaChart, Area } from "@/components/charts/area-chart";
+import { Area, AreaChart } from "@/components/charts/area-chart";
 import { Grid } from "@/components/charts/grid";
 import { ChartTooltip } from "@/components/charts/tooltip";
 import { XAxis } from "@/components/charts/x-axis";
+import { GitHubCalendarCard } from "@/components/mdx/github-calendar-card";
 import { Icon } from "@/components/mdx/icon";
+import { cn } from "@/lib/utils";
 
 type MdxComponentProps = {
   className?: string;
@@ -158,6 +158,7 @@ const mdxComponents: Record<string, any> = {
   ChartTooltip,
   XAxis,
   Icon,
+  GitHubCalendarCard,
 };
 
 const prettyCodeOptions = {
