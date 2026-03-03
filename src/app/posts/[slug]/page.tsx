@@ -45,6 +45,13 @@ export default async function PostPage({params}: PostPageProps) {
 
     const content = await renderMdx(post.content);
     const {category, tags} = post.frontmatter;
+    const posts = getAllPosts();
+    const currentIndex = posts.findIndex((item) => item.slug === post.slug);
+    const previousPost = currentIndex > 0 ? posts[currentIndex - 1] : null;
+    const nextPost =
+        currentIndex >= 0 && currentIndex < posts.length - 1
+            ? posts[currentIndex + 1]
+            : null;
 
     return (
         <article className={`grid gap-8 ${post.headings.length > 0 ? "lg:grid-cols-[minmax(0,1fr)_240px]" : ""}`}>
@@ -84,6 +91,32 @@ export default async function PostPage({params}: PostPageProps) {
                 >
                     {content}
                 </div>
+                {(previousPost || nextPost) ? (
+                    <nav className="mt-10 grid gap-3 sm:grid-cols-2" aria-label="文章导航">
+                        {previousPost ? (
+                            <Link
+                                href={`/posts/${previousPost.slug}`}
+                                className="group rounded-2xl border border-neutral-200/80 bg-neutral-50/80 p-4 transition-colors hover:border-neutral-300 hover:bg-neutral-100/80 dark:border-neutral-800 dark:bg-neutral-950/60 dark:hover:border-neutral-700 dark:hover:bg-neutral-900/70"
+                            >
+                                <p className="text-xs text-neutral-500">上一篇</p>
+                                <p className="mt-2 line-clamp-2 font-medium text-neutral-800 transition-colors group-hover:text-neutral-950 dark:text-neutral-200 dark:group-hover:text-white">
+                                    {previousPost.frontmatter.title}
+                                </p>
+                            </Link>
+                        ) : <div />}
+                        {nextPost ? (
+                            <Link
+                                href={`/posts/${nextPost.slug}`}
+                                className="group rounded-2xl border border-neutral-200/80 bg-neutral-50/80 p-4 text-right transition-colors hover:border-neutral-300 hover:bg-neutral-100/80 dark:border-neutral-800 dark:bg-neutral-950/60 dark:hover:border-neutral-700 dark:hover:bg-neutral-900/70"
+                            >
+                                <p className="text-xs text-neutral-500">下一篇</p>
+                                <p className="mt-2 line-clamp-2 font-medium text-neutral-800 transition-colors group-hover:text-neutral-950 dark:text-neutral-200 dark:group-hover:text-white">
+                                    {nextPost.frontmatter.title}
+                                </p>
+                            </Link>
+                        ) : null}
+                    </nav>
+                ) : null}
             </section>
             {post.headings.length > 0 && (<PostToc headings={post.headings}/>)}
         </article>
