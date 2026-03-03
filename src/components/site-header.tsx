@@ -14,10 +14,8 @@ import { cn } from "@/lib/utils";
 
 const navItems = [
   { href: "/", label: "首页", icon: "mingcute:home-5-line" },
-  { href: "/tags", label: "标签", icon: "mingcute:tag-2-line" },
-  { href: "/categories", label: "分类", icon: "mingcute:list-check-2-line" },
-  { href: "/about", label: "关于", icon: "mingcute:information-line" },
-  { href: "/friends", label: "友链", icon: "mingcute:group-line" },
+  { href: "/about/", label: "关于", icon: "mingcute:information-line" },
+  { href: "/friends/", label: "友链", icon: "mingcute:group-line" },
 ];
 
 export function SiteHeader() {

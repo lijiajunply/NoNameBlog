@@ -6,7 +6,7 @@ import { type PostFrontmatter, postFrontmatterSchema } from "./schema";
 import { extractHeadings } from "./toc";
 
 export type Heading = {
-  depth: 2 | 3;
+  depth: 1 | 2 | 3;
   text: string;
   id: string;
 };

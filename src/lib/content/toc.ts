@@ -5,7 +5,7 @@ import { unified } from "unified";
 import { visit } from "unist-util-visit";
 
 type TocHeading = {
-  depth: 2 | 3;
+  depth: 1 | 2 | 3;
   text: string;
   id: string;
 };
@@ -33,7 +33,7 @@ export function extractHeadings(markdown: string): TocHeading[] {
   const headings: TocHeading[] = [];
 
   visit(tree, "heading", (node: Heading) => {
-    if (node.depth !== 2 && node.depth !== 3) {
+    if (node.depth !== 1 && node.depth !== 2 && node.depth !== 3) {
       return;
     }
 

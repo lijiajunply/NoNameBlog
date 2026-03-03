@@ -43,11 +43,7 @@ export default function HomePage() {
             </div>
 
             <h1 className="text-4xl font-semibold leading-[1.15] tracking-tight text-neutral-900 md:text-5xl lg:text-[3.5rem] dark:text-white">
-              内容驱动设计，
-              <br className="hidden md:block" />
-              <span className="text-neutral-500 dark:text-neutral-400">
-                系统思维写作。
-              </span>
+              一条鱼的自娱自乐
             </h1>
 
             <div className="mt-8 flex flex-wrap gap-2.5">

@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 
 type Heading = {
-  depth: 2 | 3;
+  depth: 1 | 2 | 3;
   text: string;
   id: string;
 };
@@ -22,8 +22,10 @@ export function PostToc({ headings }: { headings: Heading[] }) {
             <a
               className={cn(
                 "block rounded-md px-2 py-1 transition-colors hover:bg-neutral-100 hover:text-neutral-900 dark:hover:bg-neutral-800 dark:hover:text-white",
-                item.depth === 3 &&
+                item.depth === 2 &&
                   "ml-3 text-neutral-500 dark:text-neutral-400",
+                item.depth === 3 &&
+                  "ml-6 text-neutral-500 dark:text-neutral-400",
               )}
               href={`#${item.id}`}
             >
