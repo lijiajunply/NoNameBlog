@@ -130,6 +130,12 @@ code {
   text-underline-offset: 3px;
 }
 
+/* Prevent long inline content from forcing article width expansion */
+.prose :where(p, li, blockquote, td, th, h1, h2, h3, h4, h5, h6) {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
 /* Syntax highlighting for rehype-pretty-code */
 html span[style*="--shiki-"] {
   color: var(--shiki-light);

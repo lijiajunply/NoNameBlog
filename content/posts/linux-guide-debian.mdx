@@ -1,0 +1,118 @@
+---
+title: "linux使用指南（Debian系）"
+date: "2023-11-02"
+summary: "linux使用指南（Debian系）（Notion 导入）"
+tags: ["Linux"]
+category: "Linux指南"
+cover: "https://www.notion.so/images/page-cover/met_henri_tl_1892.jpg"
+---
+
+首先是我自己总结的一个脚本，刚装完用的：(在kali上试过一遍了)
+
+```shell
+# update
+sudo apt-get clean 
+sudo apt-get update
+sudo apt-get upgrade -y 
+sudo apt-get dist-upgrade -y
+#gdebi
+sudo apt install gdebi
+#install stacer
+sudo add-apt-repository ppa:oguzhaninan/stacer
+sudo apt-get update
+sudo apt-get install stacer 
+#download wps
+wget  https://wdl1.cache.wps.cn/wps/download/ep/Linux2019/10702/wps-office_11.1.0.10702_amd64.deb
+sudo apt-get install wps-office_11.1.0.10702_amd64.deb
+#download 百度网盘
+wget https://issuecdn.baidupcs.com/issue/netdisk/LinuxGuanjia/3.5.0/baidunetdisk_3.5.0_amd64.deb
+wget http://mirrors.ustc.edu.cn/debian/pool/main/libi/libindicator/libindicator3-7_0.5.0-2_amd64.deb
+sudo apt-get install libindicator3-7_0.5.0-2_amd64.deb
+wget http://mirrors.ustc.edu.cn/debian/pool/main/liba/libappindicator/libappindicator3-1_0.4.92-3.1_amd64.deb
+sudo apt-get install libappindicator3-1_0.4.92-3.1_amd64.deb
+sudo apt-get install baidunetdisk_3.5.0_amd64.deb
+# 设置虚拟内存
+sudo su  
+df -h
+fallocate -l 6G /swap.img  #数字自己定
+ls -lh /swap.img            
+chmod 600 /swap.img         
+ls -lh /swap.img            
+mkswap /swap.img
+swapon /swap.img
+swapon –-show
+free -h
+echo '/swap.img none swap sw 0 0'|sudo tee -a /etc/fstab
+cat /etc/fstab
+#download qq音乐
+wget https://dldir1.qq.com/music/clntupate/linux/deb/qqmusic_1.1.0_amd64.deb
+sudo apt-get install qqmusic_1.1.0_amd64.deb
+#download 网易云音乐
+wget https://d1.music.126.net/dmusic/netease-cloud-music_1.2.1_amd64_ubuntu_20190428.deb 
+sudo gdebi netease-cloud-music_1.2.1_amd64_ubuntu_20190428.deb
+# download  Microsoft Edge for Linux
+wget https://go.microsoft.com/fwlink/?linkid=2149139
+sudo gdebi microsoft-edge-beta_93.0.961.33-1_amd64.deb
+# download qq for linux 
+wget https://down.qq.com/qqweb/LinuxQQ/linuxqq_2.0.0-b2-1089_amd64.deb
+sudo gdebi linuxqq_2.0.0-b2-1089_amd64.deb
+#搜狗输入法
+wget https://ime.sogouimecdn.com/202108291635/7f2fa26040ed09e7983b0c7b5b3dad72/dl/index/1612260778/sogoupinyin_2.4.0.3469_amd64.deb
+sudo gdebi sogoupinyin_2.4.0.3469_amd64.deb
+sudo apt-get install fcitx
+sudo apt-get install fcitx-config-gtk2
+sudo apt-get install fcitx-config-gtk3
+sudo fcitx-config-gtk3
+#https://pinyin.sogou.com/linux/help.php 看这个操作，在fcitx-config-gtk3内操作
+```
+
+1. 更新
+
+1. 下载了一堆东西
+
+- gdebi
+
+- stacer
+
+- wps
+
+- 百度网盘
+
+- qq音乐
+
+- 网易云音乐
+
+- Microsoft Edge for Linux (bete版)
+
+- 搜狗输入法
+
+3.设置虚拟内存
+
+---
+
+下面就让我来讲一下这些软件的功能
+
+1.gdebi
+
+> gdebi是一个用于安装你自己手动下载的包的GUI程序。GDebi也可以命令行模式运行（sudo gdebipackage.deb），其功能和GUI模式下完全一样。
+
+其实它不只这些。更重要的是它可以同时下载依赖项。建议使用。
+
+2.stacer
+
+> Stacer 一款 Linux 系统优化和监控工具。 可以看成是 CCleaner 的 Linux 版本。简单易用，速度很快，且完全开源。 截图 仪表板 系统清理 自启动管理 卸载 资源
+> [https://gitee.com/mirrors/stacer](https://link.zhihu.com/?target=https%3A//gitee.com/mirrors/stacer)
+
+如果用过CCleaner的人就会知道它的好处。stacer的话就像一个没有杀毒功能的良心360全家桶。
+
+3. Microsoft Edge for Linux
+
+微软推出的浏览器Edge，算是业界上比较良心的浏览器了，基于Chromium内核。
+
+主要是不用翻墙下插件。
+
+---
+
+然后是指令大全：
+
+[**烟雨江南：Linux基本操作指令**](https://zhuanlan.zhihu.com/p/41605800#:~:text=1%20%E5%9F%BA%E6%9C%AC%E6%8C%87%E4%BB%A4cd%EF%BC%88%E5%88%87%E6%8D%A2%E7%9B%AE%E5%BD%95%EF%BC%89%20%E5%92%8Cls%EF%BC%88%E6%B5%8F%E8%A7%88%E7%9B%AE%E5%BD%95%E4%B8%8B%E6%96%87%E4%BB%B6%EF%BC%89%20...%202%20%E5%9F%BA%E6%9C%AC%E6%8C%87%E4%BB%A4touch%EF%BC%88%E5%88%9B%E5%BB%BA%E6%96%87%E4%BB%B6%EF%BC%89%E3%80%81cp%EF%BC%88%E5%A4%8D%E5%88%B6%E6%96%87%E4%BB%B6%EF%BC%89%E3%80%81mv%EF%BC%88%E5%89%AA%E5%88%87%E6%96%87%E4%BB%B6%EF%BC%89%20...%203,%E5%9F%BA%E6%9C%AC%E6%8C%87%E4%BB%A4mkdir%EF%BC%88%E5%88%9B%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9%EF%BC%89%E3%80%81rmdir%EF%BC%88%E5%88%A0%E9%99%A4%E6%96%87%E4%BB%B6%E5%A4%B9%EF%BC%89%E3%80%81rm%EF%BC%88%E5%88%A0%E9%99%A4%E6%96%87%E4%BB%B6%E5%92%8C%E6%96%87%E4%BB%B6%E5%A4%B9%EF%BC%89%20...%204%20%E5%9F%BA%E6%9C%AC%E6%8C%87%E4%BB%A4nano%EF%BC%88%E7%BC%96%E8%BE%91%E6%96%87%E4%BB%B6%EF%BC%89%E3%80%81cat%EF%BC%88%E6%98%BE%E7%A4%BA%E6%96%87%E4%BB%B6%E5%86%85%E5%AE%B9%EF%BC%89%20...%205%20chmod%EF%BC%88change%20mode%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86%EF%BC%89)

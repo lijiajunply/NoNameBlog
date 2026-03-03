@@ -1,0 +1,279 @@
+---
+title: "Asp Net Core的身份验证功能简要"
+date: "2023-12-26"
+summary: "Asp Net Core的身份验证功能简要（Notion 导入）"
+tags: ["CSharp"]
+category: "Csharp操作"
+cover: "https://www.notion.so/images/page-cover/nasa_multi-axis_gimbal_rig.jpg"
+---
+
+# 前言
+
+对于一个网站来说，一个身份验证系统是不可或缺的。
+
+我们这次就简单讲一下Blazor的身份验证系统。
+
+
+
+# 系统大纲
+
+对于整个系统而言，我们只需要写这些东西：数据库、各种身份信息存储以及连接两者的方法。
+
+# 后端数据库
+
+我们这里使用EF Core跟MySql来进行书写。这里细节我不阐述，可以去看之前讲EF Core的那篇文章。
+
+首先是用户类:
+
+```c#
+public class UserModel
+{
+    [Key]
+    [Column(TypeName = "varchar(256)")]
+    [Required(ErrorMessage = "名字出错")]
+    public string UserName { get; set; }
+
+    [Required(ErrorMessage = "密码出错")] 
+		 public string Password { get; set;}
+}
+```
+
+在这里我们简单的书写了一个用户类，主键是用户名，这就要求用户必须得使用唯一名来进行注册，要不然就会出错。
+
+然后我们来构建DbContext类:
+
+```c#
+public class AuthContext : DbContext
+{
+    public DbSet<UserModel> Users { get; set; }
+
+    public AuthContext(DbContextOptions<AuthContext> options)
+        : base(options) { }
+}
+```
+
+接下来我们只要迁移，更新数据库就行了。
+
+然后在Blazor项目的Project.cs中写上这么一句:
+
+```c#
+builder.Services.AddDbContextFactory<WebFileContext>(opt =>
+        opt.UseMySQL(builder.Configuration.GetConnectionString("MySQL")!));
+```
+
+数据库的构建就基本完成了。
+
+
+
+# 身份数据抽象
+
+我们这里主要使用到`Microsoft.AspNetCore.Authorization` 这个库，这个是微软自带的。
+
+首先是要对其进行配置：
+
+```c#
+builder.Services.AddOptions();
+builder.Services.AddAuthorizationCore();
+```
+
+对于身份信息的存储我们主要有这么几种方案:
+
+- Cookie
+
+- JWT令牌
+
+- Session
+
+- OAuth2
+
+我们这里就已Session作为案例。
+
+
+
+## Session方案
+
+Session是一种服务器端方案，其针对每个用户，只有客户端才能访问，程序为该客户添加一个 session。session中主要保存用户的登录信息、操作信息等等。此 session将在用户访问结束后自动消失(如果也是超时)。
+
+我们这里就简单使用一下Session方案。
+
+首先在Project.cs简单配置一下:
+
+```c#
+builder.Services.AddScoped<ProtectedSessionStorage>();
+builder.Services.AddScoped<AuthenticationStateProvider, Provider>();
+```
+
+这里我们首先使用了ProtectedSessionStorage来进行依赖注入，然后我们使用到AuthenticationStateProvider来进行操作。
+
+不过我们现在需要来实现一下这个操作类，因为我们使用到的方案不同，所以我们需要实现一下。
+
+```c#
+public class Provider : AuthenticationStateProvider
+{
+    private readonly ProtectedSessionStorage _sessionStorage;
+    private readonly ClaimsPrincipal _anonymous = new(new ClaimsIdentity());
+
+    public Provider(ProtectedSessionStorage sessionStorage)
+    {
+        _sessionStorage = sessionStorage;
+    }
+
+    public override async Task<AuthenticationState> GetAuthenticationStateAsync()
+    {
+        try
+        {
+            var storageResult = await _sessionStorage.GetAsync<UserModel>("Permission");
+            var model = storageResult.Success ? storageResult.Value : null;
+            if (model == null)
+            {
+                return await Task.FromResult(new AuthenticationState(_anonymous));
+            }
+
+            var claimsPrincipal = new ClaimsPrincipal(new ClaimsIdentity(new List<Claim>
+            {
+                new(ClaimTypes.Name, model.UserName),
+                new(ClaimTypes.NameIdentifier, model.Password)
+            }, "Auth"));
+
+            return await Task.FromResult(new AuthenticationState(claimsPrincipal));
+        }
+        catch
+        {
+            return await Task.FromResult(new AuthenticationState(_anonymous));
+        }
+    }
+
+    public async Task UpdateAuthState(UserModel? model)
+    {
+        ClaimsPrincipal claimsPrincipal;
+        if (model is not null)
+        {
+            await _sessionStorage.SetAsync("Permission", model);
+            claimsPrincipal = new ClaimsPrincipal(new ClaimsIdentity(new List<Claim>
+            {
+                new(ClaimTypes.Name, model.UserName),
+                new(ClaimTypes.NameIdentifier, model.Password)
+            }));
+        }
+        else
+        {
+            await _sessionStorage.DeleteAsync("Permission");
+            claimsPrincipal = _anonymous;
+        }
+
+        NotifyAuthenticationStateChanged(Task.FromResult(new AuthenticationState(claimsPrincipal)));
+    }
+}
+
+public static class ProviderStatic
+{
+    public static UserModel? ToUser(this ClaimsPrincipal claims)
+    {
+        if (claims.Identity is null || !claims.Identity.IsAuthenticated) return default;
+        var name = claims.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.Value;
+        var password = claims.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
+        if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(password)) return default;
+        return new UserModel() { UserName = name, Password = password };
+    }
+}
+```
+
+大概就是这样。
+
+
+
+# 在Page中使用
+
+我们现在完成了接口，那么现在就得在页面上实现。
+
+目前来说通常有两种方案:微软的`AuthorizeView` 组件跟AuthenticationStateProvider在Page中的依赖注入。
+
+
+
+## `AuthorizeView` 组件使用
+
+`AuthorizeView` 是微软官方的身份验证系统组件，其有三种状态:
+
+- 未登录 （`NotAuthorized`）
+
+- 正在登录 （`Authorizing`）
+
+- 已登录 （`Authorized`）
+
+就比如说像这样：
+
+```c#
+<AuthorizeView>
+                <Authorized>
+                    <Logout ImageUrl="personal.png" UserName="@context.User.Identity!.Name">
+                        <LinkTemplate>
+                            <a href="/Account"><i class="fa-solid fa-suitcase"></i>个人中心</a>
+                            <a href="/Account/Setting"><i class="fa-solid fa-cog"></i>设置</a>
+                            <LogoutLink/>
+                        </LinkTemplate>
+                    </Logout>
+                </Authorized>
+                <Authorizing>
+                    <p>正在登录中</p>
+                </Authorizing>
+                <NotAuthorized>
+                    <a href="/Account/Login">
+                        <i class="fa fa-sign-in" aria-hidden="true">  登录</i>
+                    </a>
+                </NotAuthorized>
+            </AuthorizeView>
+```
+
+这就是一个标准的形式。
+
+我们可以注意到，当为Authorized时，该组件会传入一个AuthenticationState参数，叫做context，你可以使用这个对其进行一些基本操作，比如说显示用户名等等。
+
+
+
+## AuthenticationStateProvider在Page中的依赖注入
+
+我们还可以使用AuthenticationStateProvider来进行操作，这个范围更广，可以使用它来进行登录操作。
+
+首先在Page上使用依赖注入:
+
+```c#
+@inject AuthenticationStateProvider AuthStateProvider
+```
+
+然后就可以使用了，这里统一传入的是Provider类（在Project.cs里头配置好的），我们要对其进行强制转化之后才可以使用。例如下面这样：
+
+```c#
+private async Task Done()
+    {
+        if (string.IsNullOrEmpty(Model.UserName) || string.IsNullOrEmpty(Model.Password))
+        {
+            await MessageService.Show(new MessageOption() { Content = "没数据" });
+            return;
+        }
+
+        await using var context = await DbFactory.CreateDbContextAsync();
+
+        if (!await context.Users.AnyAsync(x => x.Password == Model.Password && x.UserName == Model.UserName))
+        {
+            await MessageService.Show(new MessageOption() { Content = "账号密码出错" });
+            return;
+        }
+        var provider = (Provider)AuthStateProvider;
+        await provider.UpdateAuthState(Model);
+        navigation.NavigateTo("", true);
+    }
+```
+
+这个是一个简易的登录操作，首先会对输入的参数进行分析，然后再在数据库中查找信息，最后录入到身份信息中。
+
+我们这里就可以使用到Provider中的两个方法:`GetAuthenticationStateAsync` 跟`UpdateAuthState `
+
+其中前者是继承自父级的方法。
+
+
+
+# 最后
+
+我们在这里简单使用了`Microsoft.AspNetCore.Authorization` 来进行身份验证操作。
+
+各位可以根据自己的需要，选择合适的身份储存方案。

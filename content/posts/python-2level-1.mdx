@@ -1,0 +1,613 @@
+---
+title: "Python计算机二级（一）"
+date: "2023-09-28"
+summary: "Python语言的基本语法元素"
+tags: ["开发", "Python"]
+category: "Python二级"
+cover: "https://www.notion.so/images/page-cover/nasa_reduced_gravity_walking_simulator.jpg"
+---
+
+之前看到过一个问题：[计算机二级Python难吗？](https://www.zhihu.com/answer/2565698254)
+
+我当时还搜了一下计算机二级考些什么：
+
+
+> 来自： [计算机等级考试二级考什么 (liuxue86.com)](https://link.zhihu.com/?target=https%3A//jsj.liuxue86.com/a/4165524.html%23%3A~%3Atext%3D%25E8%25AE%25A1%25E7%25AE%2597%25E6%259C%25BA%25E7%25AD%2589%25E7%25BA%25A7%25E8%2580%2583%25E8%25AF%2595%25E4%25BA%258C%25E7%25BA%25A7%25E8%2580%2583%25E4%25BB%2580%25E4%25B9%2588%25201%2520MS%2520Office%25EF%25BC%259A%25E8%25AE%25A1%25E7%25AE%2597%25E6%259C%25BA%25E7%259A%2584%25E5%259F%25BA%25E7%25A1%2580%25E7%259F%25A5%25E8%25AF%2586%25E3%2580%2581Word%25E7%259A%2584%25E5%258A%259F%25E8%2583%25BD%25E5%2592%258C%25E4%25BD%25BF%2520...%25202%2520C%25E8%25AF%25AD%25E8%25A8%2580%25EF%25BC%259ADos%25E5%2591%25BD%25E4%25BB%25A4%25E3%2580%2581%25E8%25AE%25A1%25E7%25AE%2597%25E6%259C%25BA%25E7%25BB%2584%25E6%2588%2590%25E5%258E%259F%25E7%2590%2586%25E3%2580%2581%25E5%25A4%259A%25E5%25AA%2592%25E4%25BD%2593%25E3%2580%2581%25E6%2595%25B0%25E6%258D%25AE%25E5%25BA%2593%25E6%2593%258D%25E4%25BD%259C%25E3%2580%2581%2520...%2CWPS%2520Office%25EF%25BC%259A%25E5%2590%2584%25E4%25B8%25AA%25E8%25BD%25AF%25E4%25BB%25B6%25E7%259A%2584%25E5%258A%259F%25E8%2583%25BD%25E5%2592%258C%25E4%25BD%25BF%25E7%2594%25A8%25E3%2580%2582%25208%2520Python%25EF%25BC%259APython%25E8%25AF%25AD%25E8%25A8%2580%25E5%259F%25BA%25E6%259C%25AC%25E8%25AF%25AD%25E6%25B3%2595%25E5%2585%2583%25E7%25B4%25A0%25E3%2580%2581%25E5%259F%25BA%25E6%259C%25AC%25E6%2595%25B0%25E6%258D%25AE%25E7%25B1%25BB%25E5%259E%258B%2520...%25209%2520WEB%25EF%25BC%259AWeb%25E6%258A%2580%25E6%259C%25AF%25E5%259F%25BA%25E7%25A1%2580%25E3%2580%2581HTTP%25E5%258D%258F%25E8%25AE%25AE%25E5%259F%25BA%25E7%25A1%2580%25E3%2580%2581HTML%25E5%259F%25BA%25E7%25A1%2580%25E3%2580%2581%2520)
+
+看样子python最简单，最易学。
+
+
+
+****首先让我们看一看都考什么：****
+
+> 一、Python语言的基本语法元素
+1、程序的基本语法元素:程序的格式框架、缩进、注释、变量、命名、保留字、数据类型、赋值 语句、引用;
+
+2、基本输入输出函数:input()、eval()、print();
+
+3、源程序的书写风格;
+
+4、Python语言的特点。
+
+二、基本数据类型
+
+1、数字类型:整数类型、浮点数类型和复数类型;
+
+2、数字类型的运算:数值运算操作符、数值运算函数;
+
+3、字符串类型及格式化:索引、切片、基本的format()格式化方法;
+
+4、字符串类型的操作:字符串操作符、处理函数和处理方法;
+
+5、类型判断和类型间转换。
+
+三、程序控制结构
+
+1、程序的三种控制结构;
+
+2、程序的分支结构:单分支结构、二分支结构、多分支结构;
+
+3、程序的循环结构:遍历循环、无限循环、break和continue循环控制。
+
+4、程序的异常处理:try-except。
+
+四、函数和代码复用
+
+1、函数的定义和使用;
+
+2、函数的参数传递:可选参数传递、参数名称传递、函数的返回值;
+
+3、变量的作用域:局部变量和全局变量。
+
+五、组合数据类型
+
+1、组合数据类型的基本概念;
+
+2、列表类型:定义、索引、切片;
+
+3、列表类型的操作:列表的操作函数、列表的操作方法;
+
+4、字典类型:定义、索引;
+
+5、字典类型的操作:字典的操作函数、字典的操作方法。
+
+六、文件和数据格式化
+
+1、文件的使用:文件打开、读写和关闭;
+
+2、数据组织的维度:一维数据和二维数据;
+
+3、一维数据的处理:表示、存储和处理;
+
+4、二维数据的处理:表示、存储和处理;
+
+5、采用CSV格式对一二维数据文件的读写。
+
+七、Python计算生态
+
+1、标准库:turtle库(必选)、random库(必选) 、time库(可选);
+
+2、基本的Python内置函数;
+
+3、第三方库的获取和安装;
+
+4、脚本程序转变为可执行程序的第三方库:PyInstaller库(必选);
+
+5、第三方库:jieba库(必选)、wordcloud 库(可选);
+
+6、更广泛的Python计算生态,只要求了解第三方库的名称,不限于以下领域:网络爬虫、数 据分析、文本处理、数据可视化、用户图形界面、机器学习、Web 开发、游戏开发等。
+
+看起来又多又难，实际上很简单。因为这些属于基础中的基础，基本上属于只要你想学就能学会的东西，根本不存在什么没有编程思想，理科思维就不能学的东西。
+
+
+
+### **0.Python安装及环境构建**
+
+首先下载python：[Download Python | Python.org](https://link.zhihu.com/?target=https%3A//www.python.org/downloads/)
+
+![](https://pic1.zhimg.com/80/v2-57ccc1830ed9cb45994737079a7c6244_1440w.webp)
+
+https://www.python.org/downloads/
+
+然后下载vscode:
+
+[Download Visual Studio Code - Mac, Linux, Windows](https://link.zhihu.com/?target=https%3A//code.visualstudio.com/Download)
+
+![](https://pic3.zhimg.com/80/v2-f64c4b7cfa19764f54cb7b7bc4c5a032_1440w.webp)
+
+自己根据自己的操作系统来下载
+
+在vscode的侧面菜单栏里点击最后一个，在搜索栏中搜索python,chinese,jupyter这三个扩展，下载即可：
+
+![](https://pic1.zhimg.com/80/v2-b6d217e2fb7a172ac9e8d8ddaf4d78fc_1440w.webp)
+
+圈红圈的那个，看到类似的就行，不必钻牛角
+
+![](https://pic3.zhimg.com/80/v2-d2d06e4fbe2667c27099311a1e57fa6a_1440w.webp)
+
+第一个
+
+![](https://pic2.zhimg.com/80/v2-310468fa5225d090c7d7cd68e8c0709d_1440w.webp)
+
+第一个
+
+![](https://pic1.zhimg.com/80/v2-91540031552193a0fd2009ce267f841c_1440w.webp)
+
+第一个
+
+并且按win键（windows图标键） + R键 ，输入cmd，按下回车即可。
+
+![](https://pic1.zhimg.com/80/v2-40501f7fd7b00c3211d1d8e677430e80_1440w.webp)
+
+输入指令：
+
+`pip install jupyter`
+
+或者复制后右键
+
+现在就构建好了python环境。(如有问题发在评论区里)
+
+### **1.Python语言的基本语法元素 #我就直接跳过什么python的发展历史啊什么的废话**
+
+(1) 程序的基本语法元素:程序的格式框架、缩进、注释、变量、命名、保留字、数据类型、赋值语句、引用
+
+1.程序的格式框架：
+
+即段落格式，是Python语法的一部分，这种设计有**助于提高代码的可读性和可维护性。**
+
+**eg:**
+
+`a ``**=**`` input("number:")
+``**if**``(type(a) ``**==**`` int):
+   print("int")
+``**else**``:
+   print("not int")
+``*#放心，一定会输出 not int 的，这个我们待会儿再讲*``*#一般我们就这么写*`
+
+这样是不是比下面这个好看：
+
+`a = input("number:")if(type(a) == int):print("int")else:print("not int")
+#放心，会报错的，这个我们待会儿再讲`
+
+请记住，一定要这么写！！！（毕竟，人要对自己好一点）
+
+缩进：
+
+我们再来看这段代码：
+
+`a ``**=**`` input("number:") ``**if**``(type(a) ``**==**`` int):   print("int") ``**else**``:   print("not int")`
+
+试着在vscode运行一下：
+
+`Input In [8]
+    a = input("number:")if(type(a) == int):print("int")else:print("not int")
+                                          ^
+SyntaxError: invalid syntax`
+
+为什么呢？因为缩进。
+
+python与c/c++,c#,java不同之处在于 ";" 与 "{ }"
+
+看一下C#的代码：
+
+`**for**``(``**int**`` a = 1 ; a <= 3 ; a++){
+Console.WriteLine("hello,world!"); 
+}
+Console.ReadKey();
+``*//这是C#的注释
+*``*//C#每一个“句子”后面都带 ";"*`
+
+如果有条件，试着去";"再运行试试。
+
+而python一般不用 ";" 也不用 "{ }"。但是你去掉什么，你就要加上什么。于是python加入了缩进（而且是十分严谨的缩进，不能出半点差错）。
+
+> (选听)：
+不论“;”"{ }" 还是缩进，都是方便编译器编译代码而做的标记。
+
+对于编译器来说，“print("hello,world")” 与 “a =1”都是一样的，只是一串数据而已。
+
+举个例子(C#):
+
+for(int a = 1 ; a <= 3 ; a++){
+
+Console.WriteLine("hello,world!");
+
+}
+
+Console.ReadKey();
+
+与：
+
+for(int a = 1 ; a <= 3 ; a++){Console.WriteLine("hello,world!"); }Console.ReadKey();
+
+是一样的，循环三遍 hello,world!
+
+而缩进就是tab键 or 四个空格键，不信你在vscode试试。
+
+当然，事实上python是有";"的，不过可加可不加，干脆不加，还少写一个字符[doge]
+
+**一定要缩进！！！**
+
+注
+
+`*#这是注释*``*#这是注释*``'''
+这也是注释
+这也是注释
+'''
+"""
+这也是注释
+这也是注释
+这也是注释
+"""`
+
+注释，同我们语文课本中文言文中的注释。与正文无关，但是让我们能更方便的理解正文。
+
+也就是说，注释不影响代码运行，但影响读者阅读！！！
+
+eg:
+
+`print("hello,world")
+#luckyfish真帅！！！ 我要给他三连！！！`
+
+不影响代码运行，但会让读者想起来要三连。
+
+那么让我们再看一下上面的注释：
+
+`*#这是注释*``*#这是注释*``'''
+这也是注释
+这也是注释
+'''
+
+"""
+这也是注释
+这也是注释
+这也是注释
+"""`
+
+有 # ''' """ 这三种表达方式。我们不难看出，#是单行注释 ， 而 ''' 与 """ 是多行注释。那么我们就要注意'''与"""需要把注释内容罩着才行。
+
+> 就像 ; , {} , 缩进 一样，# , ''' , """ 也是一种标记。
+
+变量、命名、赋值语句、引用：
+
+eg:
+
+`a = 1 #这是一个赋值语句`
+
+这里声明了一个变量a，并把1赋值给了a。
+
+注意：
+
+**把1赋值给了a 不等于 令a等于1 ！**
+
+**所有的变量必须在使用前赋值，使用未赋值的变量会产生错误！**
+
+eg:
+
+`a = 1
+1 = a 
+error:
+ Input In [1]
+    1 = a
+    ^
+SyntaxError: cannot assign to literal here. Maybe you meant '==' instead of '='?`
+
+报错了。
+
+实际上“=”它在python(甚至大部分语言)中是赋值符号，而“==”才是等于符号。这也是为什么error中会有“SyntaxError: cannot assign to literal here. Maybe you meant '==' instead of '='?”这句话。
+
+如果你不明白，那么现在让我们翻译一下这句话：
+
+`a = 1
+a = 2
+print("a等于：",a)`
+
+a等于1，a等于2？a不是等于1吗？可最后为什么a等于2？
+
+那么 a = 1 赋值语句到底是如何进行的呢？
+
+首先创建一个箱子（我们就把它叫做“新建箱子”），把1装进去，然后查一下有没有“a”这个箱子，如果没有就创建，再把“新建箱子”里的东西（也就是1）复制到“a”这个箱子里。
+
+这样的话我们也就不难理解这一句话了：
+
+`a = 1
+b = 2
+a = b
+print(a)
+print(b)
+
+output: 
+2
+2`
+
+> 选读：
+
+讲一下全局变量与局部变量：
+
+定义在函数外部，模块内部的变量称为全局变量
+
+定义在函数内部的变量称为局部变量
+
+局部变量在函数调用时才能够被创建，在函数调用之后会自动销毁
+
+全局变量，所有函数都可以直接访问
+
+eg:
+
+`a ``**=**`` 1 
+``**def**`` ``**w**``(): ``*#这是一个函数*``c ``**=**`` a
+print(c)
+
+error:
+```**---------------------------------------------------------------------------NameError **```Traceback (most recent call last)
+Untitled``**-**``1.ipynb Cell 3 ``**in**`` ``**<**``cell line: 4``**>**``()
+      2 ``**def**`` ``**w**``():
+      3     c ``**=**`` 1
+``**---->**`` 4 print(c)
+
+``**NameError**``: name 'c' ``**is**`` ``**not**`` defined`
+
+a 是全局变量，而c是局部变量。
+
+保留字：
+
+`#保留字
+import keyword #引用
+print(keyword.kwlist)#输出所有keyword`
+
+试着运行一下
+
+`['False', 'None', 'True', 'and', 'as', 'assert', 'async', 'await', 'break', 'class', 'continue', 'def', 'del', 'elif', 'else', 'except', 'finally', 'for', 'from', 'global', 'if', 'import', 'in', 'is', 'lambda', 'nonlocal', 'not', 'or', 'pass', 'raise', 'return', 'try', 'while', 'with', 'yield']`
+
+> 保留字也称为关键字，指被编程语言内部定义并保留使用的标识符，程序员编写程序时不能定义与保留字相同的标识符。每种程序设计语言都有一套保留字，保留字一般用来构成程序整体框架、表达关键值和具有结构性的复杂语义等。掌握一门编程语言首先要熟记其所对应的保留字。
+> [Python的33个保留字 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/85559241)
+
+现在先不讲，以后会讲的。现在只需要知道一点：若将保留字作为标识符并赋值将会报错！
+
+`class = 1
+error:
+Input In [4]
+    class = 1
+          ^
+SyntaxError: invalid syntax`
+
+数据类型：
+
+文本类型 str （字符串）
+
+数值类型 int（整数）, float（浮点数，带“.”的）, complex（复数，eg: 1+2j ，这里的"j"就是"i"）
+
+序列类型 list(列表), tuple（元组）, range（不可变的数字序列）
+
+映射类型 dict（字典）
+
+集合类型 set（集合）, frozenset（不可变集合）
+
+布尔类型 bool（表示逻辑，包括true和false）
+
+二进制类型 bytes（字节）, bytearray（字节数组）, memoryview（指针）
+
+同前面，现在先不讲，以后会讲。
+
+基本输入输出函数 input()、eval()、print() ：
+
+首先让我们看一下input():
+
+`a = input("number:")
+if(type(a) == int):
+   print("int")
+else:
+   print("not int")`
+
+运行一下，你就明白input函数的用处了。
+
+input()会让你输入字符串（就是一堆字，一个也行）。注意：input()输出的东西都是**字符串**，无论你输入的是1，1.0 还是asdfghjkl，它都视为字符串。
+
+于是，上面的代码无法判断是否为整数。
+
+eval():
+
+eval() 函数用来执行一个字符串表达式，并返回表达式的值。
+
+语法：eval(expression, globals, locals)
+
+- expression ：需要一个字符串，该字符串将被解析并评估为Python表达式
+
+- globals（可选）：一个字典，用于指定可用的全局方法和变量。
+
+- locals（可选）：另一个字典，用于指定可用的本地方法和变量。
+
+比如说：
+
+`eval('print("hello,world!")')
+output:
+hello,world!`
+
+可当我们写入这段代码时：
+
+`eval('a = 1 ')
+
+error:
+Traceback (most recent call last):
+
+  File c:\Users\23836\AppData\Local\Programs\Python\Python310\lib\site-packages\IPython\core\interactiveshell.py:3398 in run_code
+    exec(code_obj, self.user_global_ns, self.user_ns)
+
+  Input In [65] in <cell line: 1>
+    eval('a = 1 ')
+
+  File <string>:1
+    a = 1
+      ^
+SyntaxError: invalid syntax`
+
+这告诉我们eval()不能自行创建变量，只能让外界给他传递变量。
+
+eg:
+
+`a = 1
+eval('a = 2')
+print(a)
+
+error:
+Traceback (most recent call last):
+
+  File c:\Users\23836\AppData\Local\Programs\Python\Python310\lib\site-packages\IPython\core\interactiveshell.py:3398 in run_code
+    exec(code_obj, self.user_global_ns, self.user_ns)
+
+  Input In [1] in <cell line: 2>
+    eval('a = 2')
+
+  File <string>:1
+    a = 2
+      ^
+SyntaxError: invalid syntax`
+
+我并没有传递a这个变量，而是直接使用了，于是报错。
+
+> 个人认为再讲深一点也没用，计算机二级看起来也不会太为难你们。
+
+print():
+
+这个函数其实各位已经有所了解了吧。print()是负责输出的。
+
+但是实际上print()的用法不止于此。我们来看一看print()的具体用法：
+
+- 对一切对象进行输出
+
+- 格式化对象
+
+eg:
+
+`print("str")
+print(1)
+print(1.0)
+
+output:
+str
+1
+1.0`
+
+不管你是str,int还是什么的，只要你还是个对象，他就会进行输出。(背后的逻辑我们以后再讲)
+
+还有格式化对象，举个例子：
+
+`#格式化对象：
+a = "the length of (%s) is %d" %('runoob',len('runoob'))
+print(a)
+
+output:
+the length of (runoob) is 6`
+
+通过vscode的代码高亮来看一下：
+
+![](https://pic4.zhimg.com/80/v2-e81bfa144e98751451ff8c93463d522f_1440w.webp)
+
+不难发现，前面的"the length of (%s) is %d" 部分就已结句，后面的只不过是对前面的”补充“，前面的"%s"与"%d"则是后面内容的”占位标记“，而"%"则是前面"the length of (%s) is %d" 与后面('runoob',len('runoob'))的”连接符“。而"%s"对应"'runoob'"，"%d"对应"len('runoob')"。
+
+
+
+那么就有人想大胆的尝试一下：
+
+```python
+a = "the length of (%s) is %d" %(len('runoob'),'runoob')
+print(a)
+```
+
+
+
+ta把'runoob'与len('runoob')调换了一下顺序，结果：
+
+```python
+--------------------------------------------------------------------------
+TypeError Traceback (most recent call last)
+Untitled-1.ipynb Cell 3 in <cell line: 1>()
+----> 1 a = "the length of (%s) is %d" %(len('runoob'),'runoob') 2 print(a)
+TypeError: %d format: a real number is required, not str
+```
+
+也就是说，不同的”占位标记“它的功能也不同。
+
+![](https://pic2.zhimg.com/80/v2-7f3e1c75333ac3310270fa03efde4065_1440w.webp)
+
+字符串格式化符号
+
+![](https://pic4.zhimg.com/80/v2-d0f83e1dc8c5a763d6c540b74ce9d2db_1440w.webp)
+
+格式化操作符辅助指令
+
+还有针对16进制，十进制，八进制整数的：
+
+**#%x** --- hex 十六进制
+
+**#%d** --- dec 十进制
+
+**#%o** --- oct 八进制
+
+这些你不一定都要记，只要你记得几个重要的就行。至于哪几个是重要的，这就要看你的使用频率了。
+
+源程序的书写风格：（了解一下就行）
+
+这里我介绍一下Pythonic。
+
+Pythonic，就是代码风格符合Python的特点，合理使用“语法糖”，使代码简洁优美，更具可读性，便于维护和修改。
+
+你可以使用一下python shell
+
+![](https://pic4.zhimg.com/80/v2-5c1068ed2232d0f601e1e6421cb97413_1440w.webp)
+
+打开后输入import this，你会得到：
+
+![](https://pic1.zhimg.com/80/v2-7029bb194eaadf9741cf6b1a43ce1ae0_1440w.webp)
+
+翻译一下：
+
+> 优美胜于丑陋（Python 以编写优美的代码为目标）
+明了胜于晦涩（优美的代码应当是明了的，命名规范，风格相似）
+
+简洁胜于复杂（优美的代码应当是简洁的，不要有复杂的内部实现）
+
+复杂胜于凌乱（如果复杂不可避免，那代码间也不能有难懂的关系，要保持接口简洁）
+
+扁平胜于嵌套（优美的代码应当是扁平的，不能有太多的嵌套）
+
+间隔胜于紧凑（优美的代码有适当的间隔，不要奢望一行代码解决问题）
+
+可读性很重要（优美的代码是可读的）
+
+即便假借特例的实用性之名，也不可违背这些规则（这些规则至高无上）
+
+不要包容所有错误，除非你确定需要这样做（精准地捕获异常，不写 except:pass 风格的代码）
+
+当存在多种可能，不要尝试去猜测
+
+而是尽量找一种，最好是唯一一种明显的解决方案（如果不确定，就用穷举法）
+
+虽然这并不容易，因为你不是 Python 之父（这里的 Dutch 是指 Guido ）
+
+做也许好过不做，但不假思索就动手还不如不做（动手之前要细思量）
+
+如果你无法向人描述你的方案，那肯定不是一个好方案；反之亦然（方案测评标准）
+
+命名空间是一种绝妙的理念，我们应当多加利用（倡导与号召）
+
+Python语言的特点：
+
+> 1. 简单
+2. 易学
+
+3. 免费、开源
+
+4. 高层语言
+
+5. 可移植性
+
+6. 解释性
+
+7. 面向对象
+
+8. 可扩展性
+
+9. 可嵌入型
+
+10. 丰富的库

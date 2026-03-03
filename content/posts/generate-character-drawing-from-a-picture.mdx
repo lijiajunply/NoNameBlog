@@ -1,0 +1,112 @@
+---
+title: "将图片生成字符画有几步？"
+date: "2023-09-28"
+summary: "将图片生成字符画有几步？（Notion 导入）"
+tags: ["开发", "CSharp"]
+category: "CSharp更多库分享"
+cover: "https://www.notion.so/images/page-cover/rijksmuseum_jansz_1636.jpg"
+---
+
+# 前言
+
+之前有一段时间网上特别流行这种图片转字符串的小程序，看起来特别牛，就很适合装逼[doge]
+
+于是我也写了一个，然后发给了别人：
+
+ta:我这是linux……你那个引用了System.Drawing，linux上用不了
+
+这…
+
+于是我找到了一个跨平台的图像库: https://sixlabors.com/products/imagesharp/
+
+本案例就使用这个进行开发。 案例详细
+
+# 一、ImageSharp的初始化
+
+首先安装ImageSharp的包。在控制台中输入：
+
+```shell
+dotnet add package SixLabors.ImageSharp
+```
+
+完成安装。
+
+然后引用SixLabors.ImageSharp：
+
+```c#
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.PixelFormats;
+using SixLabors.ImageSharp.Processing;
+```
+
+这三个都引用一下，方便后面使用。
+
+然后我们进行读取图片文件数据。使用Image.Load(path)来进行数据读取。这里的path为文件路径，string类型。
+
+Load()也支持流读取，但为了代码简洁，此处不使用。
+
+```c#
+var Images = Image.Load<Rgba32>(path);
+```
+
+Images类型为Image。该类型可以直接通过[i,j]来查看像素数据。
+
+# 二、灰化
+
+在灰化之前，我们要先把图片大小改成65p。因为我们需要让控制台完美输出，否则控制台会“装不下”。
+
+```c#
+Images.Mutate(x=>x.Resize(0,65));
+```
+
+开始进行灰化！
+
+```c#
+static Image<Rgba32> ToGray(Image<Rgba32> img)
+{    
+		for (int i = 0; i < img.Height; i++)    
+    {        
+       for (int j = 0; j < img.Width; j++)        
+       {            
+            var color = img[j,i];            //计算灰度值
+            int gray = (int)(color.R * 0.3 + color.G * 0.59 + color.B * 0.11);
+            System.Drawing.Color newColor = System.Drawing.Color.FromArgb(gray, gray, gray); 
+//修改该像素点的RGB的颜色            
+            img[j,i] = new Rgba32(newColor.R, newColor.G, newColor.B, newColor.A);        
+       }    
+    }    
+    return img;
+}
+```
+
+最后进行输出即可。
+
+# 三、匹配字符串
+
+```c#
+string chars = "#8XOHLTI)i=+;:,. ";
+string bmpstr = "";
+
+for (int i = 0; i < Images.Height; i += 2)
+{
+    for (int j = 0; j <  Images.Width; j++)
+    {
+        var origalColor = Images[j,i];
+        int index = (int)((origalColor.R + origalColor.G + origalColor.B) / 768.0 * chars.Length);
+        bmpstr += chars[index];
+    }
+    bmpstr += "\r\n";
+}
+```
+
+我们知道，rgb值越大颜色越深，所以我们可以通过 rgb平均值（在0到1之间） x 字符串长度 来匹配相应的字符串。这里的字符串必须是按照 密集到稀疏 或者 从稀疏到密集 。这里具体怎么搞看你自己。
+
+至于为什么要i += 2，隔行读取，是因为字符大小的问题。如果不这样，就会很难看，不信你自己试试。
+
+# 总结
+
+现在我们就获得了一个字符画，输出即可。
+
+我们在这里使用了ImageSharp这个图形库，官方文档在这里：
+
+https://docs.sixlabors.com/articles/imagesharp/gettingstarted.html

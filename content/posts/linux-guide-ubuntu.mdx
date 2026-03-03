@@ -1,0 +1,315 @@
+---
+title: "Linux指南（Ubuntu篇）"
+date: "2023-11-18"
+summary: "Linux指南（Ubuntu篇）（Notion 导入）"
+tags: ["Linux"]
+category: "Linux指南"
+cover: "https://www.notion.so/images/page-cover/met_goya_1789.jpg"
+---
+
+## **前言**
+
+之前那个指南我想摆了，主要是有一年没更新了。版本都换了。
+
+于是现在我打算重写一个[doge]
+
+希望这个别断更。
+
+## **一 安装**
+
+这里先留着，我先不写[doge]
+
+### **二 简单配置**
+
+### **先更新一下系统：**
+
+```shell
+*# update*
+sudo apt-get clean 
+sudo apt-get update
+sudo apt-get upgrade -y 
+sudo apt-get dist-upgrade -y
+```
+
+顺便安装一下gdebi，他可以在安装时找到未安装的依赖并安装：
+
+```shell
+sudo apt install gdebi
+```
+
+### **1 搜狗输入法**
+
+先安装这些：
+
+```shell
+sudo apt-get install fcitx
+sudo apt-get install fcitx-config-gtk2
+sudo apt-get install fcitx-config-gtk3
+```
+
+[**搜狗输入法-首页**](https://link.zhihu.com/?target=https%3A//shurufa.sogou.com/)[](https://link.zhihu.com/?target=https%3A//shurufa.sogou.com/)[shurufa.sogou.com/](https://link.zhihu.com/?target=https%3A//shurufa.sogou.com/)
+
+![](https://pic2.zhimg.com/v2-215f7e6541aa123df97d26937d548e21_180x120.jpg)
+
+在官网上下载即可。
+
+然后输入指令：sudo fcitx-config-gtk3，用超级用户来打开fcitx-config-gtk3。
+
+看这个操作（在fcitx-config-gtk3内操作）：
+
+[**搜狗输入法 for linux 安装指南**](https://link.zhihu.com/?target=https%3A//pinyin.sogou.com/linux/help.php)[](https://link.zhihu.com/?target=https%3A//pinyin.sogou.com/linux/help.php)[pinyin.sogou.com/linux/help.php](https://link.zhihu.com/?target=https%3A//pinyin.sogou.com/linux/help.php)
+
+### **2 网易云音乐**
+
+因为在Ubuntu22.04直接安装无法运行，所以这里我们使用脚本
+
+[**GitHub - wangling12/ncm-patch-script: Ubuntu 22.04下网易云音乐的修复脚本**](https://link.zhihu.com/?target=https%3A//github.com/wangling12/ncm-patch-script)[](https://link.zhihu.com/?target=https%3A//github.com/wangling12/ncm-patch-script)[github.com/wangling12/ncm-patch-script](https://link.zhihu.com/?target=https%3A//github.com/wangling12/ncm-patch-script)
+
+![](https://pic2.zhimg.com/v2-cb2ffaad3f83c6ee0ce9384c68e869d5_180x120.jpg)
+
+直接使用这里面的脚本，执行完会生成一个deb安装包，使用那个来安装即可。
+
+其实我也推荐你去试一下yesplaymusic，使用的是包装好的网易云api
+
+在ubuntu里只能用snap来安装：
+
+```shell
+sudo snap install yesplaymusic
+```
+
+### **3 wps , qq音乐 , 百度网盘，Edge**
+
+这些需要在网站上下载:
+
+[**WPS Office 2019 for Linux-支持多版本下载_WPS官方网站**](https://link.zhihu.com/?target=https%3A//www.wps.cn/product/wpslinux)[](https://link.zhihu.com/?target=https%3A//www.wps.cn/product/wpslinux)[www.wps.cn/product/wpslinux](https://link.zhihu.com/?target=https%3A//www.wps.cn/product/wpslinux)
+
+[**QQ音乐下载页 - QQ音乐,音乐你的生活!**](https://link.zhihu.com/?target=https%3A//y.qq.com/download/download.html)[](https://link.zhihu.com/?target=https%3A//y.qq.com/download/download.html)[y.qq.com/download/download.html](https://link.zhihu.com/?target=https%3A//y.qq.com/download/download.html)
+
+![](https://pic2.zhimg.com/v2-04b005449543bbc9ffb84d4b270bb94d_180x120.jpg)
+
+[**https://www.microsoft.com/zh-cn/edge**](https://link.zhihu.com/?target=https%3A//www.microsoft.com/zh-cn/edge)[](https://link.zhihu.com/?target=https%3A//www.microsoft.com/zh-cn/edge)[www.microsoft.com/zh-cn/edge](https://link.zhihu.com/?target=https%3A//www.microsoft.com/zh-cn/edge)
+
+[**https://pan.baidu.com/download#linux**](https://link.zhihu.com/?target=https%3A//pan.baidu.com/download%23linux)[](https://link.zhihu.com/?target=https%3A//pan.baidu.com/download%23linux)[pan.baidu.com/download#linux](https://link.zhihu.com/?target=https%3A//pan.baidu.com/download%23linux)
+
+但是在安装百度网盘之前先运行：
+
+```shell
+wget http://mirrors.ustc.edu.cn/debian/pool/main/libi/libindicator/libindicator3-7_0.5.0-2_amd64.deb
+sudo apt-get install libindicator3-7_0.5.0-2_amd64.deb
+```
+
+安装libindicator再安装百度网盘
+
+其他的没事
+
+### **4 人脸识别（howdy）**
+
+先设置pip下载源：
+
+```shell
+mkdir ~/.pip
+cd ~/.pip
+open pip.conf
+```
+
+文件内容：
+
+```shell
+[global]
+index-url = https://pypi.tuna.tsinghua.edu.cn/simple
+[install]
+trusted-host = https://pypi.tuna.tsinghua.edu.cn
+```
+
+然后保存。
+
+因为安装howdy需要使用到pip，而如果不设置国内源的话，安装起来有点困难（根本安装不了）
+
+现在可以开始正式的安装了：
+
+```shell
+sudo add-apt-repository ppa:boltgolt/howdy
+sudo apt update
+sudo apt install howdy
+```
+
+在安装howdy时，会出现让你选（f/b/s）的选项，这三个分别是：
+
+- **F：Fast** 快速
+
+- **B：Balanced** 平衡
+
+- **S：Securs** 安全
+
+自己选吧。我选的是fast(f)。其他的我没试过，不知道。知道的可以在评论区讲一下。
+
+安装好了后我们需要配置一下摄像头，先看一下有没有摄像头：
+
+```shell
+sudo apt install v4l-utils
+v4l2-ctl --list-devices
+```
+
+一般来说有个/dev/video0，我们就使用那个，现在配置：
+
+```shell
+sudo howdy config
+```
+
+查找以device_path开头的行，将其改为/dev/video0
+
+一般用的都是nano，nano保存按ctrl + x , shift+y ,enter或ctrl+o , ctrl+x, enter
+
+反正都要按三次
+
+最后录入人脸：
+
+```shell
+sudo howdy add
+```
+
+命令执行后，会让你输入一个 24 字符之内的「标签」进行区分和标识，然后程序会自动打开摄像头进行人脸扫描，出现「Scan complete」提示后则表示记录成功。
+
+这些是howdy的基本指令：
+
+- sudo howdy list ——面部模型记录
+
+- sudo howdy remove face_ID ——删除指定 ID 的面部记录
+
+- sudo howdy clear ——清除所有面部模型记录
+
+- sudo howdy disable 1 ——禁用 Howdy 功能
+
+- sudo howdy disable 0 ——启用 Howdy 功能
+
+### **5 微信，QQ**
+
+这是真的搞。腾讯出来挨骂！赶紧出linux版，QQ也赶紧更新！太丑了我丢
+
+deepin wine不知道为什么现在用不了，所以这里使用优麒麟的。
+
+微信：
+
+[**微信**](https://link.zhihu.com/?target=https%3A//www.ubuntukylin.com/applications/106-cn.html)[](https://link.zhihu.com/?target=https%3A//www.ubuntukylin.com/applications/106-cn.html)[www.ubuntukylin.com/applications/106-cn.html](https://link.zhihu.com/?target=https%3A//www.ubuntukylin.com/applications/106-cn.html)
+
+![](https://pic1.zhimg.com/v2-99edfb03bcdabc39e5948e9cb6a07820_180x120.jpg)
+
+直接下载
+
+QQ：
+
+这个有点复杂，需要先安装优麒麟应用商店才行
+
+```shell
+# 添加公钥
+sudo gpg --no-default-keyring --keyring gnupg-ring:/etc/apt/trusted.gpg.d/papirus.gpg --keyserver keyserver.ubuntu.com --recv 56583E647FFA7DE7
+
+# 添加镜像
+echo "deb http://archive.ubuntukylin.com/software jammy-partner main" | sudo tee /etc/apt/sources.list.d/kylin-software-center.list > /dev/null
+
+# 更新索引
+sudo apt update
+
+# 安装麒麟应用商店
+sudo apt install -y kylin-software-center
+```
+
+然后在应用商店里面下载QQ（crossover）即可
+
+### **6 安装驱动**
+
+方法一：使用官方的NVIDIA驱动进行手动安装（稳定、靠谱）
+
+```shell
+#更新软件列表
+sudo apt-get update   
+sudo apt-get install g++
+sudo apt-get install gcc
+sudo apt-get install make
+#查看GPU型号
+lspci | grep -i nvidia
+```
+
+然后在[下载新版 NVIDIA 官方驱动](https://link.zhihu.com/?target=https%3A//www.nvidia.cn/Download/index.aspx%3Flang%3Dcn)中找到相应驱动，下载。注意把存放nvidia驱动的文件夹设置为英文名
+
+然后卸载驱动：
+
+```shell
+sudo apt-get remove --purge nvidia*
+#上面那个不行的话就把*去掉
+```
+
+禁用nouveau(nouveau是通用的驱动程序)：
+
+```shell
+sudo nano /etc/modprobe.d/blacklist.conf
+# 或者 blacklist-nouveau.conf
+```
+
+在文件末尾添加:
+
+```shell
+blacklist nouveau
+options nouveau modeset=0
+```
+
+保存退出
+
+然后在终端上输入：
+
+```shell
+sudo update-initramfs –u
+```
+
+重启系统
+
+之后输入：
+
+```shell
+lsmod | grep nouveau
+```
+
+如果没有输出，则没问题
+
+为了安装新的Nvidia驱动程序，我们需要停止当前的显示服务器。最简单的方法是使用telinit命令更改为运行级别3。在终端输入以下linux命令后，显示服务器将停止：
+
+
+
+```shell
+sudo telinit 3
+```
+
+但我联想小新pro16没事
+
+在安放驱动的目录上，输入指令：
+
+
+
+```shell
+sudo chmod 777 NVIDIA-Linux-x86_64-430.26.run   #给你下载的驱动赋予可执行权限，才可以安装
+sudo ./NVIDIA-Linux-x86_64-430.26.run （–no-opengl-files）   #安装
+```
+
+–no-opengl-files 只安装驱动文件，不安装OpenGL文件。这个参数我亲测台式机不加没问题，笔记本不加有可能出现循环登录。但我的笔记本没问题。加了还安不上。
+
+运行时会问你几个问题：
+
+1.The distribution-provided pre-install script failed! Are you sure you want to continue?
+
+选择continue installation
+
+2.Would you like to register the kernel module souces with DKMS? This will allow DKMS to automatically build a new module, if you install a different kernel later?
+
+选择 No 继续。
+
+3.问题没记住，选项是：install without signing
+
+4.问题大概是：Nvidia's 32-bit compatibility libraries? 选择 No 继续。
+
+5.Would you like to run the nvidia-xconfigutility to automatically update your x configuration so that the NVIDIA x driver will be used when you restart x? Any pre-existing x confile will be backed up.
+
+选择 Yes 继续
+
+（抄的，因为我不记得了）
+
+然后重启就行了
