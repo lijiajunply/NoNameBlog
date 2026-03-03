@@ -19,6 +19,12 @@ export type Post = {
   headings: Heading[];
 };
 
+export type MonthlyGrowthStat = {
+  date: string;
+  posts: number;
+  tags: number;
+};
+
 const postsDir = path.join(process.cwd(), "content/posts");
 const aboutPath = path.join(process.cwd(), "content/pages/about.mdx");
 
@@ -118,6 +124,93 @@ export function getPostsByTag(tag: string) {
 
 export function getPostsByCategory(category: string) {
   return getAllPosts().filter((post) => post.frontmatter.category === category);
+}
+
+type YearMonth = {
+  year: number;
+  month: number;
+};
+
+function parseYearMonth(date: string): YearMonth {
+  const [year, month] = date.split("-", 2).map(Number);
+  return { year, month };
+}
+
+function compareYearMonth(a: YearMonth, b: YearMonth) {
+  if (a.year !== b.year) {
+    return a.year - b.year;
+  }
+  return a.month - b.month;
+}
+
+function nextYearMonth({ year, month }: YearMonth): YearMonth {
+  if (month === 12) {
+    return { year: year + 1, month: 1 };
+  }
+  return { year, month: month + 1 };
+}
+
+function formatMonthStart({ year, month }: YearMonth) {
+  return `${year.toString().padStart(4, "0")}-${month.toString().padStart(2, "0")}-01`;
+}
+
+export function getMonthlyGrowthStats(): MonthlyGrowthStat[] {
+  const posts = getAllPosts().toSorted((a, b) =>
+    a.frontmatter.date.localeCompare(b.frontmatter.date),
+  );
+  if (posts.length === 0) {
+    return [];
+  }
+
+  const postsByMonth = new Map<string, Post[]>();
+  for (const post of posts) {
+    const monthKey = `${post.frontmatter.date.slice(0, 7)}-01`;
+    const current = postsByMonth.get(monthKey);
+    if (current) {
+      current.push(post);
+    } else {
+      postsByMonth.set(monthKey, [post]);
+    }
+  }
+
+  const firstMonth = parseYearMonth(posts[0].frontmatter.date);
+  const now = new Date();
+  const currentMonth: YearMonth = {
+    year: now.getFullYear(),
+    month: now.getMonth() + 1,
+  };
+
+  const firstSeenTagMonth = new Map<string, string>();
+  for (const post of posts) {
+    const monthKey = `${post.frontmatter.date.slice(0, 7)}-01`;
+    for (const tag of post.frontmatter.tags) {
+      if (tag && !firstSeenTagMonth.has(tag)) {
+        firstSeenTagMonth.set(tag, monthKey);
+      }
+    }
+  }
+
+  const newTagsByMonth = new Map<string, number>();
+  for (const monthKey of firstSeenTagMonth.values()) {
+    newTagsByMonth.set(monthKey, (newTagsByMonth.get(monthKey) ?? 0) + 1);
+  }
+
+  const stats: MonthlyGrowthStat[] = [];
+  let cursor = firstMonth;
+
+  while (compareYearMonth(cursor, currentMonth) <= 0) {
+    const monthKey = formatMonthStart(cursor);
+    const monthPosts = postsByMonth.get(monthKey) ?? [];
+
+    stats.push({
+      date: monthKey,
+      posts: monthPosts.length,
+      tags: newTagsByMonth.get(monthKey) ?? 0,
+    });
+    cursor = nextYearMonth(cursor);
+  }
+
+  return stats;
 }
 
 export function getAboutPageSource() {

@@ -6,7 +6,7 @@ import {ChartTooltip} from "@/components/charts/tooltip";
 import {XAxis} from "@/components/charts/x-axis";
 import {PostCard} from "@/components/post-card";
 import {Badge} from "@/components/ui/badge";
-import {getAllPosts, getAllTags} from "@/lib/content/posts";
+import {getAllPosts, getAllTags, getMonthlyGrowthStats} from "@/lib/content/posts";
 
 const POSTS_PER_PAGE = 8;
 
@@ -16,16 +16,7 @@ export default function HomePage() {
     const heroTags = tags.slice(0, 6);
     const pagedPosts = posts.slice(0, POSTS_PER_PAGE);
     const totalPages = Math.ceil(posts.length / POSTS_PER_PAGE);
-    const chartData = [
-        {date: "2025-08-01", posts: 1, tags: 2},
-        {date: "2025-09-01", posts: 2, tags: 3},
-        {date: "2025-10-01", posts: 2, tags: 4},
-        {date: "2025-11-01", posts: 3, tags: 5},
-        {date: "2025-12-01", posts: 3, tags: 7},
-        {date: "2026-01-01", posts: 4, tags: 8},
-        {date: "2026-02-01", posts: 5, tags: 10},
-        {date: "2026-03-01", posts: posts.length, tags: tags.length + 6},
-    ];
+    const chartData = getMonthlyGrowthStats();
 
     return (
         <div className="space-y-16">
