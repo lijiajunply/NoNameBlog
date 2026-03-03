@@ -357,3 +357,81 @@ figure[data-rehype-pretty-code-figure]:hover
   figcaption[data-rehype-pretty-code-title]::before {
   /* optional: you can add an image url or svg here to show the inside symbols like x - + on hover if you want */
 }
+
+/* Minimal Apple-like markdown alerts ([!TIP], [!NOTE], etc.) */
+.markdown-alert {
+  --alert-accent: color-mix(in srgb, var(--foreground) 48%, transparent);
+  margin: 1.35rem 0;
+  border: 1px solid color-mix(in srgb, var(--foreground) 10%, transparent);
+  border-left: 3px solid var(--alert-accent);
+  border-radius: calc(var(--radius-md) + 2px);
+  background: color-mix(in srgb, #ffffff 58%, transparent);
+  padding: 0.95rem 1rem;
+  backdrop-filter: saturate(1.05) blur(8px);
+  -webkit-backdrop-filter: saturate(1.05) blur(8px);
+}
+
+.markdown-alert > :first-child {
+  margin-top: 0;
+}
+
+.markdown-alert > :last-child {
+  margin-bottom: 0;
+}
+
+.markdown-alert .markdown-alert-title {
+  letter-spacing: 0.01em;
+}
+
+.markdown-alert.markdown-alert-note {
+  --alert-accent: #0a84ff;
+}
+
+.markdown-alert.markdown-alert-tip {
+  --alert-accent: #30b05a;
+}
+
+.markdown-alert.markdown-alert-important {
+  --alert-accent: #7b61ff;
+}
+
+.markdown-alert.markdown-alert-warning {
+  --alert-accent: #bf7e0e;
+}
+
+.markdown-alert.markdown-alert-caution {
+  --alert-accent: #d14b42;
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title,
+.markdown-alert.markdown-alert-tip .markdown-alert-title,
+.markdown-alert.markdown-alert-important .markdown-alert-title,
+.markdown-alert.markdown-alert-warning .markdown-alert-title,
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--alert-accent);
+}
+
+.dark .markdown-alert {
+  border-color: color-mix(in srgb, #ffffff 12%, transparent);
+  background: color-mix(in srgb, #ffffff 6%, transparent);
+}
+
+.dark .markdown-alert.markdown-alert-note {
+  --alert-accent: #64a9ff;
+}
+
+.dark .markdown-alert.markdown-alert-tip {
+  --alert-accent: #5ccf7f;
+}
+
+.dark .markdown-alert.markdown-alert-important {
+  --alert-accent: #b39bff;
+}
+
+.dark .markdown-alert.markdown-alert-warning {
+  --alert-accent: #f2b44f;
+}
+
+.dark .markdown-alert.markdown-alert-caution {
+  --alert-accent: #ff8b82;
+}
