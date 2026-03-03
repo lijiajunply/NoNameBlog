@@ -1,0 +1,145 @@
+---
+title: 1.简单介绍csly
+date: '2023-09-28'
+summary: 我们要写一个解释器，先简单介绍csly一下吧
+tags:
+  - 开发
+  - CSharp
+category: 如何用Csharp写一个脚本语言？
+cover: /notion-covers/luckylang-1-csly.jpg
+---
+
+# 简单介绍csly
+
+csly是一个编译器前端框架，使用C#开发。 因为本系列只是想带大家简单的介绍一下一个解释器是如何构成的，所以我们使用csly来进行开发以节省时间。 一个解释器首先应该将文本进行解析：比如下面的这个句子：
+
+```c#
+int a = 1;
+```
+
+就可以被解析成： (int)(a)(=)(1)这四个元素。这时就有人觉得很简单，觉得就分割空格就行了，但是事实上我们还有一种可能：
+
+```c#
+int a=1
+```
+
+这也可以被解析。 然后还要将这些元素分类组合成一堆类实例，比如说将上面的赋值语句解析成一个statement类的子类setStatement。 这里就比较麻烦了。而csly就是将这些麻烦的内容包装成一个个api来供我们使用。所以我们只需要完成其他的简单内容就行了。 csly在分析语法这方面提供了一个方法，使用bnf/ebnf来书写语法格式。如：
+
+```c#
+root:statement*statement: id '=' expr
+```
+
+我相信各位或许还不明白这两句话表达着什么，我简单讲一下： 第一句是一个总起：root包含0或多个statement，*的意思就是0或多个； 第二句声明statement的一种可能：形如 `<id> = <表达式>；` ## 第一步：编写Token（Lexer） 那么我们现在先进行我们的第一步 根据上面的说法，我们需要先进行解析元素这一步。csly已经帮我们包装好了一个api，我们只需要编写一个枚举类就行。 那么让我们想想应该加入哪些东西，我们来看这个句子：
+
+```c#
+if(a < 1){return a}
+```
+
+我们来解析一下：(if)(a)(<)(1)(return)(a)。有这些东西。我们从这些东西中可以看出有以下几个类别： - 关键字：像if,return这种，属于特殊的标识符 - 标识符：命名变量 - 通用符号：指像=,!=,<,>这种符号 - 值：像int,string,double这种，他们有自己的表达方式。 - 注释：//或者/* */ 首先我们定义一下关键字（keyword）
+
+```c#
+[Keyword("if")]     IF     = 1,
+[Keyword("for")]    FOR    = 2,
+[Keyword("while")]  WHILE  = 3,
+[Keyword("def")]    DEF    = 4,
+[Keyword("true")]   TRUE   = 5,
+[Keyword("false")]  FALSE  = 6,
+[Keyword("elif")]   ELIF   = 7,
+[Keyword("else")]   ELSE   = 8,
+[Keyword("return")] RETUEN = 9,
+[Keyword("import")] IMPROT = 10,
+[Keyword("class")]  CLASS  = 11,
+[Keyword("import")] IMPORT = 12,
+```
+
+我们使用修饰器来帮助csly找到相关内容，形如： [Keyword(“<关键字>”))] <标识符> = `<int值>` 接下来是标识符和值：
+
+```c#
+[AlphaNumId] IDENTIFIER = 200,
+[String]     STRING     = 201,
+[Int]        INT        = 202,
+[Double]     DOUBLE     = 203,
+```
+
+然后是通用符号：
+
+```c#
+[Sugar("=")]  SET       = 100,
+[Sugar("==")] EQUALS    = 101,
+[Sugar("<")]  LESSER    = 102,
+[Sugar(">")]  GREATER   = 103,
+[Sugar("<=")] LESS_EQ   = 104,
+[Sugar(">=")] GR_EQ     = 105,
+[Sugar("||")] OR        = 106,
+[Sugar("&&")] AND       = 107,
+[Sugar("!")]  NOT       = 108,
+[Sugar("(")]  LPAREN    = 109,
+[Sugar(")")]  RPAREN    = 110,
+[Sugar("[")]  L_BRACKET = 111,
+[Sugar("]")]  R_BRACKET = 112,
+[Sugar("!=")] DIFFERENT = 113,
+[Sugar(".")]  DOT       = 114,
+[Sugar("+")]  PLUS      = 115,
+[Sugar("-")]  MINUS     = 116,
+[Sugar("*")]  TIMES     = 117,
+[Sugar("/")]  DIVIDE    = 118,
+```
+
+注释：
+
+```c#
+[Comment("//","/*","*/")] COMMENT = 1000,
+```
+
+这里需要注意一下，第一个参数是单行注释符号，第二个是多行注释符号开端，第三个是其结尾。 现在，我们已经定义好了Token这个枚举。 ## 全部代码(Token)
+
+```c#
+using sly.lexer;namespace LuckyLang;
+[Lexer(IndentationAWare = true)]
+public enum Lexer{    
+#region Keyword 1~99    
+    [Keyword("if")]     IF     = 1,
+    [Keyword("for")]    FOR    = 2,
+    [Keyword("while")]  WHILE  = 3,
+    [Keyword("def")]    DEF    = 4,
+    [Keyword("true")]   TRUE   = 5,
+    [Keyword("false")]  FALSE  = 6,
+    [Keyword("elif")]   ELIF   = 7,
+    [Keyword("else")]   ELSE   = 8,
+    [Keyword("return")] RETUEN = 9,
+    [Keyword("import")] IMPROT = 10,
+    [Keyword("class")]  CLASS  = 11,
+    [Keyword("import")]IMPORT =12,
+    #endregion
+    #region Sugar 100~199
+    [Sugar("=")]  SET       = 100,
+    [Sugar("==")] EQUALS    = 101,
+    [Sugar("<")]  LESSER    = 102,
+    [Sugar(">")]  GREATER   = 103,
+    [Sugar("<=")] LESS_EQ   = 104,
+    [Sugar(">=")] GR_EQ     = 105,
+    [Sugar("||")] OR        = 106,
+    [Sugar("&&")] AND       = 107,
+    [Sugar("!")]  NOT       = 108,
+    [Sugar("(")]  LPAREN    = 109,
+    [Sugar(")")]  RPAREN    = 110,
+    [Sugar("[")]  L_BRACKET = 111,
+    [Sugar("]")]  R_BRACKET = 112,
+    [Sugar("!=")] DIFFERENT = 113,
+    [Sugar(".")]  DOT       = 114,
+    [Sugar("+")]  PLUS      = 115,
+    [Sugar("-")]  MINUS     = 116,
+    [Sugar("*")]  TIMES     = 117,
+    [Sugar("/")]  DIVIDE    = 118,
+    #endregion
+    #region VA 200~299
+    [AlphaNumId] IDENTIFIER = 200,
+    [String]     STRING     = 201,
+    [Int]        INT        = 202,
+    [Double]     DOUBLE     = 203,
+    #endregion
+    #region Comment
+    [Comment("//","/*","*/")] COMMENT = 1000,    
+#endregion
+}
+```

@@ -1,0 +1,42 @@
+---
+title: Arch系统清理
+date: '2023-10-01'
+summary: Arch也会有垃圾需要清理的，我们必须要学会如何清理
+tags:
+  - 工具
+  - Arch Linux
+category: Arch Linux用户日记
+cover: /notion-covers/arch-clean.jpg
+---
+
+我们在使用arch时，总会产生垃圾，那么为了更好的使用，我们就必须要清理
+
+# 垃圾的产生
+
+Arch 的垃圾产生通常有以下几种：
+
+1. 不用的软件包和依赖
+
+1. 系统日志
+
+一般就这两种
+
+# 清除由软件产生的垃圾
+
+这里比较简单，就是把一些没有使用的依赖给删除
+
+```shell
+pacman -Sc # 清理未安装软件包
+pacman -Scc # 清理缓存中所有内容
+yay -Scc  # 如果安装了yay  直接用yay清理就好
+```
+
+# 清除由系统日志产生的垃圾
+
+系统日志还是需要的，这样好让我们知道有哪些地方出错了，方便维护
+
+所以这里我们就简单的限制一下就行
+
+```shell
+sudo journalctl --vacuum-size=10M
+```

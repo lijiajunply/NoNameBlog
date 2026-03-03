@@ -1,0 +1,197 @@
+---
+title: 2.编写AST和语法规范
+date: '2023-09-28'
+summary: 编写AST和语法规范
+tags:
+  - 开发
+  - CSharp
+category: 如何用Csharp写一个脚本语言？
+cover: /notion-covers/luckylang-2-ast.jpg
+---
+
+# 编写AST和语法规范
+
+## 语法规范
+
+我们首先来想一想我们需要什么语法，这里可以学习一下C#和Python：
+
+首先要一个赋值语句，像这样：（Python语法）
+
+```python
+a = 1
+```
+
+因为我们要编写一个脚本语言，所以在这里我们学习一下python。现在分析一下：
+
+首先需要一个标识符a，中间是一个‘=’符号，右边是一个值类型
+
+那么我们的语句就是:`<id> = <value>`
+
+第一章讲过，csly使用bnf/ebnf，我们这里使用ebnf，因为ebnf更加便捷，而且现在csly有很多特性是只有ebnf才能有的，所以我们在这里使用ebnf。
+
+现在书写一下：
+
+```python
+statement: IDENTIFIER SET[d] expr
+```
+
+其中,[d]表示丢弃，我们不需要这个元素。
+
+那么接下来的就好写多了：
+
+```python
+#if:if (<条件>):   <code>#forfor(<set>,<条件>,<code>):   <code>#whilewhile <条件>:   <code>#return:return areturn pass#defdef a(a b):   <code>#classclass a:   a = 1   def a():      <code>
+```
+
+我们翻译一下：
+
+```python
+root: statement*
+statement: set
+set: id SET[d] expr
+statement: FOR[d] '(' set ';'[d] expr ';'[d] statement ';' ')'[d]
+blockstatement: WHILE[d] '('[d] expr ')'[d] block
+block: INDENT[d] statement* UINDENT[d]
+statement: IF[d] ifblock (ELIF[d] ifblock)* (ELSE[d] ':'[d] block)?
+ifblock: expr ':'[d] blockstatement: DEF[d] id '('[d] id* ')'[d] ':'[d] 
+blockstatement: IMPROT[d] 
+idstatement: CLASS[d] id INDENT[d] classinfo* UINDENT[d]
+classinfo: set
+classinfo: DEF[d] id '('[d] id* ')'[d] ':'[d] 
+blockclassinfo: id
+```
+
+写完！
+
+## AST
+
+我们现在需要进行分析，将我们获得的元素组合成一个个“产品”，也就是一个个类的实例。
+
+虽然这些“产品”不一，可我们现在需要将这些产品聚合到一起，我们需要一个接口，让它成为基类。
+
+这个类就叫AST吧。
+
+接下来就是将AST分类。虽然我们有不同的值，不同的语法，但我们大致的可以分为两大类：
+
+- expr ：包含id，各种value，二元表达式
+
+- statement：包含各种句子
+
+其中expr有GetValue()；statement有Run()。
+
+statement则包括:
+
+- if
+
+- while
+
+- for
+
+- 函数定义
+
+- 类的定义
+
+- return
+
+value包括：
+
+- IntValue : int
+
+- StringValue : string
+
+- DoubleValue : double
+
+- BoolValue : bool
+
+我们在编写ebnf表达式的时候也必须要有这些部分。
+
+那么现在，我们需要花费大量的时间来构建这一体系。
+
+## Parser
+
+在构建完这个体系后。我们开始准备连接AST和语法规范。我们新建一个Parser类。
+
+csly在连接上使用方法+修饰器的方法来构建，例如：
+
+```c#
+[Production("root: statement*")]public AST.AST Root(List<AST.AST> a) => new BlockStatement(a);
+```
+
+形如：
+
+```c#
+[Production("ebnf语句")]public <基类名称> <方法名>(参数) => return ast;
+```
+
+在ebnf语法中，分为终端和非终端。终端就是由Token枚举中的元素组成，而非终端就像上面的statement一样，必须要定义。也就是说，一个ebnf语句最终都必须指向非终端集合。
+
+对于有0到多个语句，我们使用*来表示，1到多个用+表示，0或1个用?表示。而csly最终传递给我们的，可以看下面这张图：
+
+
+这里用Lexer来表示我们写的Token枚举。
+
+现在，我们可以来编写我们的Parser类了。
+
+```c#
+[Production("block: INDENT[d] statement* UINDENT[d]")]
+    public AST.AST Block(List<AST.AST> a) => new BlockStatement(a);
+  
+    [Production("statement: set")]
+    public AST.AST SET(AST.AST a) => a;
+  
+    [Production("set: IDENTIFIER SET[d] Parser_expressions")]
+    public AST.AST Set(Token<Lexer> id,Expression expression) =>
+        new SetStatement(new ID(id.Value),expression);
+  
+    [Production("statement: FOR[d] LPAREN[d] set Parser_expressions statement RPAREN[d] ':'[d] block")]
+    public AST.AST For(SetStatement set,Expression expression,Statement statement,BlockStatement block)
+        => new ForStatement(set,expression,statement,block);
+
+    [Production("statement: WHILE[d] LPAREN[d] Parser_expressions RPAREN[d] ':'[d] block")]
+    public AST.AST While(Expression expression,BlockStatement blockStatement)
+        => new WhileStatement(expression,blockStatement);
+  
+    [Production("statement : IF[d] ifblock (ELIF[d] ifblock)* (ELSE[d] ':'[d] block)?")]
+    public AST.AST If(IfBlock ifBlock,List<Group<Lexer,AST.AST>> elif,ValueOption<Group<Lexer,AST.AST>> Else)
+    {
+        var eGrp = Else.Match(
+                              x => { return x; },() => { return null; });
+        var elseBlock = eGrp?.Value(0) as BlockStatement;
+        var a         = elif.Select(x => x.Value(0) as IfBlock).ToList();
+        return new IfStatement(ifBlock,a,elseBlock);
+    }
+    [Production("ifblock: Parser_expressions ':'[d] block")]
+    public AST.AST IfBlock(Expression expr,BlockStatement block)
+        => new IfBlock(expr,block);
+
+    [Production("statement: IMPORT[d] IDENTIFIER")]
+    public AST.AST Import(Token<Lexer> id) => new ImportStatement(new ID(id.Value));
+
+    [Production("statement: CLASS[d] IDENTIFIER INDENT[d] classinfo* UINDENT[d]")]
+    public AST.AST Class(Token<Lexer> id,List<AST.AST> asts) 
+        => new ClassInitStatement(new ID(id.Value),asts);
+
+    [Production("classinfo: set")]
+    public AST.AST ClassInfo_Set(AST.AST a) => a;
+
+    [Production("classinfo: DEF[d] IDENTIFIER '('[d] IDENTIFIER* ')'[d] ':'[d] block")]
+    public AST.AST ClassInfo_Def(Token<Lexer> id,List<Token<Lexer>> ids,BlockStatement blockStatement)
+    {
+        List<ID> a = new List<ID>();
+        ids.ForEach(x => a.Add(new ID(x.Value)));
+        return new DefInitStatement(new ID(id.Value),a,blockStatement);
+    }
+  
+    [Production("statement: DEF[d] IDENTIFIER '('[d] IDENTIFIER* ')'[d] ':'[d] block")]
+    public AST.AST Def(Token<Lexer> id,List<Token<Lexer>> ids,BlockStatement blockStatement)
+    {
+        List<ID> a = new List<ID>();
+        ids.ForEach(x => a.Add(new ID(x.Value)));
+        return new DefInitStatement(new ID(id.Value),a,blockStatement);
+    }
+
+    [Production("classinfo: IDENTIFIER")]
+    public AST.AST ClassInfo_ID(Token<Lexer> a) => new ID(a.Value);
+```
+
+至于expr应该如何编写，请看下一章。

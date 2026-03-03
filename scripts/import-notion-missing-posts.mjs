@@ -18,6 +18,13 @@ const PAGE_IDS = [
   "404dbfcb-284c-4554-b80f-86cf3c4fb1de", // generate-character-drawing-from-a-picture
   "67f67561-3138-4824-84dd-d22407b311f9", // authentication-asp-net-core
   "5c5549a9-03dd-45b2-9c81-d9c6db05ca03", // csharp-learn-1
+  "dae339ee-c321-45f7-b05d-b236d1aff89a", // arch-clean
+  "2ce7f36b-ff77-4ac1-ae88-4d681a624125", // oppo-close-ad
+  "158ff400-c55b-46e3-8b6a-0e4e49a7e2f2", // arch-beautify
+  "31f82180-9d55-44e8-b67f-5c8487c0e80d", // luckylang-1-csly
+  "08d66206-c5b7-49ed-b6a7-cecae3247fae", // luckylang-2-ast
+  "6d9e4917-b433-46d7-8af5-965601378813", // luckylang-3-paser
+  "fcf1e80a-1e9c-400f-9d06-34a5c866293e", // luckylang-5-done
 ];
 
 const postsDir = path.join(process.cwd(), "content/posts");

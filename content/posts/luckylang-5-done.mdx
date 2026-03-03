@@ -1,0 +1,45 @@
+---
+title: 5.完成解释器构建
+date: '2023-09-28'
+summary: 现在已经完成了所有的设计，我们得完成解释器构建了
+tags:
+  - 开发
+  - CSharp
+category: 如何用Csharp写一个脚本语言？
+cover: /notion-covers/luckylang-5-done.jpg
+---
+
+# 完成解释器构建
+
+终于到这一步了，我们现在来完成解释器的构建。
+
+## 构建解释器
+
+首先创建Interpreter类。
+
+在Interpreter类中创建方法，我叫做Using()，内容：
+
+```c#
+public void Using(string code)
+    {
+        ParserBuilder<Lexer, AST.AST> Parser = new ();
+        LuckyLang.Parser              parser = new Parser();
+        var parserBuilder = Parser.BuildParser(parser,ParserType.EBNF_LL_RECURSIVE_DESCENT, "root");
+        var buildResult = parserBuilder.Result;
+        var r   = buildResult.Parse(code);
+        var RUN = r.Result;
+        if (r.Errors !=null && r.Errors.Any())
+            r.Errors.ForEach(x => Console.WriteLine(x.ErrorMessage));
+        else{
+            VariateManager Manager = new VariateManager();
+            var            run     = RUN as Statement;
+            Console.WriteLine(run);
+            run.Run(ref Manager);
+            Console.WriteLine(Manager);
+        }
+    }
+```
+
+各位可以自己分析一下，我累了，现在是凌晨1点，我不行了，先睡了。
+
+终于完成了。

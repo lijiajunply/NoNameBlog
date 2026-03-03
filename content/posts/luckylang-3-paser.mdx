@@ -1,0 +1,154 @@
+---
+title: 3.编写二元解析
+date: '2023-09-28'
+summary: 语法搞定了，现在编写二元解析
+tags:
+  - 开发
+  - CSharp
+category: 如何用Csharp写一个脚本语言？
+cover: /notion-covers/luckylang-3-paser.jpg
+---
+
+# 编写二元解析
+
+在上一期的最后，我们发现expr还没有被定义。
+
+首先来回顾一下，expr分为哪几种：
+
+- id : 变量名，代表着对应的值
+
+- 各种值：int,string,bool,double
+
+- 二元运算：左 操作符 右
+
+就这三种，其中前两种非常简单，但第三种比较难。这不只是ebnf句子的多少，而是优先级的问题。我们来看下面这个句子：
+
+```c#
+1+1*1+1+2/2
+```
+
+大家应该都知道应该如何分割，即(1)+(1*1)+(2/2)，对吧。但是电脑不知道。同样的，我们也无法使用ebnf来实现。
+
+csly也考虑了这一点，于是便有了表达式解析。
+
+## 表达式解析
+
+我们来看下面的这个例子：
+
+```c#
+[Operation((int)Lexer.DOT,Affix.InFix,Associativity.Right,100)]public AST.AST DotExpr(Expression left,Token<Lexer> operatorToken,Expression right) =>        new Operation(left,operatorToken.TokenID,right);
+```
+
+下面函数的内容大家估计都知道了，还不熟系的话去看上一章。
+
+那么，上面的修饰符呢？
+
+我们来分析一下:
+
+首先是[Operation()]，代表着我们使用的是Operation，后面的(int)Lexer.DOT就是我们要使用的操作符，但是我们不能省略。
+
+接下来就是Affix.InFix,Associativity.Right这些，他代表的是有无左右两端，通常为InFix,Right。有时候我们会不需要左端，这时候只需要改成Affix.PreFix就行了。
+
+最后一个是一个数字，我们写的是100，这代表优先级值，这个值越大，代表优先级越大。
+
+我们现在需要 + , - , * , / , ! , != , == , < , > , < , >这些。可以先将优先级排个序：
+
+- +，- : 20，代表最低。
+
+- /，* : 50，比+，-优先级高
+
+- .(dot)：100，比上面的都高，因为我们需要优先取出类中的值才能进行计算
+
+- ！，!=，==：10，布尔运算，需要先算出左右两端才可以进行布尔运算。
+
+- ! ，.：这两个需要先进行计算才行。
+
+现在我们来书写一下：
+
+```c#
+[Operation((int)Lexer.LESSER,   Affix.InFix,Associativity.Right,10)]
+    [Operation((int)Lexer.GREATER,  Affix.InFix,Associativity.Right,10)]
+    [Operation((int)Lexer.EQUALS,   Affix.InFix,Associativity.Right,10)]
+    [Operation((int)Lexer.DIFFERENT,Affix.InFix,Associativity.Right,10)]
+    public AST.AST BinaryExpression(Expression left,Token<Lexer> operatorToken,Expression right) =>
+        new Operation(left,operatorToken.TokenID,right);
+
+    [Operation((int)Lexer.DOT,Affix.InFix,Associativity.Right,100)]
+    public AST.AST DotExpr(Expression left,Token<Lexer> operatorToken,Expression right) =>        new Operation(left,operatorToken.TokenID,right);
+
+    [Operation((int)Lexer.PLUS, Affix.InFix,Associativity.Right,20)]
+    [Operation((int)Lexer.MINUS,Affix.InFix,Associativity.Right,20)]
+    public AST.AST NumOper1(Expression left,Token<Lexer> operatorToken,Expression right) =>        new Operation(left,operatorToken.TokenID,right);
+
+    [Operation((int)Lexer.TIMES, Affix.InFix,Associativity.Right,70)]
+    [Operation((int)Lexer.DIVIDE,Affix.InFix,Associativity.Right,70)]
+    public AST.AST NmExpr2(Expression left,Token<Lexer> operatorToken,Expression right) =>        new Operation(left,operatorToken.TokenID,right);
+
+    [Operation((int)Lexer.AND,Affix.InFix,Associativity.Right,10)]
+    [Operation((int)Lexer.OR, Affix.InFix,Associativity.Right,10)]
+    public AST.AST BoolOper(Expression left,Token<Lexer> oper,Expression right) =>
+        new Operation(left,oper.TokenID,right);
+
+    [Operation((int)Lexer.NOT,Affix.PreFix,Associativity.Right,100)]
+    public AST.AST NotBool(Token<Lexer> oper,Expression expr) =>
+        new Operation(null,oper.TokenID,expr);
+
+    [Operation((int)Lexer.MINUS,Affix.PreFix,Associativity.Right,100)]
+    public AST.AST MINUS(Token<Lexer> oper,Expression expr) =>
+        new Operation(null,oper.TokenID,expr);
+```
+
+ok了。
+
+现在我们将表达式解析与值和标识符进行拼接：
+
+```c#
+[Operand]
+    [Production("operand: primary")]
+    public AST.AST Operand(AST.AST prim) => prim;
+
+    [Production("primary: LPAREN[d] Parser_expressions RPAREN[d]")]
+    public AST.AST LR(Expression prim) => prim;
+
+    [Production("primary: STRING")]
+    public AST.AST STRING(Token<Lexer> token) => new StringValue(token.Value);
+
+    [Production("primary: INT")]
+    public AST.AST INT(Token<Lexer> token) => new IntValue(token.IntValue);
+
+    [Production("primary: DOUBLE")]
+    public AST.AST DOUBLE(Token<Lexer> token) => new DoubleValue(double.Parse(token.Value));
+
+    [Production("primary: IDENTIFIER")]
+    public AST.AST IDENTIFIER(Token<Lexer> id) => new ID(id.Value);
+
+    [Production("primary: TRUE")]
+    public AST.AST BoolTrue(Token<Lexer> token) => new BoolValue(true);
+
+    [Production("primary: FALSE")]
+    public AST.AST BoolFalse(Token<Lexer> token) => new BoolValue(false);
+
+    [Production("primary: PASS[d]")]    public AST.AST Pass() => null;
+```
+
+其中我们将上面的表达式解析抽象成[Operand]来进行拼接。
+
+## 二元解析
+
+我们现在进行二元解析。
+
+二元解析其实非常简单，就是不断地重复就行。
+
+为了方面调试，我们这里将二元解析的具体方法写在Value作为一个继承方法来使用。
+
+现在我们需要将以下这几种方法进行书写：
+
+- 加减乘除：主要是Int和Double需要，当然我们也可以像Python那样string*int表示将String累加 `<int>次`
+
+- 和，或，否：用于Bool中，因为Left和Right都是Bool
+
+- 大于，小于，等于等等等等：同类别的运算。
+
+这就你们自己来写吧！
+
+最后，将expr改成Parser_expresstion，这是csly给我们命的名。
