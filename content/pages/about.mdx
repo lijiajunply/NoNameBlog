@@ -1,17 +1,87 @@
-<div className="rounded-3xl border border-neutral-200/80 bg-gradient-to-br from-white via-neutral-50 to-blue-50/60 p-6 shadow-sm dark:border-neutral-800/80 dark:from-neutral-900 dark:via-neutral-900 dark:to-blue-950/30 md:p-8">
-  <p className="mt-0 text-sm uppercase tracking-[0.24em] text-neutral-500 dark:text-neutral-400">
-    About Me
-  </p>
-  <h2 className="mt-2 mb-3">你好，我是 Luckyfish</h2>
-    一个热爱创造和分享的开发者。这里主要记录我七里八里的内容。包括一些心得和技术分享。
+<div className="rounded-[30px] border border-white/70 bg-gradient-to-b from-white/90 to-neutral-50/70 p-6 shadow-[0_14px_40px_-28px_rgba(15,23,42,0.35)] backdrop-blur-xl dark:border-white/10 dark:from-neutral-900/85 dark:to-neutral-900/55 md:p-9">
+  <h2 className="mt-4 mb-3 text-3xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100">
+    你好，我是 Luckyfish
+  </h2>
+  <div className="max-w-2xl text-[15px] leading-7 text-neutral-600 dark:text-neutral-300">
+      一个热爱创造和分享的开发者。这里主要记录我七里八里的内容。包括一些心得和技术分享。
+  </div>
 </div>
 
 ## 技术偏好
 
-- [Vue](https://vuejs.org/)
-- [React](https://reactjs.org/)
-- [C#](https://dotnet.microsoft.com/)
-- [Python](https://www.python.org/)
+<div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+  <Card className="group relative overflow-hidden rounded-[26px] border border-white/75 bg-white/78 p-6 shadow-[0_16px_38px_-28px_rgba(15,23,42,0.4)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_24px_40px_-24px_rgba(15,23,42,0.42)] dark:border-white/10 dark:bg-neutral-900/65">
+    <div className="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-transparent via-neutral-300/70 to-transparent dark:via-neutral-600/70" />
+    <div className="flex items-center justify-between gap-3">
+      <div className="text-base font-semibold text-neutral-900 dark:text-neutral-100">
+        React / Next.js
+      </div>
+      <div className="rounded-full border border-neutral-200/80 bg-white/80 p-2 text-neutral-600 dark:border-neutral-700/80 dark:bg-neutral-900/80 dark:text-neutral-300">
+        <Icon icon="mingcute:code-line" width="16" />
+      </div>
+    </div>
+    <div className="mt-2 text-sm leading-relaxed text-neutral-600 dark:text-neutral-300">
+      组件化开发、路由与渲染策略、内容站点工程化。
+    </div>
+    <a href="https://nextjs.org/" target="_blank" rel="noreferrer" className="mt-4 inline-block text-sm font-medium text-neutral-500 transition-colors hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100">
+      查看文档
+    </a>
+  </Card>
+
+  <Card className="group relative overflow-hidden rounded-[26px] border border-white/75 bg-white/78 p-6 shadow-[0_16px_38px_-28px_rgba(15,23,42,0.4)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_24px_40px_-24px_rgba(15,23,42,0.42)] dark:border-white/10 dark:bg-neutral-900/65">
+    <div className="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-transparent via-neutral-300/70 to-transparent dark:via-neutral-600/70" />
+    <div className="flex items-center justify-between gap-3">
+      <div className="text-base font-semibold text-neutral-900 dark:text-neutral-100">
+        Vue
+      </div>
+      <div className="rounded-full border border-neutral-200/80 bg-white/80 p-2 text-neutral-600 dark:border-neutral-700/80 dark:bg-neutral-900/80 dark:text-neutral-300">
+        <Icon icon="mingcute:vue-line" width="16" />
+      </div>
+    </div>
+    <div className="mt-2 text-sm leading-relaxed text-neutral-600 dark:text-neutral-300">
+      熟悉生态与组件组织方式，关注可维护性和协作效率。
+    </div>
+    <a href="https://vuejs.org/" target="_blank" rel="noreferrer" className="mt-4 inline-block text-sm font-medium text-neutral-500 transition-colors hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100">
+      查看文档
+    </a>
+  </Card>
+
+  <Card className="group relative overflow-hidden rounded-[26px] border border-white/75 bg-white/78 p-6 shadow-[0_16px_38px_-28px_rgba(15,23,42,0.4)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_24px_40px_-24px_rgba(15,23,42,0.42)] dark:border-white/10 dark:bg-neutral-900/65">
+    <div className="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-transparent via-neutral-300/70 to-transparent dark:via-neutral-600/70" />
+    <div className="flex items-center justify-between gap-3">
+      <div className="text-base font-semibold text-neutral-900 dark:text-neutral-100">
+        C# / .NET
+      </div>
+      <div className="rounded-full border border-neutral-200/80 bg-white/80 p-2 text-neutral-600 dark:border-neutral-700/80 dark:bg-neutral-900/80 dark:text-neutral-300">
+        <Icon icon="mingcute:server-line" width="16" />
+      </div>
+    </div>
+    <div className="mt-2 text-sm leading-relaxed text-neutral-600 dark:text-neutral-300">
+      工具开发与后端能力补全，注重稳定性和工程规范。
+    </div>
+    <a href="https://dotnet.microsoft.com/" target="_blank" rel="noreferrer" className="mt-4 inline-block text-sm font-medium text-neutral-500 transition-colors hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100">
+      查看文档
+    </a>
+  </Card>
+
+  <Card className="group relative overflow-hidden rounded-[26px] border border-white/75 bg-white/78 p-6 shadow-[0_16px_38px_-28px_rgba(15,23,42,0.4)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_24px_40px_-24px_rgba(15,23,42,0.42)] dark:border-white/10 dark:bg-neutral-900/65">
+    <div className="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-transparent via-neutral-300/70 to-transparent dark:via-neutral-600/70" />
+    <div className="flex items-center justify-between gap-3">
+      <div className="text-base font-semibold text-neutral-900 dark:text-neutral-100">
+        Python
+      </div>
+      <div className="rounded-full border border-neutral-200/80 bg-white/80 p-2 text-neutral-600 dark:border-neutral-700/80 dark:bg-neutral-900/80 dark:text-neutral-300">
+        <Icon icon="mingcute:ai-line" width="16" />
+      </div>
+    </div>
+    <div className="mt-2 text-sm leading-relaxed text-neutral-600 dark:text-neutral-300">
+      脚本自动化与数据处理，快速验证想法和提升效率。
+    </div>
+    <a href="https://www.python.org/" target="_blank" rel="noreferrer" className="mt-4 inline-block text-sm font-medium text-neutral-500 transition-colors hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100">
+      查看文档
+    </a>
+  </Card>
+</div>
 
 <GitHubCalendarCard username="lijiajunply" />
 

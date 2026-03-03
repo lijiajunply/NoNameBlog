@@ -20,12 +20,12 @@ export function GitHubCalendarCard({
   return (
     <section
       className={cn(
-        "my-10 rounded-3xl border border-neutral-200/80 bg-white/70 p-5 shadow-sm backdrop-blur-sm dark:border-neutral-800/80 dark:bg-neutral-900/50 md:p-7",
+        "my-10 rounded-[28px] border border-white/75 bg-white/78 p-5 shadow-[0_16px_38px_-28px_rgba(15,23,42,0.4)] backdrop-blur-xl dark:border-white/10 dark:bg-neutral-900/65 md:p-7",
         className,
       )}
     >
       <div className="mb-4 flex items-center justify-between gap-3">
-        <h3 className="m-0 text-lg font-semibold text-neutral-900 dark:text-neutral-100">
+        <h3 className="m-0 text-lg font-semibold tracking-tight text-neutral-900 dark:text-neutral-100">
           GitHub 贡献热力图
         </h3>
         <a

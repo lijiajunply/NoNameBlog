@@ -10,6 +10,7 @@ import { ChartTooltip } from "@/components/charts/tooltip";
 import { XAxis } from "@/components/charts/x-axis";
 import { GitHubCalendarCard } from "@/components/mdx/github-calendar-card";
 import { Icon } from "@/components/mdx/icon";
+import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 
 type MdxComponentProps = {
@@ -159,6 +160,7 @@ const mdxComponents: Record<string, any> = {
   XAxis,
   Icon,
   GitHubCalendarCard,
+  Card,
 };
 
 const prettyCodeOptions = {
