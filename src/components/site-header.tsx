@@ -14,6 +14,7 @@ import { cn } from "@/lib/utils";
 
 const navItems = [
   { href: "/", label: "首页", icon: "mingcute:home-5-line" },
+  { href: "/stats/", label: "统计", icon: "mingcute:chart-line-line" },
   { href: "/about/", label: "关于", icon: "mingcute:information-line" },
   { href: "/friends/", label: "友链", icon: "mingcute:group-line" },
 ];

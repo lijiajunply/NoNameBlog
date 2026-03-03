@@ -43,6 +43,7 @@ const staticRoutes = [
   "/",
   "/about/",
   "/friends/",
+  "/stats/",
   "/search/",
   "/tags/",
 ];

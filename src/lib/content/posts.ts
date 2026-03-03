@@ -19,7 +19,7 @@ export type Post = {
   headings: Heading[];
 };
 
-export type MonthlyGrowthStat = {
+export type MonthlyCumulativeStat = {
   date: string;
   posts: number;
   tags: number;
@@ -154,7 +154,7 @@ function formatMonthStart({ year, month }: YearMonth) {
   return `${year.toString().padStart(4, "0")}-${month.toString().padStart(2, "0")}-01`;
 }
 
-export function getMonthlyGrowthStats(): MonthlyGrowthStat[] {
+export function getMonthlyCumulativeStats(): MonthlyCumulativeStat[] {
   const posts = getAllPosts().toSorted((a, b) =>
     a.frontmatter.date.localeCompare(b.frontmatter.date),
   );
@@ -180,32 +180,28 @@ export function getMonthlyGrowthStats(): MonthlyGrowthStat[] {
     month: now.getMonth() + 1,
   };
 
-  const firstSeenTagMonth = new Map<string, string>();
-  for (const post of posts) {
-    const monthKey = `${post.frontmatter.date.slice(0, 7)}-01`;
-    for (const tag of post.frontmatter.tags) {
-      if (tag && !firstSeenTagMonth.has(tag)) {
-        firstSeenTagMonth.set(tag, monthKey);
-      }
-    }
-  }
-
-  const newTagsByMonth = new Map<string, number>();
-  for (const monthKey of firstSeenTagMonth.values()) {
-    newTagsByMonth.set(monthKey, (newTagsByMonth.get(monthKey) ?? 0) + 1);
-  }
-
-  const stats: MonthlyGrowthStat[] = [];
+  const cumulativeTags = new Set<string>();
+  const stats: MonthlyCumulativeStat[] = [];
+  let cumulativePosts = 0;
   let cursor = firstMonth;
 
   while (compareYearMonth(cursor, currentMonth) <= 0) {
     const monthKey = formatMonthStart(cursor);
     const monthPosts = postsByMonth.get(monthKey) ?? [];
 
+    cumulativePosts += monthPosts.length;
+    for (const post of monthPosts) {
+      for (const tag of post.frontmatter.tags) {
+        if (tag) {
+          cumulativeTags.add(tag);
+        }
+      }
+    }
+
     stats.push({
       date: monthKey,
-      posts: monthPosts.length,
-      tags: newTagsByMonth.get(monthKey) ?? 0,
+      posts: cumulativePosts,
+      tags: cumulativeTags.size,
     });
     cursor = nextYearMonth(cursor);
   }

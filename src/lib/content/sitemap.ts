@@ -12,6 +12,7 @@ export function generateSitemapXml() {
     "",
     "/about",
     "/friends",
+    "/stats",
     "/search",
     "/tags",
     "/categories",
