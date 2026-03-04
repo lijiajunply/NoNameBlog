@@ -44,9 +44,9 @@ export function PostCard({post}: { post: Post }) {
                 <img
                     src={cover}
                     alt={post.frontmatter.title}
-                    className="absolute inset-0 h-full w-full object-cover"
+                    className="absolute h-full object-cover top-0 right-0 aspect-video hidden lg:block backdrop-blur-lg"
                     style={{
-                        opacity: 0.34
+                        opacity: 0.75
                     }}
                     loading="lazy"
                 />

@@ -13,7 +13,7 @@ import {getAllPosts, getAllTags, getMonthlyCumulativeStats} from "@/lib/content/
 const POSTS_PER_PAGE = 8;
 
 export const metadata: Metadata = {
-    title: "首页",
+    title: "NoName Blog",
     description: "浏览最新文章、热门标签与博客更新趋势。",
     alternates: {
         canonical: `${siteConfig.siteUrl}/`,
