@@ -10,7 +10,7 @@ type TagPageProps = {
 
 export function generateStaticParams() {
   return getAllTags().map((tag) => ({
-    id: encodeURIComponent(tag.name),
+    id: tag.name,
   }));
 }
 
@@ -18,7 +18,7 @@ export async function generateMetadata({
   params,
 }: TagPageProps): Promise<Metadata> {
   const { id } = await params;
-  const name = decodeURIComponent(id);
+  const name = id;
 
   return {
     title: `标签: ${name}`,
@@ -30,7 +30,7 @@ export async function generateMetadata({
 
 export default async function TagDetailPage({ params }: TagPageProps) {
   const { id } = await params;
-  const name = decodeURIComponent(id);
+  const name = id;
   const posts = getPostsByTag(name);
 
   if (!posts.length) {

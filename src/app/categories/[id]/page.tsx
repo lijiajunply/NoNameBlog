@@ -10,7 +10,7 @@ type CategoryPageProps = {
 
 export function generateStaticParams() {
   return getAllCategories().map((category) => ({
-    id: encodeURIComponent(category.name),
+    id: category.name,
   }));
 }
 
@@ -18,7 +18,7 @@ export async function generateMetadata({
   params,
 }: CategoryPageProps): Promise<Metadata> {
   const { id } = await params;
-  const name = decodeURIComponent(id);
+  const name = id;
 
   return {
     title: `分类: ${name}`,
@@ -30,7 +30,7 @@ export async function generateMetadata({
 
 export default async function CategoryDetailPage({ params }: CategoryPageProps) {
   const { id } = await params;
-  const name = decodeURIComponent(id);
+  const name = id;
   const posts = getPostsByCategory(name);
 
   if (!posts.length) {
