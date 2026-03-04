@@ -106,7 +106,7 @@ export default async function PostPage({params}: PostPageProps) {
                 dangerouslySetInnerHTML={{__html: JSON.stringify(articleJsonLd)}}
             />
             <section
-                className="min-w-0 rounded-3xl border border-neutral-200/70 bg-white/75 p-7 md:p-10 dark:border-neutral-800/80 dark:bg-neutral-900/75">
+                className="min-w-0 lg:rounded-3xl lg:border lg:border-neutral-200/70 lg:bg-white/75 md:p-10 lg:dark:border-neutral-800/80 lg:dark:bg-neutral-900/75">
                 <div className="mb-6 space-y-4">
                     <div className="flex flex-wrap items-center gap-2 text-sm text-neutral-500">
                         <span>{formatDate(post.frontmatter.date)}</span>
