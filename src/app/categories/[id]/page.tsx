@@ -8,6 +8,14 @@ type CategoryPageProps = {
   params: Promise<{ id: string }>;
 };
 
+function decodeTaxonomyId(id: string) {
+  try {
+    return decodeURIComponent(id);
+  } catch {
+    return id;
+  }
+}
+
 export function generateStaticParams() {
   return getAllCategories().map((category) => ({
     id: category.name,
@@ -18,7 +26,7 @@ export async function generateMetadata({
   params,
 }: CategoryPageProps): Promise<Metadata> {
   const { id } = await params;
-  const name = id;
+  const name = decodeTaxonomyId(id);
 
   return {
     title: `分类: ${name}`,
@@ -30,7 +38,7 @@ export async function generateMetadata({
 
 export default async function CategoryDetailPage({ params }: CategoryPageProps) {
   const { id } = await params;
-  const name = id;
+  const name = decodeTaxonomyId(id);
   const posts = getPostsByCategory(name);
 
   if (!posts.length) {
