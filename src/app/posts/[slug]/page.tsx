@@ -2,6 +2,7 @@ import type {Metadata} from "next";
 import Link from "next/link";
 import {notFound} from "next/navigation";
 import {PostToc} from "@/components/post-toc";
+import {PostComments} from "@/components/post-comments";
 import {Badge} from "@/components/ui/badge";
 import {siteConfig} from "@/config/site";
 import {renderMdx} from "@/lib/content/mdx";
@@ -167,6 +168,7 @@ export default async function PostPage({params}: PostPageProps) {
                         ) : null}
                     </nav>
                 ) : null}
+                <PostComments />
             </section>
             {post.headings.length > 0 && (<PostToc headings={post.headings}/>)}
         </article>
