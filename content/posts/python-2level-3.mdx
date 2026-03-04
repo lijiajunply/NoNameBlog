@@ -25,15 +25,19 @@ cover: /notion-covers/python-2level-3.jpg
 
 ### **0.条件判断表达式**
 
-注：表达式是python最常见的东西。例：
+注：表达式是 python 最常见的东西。例：
 
-`a = 1 #赋值表达式
-a == 1 #条件判断表达式`
+```python
+a = 1 #赋值表达式
+a == 1 #条件判断表达式
+```
 
 来看一下这句话：
 
-`a ``**=**`` 1
-a ``**==**`` 2`
+```python
+a = 1
+a == 2
+```
 
 是不是对这句话感到疑惑？
 
@@ -41,12 +45,14 @@ a ``**==**`` 2`
 
 可是a不等于二呀。而且，万一出现a == b这种情况怎么办？难道让电脑判断？
 
-确实。条件判断表达式会“输出”一个bool值，即“对”(True) 或“错”(false)。例如上面的：
+确实。条件判断表达式会"输出"一个 bool 值，即"对"(True) 或"错"(false)。例如上面的：
 
-`a = 1
-a == 2`
+```python
+a = 1
+a == 2
+```
 
-这时就为false。
+这时就为 false。
 
 条件判断表达式常长这样：<变量> （条件判断操作符或条件组合保留字）<变量>（其实叫对象更好一些）
 
@@ -70,12 +76,14 @@ not：非x，即当x为True时返回false。
 
 eg:
 
-`if (a==2 and a==1):
+```python
+if (a==2 and a==1):
     print("aaa")
 if(a==2 or a==1): #or
     print("bbb")
 if(not a==2): #not    
-    print(a)`
+    print(a)
+```
 
 为什么要讲这个呢？因为我下面要讲的这些内容都与这相关。
 
@@ -89,7 +97,8 @@ if(not a==2): #not
 
 eg:
 
-`c = 1+2 #加
+```python
+c = 1+2 #加
 print(c)
 c = 1 - 2 #减
 print(c)
@@ -102,7 +111,8 @@ print(c)
 c = 101%2 #求余
 print(c)
 c = 2**3 #乘方
-print(c)`
+print(c)
+```
 
 ### **2、程序的分支结构:单分支结构、二分支结构、多分支结构**
 
@@ -128,11 +138,13 @@ if语句分为三种结构，分别是单分支结构、二分支结构、多分
 
 eg:
 
-`a = 1
+```python
+a = 1
 if a == 1:
     print(a)
-output:
-1`
+# output:
+# 1
+```
 
 当我把a改成2时就不会输出，你可以试一下。
 
@@ -144,26 +156,30 @@ output:
 
 eg:
 
-`if(1 == 2):
+```python
+if(1 == 2):
     print(False)
 else:
-    print(True)`
+    print(True)
+```
 
 多分支结构：
 
 > 语法：
 
-这里的if语句是有优先级的，即上面的"if"优先于下面的"if"，例如：
+这里的 if 语句是有优先级的，即上面的"if"优先于下面的"if"，例如：
 
-`if 1==2 :
+```python
+if 1==2 :
     print(1)
 elif 1==1 :
     print(2)
 elif 1==1 :
     print(3)
 
-output:
-2`
+# output:
+# 2
+```
 
 > 事实上，在同一函数内所有的代码里，都按照顺序结构来进行，即上面的运行完了再运行下面的。
 
@@ -177,14 +193,16 @@ while循环：
 
 eg:
 
-`a = 1
+```python
+a = 1
 while a < 3 :
     print(a)
     a += 1
 
-output:
-1
-2`
+# output:
+# 1
+# 2
+```
 
 while-else循环：
 
@@ -194,17 +212,19 @@ while-else循环：
 
 eg:
 
-`a = 1
+```python
+a = 1
 while a < 3 :
     print(a)
     a += 1
 else :
     print(a)
 
-output:
-1
-2
-3`
+# output:
+# 1
+# 2
+# 3
+```
 
 无限循环：
 
@@ -214,13 +234,15 @@ output:
 
 eg:
 
-`while True:
+```python
+while True:
     print(True)
 
-or
+# or
 
 while 1 :
-    print(True)`
+    print(True)
+```
 
 我就不运行了[doge]
 
@@ -234,7 +256,8 @@ while 1 :
 
 eg:
 
-`try:
+```python
+try:
     a = int(input("输入被除数："))
     b = int(input("输入除数："))
     c = a / b
@@ -243,9 +266,10 @@ except (ValueError, ArithmeticError):
     print("程序发生了数字格式异常、算术异常之一")
 except :
     print("未知异常")
-print("程序继续运行")`
+print("程序继续运行")
+```
 
-当我都输入0时，发生算术异常，于是报错：
+当我都输入 0 时，发生算术异常，于是报错：
 
 > 程序发生了数字格式异常、算术异常之一
 

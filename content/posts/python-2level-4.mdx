@@ -48,11 +48,13 @@ f(x) = y
 
 程序里的函数也长这样。让我们来看一个例子：
 
-`def f(x):
+```python
+def f(x):
     y = x+1
-    return y`
+    return y
+```
 
-在这里，我定义了一个函数叫做f()，形如： f(x) = x+1
+在这里，我定义了一个函数叫做 f()，形如：f(x) = x+1
 
 其中，x为输入值，y为输出值。
 
@@ -62,21 +64,25 @@ f(x) = y
 
 而使用也很简单：
 
-`y = f(1)#当有return时
-f(1)#`
+```python
+y = f(1)  # 当有 return 时
+f(1)
+```
 
-注意：**无论有没有参数，一定要有括号。你必须要以x、y的顺序设置。**
+注意：**无论有没有参数，一定要有括号。你必须要以 x、y 的顺序设置。**
 
-`def f():
+```python
+def f():
     return 1
 
-#你必须要以x、y的顺序设置，例如：
+# 你必须要以 x、y 的顺序设置，例如：
 def chu(x,y):
     return x/y
 print(chu(1,2))
 
 output:
-0.5`
+0.5
+```
 
 ### **2、函数的参数传递:可选参数传递、参数名称传递、函数的返回值**
 
@@ -84,7 +90,8 @@ output:
 
 **必选参数：函数调用的时候必须传入的参数。例如：**
 
-`def chu(x,y):
+```python
+def chu(x,y):
     return x/y
 print(chu(1))
 
@@ -96,7 +103,8 @@ d:\Untitled-1.ipynb Cell 9 in <cell line: 3>()
       2     return x/y
 ----> 3 print(chu(1))
 
-TypeError: chu() missing 1 required positional argument: 'y'`
+TypeError: chu() missing 1 required positional argument: 'y'
+```
 
 必须要填上y。
 
@@ -106,10 +114,12 @@ TypeError: chu() missing 1 required positional argument: 'y'`
 
 例如：
 
-`def f(x,y,z=1):
+```python
+def f(x,y,z=1):
     return (x*y)**z
-print(f(1,2))#x,y是必选参数，必须要写
-print(f(1,2,2))#z是默认参数，可写可不写。不写时默认为1`
+print(f(1,2))  # x,y 是必选参数，必须要写
+print(f(1,2,2))  # z 是默认参数，可写可不写。不写时默认为 1
+```
 
 注意：**默认参数必须在必选参数的后面，否则无法完成函数定义，Python会提示SyntaxError异常。**
 
@@ -117,7 +127,8 @@ print(f(1,2,2))#z是默认参数，可写可不写。不写时默认为1`
 
 例如：
 
-`def add_end(L=[]):
+```python
+def add_end(L=[]):
     L.append('END')
     return L
 print(add_end([1, 2, 3]))
@@ -127,7 +138,8 @@ print(add_end())
 output:
 [1, 2, 3, 'END']
 ['END']
-['END', 'END']`
+['END', 'END']
+```
 
 > 你们也看到了，最后L的值为['END', 'END']。这是因为L只生成一次，这个对象就一直存在。
 
@@ -135,16 +147,18 @@ output:
 
 **eg:**
 
-`**def**`` ``**cs**``(a,b,c):
+```python
+def cs(a,b,c):
     print(a)
     print(b)
     print(c)
-cs(a``**=**``1,b``**=**``2,c``**=**``3)
+cs(a=1,b=2,c=3)
 
 output:
 1
 2
-3`
+3
+```
 
 **函数的返回值：**
 
@@ -154,13 +168,15 @@ output:
 
 像这样：
 
-`def f(a, b, c, d, e, f):
+```python
+def f(a, b, c, d, e, f):
     print("a={}".format(a))
     print("b={}".format(b))
     print("c={}".format(c))
     print("d={}".format(d))
     print("e={}".format(e))
-    print("f={}".format(f))`
+    print("f={}".format(f))
+```
 
 没有return，于是不返回值。
 
@@ -170,12 +186,14 @@ output:
 
 eg:
 
-`def s(a,b):
+```python
+def s(a,b):
     return b,a
 print(s(1,2),type(s(1,2)))
 
 output:
-(2, 1) <class 'tuple'>#tuple就是元组`
+(2, 1) <class 'tuple'>  # tuple 就是元组
+```
 
 ### **3、变量的作用域:局部变量和全局变量**
 
@@ -191,8 +209,9 @@ output:
 
 eg:
 
-`a = 1 
-def w(): #这是一个函数
+```python
+a = 1 
+def w():  # 这是一个函数
     c = a
 print(c)
 
@@ -204,7 +223,8 @@ Untitled-1.ipynb Cell 3 in <cell line: 4>()
       3     c = 1
 ----> 4 print(c)
 
-NameError: name 'c' is not defined`
+NameError: name 'c' is not defined
+```
 
 a 是全局变量，而c是局部变量。
 

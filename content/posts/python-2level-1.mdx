@@ -159,17 +159,22 @@ https://www.python.org/downloads/
 
 **eg:**
 
-`a ``**=**`` input("number:")
-``**if**``(type(a) ``**==**`` int):
+```python
+a = input("number:")
+if(type(a) == int):
    print("int")
-``**else**``:
+else:
    print("not int")
-``*#放心，一定会输出 not int 的，这个我们待会儿再讲*``*#一般我们就这么写*`
+#放心，一定会输出 not int 的，这个我们待会儿再讲
+#一般我们就这么写
+```
 
 这样是不是比下面这个好看：
 
-`a = input("number:")if(type(a) == int):print("int")else:print("not int")
-#放心，会报错的，这个我们待会儿再讲`
+```python
+a = input("number:")if(type(a) == int):print("int")else:print("not int")
+#放心，会报错的，这个我们待会儿再讲
+```
 
 请记住，一定要这么写！！！（毕竟，人要对自己好一点）
 
@@ -177,7 +182,11 @@ https://www.python.org/downloads/
 
 我们再来看这段代码：
 
-`a ``**=**`` input("number:") ``**if**``(type(a) ``**==**`` int):   print("int") ``**else**``:   print("not int")`
+```python
+a = input("number:")
+if(type(a) == int):   print("int") 
+else:   print("not int")
+```
 
 试着在vscode运行一下：
 
@@ -192,12 +201,14 @@ python与c/c++,c#,java不同之处在于 ";" 与 "{ }"
 
 看一下C#的代码：
 
-`**for**``(``**int**`` a = 1 ; a <= 3 ; a++){
+```python
+for(int a = 1 ; a <= 3 ; a++){
 Console.WriteLine("hello,world!"); 
 }
 Console.ReadKey();
-``*//这是C#的注释
-*``*//C#每一个“句子”后面都带 ";"*`
+//这是 C#的注释
+//C#每一个"句子"后面都带 ";"
+```
 
 如果有条件，试着去";"再运行试试。
 
@@ -232,7 +243,10 @@ for(int a = 1 ; a <= 3 ; a++){Console.WriteLine("hello,world!"); }Console.ReadKe
 
 注
 
-`*#这是注释*``*#这是注释*``'''
+```python
+#这是注释
+#这是注释
+'''
 这也是注释
 这也是注释
 '''
@@ -240,7 +254,8 @@ for(int a = 1 ; a <= 3 ; a++){Console.WriteLine("hello,world!"); }Console.ReadKe
 这也是注释
 这也是注释
 这也是注释
-"""`
+"""
+```
 
 注释，同我们语文课本中文言文中的注释。与正文无关，但是让我们能更方便的理解正文。
 
@@ -248,14 +263,19 @@ for(int a = 1 ; a <= 3 ; a++){Console.WriteLine("hello,world!"); }Console.ReadKe
 
 eg:
 
-`print("hello,world")
-#luckyfish真帅！！！ 我要给他三连！！！`
+```python
+print("hello,world")
+#luckyfish 真帅！！！ 我要给他三连！！！
+```
 
 不影响代码运行，但会让读者想起来要三连。
 
 那么让我们再看一下上面的注释：
 
-`*#这是注释*``*#这是注释*``'''
+```python
+#这是注释
+#这是注释
+'''
 这也是注释
 这也是注释
 '''
@@ -264,7 +284,8 @@ eg:
 这也是注释
 这也是注释
 这也是注释
-"""`
+"""
+```
 
 有 # ''' """ 这三种表达方式。我们不难看出，#是单行注释 ， 而 ''' 与 """ 是多行注释。那么我们就要注意'''与"""需要把注释内容罩着才行。
 
@@ -274,7 +295,9 @@ eg:
 
 eg:
 
-`a = 1 #这是一个赋值语句`
+```python
+a = 1 #这是一个赋值语句
+```
 
 这里声明了一个变量a，并把1赋值给了a。
 
@@ -286,13 +309,15 @@ eg:
 
 eg:
 
-`a = 1
+```python
+a = 1
 1 = a 
 error:
  Input In [1]
     1 = a
     ^
-SyntaxError: cannot assign to literal here. Maybe you meant '==' instead of '='?`
+SyntaxError: cannot assign to literal here. Maybe you meant '==' instead of '='?
+```
 
 报错了。
 
@@ -300,9 +325,11 @@ SyntaxError: cannot assign to literal here. Maybe you meant '==' instead of '='?
 
 如果你不明白，那么现在让我们翻译一下这句话：
 
-`a = 1
+```python
+a = 1
 a = 2
-print("a等于：",a)`
+print("a 等于：",a)
+```
 
 a等于1，a等于2？a不是等于1吗？可最后为什么a等于2？
 
@@ -312,7 +339,8 @@ a等于1，a等于2？a不是等于1吗？可最后为什么a等于2？
 
 这样的话我们也就不难理解这一句话了：
 
-`a = 1
+```python
+a = 1
 b = 2
 a = b
 print(a)
@@ -320,7 +348,8 @@ print(b)
 
 output: 
 2
-2`
+2
+```
 
 > 选读：
 
@@ -336,42 +365,53 @@ output:
 
 eg:
 
-`a ``**=**`` 1 
-``**def**`` ``**w**``(): ``*#这是一个函数*``c ``**=**`` a
-print(c)
+```python
+a = 1 
+def w():
+    #这是一个函数
+    c = a
+    print(c)
 
 error:
-```**---------------------------------------------------------------------------NameError **```Traceback (most recent call last)
-Untitled``**-**``1.ipynb Cell 3 ``**in**`` ``**<**``cell line: 4``**>**``()
-      2 ``**def**`` ``**w**``():
-      3     c ``**=**`` 1
-``**---->**`` 4 print(c)
+---------------------------------------------------------------------------
+NameError Traceback (most recent call last)
+Untitled-1.ipynb Cell 3 in <cell line: 4>()
+      2 def w():
+      3     c = 1
+----> 4 print(c)
 
-``**NameError**``: name 'c' ``**is**`` ``**not**`` defined`
+NameError: name 'c' is not defined
+```
 
 a 是全局变量，而c是局部变量。
 
 保留字：
 
-`#保留字
+```python
+#保留字
 import keyword #引用
-print(keyword.kwlist)#输出所有keyword`
+print(keyword.kwlist)#输出所有 keyword
+```
 
 试着运行一下
 
-`['False', 'None', 'True', 'and', 'as', 'assert', 'async', 'await', 'break', 'class', 'continue', 'def', 'del', 'elif', 'else', 'except', 'finally', 'for', 'from', 'global', 'if', 'import', 'in', 'is', 'lambda', 'nonlocal', 'not', 'or', 'pass', 'raise', 'return', 'try', 'while', 'with', 'yield']`
+```python
+['False', 'None', 'True', 'and', 'as', 'assert', 'async', 'await', 'break', 'class', 'continue', 'def', 'del', 'elif', 'else', 'except', 'finally', 'for', 'from', 'global', 'if', 'import', 'in', 'is', 'lambda', 'nonlocal', 'not', 'or', 'pass', 'raise', 'return', 'try', 'while', 'with', 'yield']
+```
 
 > 保留字也称为关键字，指被编程语言内部定义并保留使用的标识符，程序员编写程序时不能定义与保留字相同的标识符。每种程序设计语言都有一套保留字，保留字一般用来构成程序整体框架、表达关键值和具有结构性的复杂语义等。掌握一门编程语言首先要熟记其所对应的保留字。
 > [Python的33个保留字 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/85559241)
 
 现在先不讲，以后会讲的。现在只需要知道一点：若将保留字作为标识符并赋值将会报错！
 
-`class = 1
+```python
+class = 1
 error:
 Input In [4]
     class = 1
           ^
-SyntaxError: invalid syntax`
+SyntaxError: invalid syntax
+```
 
 数据类型：
 
@@ -395,11 +435,13 @@ SyntaxError: invalid syntax`
 
 首先让我们看一下input():
 
-`a = input("number:")
+```python
+a = input("number:")
 if(type(a) == int):
    print("int")
 else:
-   print("not int")`
+   print("not int")
+```
 
 运行一下，你就明白input函数的用处了。
 
@@ -421,13 +463,16 @@ eval() 函数用来执行一个字符串表达式，并返回表达式的值。
 
 比如说：
 
-`eval('print("hello,world!")')
+```python
+eval('print("hello,world!")')
 output:
-hello,world!`
+hello,world!
+```
 
 可当我们写入这段代码时：
 
-`eval('a = 1 ')
+```python
+eval('a = 1 ')
 
 error:
 Traceback (most recent call last):
@@ -441,13 +486,15 @@ Traceback (most recent call last):
   File <string>:1
     a = 1
       ^
-SyntaxError: invalid syntax`
+SyntaxError: invalid syntax
+```
 
 这告诉我们eval()不能自行创建变量，只能让外界给他传递变量。
 
 eg:
 
-`a = 1
+```python
+a = 1
 eval('a = 2')
 print(a)
 
@@ -463,7 +510,8 @@ Traceback (most recent call last):
   File <string>:1
     a = 2
       ^
-SyntaxError: invalid syntax`
+SyntaxError: invalid syntax
+```
 
 我并没有传递a这个变量，而是直接使用了，于是报错。
 
@@ -481,25 +529,29 @@ print():
 
 eg:
 
-`print("str")
+```python
+print("str")
 print(1)
 print(1.0)
 
 output:
 str
 1
-1.0`
+1.0
+```
 
 不管你是str,int还是什么的，只要你还是个对象，他就会进行输出。(背后的逻辑我们以后再讲)
 
 还有格式化对象，举个例子：
 
-`#格式化对象：
+```python
+#格式化对象：
 a = "the length of (%s) is %d" %('runoob',len('runoob'))
 print(a)
 
 output:
-the length of (runoob) is 6`
+the length of (runoob) is 6
+```
 
 通过vscode的代码高亮来看一下：
 

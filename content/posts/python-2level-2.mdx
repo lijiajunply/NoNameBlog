@@ -66,12 +66,15 @@ True
 
 eg:
 
-`a ``**=**`` 14E3 
+```python
+a = 14E3 
 print(a)
 print(type(a))
 
 output:
-14000.0 ``*#注意这个".0"*``**<**``**class**`` '``**float**``'>`
+14000.0 #注意这个".0"
+<class 'float'>
+```
 
 > 选读：
 C/C++,C#,Java还有一种表达方式，就是double，而double能容纳的小数范围比float大（像我就一直使用doubie，虽然这或许不是一个好习惯）
@@ -95,7 +98,8 @@ output:
 
 eg:
 
-`c = 1+2 #加
+```python
+c = 1+2 #加
 print(c)
 c = 1 - 2 #减
 print(c)
@@ -117,7 +121,8 @@ output:
 0.5
 3
 1
-8`
+8
+```
 
 增强赋值操作符：
 
@@ -125,7 +130,8 @@ output:
 
 eg:
 
-`d += 1
+```python
+d += 1
 error:
 ---------------------------------------------------------------------------
 NameError                                 Traceback (most recent call last)
@@ -140,7 +146,8 @@ a = 1
 a += 1 # a = a + 1
 print(a)
 output:
-2`
+2
+```
 
 数值运算函数:
 
@@ -159,46 +166,56 @@ output:
 
 divmod()：计算商与余数的函数，例如：
 
-`a = divmod(4,2) # 4//2 , 4%2
+```python
+a = divmod(4,2) # 4//2 , 4%2
 print(a)
 
 output:
-(2, 0)`
+(2, 0)
+```
 
 max()和min()：这个可能要等到讲列表那里才能讲，我先把代码放在这里：
 
-`S = [1,3,8,9,25,66,87,20,2099]
+```python
+S = [1,3,8,9,25,66,87,20,2099]
 print(max(S))
 print(min(S))
-#max()函数是计算任意多个数字里面的最大值，而min()函数是计算任意多个数字里面的最小值
+#max() 函数是计算任意多个数字里面的最大值，而 min() 函数是计算任意多个数字里面的最小值
 
 output:
 2099
-1`
+1
+```
 
 > 这个可以通过冒泡排序和快速排序来实现
 
 pow()：计算幂次方运算的函数，相当于x**y。例如：
 
-`a = pow(3,10)
+```python
+a = pow(3,10)
 print(a)
 output:
-59049`
+59049
+```
 
 他还有第三个参数，即对pow(x,y)进行求余（x**y % z)。例如：
 
-`a = pow(3,10,10**4)
+```python
+a = pow(3,10,10**4)
 print(a)
 output:
-9049`
+9049
+```
 
 round()：返回浮点数x的四舍五入值。形如round(x,y)，其中y表示约到第几位。例如：
 
-`a = round(20.012181212121212,4)
+```python
+a = round(20.012181212121212,4)
 print(a)
 
 output:
-20.0122`
+20.0122
+```
 
 我们可以等到学完函数后重新写一下这些函数。
 
@@ -216,18 +233,19 @@ output:
 
 eg:
 
-`a ``**=**`` """
+```python
+a = """
 qwertyuiop
 asdfghjkl
 zxcvbnm
 """
-b ``**=**`` ''' 
+b = ''' 
 1234567890
 -=-=-=
 '''
-c ``**=**`` "'Epic Games'"
-d ``**=**`` '"e"'
-e ``**=**`` ''' "a" 'a' '''
+c = "'Epic Games'"
+d = '"e"'
+e = ''' "a" 'a' '''
 print(a,b,c,d,e)
 
 output:
@@ -237,7 +255,9 @@ asdfghjkl
 zxcvbnm
   
 1234567890
-``**-=-=-=**``'Epic Games' "e"  "a" 'a'`
+-=-=-=
+'Epic Games' "e"  "a" 'a'
+```
 
 看一下vscode的代码高亮：
 
@@ -253,11 +273,13 @@ zxcvbnm
 
 比如我要将 I_love_python_! 中最开始的那个字符呈现在控制台上，那么我就可以这么做：
 
-`d = "I_love_python_!"
+```python
+d = "I_love_python_!"
 print(d[0])#索引
 
 output:
-I`
+I
+```
 
 不知道你们有没有发现，第一个字符我们不会写成“1”，而是“0”，这一点我们要注意。不过我们现在可以写出一张位置图了：
 
@@ -298,11 +320,13 @@ I _ l o v e _ p y t h o n _ !
 
 看一下实例：
 
-`d ``**=**`` "I_love_python_!"
+```python
+d = "I_love_python_!"
 print(d[1:5])
 
 output:
-_lov`
+_lov
+```
 
 虽然切片是这么写的（[a:b]），但实际上在取值上并不是在[a,b]中进行，**而是在[a,b) (左闭右开) 中进行取值**，请一定要记住！
 
@@ -320,19 +344,21 @@ _lov`
 
 看一下实例吧：
 
-`#format()
+```python
+#format()
 print(format(('baidu','com')))#元组
 print("{}:{}".format('192.168.0.100',8888))
 #192.168.0.100:8888
 print("{server}{1}:{0}".format(8888,'192.168.1.100',server='Web Server Info :'))
-#Web Server Info :192.168.1.100:8888　　
+#Web Server Info :192.168.1.100:8888
 print("{0[0]}.{0[1]}".format(('baidu','com')))
 
 output:
 ('baidu', 'com')
 192.168.0.100:8888
 Web Server Info :192.168.1.100:8888
-baidu.com`
+baidu.com
+```
 
 ### **4、字符串类型的操作:字符串操作符、处理函数和处理方法**
 
@@ -342,18 +368,21 @@ baidu.com`
 
 eg:
 
-`d = "Epic Games "
+```python
+d = "Epic Games "
 d += "IntelliJ IDEA Community Edition 2022.1.3"
 print(d)
 
 output:
-Epic Games IntelliJ IDEA Community Edition 2022.1.3`
+Epic Games IntelliJ IDEA Community Edition 2022.1.3
+```
 
 “*”：通过“*”来重复字符串
 
 eg:
 
-`c = "Microsoft VS Code" * 3
+```python
+c = "Microsoft VS Code" * 3
 print(c)
 d = "Epic Games "
 d *= 3
@@ -361,7 +390,8 @@ print(d)
 
 output:
 Microsoft VS CodeMicrosoft VS CodeMicrosoft VS Code
-Epic Games Epic Games Epic Games`
+Epic Games Epic Games Epic Games
+```
 
 放心，没有减和除，不过你可以想一下应该可以起什么作用，并写在评论区中。
 
@@ -369,14 +399,16 @@ Epic Games Epic Games Epic Games`
 
 eg:
 
-`d = "abc"*2 #重复"abc"
+```python
+d = "abc"*2 #重复"abc"
 print(d)
 print("a" in d ,"s" in d) #in:判断有无该字符串
 
 output:
 abcabc
 True True
-abcabc`
+abcabc
+```
 
 字符串处理函数
 
@@ -396,7 +428,8 @@ abcabc`
 
 eg:
 
-`a = 1
+```python
+a = 1
 d = "a"
 print(type(a))
 print(type(d))
@@ -407,7 +440,8 @@ output:
 <class 'int'>
 <class 'str'>
 <class 'float'>
-True`
+True
+```
 
 可以发现，type()会直接输出成对应类型，而isinstance()是判断是否为~~类型，然后输出成bool值。
 
@@ -426,24 +460,26 @@ type() 不会认为子类是一种父类类型，不考虑继承关系。
 
 eg:
 
-`a = 1.0 #浮点数
+```python
+a = 1.0 #浮点数
 #a = "1" #string
-b = int(a)#将a转换为整数，a可以是浮点数或字符串
+b = int(a)#将 a 转换为整数，a 可以是浮点数或字符串
 if(type(b) == int):
     print(b)
 a = 1 #整数
 #a = "1" #string
-b = float(a)#将a转换为浮点数，a可以是整数或字符串
+b = float(a)#将 a 转换为浮点数，a 可以是整数或字符串
 if(type(b) == float):
     print(b)
-b = str(a)#将a转换为字符串，a可以是整数或浮点数
+b = str(a)#将 a 转换为字符串，a 可以是整数或浮点数
 if(type(b) == str):
     print("'" + b +"'")
 
 output:
 1
 1.0
-'1'`
+'1'
+```
 
 ## **结尾**
 
