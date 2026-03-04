@@ -17,9 +17,14 @@ function decodeTaxonomyId(id: string) {
 }
 
 export function generateStaticParams() {
-  return getAllTags().map((tag) => ({
-    id: tag.name,
-  }));
+  const ids = new Set<string>();
+
+  for (const tag of getAllTags()) {
+    ids.add(tag.name);
+    ids.add(encodeURIComponent(tag.name));
+  }
+
+  return [...ids].map((id) => ({ id }));
 }
 
 export async function generateMetadata({
