@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "postbuild": "node scripts/generate-rss.mjs && node scripts/generate-sitemap.mjs && cp public/rss.xml out/rss.xml && cp public/sitemap.xml out/sitemap.xml && pagefind --site out",
+    "postbuild": "node scripts/generate-rss.mjs && node scripts/generate-sitemap.mjs && node -e \"const fs=require('fs'); fs.copyFileSync('public/rss.xml', 'out/rss.xml'); fs.copyFileSync('public/sitemap.xml', 'out/sitemap.xml')\" && pagefind --site out",
     "start": "serve -s out -l tcp://0.0.0.0:${PORT:-3000}",
     "serve:out": "serve -s out -l 3000",
     "lint": "biome check",

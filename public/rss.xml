@@ -69,6 +69,14 @@
       </item>
 
       <item>
+        <title>和iOS Club一起学C#（一）什么是C#</title>
+        <link>https://blog.luckyfishes.site/posts/csharp-learn-1/</link>
+        <guid>https://blog.luckyfishes.site/posts/csharp-learn-1/</guid>
+        <pubDate>Wed, 31 Jul 2024 00:00:00 GMT</pubDate>
+        <description>和iOS Club一起学C#（一）什么是C#（Notion 导入）</description>
+      </item>
+
+      <item>
         <title>MySQL? PostgreSQL!</title>
         <link>https://blog.luckyfishes.site/posts/efcore-error/</link>
         <guid>https://blog.luckyfishes.site/posts/efcore-error/</guid>
@@ -117,6 +125,14 @@
       </item>
 
       <item>
+        <title>OPPO手机关闭广告</title>
+        <link>https://blog.luckyfishes.site/posts/oppo-close-ad/</link>
+        <guid>https://blog.luckyfishes.site/posts/oppo-close-ad/</guid>
+        <pubDate>Fri, 29 Dec 2023 00:00:00 GMT</pubDate>
+        <description>OPPO手机关闭广告（Notion 导入）</description>
+      </item>
+
+      <item>
         <title>Avalonia（二）简单介绍一下项目</title>
         <link>https://blog.luckyfishes.site/posts/avalonia-2-initproj/</link>
         <guid>https://blog.luckyfishes.site/posts/avalonia-2-initproj/</guid>
@@ -125,11 +141,35 @@
       </item>
 
       <item>
+        <title>Asp Net Core的身份验证功能简要</title>
+        <link>https://blog.luckyfishes.site/posts/authentication-asp-net-core/</link>
+        <guid>https://blog.luckyfishes.site/posts/authentication-asp-net-core/</guid>
+        <pubDate>Tue, 26 Dec 2023 00:00:00 GMT</pubDate>
+        <description>Asp Net Core的身份验证功能简要（Notion 导入）</description>
+      </item>
+
+      <item>
+        <title>Linux指南（Ubuntu篇）</title>
+        <link>https://blog.luckyfishes.site/posts/linux-guide-ubuntu/</link>
+        <guid>https://blog.luckyfishes.site/posts/linux-guide-ubuntu/</guid>
+        <pubDate>Sat, 18 Nov 2023 00:00:00 GMT</pubDate>
+        <description>Linux指南（Ubuntu篇）（Notion 导入）</description>
+      </item>
+
+      <item>
         <title>Linux指南（arch系篇）</title>
         <link>https://blog.luckyfishes.site/posts/linux-guide-arch/</link>
         <guid>https://blog.luckyfishes.site/posts/linux-guide-arch/</guid>
         <pubDate>Thu, 02 Nov 2023 00:00:00 GMT</pubDate>
         <description>Arch 系 Linux 安装与常见配置指引。</description>
+      </item>
+
+      <item>
+        <title>linux使用指南（Debian系）</title>
+        <link>https://blog.luckyfishes.site/posts/linux-guide-debian/</link>
+        <guid>https://blog.luckyfishes.site/posts/linux-guide-debian/</guid>
+        <pubDate>Thu, 02 Nov 2023 00:00:00 GMT</pubDate>
+        <description>linux使用指南（Debian系）（Notion 导入）</description>
       </item>
 
       <item>
@@ -149,6 +189,22 @@
       </item>
 
       <item>
+        <title>Python计算机二级（六）</title>
+        <link>https://blog.luckyfishes.site/posts/python-2level-6/</link>
+        <guid>https://blog.luckyfishes.site/posts/python-2level-6/</guid>
+        <pubDate>Thu, 02 Nov 2023 00:00:00 GMT</pubDate>
+        <description>文件和数据格式化</description>
+      </item>
+
+      <item>
+        <title>Python从入门到入土</title>
+        <link>https://blog.luckyfishes.site/posts/python-from-entry-to-burial/</link>
+        <guid>https://blog.luckyfishes.site/posts/python-from-entry-to-burial/</guid>
+        <pubDate>Thu, 02 Nov 2023 00:00:00 GMT</pubDate>
+        <description>Python从入门到入土（Notion 导入）</description>
+      </item>
+
+      <item>
         <title>C#应该怎么才能连接数据库？</title>
         <link>https://blog.luckyfishes.site/posts/cs-sql/</link>
         <guid>https://blog.luckyfishes.site/posts/cs-sql/</guid>
@@ -157,11 +213,123 @@
       </item>
 
       <item>
+        <title>Arch+KDE的美化日志</title>
+        <link>https://blog.luckyfishes.site/posts/arch-beautify/</link>
+        <guid>https://blog.luckyfishes.site/posts/arch-beautify/</guid>
+        <pubDate>Sun, 01 Oct 2023 00:00:00 GMT</pubDate>
+        <description>Arch+KDE的美化日志（Notion 导入）</description>
+      </item>
+
+      <item>
+        <title>Arch系统清理</title>
+        <link>https://blog.luckyfishes.site/posts/arch-clean/</link>
+        <guid>https://blog.luckyfishes.site/posts/arch-clean/</guid>
+        <pubDate>Sun, 01 Oct 2023 00:00:00 GMT</pubDate>
+        <description>Arch也会有垃圾需要清理的，我们必须要学会如何清理</description>
+      </item>
+
+      <item>
+        <title>Avalonia（一）安装与配置</title>
+        <link>https://blog.luckyfishes.site/posts/avalonia-1-start/</link>
+        <guid>https://blog.luckyfishes.site/posts/avalonia-1-start/</guid>
+        <pubDate>Thu, 28 Sep 2023 00:00:00 GMT</pubDate>
+        <description>Avalonia安装与配置</description>
+      </item>
+
+      <item>
+        <title>将图片生成字符画有几步？</title>
+        <link>https://blog.luckyfishes.site/posts/generate-character-drawing-from-a-picture/</link>
+        <guid>https://blog.luckyfishes.site/posts/generate-character-drawing-from-a-picture/</guid>
+        <pubDate>Thu, 28 Sep 2023 00:00:00 GMT</pubDate>
+        <description>将图片生成字符画有几步？（Notion 导入）</description>
+      </item>
+
+      <item>
+        <title>1.简单介绍csly</title>
+        <link>https://blog.luckyfishes.site/posts/luckylang-1-csly/</link>
+        <guid>https://blog.luckyfishes.site/posts/luckylang-1-csly/</guid>
+        <pubDate>Thu, 28 Sep 2023 00:00:00 GMT</pubDate>
+        <description>我们要写一个解释器，先简单介绍csly一下吧</description>
+      </item>
+
+      <item>
+        <title>2.编写AST和语法规范</title>
+        <link>https://blog.luckyfishes.site/posts/luckylang-2-ast/</link>
+        <guid>https://blog.luckyfishes.site/posts/luckylang-2-ast/</guid>
+        <pubDate>Thu, 28 Sep 2023 00:00:00 GMT</pubDate>
+        <description>编写AST和语法规范</description>
+      </item>
+
+      <item>
+        <title>3.编写二元解析</title>
+        <link>https://blog.luckyfishes.site/posts/luckylang-3-paser/</link>
+        <guid>https://blog.luckyfishes.site/posts/luckylang-3-paser/</guid>
+        <pubDate>Thu, 28 Sep 2023 00:00:00 GMT</pubDate>
+        <description>语法搞定了，现在编写二元解析</description>
+      </item>
+
+      <item>
         <title>4.书写Run函数</title>
         <link>https://blog.luckyfishes.site/posts/luckylang-4-astrun/</link>
         <guid>https://blog.luckyfishes.site/posts/luckylang-4-astrun/</guid>
         <pubDate>Thu, 28 Sep 2023 00:00:00 GMT</pubDate>
         <description>脚本语言系列：Run 函数与变量管理器实现。</description>
+      </item>
+
+      <item>
+        <title>5.完成解释器构建</title>
+        <link>https://blog.luckyfishes.site/posts/luckylang-5-done/</link>
+        <guid>https://blog.luckyfishes.site/posts/luckylang-5-done/</guid>
+        <pubDate>Thu, 28 Sep 2023 00:00:00 GMT</pubDate>
+        <description>现在已经完成了所有的设计，我们得完成解释器构建了</description>
+      </item>
+
+      <item>
+        <title>Python计算机二级（一）</title>
+        <link>https://blog.luckyfishes.site/posts/python-2level-1/</link>
+        <guid>https://blog.luckyfishes.site/posts/python-2level-1/</guid>
+        <pubDate>Thu, 28 Sep 2023 00:00:00 GMT</pubDate>
+        <description>Python语言的基本语法元素</description>
+      </item>
+
+      <item>
+        <title>Python计算机二级（二）</title>
+        <link>https://blog.luckyfishes.site/posts/python-2level-2/</link>
+        <guid>https://blog.luckyfishes.site/posts/python-2level-2/</guid>
+        <pubDate>Thu, 28 Sep 2023 00:00:00 GMT</pubDate>
+        <description>Python计算机二级（二）</description>
+      </item>
+
+      <item>
+        <title>Python计算机二级（三）</title>
+        <link>https://blog.luckyfishes.site/posts/python-2level-3/</link>
+        <guid>https://blog.luckyfishes.site/posts/python-2level-3/</guid>
+        <pubDate>Thu, 28 Sep 2023 00:00:00 GMT</pubDate>
+        <description>程序控制结构</description>
+      </item>
+
+      <item>
+        <title>Python计算机二级（四）</title>
+        <link>https://blog.luckyfishes.site/posts/python-2level-4/</link>
+        <guid>https://blog.luckyfishes.site/posts/python-2level-4/</guid>
+        <pubDate>Thu, 28 Sep 2023 00:00:00 GMT</pubDate>
+        <description>函数和代码复用</description>
+      </item>
+
+      <item>
+        <title>Python计算机二级（前言）</title>
+        <link>https://blog.luckyfishes.site/posts/python-2level-start/</link>
+        <guid>https://blog.luckyfishes.site/posts/python-2level-start/</guid>
+        <pubDate>Thu, 28 Sep 2023 00:00:00 GMT</pubDate>
+        <description>为什么要写这样一个教程</description>
+      </item>
+
+      <item>
+        <title>Arch才应该是你的生产力工具</title>
+        <link>https://blog.luckyfishes.site/posts/arch-should-be-your-productivity-tool/</link>
+        <guid>https://blog.luckyfishes.site/posts/arch-should-be-your-productivity-tool/</guid>
+        <pubDate>Fri, 02 Jul 2021 00:00:00 GMT</pubDate>
+        <description>Arch才应该是你的生产力工具（Notion 导入）</description>
       </item>
 
       <item>
