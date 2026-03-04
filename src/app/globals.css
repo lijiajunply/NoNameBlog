@@ -441,3 +441,53 @@ figure[data-rehype-pretty-code-figure]:hover
 .dark .markdown-alert.markdown-alert-caution {
   --alert-accent: #ff8b82;
 }
+
+/* Code block line numbers */
+figure[data-rehype-pretty-code-figure] pre {
+  counter-reset: code-line;
+}
+
+figure[data-rehype-pretty-code-figure] pre code {
+  display: block;
+}
+
+figure[data-rehype-pretty-code-figure] pre [data-line] {
+  display: block;
+  position: relative;
+  padding-left: 2.75rem;
+  min-height: 1.5rem;
+}
+
+figure[data-rehype-pretty-code-figure] pre [data-line]::before {
+  counter-increment: code-line;
+  content: counter(code-line);
+  display: inline-block;
+  position: absolute;
+  left: 0.15rem;
+  width: 1.5rem;
+  text-align: right;
+  color: color-mix(in srgb, var(--muted-foreground) 80%, transparent);
+  opacity: 0.7;
+  user-select: none;
+}
+
+/* Keep language indicator visible with copy button */
+figure[data-rehype-pretty-code-figure] pre[data-language]::before {
+  right: 4.25rem;
+}
+
+@media (max-width: 768px) {
+  figure[data-rehype-pretty-code-figure] pre [data-line] {
+    padding-left: 0;
+  }
+
+  figure[data-rehype-pretty-code-figure] pre [data-line]::before {
+    display: none;
+  }
+}
+
+@media (hover: none) {
+  .code-copy-button {
+    opacity: 1;
+  }
+}

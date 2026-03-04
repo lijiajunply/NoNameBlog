@@ -8,6 +8,7 @@ import remarkGfm from "remark-gfm";
 import { Area, AreaChart } from "@/components/charts/area-chart";
 import { Grid } from "@/components/charts/grid";
 import { ChartTooltip } from "@/components/charts/tooltip";
+import { CodeBlockFigure } from "@/components/mdx/code-block-figure";
 import { XAxis } from "@/components/charts/x-axis";
 import { GitHubCalendarCard } from "@/components/mdx/github-calendar-card";
 import { Icon } from "@/components/mdx/icon";
@@ -204,6 +205,16 @@ const mdxComponents: Record<string, any> = {
       {children}
     </pre>
   ),
+  figure: ({ className, children, ...props }: MdxComponentProps) =>
+    "data-rehype-pretty-code-figure" in props ? (
+      <CodeBlockFigure className={className} {...props}>
+        {children}
+      </CodeBlockFigure>
+    ) : (
+      <figure className={className} {...props}>
+        {children}
+      </figure>
+    ),
   AreaChart,
   Area,
   Grid,
