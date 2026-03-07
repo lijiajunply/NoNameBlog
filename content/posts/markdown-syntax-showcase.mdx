@@ -21,7 +21,7 @@ category: 技术
 - 普通链接：[Vercel](https://vercel.com)
 - 仓库链接：[GitHub](https://github.com)
 
-> 一句话总结：能写文章，就能写出不错的阅读体验。
+> 还支持引用块，适合放一些补充说明、背景信息或者相关链接：
 
 ## 2. 列表、任务、表格（GFM）
 
@@ -286,13 +286,18 @@ numTicks: 5
 ::
 ::
 
-## 9. 折叠内容与分隔线
+## 9. 原生 HTML 内容
+
+因为 MDX 的特性，你可以直接在 Markdown 中混用 HTML 标签，这对于一些特殊需求的内容展示非常有用。
+
+```html
+<details>
+  <summary>点我展开（原生 HTML 标签）</summary>
+  <p>MDX 支持直接混用 HTML，你可以用它做补充说明区。</p>
+</details>
+```
 
 <details>
   <summary>点我展开（原生 HTML 标签）</summary>
   <p>MDX 支持直接混用 HTML，你可以用它做补充说明区。</p>
 </details>
-
----
-
-如果你要继续扩展这篇展示文，建议优先增加你自己项目里会重复出现的“写作积木”，例如：FAQ 卡片、版本更新日志、统一的结语模板。

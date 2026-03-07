@@ -8,8 +8,8 @@ export function PostCard({post}: { post: Post }) {
 
     return (
         <div
-            className="group relative overflow-hidden rounded-[30px] h-60 border border-neutral-200/70 bg-white/80 shadow-[0_6px_30px_-18px_rgba(0,0,0,0.2)] backdrop-blur-sm dark:border-neutral-800/80 dark:bg-neutral-900/80">
-            <div className="relative z-10 p-12 md:p-7">
+            className="group relative overflow-hidden rounded-[30px] min-h-60 border border-neutral-200/70 bg-white/80 shadow-[0_6px_30px_-18px_rgba(0,0,0,0.2)] backdrop-blur-sm dark:border-neutral-800/80 dark:bg-neutral-900/80">
+            <div className="relative z-10 p-7">
                 <div className="mb-4 flex flex-wrap items-center gap-2 text-xs text-neutral-500">
                     <span>{formatDate(post.frontmatter.date)}</span>
                     <span>·</span>
