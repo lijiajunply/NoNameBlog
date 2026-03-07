@@ -99,7 +99,7 @@ const mdxComponents: Record<string, any> = {
       )}
       {...props}
     >
-      <div className="text-neutral-600 italic leading-relaxed dark:text-neutral-400">
+      <div className="text-neutral-600 leading-relaxed dark:text-neutral-400">
         {children}
       </div>
     </blockquote>
@@ -136,49 +136,6 @@ const mdxComponents: Record<string, any> = {
     >
       {children}
     </li>
-  ),
-  table: ({ className, children, ...props }: MdxComponentProps) => (
-    <div className="my-8 w-full overflow-x-auto rounded-2xl border border-neutral-200/80 bg-white/50 shadow-sm backdrop-blur-sm dark:border-neutral-800/80 dark:bg-neutral-900/50">
-      <table
-        className={cn("w-full border-collapse text-left text-sm", className)}
-        {...props}
-      >
-        {children}
-      </table>
-    </div>
-  ),
-  thead: ({ className, children, ...props }: MdxComponentProps) => (
-    <thead
-      className={cn(
-        "bg-neutral-50/80 dark:bg-neutral-800/80 backdrop-blur-md",
-        className,
-      )}
-      {...props}
-    >
-      {children}
-    </thead>
-  ),
-  th: ({ className, children, ...props }: MdxComponentProps) => (
-    <th
-      className={cn(
-        "border-b border-neutral-200/80 px-4 py-3.5 font-medium text-neutral-900 dark:border-neutral-800/80 dark:text-neutral-100",
-        className,
-      )}
-      {...props}
-    >
-      {children}
-    </th>
-  ),
-  td: ({ className, children, ...props }: MdxComponentProps) => (
-    <td
-      className={cn(
-        "border-b border-neutral-100/80 px-4 py-3 text-neutral-700 last:border-0 dark:border-neutral-800/80 dark:text-neutral-300",
-        className,
-      )}
-      {...props}
-    >
-      {children}
-    </td>
   ),
   img: ({ className, alt, ...props }: MdxComponentProps) => (
     <ZoomableImage className={className} alt={alt} {...props} />

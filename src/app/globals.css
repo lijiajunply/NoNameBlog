@@ -491,3 +491,52 @@ figure[data-rehype-pretty-code-figure] pre[data-language]::before {
     opacity: 1;
   }
 }
+
+/* Table Styling */
+.prose table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: var(--radius-md);
+  border: 1px solid color-mix(in srgb, var(--foreground) 8%, transparent);
+  overflow: hidden;
+  font-size: 0.875rem;
+}
+
+.prose thead tr {
+  background-color: color-mix(in srgb, var(--foreground) 4%, transparent);
+}
+
+.prose th,
+.prose td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--foreground) 8%, transparent);
+  text-align: left;
+}
+
+.prose th {
+  font-weight: 600;
+  color: var(--foreground);
+}
+
+.prose tr:last-child td {
+  border-bottom: none;
+}
+
+
+/* Style for blockquotes to match Apple Notes */
+.prose blockquote {
+  font-style: normal;
+  border-left-width: 3px;
+  border-color: color-mix(in srgb, var(--foreground) 8%, transparent);
+  color: var(--muted-foreground);
+  background: color-mix(in srgb, var(--foreground) 2%, transparent);
+  padding-left: 1rem;
+  quotes: none;
+}
+
+.dark .prose blockquote {
+  border-color: color-mix(in srgb, var(--foreground) 20%, transparent);
+  color: var(--muted-foreground);
+  background: color-mix(in srgb, var(--foreground) 8%, transparent);
+}
