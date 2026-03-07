@@ -8,6 +8,8 @@ export const postFrontmatterSchema = z.object({
   category: z.string().default("Uncategorized"),
   draft: z.boolean().default(false),
   cover: z.string().optional(),
+  previous: z.string().min(1).optional(),
+  next: z.string().min(1).optional(),
 });
 
 export type PostFrontmatter = z.infer<typeof postFrontmatterSchema>;

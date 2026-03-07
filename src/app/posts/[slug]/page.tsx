@@ -75,12 +75,21 @@ export default async function PostPage({ params }: PostPageProps) {
   const { category, tags } = post.frontmatter;
   const summary = post.frontmatter.summary ?? undefined;
   const posts = getAllPosts();
+  const postsBySlug = new Map(posts.map((item) => [item.slug, item]));
   const currentIndex = posts.findIndex((item) => item.slug === post.slug);
-  const previousPost = currentIndex > 0 ? posts[currentIndex - 1] : null;
-  const nextPost =
+  const defaultPreviousPost = currentIndex > 0 ? posts[currentIndex - 1] : null;
+  const defaultNextPost =
     currentIndex >= 0 && currentIndex < posts.length - 1
       ? posts[currentIndex + 1]
       : null;
+  const previousPost =
+    post.frontmatter.previous && post.frontmatter.previous !== post.slug
+      ? (postsBySlug.get(post.frontmatter.previous) ?? defaultPreviousPost)
+      : defaultPreviousPost;
+  const nextPost =
+    post.frontmatter.next && post.frontmatter.next !== post.slug
+      ? (postsBySlug.get(post.frontmatter.next) ?? defaultNextPost)
+      : defaultNextPost;
   const articleJsonLd = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
