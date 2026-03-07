@@ -118,13 +118,53 @@ export function transformColonComponents(source: string): string {
     const blockLines: string[] = [];
     let foundEnd = false;
     let cursor = index + 1;
+    let nestedDepth = 0;
+    let innerFenceMarker: "```" | "~~~" | null = null;
 
     while (cursor < lines.length) {
       const current = lines[cursor] ?? "";
-      if (BLOCK_END_RE.test(current)) {
-        foundEnd = true;
-        break;
+
+      if (innerFenceMarker) {
+        blockLines.push(current);
+        if (current.trimStart().startsWith(innerFenceMarker)) {
+          innerFenceMarker = null;
+        }
+        cursor += 1;
+        continue;
       }
+
+      const trimmedCurrent = current.trimStart();
+      if (trimmedCurrent.startsWith("```")) {
+        innerFenceMarker = "```";
+        blockLines.push(current);
+        cursor += 1;
+        continue;
+      }
+      if (trimmedCurrent.startsWith("~~~")) {
+        innerFenceMarker = "~~~";
+        blockLines.push(current);
+        cursor += 1;
+        continue;
+      }
+
+      if (COMPONENT_START_RE.test(current)) {
+        nestedDepth += 1;
+        blockLines.push(current);
+        cursor += 1;
+        continue;
+      }
+
+      if (BLOCK_END_RE.test(current)) {
+        if (nestedDepth === 0) {
+          foundEnd = true;
+          break;
+        }
+        nestedDepth -= 1;
+        blockLines.push(current);
+        cursor += 1;
+        continue;
+      }
+
       blockLines.push(current);
       cursor += 1;
     }
@@ -141,11 +181,11 @@ export function transformColonComponents(source: string): string {
     const bodyLines = splitAt === -1 ? [] : blockLines.slice(splitAt + 1);
 
     const props = parseYamlProps(yamlLines.join("\n"));
-    const mdxNode = buildMdxComponent(
-      componentName,
-      props,
-      bodyLines.join("\n"),
-    );
+    const rawBody = bodyLines.join("\n");
+    const transformedBody = rawBody
+      ? transformColonComponents(rawBody)
+      : rawBody;
+    const mdxNode = buildMdxComponent(componentName, props, transformedBody);
     output.push(mdxNode);
 
     // Move index to the line after ending token "::"
