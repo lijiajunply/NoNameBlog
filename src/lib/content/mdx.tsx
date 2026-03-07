@@ -11,6 +11,7 @@ import { Area, AreaChart } from "@/components/charts/area-chart";
 import { Grid } from "@/components/charts/grid";
 import { ChartTooltip } from "@/components/charts/tooltip";
 import { XAxis } from "@/components/charts/x-axis";
+import { Chat } from "@/components/mdx/chat";
 import { CodeBlockFigure } from "@/components/mdx/code-block-figure";
 import { GitHubCalendarCard } from "@/components/mdx/github-calendar-card";
 import { Icon } from "@/components/mdx/icon";
@@ -19,7 +20,6 @@ import { ZoomableImage } from "@/components/mdx/zoomable-image";
 import { Card } from "@/components/ui/card";
 import { rehypeMermaid } from "@/lib/content/rehype-mermaid";
 import { transformColonComponents } from "@/lib/content/remark-colon-components";
-import { Chat } from "@/components/mdx/chat";
 import { cn } from "@/lib/utils";
 
 type MdxComponentProps = {

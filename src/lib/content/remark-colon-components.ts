@@ -4,6 +4,9 @@ type YamlData = Record<string, unknown>;
 const YAML_PROP_PREFIX = "__YAML__";
 
 const COMPONENT_START_RE = /^::([A-Za-z][A-Za-z0-9_]*)\s*$/;
+const DETAILS_START_RE = /^::\s*details(?:\s+(.*\S))?\s*$/i;
+const DOUBLE_BLOCK_START_RE =
+  /^::(?:[A-Za-z][A-Za-z0-9_]*|\s+details(?:\s+.*)?)\s*$/i;
 const BLOCK_END_RE = /^::\s*$/;
 const YAML_BODY_SPLIT_RE = /^---\s*$/;
 const LEGACY_COMPONENT_RE =
@@ -104,6 +107,91 @@ export function transformColonComponents(source: string): string {
       throw new Error(
         `Legacy MDX component syntax is not supported. Use "::ComponentName" with YAML props instead. (line ${index + 1})`,
       );
+    }
+
+    const detailsMatch = line.match(DETAILS_START_RE);
+
+    if (detailsMatch) {
+      const summaryText = detailsMatch[1]?.trim() ?? "";
+      const detailsBodyLines: string[] = [];
+      let foundDetailsEnd = false;
+      let cursor = index + 1;
+      let nestedDepth = 0;
+      let innerFenceMarker: "```" | "~~~" | null = null;
+
+      while (cursor < lines.length) {
+        const current = lines[cursor] ?? "";
+
+        if (innerFenceMarker) {
+          detailsBodyLines.push(current);
+          if (current.trimStart().startsWith(innerFenceMarker)) {
+            innerFenceMarker = null;
+          }
+          cursor += 1;
+          continue;
+        }
+
+        const trimmedCurrent = current.trimStart();
+        if (trimmedCurrent.startsWith("```")) {
+          innerFenceMarker = "```";
+          detailsBodyLines.push(current);
+          cursor += 1;
+          continue;
+        }
+        if (trimmedCurrent.startsWith("~~~")) {
+          innerFenceMarker = "~~~";
+          detailsBodyLines.push(current);
+          cursor += 1;
+          continue;
+        }
+
+        if (
+          DOUBLE_BLOCK_START_RE.test(current) &&
+          !BLOCK_END_RE.test(current)
+        ) {
+          nestedDepth += 1;
+          detailsBodyLines.push(current);
+          cursor += 1;
+          continue;
+        }
+
+        if (BLOCK_END_RE.test(current)) {
+          if (nestedDepth === 0) {
+            foundDetailsEnd = true;
+            break;
+          }
+          nestedDepth -= 1;
+          detailsBodyLines.push(current);
+          cursor += 1;
+          continue;
+        }
+
+        detailsBodyLines.push(current);
+        cursor += 1;
+      }
+
+      if (!foundDetailsEnd) {
+        throw new Error(`Unclosed ":: details" block at line ${index + 1}`);
+      }
+
+      const rawBody = detailsBodyLines.join("\n");
+      const transformedBody = rawBody
+        ? transformColonComponents(rawBody)
+        : rawBody;
+      const escapedSummary = escapeHtmlAttr(summaryText);
+      const detailsNodeLines = [
+        "<details>",
+        `<summary>${escapedSummary || "Details"}</summary>`,
+      ];
+      if (transformedBody.trim()) {
+        detailsNodeLines.push("", transformedBody, "");
+      }
+      detailsNodeLines.push("</details>");
+      const detailsNode = detailsNodeLines.join("\n");
+      output.push(detailsNode);
+
+      index = cursor + 1;
+      continue;
     }
 
     const componentMatch = line.match(COMPONENT_START_RE);

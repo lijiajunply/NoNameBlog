@@ -523,6 +523,41 @@ figure[data-rehype-pretty-code-figure] pre[data-language]::before {
   border-bottom: none;
 }
 
+.prose details {
+  margin: 1.75rem 0;
+  border-radius: 1rem;
+  border: 1px solid color-mix(in srgb, var(--foreground) 10%, transparent);
+  background: color-mix(in srgb, var(--foreground) 3%, transparent);
+  padding: 0.9rem 1rem;
+}
+
+.prose details > summary {
+  cursor: pointer;
+  list-style: none;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--foreground);
+}
+
+.prose details > summary::-webkit-details-marker {
+  display: none;
+}
+
+.prose details > summary::before {
+  content: "▸";
+  margin-right: 0.5rem;
+  color: var(--muted-foreground);
+  transition: transform 0.2s ease;
+}
+
+.prose details[open] > summary::before {
+  transform: rotate(90deg);
+}
+
+.prose details > :not(summary):first-of-type {
+  margin-top: 0.8rem;
+}
+
 /* Style for blockquotes to match Apple Notes */
 .prose blockquote {
   font-style: normal;
