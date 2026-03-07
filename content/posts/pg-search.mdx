@@ -1,0 +1,187 @@
+---
+title: 全文搜索？直接上 PGSQL！
+date: '2025-12-29'
+summary: 一个最近研究出来的东西
+tags:
+  - SQL
+  - CSharp
+category: Csharp操作
+cover: https://fastly.jsdelivr.net/gh/bucketio/img11@main/2025/11/30/1764432631343-93489f16-133a-4436-8ffd-ca330d5d2bbf.png
+---
+
+
+## 前言
+
+社团官网事实上一直都有一个简易的博客系统。其实我最早在写 Blazor Service 的时候，是用的 "静态博客" —— 把文章放在 `assets` 中，然后当访问这个 URL 时，就访问到这个文件，然后通过 markdown-it 进行渲染。后面才加入的动态博客 —— 把文章数据放到数据库里。
+
+不过既然都换成动态博客了，自然就要整点好活，例如全文搜索。于是就开始进行制作。
+
+这是我最初的代码：
+
+```cs
+var articles = await articleRepository.GetAll();
+var filteredArticles = articles
+                .Where(a => a.Title.Contains(keyword, StringComparison.OrdinalIgnoreCase) ||
+                            a.Content.Contains(keyword, StringComparison.OrdinalIgnoreCase))
+                .OrderByDescending(a => a.LastWriteTime)
+                .ToList();
+
+return Ok(filteredArticles);
+```
+
+但其实这样，即使是使用数据库优化也快不到哪儿去，而且还不能看到被搜到的内容片段。那么这个时候就得好好的研究一下了。
+
+不得不感谢一下 Gemini 3 （虽然其他 AI 说不定也可以），但是它确实很出色，例如前端 UI 设计，很多都是 Gemini 3 的功劳。 Gemini 3 直接跟我讲，不妨直接使用 PGSQL 的全文搜索插件。
+
+
+## 你在说啥呢？
+
+是这样的，其实 PGSQL 是有插件的，例如搞 Agent 的都需要搭建的向量数据库，事实上完全可以使用 PGSQL 的向量插件 pgvector 来完成。同样的，我们这次需要使用的是 PGSQL 的插件 zhparser
+
+事实上 PGSQL 本身就有全文检索功能，但是自带的那个是依据按照空格和标点符号来分词的，这对中文不适用。所以自然而然的，我们得找个能够分词的插件，先进行分词，再进行全文检索。
+
+这就是 zhparser 的存在意义了。zhparser 是一个中文分词插件。例如下面这个示例：
+
+```SQL
+ostgres=# 
+SELECT * FROM ts_debug('zhcfg', '安装成功测试');  
+CREATE EXTENSION  
+CREATE TEXT SEARCH CONFIGURATION  
+ALTER TEXT SEARCH CONFIGURATION  
+ alias |   description    | token | dictionaries | dictionary | lexemes   
+-------+------------------+-------+--------------+------------+---------  
+ v     | verb,动词        | 安装  | {simple}     | simple     | {安装}  
+ a     | adjective,形容词 | 成功  | {simple}     | simple     | {成功}  
+ v     | verb,动词        | 测试  | {simple}     | simple     | {测试}  
+(3 rows)
+```
+
+他将 `安装成功测试` 分成了三个 —— “安装（动词）”、“成功（形容词）”、“测试（动词）”。
+
+## 先安装一下再说
+
+先进行一下前置软件的安装，方便我们后面进行 下载和 cmake 编译：
+ 
+ ```bash
+apt-get update
+apt-get install -y postgresql-server-dev-17 make gcc wget unzip
+```
+
+然后开始安装 SCWS。SCWS的全称是 **简易中文分词系统**，实际上 zhparser 就是调用的这个软件完成的操作。
+
+```bash
+# 下载 SCWS
+wget -q -O scws-1.2.3.tar.bz2 http://www.xunsearch.com/scws/down/scws-1.2.3.tar.bz2
+
+# 解压
+tar -xf scws-1.2.3.tar.bz2
+cd scws-1.2.3
+
+# 编译安装
+./configure
+make
+make install
+```
+
+接下来就要安装一下 zhparser 了：
+
+```bash
+# 回到上级目录
+cd ..
+
+# 下载 zhparser (从 GitHub 获取最新 release 或 master)
+wget -q -O zhparser.zip https://github.com/amutu/zhparser/archive/master.zip
+
+# 解压
+unzip zhparser.zip
+cd zhparser-master
+
+# 编译安装
+SCWS_HOME=/usr/local make
+SCWS_HOME=/usr/local make install
+```
+
+现在，只需要在 PGSQL 中进行插件的安装和应用即可：
+
+```bash
+psql -U root postgres
+# 进入 pgsql 对应的数据库，记得把postgres替换成你用的那个数据库
+```
+
+```sql
+-- 创建扩展
+CREATE EXTENSION zhparser;
+
+-- 启用并将配置设置为中文
+CREATE TEXT SEARCH CONFIGURATION testzhcfg (PARSER = zhparser);
+ALTER TEXT SEARCH CONFIGURATION testzhcfg ADD MAPPING FOR n,v,a,i,e,l WITH simple;
+
+-- 测试一下
+SELECT to_tsvector('testzhcfg', '这是中文分词测试');
+```
+
+然后就  OK 了
+
+## 写一下后端代码
+
+现在，我们已经安装好了 zhparser。现在支持一下：
+
+```sql
+SELECT ""Title"", ""Content""
+       ts_headline('zhcfg', ""Title"", plainto_tsquery('zhcfg', @keyword)) as highlighted_title,
+       ts_headline('zhcfg', LEFT(""Content"", 500), plainto_tsquery('zhcfg', @keyword)) as highlighted_content
+WHERE to_tsvector('zhcfg', ""Title"" || ' ' || ""Content"") @@ plainto_tsquery('zhcfg', @keyword)
+ORDER BY ""LastWriteTime"" DESC
+```
+
+这样就完成了。
+
+当然如果你用的是 EF Core 这种的话，那就很好了 —— 直接抄作业吧。因为我也用的是 EF Core + Asp.Net Core:
+
+```cs
+		await using var context = await factory.CreateDbContextAsync();
+
+        // 使用zhparser进行中文全文搜索并生成高亮片段
+        var sql = @"
+            SELECT ""Title"", ""Content"", 
+                   ts_headline('zhcfg', ""Title"", plainto_tsquery('zhcfg', @keyword)) as highlighted_title,
+                   ts_headline('zhcfg', LEFT(""Content"", 500), plainto_tsquery('zhcfg', @keyword)) as highlighted_content
+            FROM ""Articles"" 
+            WHERE to_tsvector('zhcfg', ""Title"" || ' ' || ""Content"") @@ plainto_tsquery('zhcfg', @keyword)
+            ORDER BY ""LastWriteTime"" DESC";
+
+        await using var command = context.Database.GetDbConnection().CreateCommand();
+        command.CommandText = sql;
+        var parameter = command.CreateParameter();
+        parameter.ParameterName = "@keyword";
+        parameter.Value = keyword;
+        command.Parameters.Add(parameter);
+
+        await context.Database.OpenConnectionAsync();
+        await using var reader = await command.ExecuteReaderAsync();
+
+        var tempResults = new List<ArticleSearchResult>();
+        while (await reader.ReadAsync())
+        {
+            var article = new ArticleSearchResult
+            {
+                HighlightedTitle = reader["highlighted_title"].ToString() ?? reader["Title"].ToString() ?? "",
+                HighlightedContent = reader["highlighted_content"].ToString() ?? reader["Content"].ToString() ?? ""
+            };
+
+            tempResults.Add(article);
+        }
+
+        return tempResults;
+```
+
+现在，终于 OK 了。
+
+
+来看看前端的效果：
+
+
+![](https://fastly.jsdelivr.net/gh/bucketio/img14@main/2025/11/30/1764489153241-50faf15d-2dfe-40ad-994b-0ef9a28a0373.png)
+
+
+(就是颜色有点问题，但是这也都是后面的事情了)

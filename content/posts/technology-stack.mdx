@@ -1,0 +1,333 @@
+---
+title: 还不知道怎么去选择项目的技术栈？速来看看这个！
+date: '2025-12-29'
+summary: 说实话很多时候都有人问我这个项目应该用什么框架，那个项目用什么框架。但是每次说吧，又很害怕别人听不明白，而且没有什么总结性的东西。所以特此写一篇文章，简单总结一下常用的框架这些。
+category: 生活随笔
+---
+
+先聊聊什么是技术栈吧。
+
+## 什么是技术栈
+
+说白了就是一堆框架一堆技术的排列组合。百度上是这么讲的：
+
+![](./assets/v2-e3fc799d5b57c7ef263d6fc4926b3f9b_r.jpg)
+
+
+
+
+那么对于技术栈的选择，一般来说需要遵循这四个原则：
+
+- 需求导向（是否满足业务功能/性能/工期）
+- 团队适配（成员技能与学习成本）
+- 生态成熟（社区支持与长期维护性）
+- 进化空间（是否可动态扩展/替换）
+
+我这里拿社团 App 举个例子。现在有这样一个需求：
+
+>  你需要写这样一个软件：
+>  移动端主打学习与生活。要求至少能看教务系统各种常用数据（课表，成绩，绩点）。
+>  桌面端主打生产力。要求能和编程相关，以及课表的通知。
+
+你会怎么选技术栈？
+
+我先公布一下我的答案吧：
+
+>  我这里用到的技术栈是 Flutter（移动端）+ Avalonia（桌面端）+ [http://Asp.Net](http://Asp.Net) Core WebApi（后端 Api）+ Redis（缓存）
+
+至于我为什么要这么选，就放到文末揭晓了。让我们先来讲讲都有啥常用的框架。
+
+## 接下来简单介绍一下各种框架
+
+我这里根据应用场景的不同来划分了不同领域所常用的框架：
+
+1. Web 前端（网站页面渲染）
+2. Web 后端（WebApi，用来向应用接数据，例如网站，App 甚至是 AI 啊什么的）
+3. 移动端 App（手机平板等场景）
+4. 桌面端 App
+
+那就分领域简单讲讲：
+
+>  [!NOTE]
+>  这一段其实简单看看就行。也不需要知道太多的关于底层实现一类的东西。
+
+## Web 前端
+
+这里其实可以分为这几种：
+
+- 传统的 html + css + js（例如 Vue，React 这种）
+- 服务器渲染（Next.js，Blazor Server）
+- WASM（Blazor WASM，说实话我对 WASM 的不太了解）。
+- 更加传统的 MVC，但是现在的趋势是前后端分离和服务器渲染
+
+## 先讲一下开发速度我个人认为最快的（有点私货了）
+
+说实话如果你学过 C#，然后又特别着急做项目，我首推 Blazor Server（服务器渲染）。Blazor Server通过C#在服务端直接渲染页面，前后端逻辑统一在同一项目中，减少跨服务调用成本。纯纯的前后端不分离。
+
+我这么讲的一大原因就是 23 年的时候，我用两个小时写了社团官网的第一版。真的很快。（当然这也导致现在转成前后端分离有点难崩）
+
+这里简单看一下 Blazor Server（当然后面的 WASM 也一样的，这俩就是调用的 API 不一样而已，但是语法都一样的）:
+
+```csharp
+<button @onclick="OnClick">@num</button>
+
+@code
+{
+    int num = 0;
+
+    void OnClick()
+    {
+        num++;
+    }
+}
+```
+
+## 如果你就想简单写个网站，对性能要求也没那么高的话
+
+这里我推荐 Vue/React 。这里如果团队里都是新手，那我很推荐 Vue。这个相对于 React 入门简单些。可以先看一下双方的新手文档：
+
+>  因为一些原因，只能麻烦各位翻到最后去看注释了
+>  [React 文档](https://zh-hans.react.dev/learn)
+>  [Vue 文档](https://cn.vuejs.org/guide/introduction.html)
+
+React 的风格其实是这样的：
+
+```text
+function MyButton() {
+  const [count, setCount] = useState(0);
+
+  function handleClick() {
+    setCount(count + 1);
+  }
+
+  return <button onClick={handleClick}>Clicked {count} times</button>;
+}
+```
+
+然后是 Vue（选项式）：
+
+```text
+<script>
+export default {
+  data() {
+    return {
+      count: 0
+    }
+  }
+}
+</script>
+
+<template>
+  <button @click="count++">Count is: {{ count }}</button>
+</template>
+</style>
+```
+
+这里其实很容易就能看出来这俩的区别：Vue 是在 HTML 上进行扩展，React 则是在 JS 文件上插入 HTML 内容，这个东西其实叫`JSX`。
+
+然后就是很 ‘功利’的环节了：事实上从热度和就业上来看，国外更喜欢 React，国内更喜欢 Vue。就我目前看的岗很多都要求会 Vue。
+
+## 然后就是 WASM。如果对尝鲜或者对性能有需求的话
+
+WASM 其实就是直接在浏览器运行机器码。自然性能就很高。这里就例如 B 站的那个云剪辑，那个我记得是拿 Go 写的 WASM。
+
+这里我见过的成熟框架其实就是 Blazor WASM（毕竟我是 C#程序员）。但是我真不推荐各位用 Blazor WASM，有点慢。我也拿这个框架写了一个，就是 [社团的线上图书馆](https://lib.xauat.site/)。各位可以去体验一下，事实上是有点慢的（即使我开了压缩）。
+
+## MVC，一种传统的方法
+
+说实话我感觉现在的趋势都是前后端分离 / 服务端渲染，然后有些也开始要 WASM 的了。简单介绍几个我熟悉的吧：
+
+- Spring MVC（Java）
+- [http://Asp.Net](http://Asp.Net) Core MVC（C#）
+- Django（Python）
+
+## Web 后端
+
+这里简直就是百花齐放。基本上我看过的很多语言，都有个 WebApi 方案。这里我介绍几个常见的：
+
+- Java 的 Spring
+- C#的 [http://Asp.net](http://Asp.net) Core WebApi
+- Python 的 FastApi/Flask
+- Go 的 gin
+
+这里我简单做个对比吧：
+
+| 框架                                                                                                                                                                                                                                              | 优点                                                    | 缺点                                              |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------- |
+| Spring                                                                                                                                                                                                                                          | 最多人用，最常用的框架，库多社区强大，生态系统成熟，方便快速开发微服务和分布式系统             | 相比 C#和 go 的，性能不太行，占比有点高，复杂度也相对较高，学习曲线较陡峭，启动时间较长 |
+| <a href="https://link.zhihu.com/?target=http%3A//Asp.net" class=" external" target="_blank" rel="nofollow noreferrer"><span class="invisible">http://</span><span class="visible">Asp.net</span><span class="invisible"></span></a> Core WebApi | 有 EF 这个强大的 ORM 框架，和数据库连接非常方便，性能较好，与微软生态集成紧密，适合企业级应用   | 库少，相关技术文档国内不多，主要靠国外，社区没有 Spring 强大              |
+| FastApi                                                                                                                                                                                                                                         | 性能相对于 Flask 较好，Python 语言简单易上手，支持现代异步编程，内置自动生成 API 文档  | 开源时间较短，官方文档没有 Flask 好，生态尚不完善，第三方扩展较少            |
+| Flask                                                                                                                                                                                                                                           | Python 语言简单易上手，社区较 FastApi 活跃，轻量灵活，扩展丰富，适合小型项目和快速原型开发 | 性能较 FastApi 差，未提供异步支持，性能瓶颈明显                    |
+| gin                                                                                                                                                                                                                                             | 性能强，高并发多线程情景表现优异                                      | 社区不强，生态不太行，orm 框架不如 Java 和 C#的好                 |
+
+不过基本上都一个写法：Get 和 Port 两种操作（一个在 Url 给数据一个在 Body 给数据），然后就开始花式的增删改查（除非你用的 graphql）。
+
+这里我拿 Spring 举例了：
+
+```java
+@RestController
+public class HelloController {
+
+    @GetMapping("/hello")
+    public String hello() {
+        return "Hello, Spring Boot!";
+    }
+}
+```
+
+>  [!NOTE] 当然你该怎么去增删改查，以及该怎么去做缓存消息队列这些，请看数据库那里。
+>  不过这里希望可以去看看例如控制反转这些设计思路。这些都是 **WebAPI 框架实现 ** 一般会使用的技术。
+
+## 移动端 App
+
+这里主要是四种类型：
+
+- 跨端（自绘路线）：Flutter
+- 跨端（转换成原生控件）：MAUI、React Native、Kotlin Multiplatform、Weex
+- 跨端（使用内置浏览器 / 包装浏览器内核）：Cordova、Ionic
+- 纯纯原生：Android（Java/Kotlin）、iOS（Objective-C/Swift）
+
+这里我也和 Web 前端一样，分开讲：
+
+## 跨端自绘路线（Flutter）
+
+跨端自绘这条路，我看到的现在主流的就两个 —— Flutter 和 Avalonia。他们都是用的 Skia 这个引擎。不过 Flutter 更注重于移动端，Avalonia 更注重于桌面端。
+
+总的来说 Flutter/Avalonia 的工作原理就是通过Skia图形引擎自绘界面，不依赖系统UI组件，因此跨平台显示效果更一致。
+
+但是 Flutter 并不是说就完全脱离原生了。事实就是，对于权限或者需要和原生交互，你只能去写原生代码。例如小组件和获取电量这些。
+
+还有就是 Flutter 的风格 —— 声明式 UI，他的风格是这样的：
+
+```dart
+Widget build(
+      BuildContext context, double shrinkOffset, bool overlapsContent) {
+    return Container(
+      color: Theme.of(context).scaffoldBackgroundColor,
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Align(alignment: Alignment.centerLeft, child: child),
+      ),
+    );
+  }
+```
+
+我个人的感觉就是，如果你之前是完完全全写后端或者没有接触 XML 一类的 UI 写法的，会很容易上手这个。
+
+当然 Flutter 有个缺点，就是对于和原生之间还是有点麻烦 —— 或者说你得会点原生开发。还有就是 Flutter 社区不如 Web 前端那么强大。
+
+>  [!NOTE] 关于 Flutter ，可以去看看这个项目: [社团 App](https://gitee.com/luckyfishisdashen/iOSClub.AppMobile)
+
+## 如果你要是会 Web 前端的话，可以试试套个浏览器
+
+事实上一直以来都有这样一个观点 —— ** 浏览器是最简单的跨平台方案 **。
+
+的确是这样，如果你不考虑性能、内存和硬盘占比的话，完全可以写个 “网站”，然后套个浏览器内核播放 “网站”内容。
+
+这也是很多应用干的事情了 —— 例如利用 Cordova/Ionic 这种，直接使用安卓内置浏览器内核 / 自己放个浏览器内核 来进行操作。这样你需要会 Vue/ React 就可以进行移动端开发。
+
+这里我再讲个 “异类” —— MAUI Blazor。后面会讲到的 MAUI，事实上也有这种方案，使用 Blazor 来开发移动端 App。
+
+## 或者也可以转成系统原生控件 / 编译转换成相关语言
+
+这里的代表就是 MAUI、React Native、Kotlin Multiplatform（KMP） 这三个了。
+
+转成系统原生控件简单来说就是通过 “桥接” 机制将跨平台代码转换为各平台的原生 UI 控件（如 Android 的 View、iOS 的 UIKit），保留原生渲染能力。这里的代表就是 React Native。RN 通过使用虚拟 DOM 转换成原生 UI 控件进行跨平台操作。
+
+而编译转换成相关语言则是直接将某个语言编译为平台下的二进制文件。例如 MAUI 就是将 C#编译成 安卓 /iOS 对应的二进制代码，从而完成跨平台的。
+
+>  [!NOTE] 但是网上一直在争辩，尤其是关于 React Native 到今天版本还没到 1.0 的趣事。当然还有 MAUI 到现在 Bug 还一堆，KMP 还不成熟这一类话题。
+>  要是想了解一下 MAUI，可以去看看云妈写的项目: [滑稽账本](https://gitee.com/XAUATiOSClub/huaji-ledger)
+
+## 原生开发
+
+如果你追求性能，或者需要和系统进行强交互的话，那么直接上原生吧。
+
+但是问题就在于，得维护两套代码。
+
+## 最后来个总结吧：
+
+| 分类       | 典型框架                  | 适用场景                      | 核心权衡              |
+| -------- | --------------------- | ------------------------- | ----------------- |
+| 自绘       | Flutter               | 高画质、高性能需求（如游戏、设计工具）       | 性能最优，但学习 / 包体成本高  |
+| 内置浏览器    | Cordova/Ionic         | 动态内容（活动页、轻量级工具）           | 开发效率高，但性能 / 体验受限  |
+| 转换成系统 UI | React Native/KMP/MAUI | 中大型应用（电商、社交）              | 平衡复用与性能，但需处理桥接    |
+| 纯原生      | 无框架                   | 极致性能 / 定制化需求（如金融、安全类 App） | 性能最优，但开发 / 维护成本极高 |
+
+## 还有一个，小程序端
+
+小程序端现在也就国内有这个需求，而且下面这两个对于移动端的适配不是很强，所以就不放在上面了。
+
+这里我就讲两个：UniApp 和 Taro。这两个都支持主流的小程序的跨端，还可以拿这俩写移动端的 App。
+
+UniApp 用的最广泛，但是他那个 IDE 实在难用。不过他对于各种小程序的适配是做的最好的。
+
+Taro 的话相对于 UniApp，适配一般般。但是 Taro 支持拿 React 的语法来写项目，而且 Taro 对于移动端的适配还行（采用 React Native）。
+
+## 桌面端 App
+
+桌面端的框架，其实跟移动端 App 的分类类似：
+
+- 跨端（自绘路线）：Avalonia
+- 跨端（编译成对应二进制文件）：QT
+- 跨端（使用内置浏览器 / 包装浏览器内核）：Electron、Tauri
+- 纯纯原生：MacOS（Objective-C/Swift）、 Windows（WPF/Winform）
+
+这里就简单讲一下吧：
+
+| 代表框架              | 优势                              | 劣势                   | 典型场景                         |
+| ----------------- | ------------------------------- | -------------------- | ---------------------------- |
+| Avalonia          | 高性能、多平台支持                       | 依赖 .NET 环境，移动端生态仍在发展 | 工业软件、设计工具                    |
+| QT                | 高性能、跨平台深度适配                     | 学习成本高（C++）、体积较大      | 视频处理、工业控制                    |
+| Electron          | 开发效率高、生态成熟                      | 内存占用 / 体积大           | 轻量级工具（如 IDE 插件）              |
+| Tauri             | 轻量化、安全、性能均衡（使用各端内置的浏览器内核而非自己套壳） | 生态尚未完全成熟             | 小型桌面工具                       |
+| Objective-C/Swift | 系统深度集成、性能最优                     | 仅限 macOS，需多平台重复开发    | 专业 MacOS 应用（如 Final Cut Pro） |
+| WPF               | 系统 API 调用便捷，使用 XAML 语法开发        | 仅限 Windows           | 企业内部工具、Windows 专用应用          |
+| Winform           | 系统 API 调用便捷、可以拖控件来开发软件          | 仅限 Windows           | 企业内部工具、Windows 专用应用          |
+
+>  [!NOTE]
+>  这里要讲一下 VS Code。VS Code 虽然是用的 Electron ，但是 VS Code 的性能还是挺强的。这是因为做了很多的优化。
+
+## 回答前面的问题
+
+我们现在以及了解到了这些常用的框架。那么现在就根据最开始讲到的那四个原则，来简要分析一下社团App的选项。
+
+先复习一下这四个原则：
+
+- 需求导向（是否满足业务功能/性能/工期）
+- 团队适配（成员技能与学习成本）
+- 生态成熟（社区支持与长期维护性）
+- 进化空间（是否可动态扩展/替换）
+
+然后是需求：
+
+>  你需要写这样一个软件：
+>  移动端主打学习与生活。要求至少能看教务系统各种常用数据（课表，成绩，绩点）。
+>  桌面端主打生产力。要求能和编程相关，以及课表的通知。
+
+这里的业务功能并不涉及到大量和系统的交互，但是对于性能要求是有的；团队前期就我一个人，我目前大量使用的语言是C#和JS。
+
+因为前面提到的性能问题，而且我目前并没有移动端原生开发经验。所以我自然而然的选择了Flutter 和 Avalonia。他们相对于其他的跨端方案来说，性能会强一些，写起来也还算舒适。
+
+对于后端的选择，我这里就完全用C#的[http://Asp.Net](http://Asp.Net) Core WebApi了。我比较熟悉。
+
+所以我才会选择使用 Flutter（移动端）+ Avalonia（桌面端）+ [http://Asp.Net](http://Asp.Net) Core WebApi（后端 Api）+ Redis（缓存）这一套方案。
+
+## 一点小小的建议
+
+先放个公式吧：
+
+1.  对于队伍中有会写Web前端的，那么不妨就上他们最熟悉的：移动端上Ionic/React Native，桌面端上Electron。或者也可以用服务器渲染 Next.js，前后端不分离。
+ 
+2.  如果队伍里有会C#的，那么桌面端就上Avalonia/WPF这种，WebAPI上[http://Asp.Net](http://Asp.Net) Core WebApi。要是那个写C#的比较厉害，团队需要快速开发，那Web端选Blazor，WebApi直接放在Blazor上面。中间只需要写专门的数据服务层即可。
+ 
+
+但是建议不要用不太成熟的，例如MAUI和Tauri。这两个都有点Bug。Tauri主要是因为各端的内置浏览器的兼容问题，而MAUI现在Bug还是很多。
+
+然后就是最后要说明的一件事，事实上，每个框架都或多或少有点问题——没有完美的框架。例如：
+
+>  若项目需求是「3个月快速上线+跨平台轻量工具」，可优先选择Electron（开发效率＞体积成本）；若需求是「长期维护的高性能桌面设计工具」，则Avalonia（性能＞.NET依赖成本）更合适。
+
+当然要是团队里全是大佬，那就无所谓了。
+
+>  至于项目内的架构问题。这个单放一期吧。
