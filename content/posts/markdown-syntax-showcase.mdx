@@ -130,7 +130,7 @@ flowchart TD
 
 ## 8. MDX 组件混排
 
-先看新的 `:: + YAML` 写法（等价于 MDX JSX 组件调用）：
+先看看具体的语法
 
 ```md
 ::GitHubCalendarCard
@@ -138,25 +138,58 @@ username: lijiajunply
 ::
 ```
 
+也就是形如 `::组件名` + `参数（YAML 格式）` + `::` 的结构，参数部分可以有多行，也可以没有。
+
+### GitHub 贡献日历
+
+GitHubCalendarCard 组件基于 react-github-calendar 封装，参数只需要提供 GitHub 用户名，就能展示对应的贡献日历：
+
+```md
+::GitHubCalendarCard
+username: lijiajunply
+::
+```
 实际渲染效果：
 
 ::GitHubCalendarCard
 username: lijiajunply
 ::
 
-也支持复杂参数（对象 / 数组 / 布尔 / 数字）：
+### Icon 图标
 
-```md
+Icon 使用 Iconify ，参数只需要提供图标名称（icon）和可选的样式类（className）：
+
+```yaml
 ::Icon
 icon: ph:rocket-launch-duotone
 className: text-emerald-500
 ::
 ```
 
+实际渲染效果：
+
 ::Icon
 icon: ph:rocket-launch-duotone
 className: text-emerald-500
 ::
+
+### 内容卡片
+
+这个就不用多说了，直接看语法和效果：
+
+```yaml
+::Card
+className: my-8 border border-emerald-200/60 bg-gradient-to-r from-emerald-50/80 to-teal-50/80 p-6 dark:border-emerald-500/20 dark:from-emerald-900/20 dark:to-teal-900/20
+
+---
+
+### 组件化内容卡片
+
+你可以把总结、提示、结果等信息放在这个区域，让页面结构更有层次。
+::
+```
+
+实际渲染效果：
 
 ::Card
 className: my-8 border border-emerald-200/60 bg-gradient-to-r from-emerald-50/80 to-teal-50/80 p-6 dark:border-emerald-500/20 dark:from-emerald-900/20 dark:to-teal-900/20
@@ -168,9 +201,11 @@ className: my-8 border border-emerald-200/60 bg-gradient-to-r from-emerald-50/80
 你可以把总结、提示、结果等信息放在这个区域，让页面结构更有层次。
 ::
 
-再看一个图表类组件示例（包含 `AreaChart + Grid + Area + Tooltip + XAxis`）：
+### 图表
 
-```md
+这个就有点复杂了。整体是使用的 bklit UI ，语法上其实写起来有点坐牢，建议这部分直接拿 AI 帮忙写吧，毕竟参数比较多，层级也比较深：
+
+```yaml
 ::AreaChart
 data:
   - date: "2026-03-01"
@@ -284,6 +319,38 @@ strokeWidth: 2
 ::XAxis
 numTicks: 5
 ::
+::
+
+### 对话
+
+这里主要借鉴自 纸鹿 的对话框组件。但是纸鹿那个有点复杂，写起来也有点坐牢其实。这里我感觉支持一下一般情况就 ok 了，但如果你想要支持更多，直接去 Chat 组件那里改就行：
+
+看看写法：
+
+```yaml
+::Chat
+userChatData:
+  - userName: ""
+    messages: "你好，最近怎么样？"
+  - userName: "NoName"
+    messages: "挺好的，你呢？"
+  - userName: "LuckyFish"
+    messages: "我也不错。"
+    isMe: true
+::
+```
+
+看看效果：
+
+::Chat
+userChatData:
+  - userName: ""
+    messages: "你好，最近怎么样？"
+  - userName: "NoName"
+    messages: "挺好的，你呢？"
+  - userName: "LuckyFish"
+    messages: "我也不错。"
+    isMe: true
 ::
 
 ## 9. 原生 HTML 内容

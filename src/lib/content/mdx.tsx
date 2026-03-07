@@ -19,6 +19,7 @@ import { ZoomableImage } from "@/components/mdx/zoomable-image";
 import { Card } from "@/components/ui/card";
 import { rehypeMermaid } from "@/lib/content/rehype-mermaid";
 import { transformColonComponents } from "@/lib/content/remark-colon-components";
+import { Chat } from "@/components/mdx/chat";
 import { cn } from "@/lib/utils";
 
 type MdxComponentProps = {
@@ -212,6 +213,7 @@ const mdxComponents: Record<string, any> = {
   GitHubCalendarCard: withDecodedProps(GitHubCalendarCard),
   MermaidDiagram: withDecodedProps(MermaidDiagram),
   Card: withDecodedProps(Card),
+  Chat: withDecodedProps(Chat),
 };
 
 const prettyCodeOptions = {
