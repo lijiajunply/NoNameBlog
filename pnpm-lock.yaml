@@ -35,6 +35,9 @@ importers:
       '@visx/shape':
         specifier: ^4.0.1-alpha.0
         version: 4.0.1-alpha.0(react@19.2.3)
+      abcjs:
+        specifier: ^6.6.2
+        version: 6.6.2
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
@@ -868,6 +871,9 @@ packages:
 
   '@zeit/schemas@2.36.0':
     resolution: {integrity: sha512-7kjMwcChYEzMKjeex9ZFXkt1AyNov9R5HZtjBKVsmVpw7pa7ZtlCGvCBC2vnnXctaYN+aRI61HjIqeetZW5ROg==}
+
+  abcjs@6.6.2:
+    resolution: {integrity: sha512-YLbp5lYUq0uOywWZx9EuTdm0TcflKZi7hOzz366A/LFl3qoAXSYIjznJQmr/VeHg8NcLxZYoN8dLi7PqCpxKEA==}
 
   acorn-jsx@5.3.2:
     resolution: {integrity: sha512-rq9s+JNhf0IChjtDXxllJ7g41oZk5SlXtp0LHwyA5cejwn7vKmKp4pPri6YEePv2PU65sAsegbXtIinmDFDXgQ==}
@@ -3044,6 +3050,8 @@ snapshots:
       internmap: 2.0.3
 
   '@zeit/schemas@2.36.0': {}
+
+  abcjs@6.6.2: {}
 
   acorn-jsx@5.3.2(acorn@8.16.0):
     dependencies:

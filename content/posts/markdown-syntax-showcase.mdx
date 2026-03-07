@@ -378,7 +378,52 @@ MDX 其实支持直接混用 HTML，但是我先支持一下
 MDX 其实支持直接混用 HTML，但是我先支持一下
 ::
 
-## 9. 原生 HTML 内容
+## 9. 乐谱
+
+是这样的，我加入了乐谱的支持：
+
+```markdown
+```music
+L:1/8
+Q:1/4=100
+M:2/4
+K:D
+V:1 clef=treble
+V:2 clef=bass
+%%MIDI program 32
+[V:1] z2 z f/g/ | aa a>b | af dd/e/ | ff ee | d2 z2 || FA A>B | AF DD/E/ |
+w: | | | | | 你 爱 我 | 我 爱 你 蜜 雪
+[V:2] z4 | D,[F,A,] .A,[F,A,] | .D,[F,A,] .A,[E,A,] | .G,,[G,D,] .A,,[E,A,] | .D,[F,A,] [D,,D,]2 || .D,,[D,F,] .A,,[D,F,] | .D,,[D,F,] .A,,[D,F,] |
+[V:1] FF ED | E2 z2 | FA A>B | AF DD/E/ | FF EE | D2 z2 | G2 G2 |
+w: 冰 城 甜 蜜 | 蜜 | 你 爱 我 | 我 爱 你 蜜 雪 冰 城 甜 蜜 | 蜜 | 你 爱
+[V:2] .G,,[B,G,] .D,[B,G,] | .A,,[A,C] .E,[A,C] | .D,,[D,F,] .A,,[D,F,] | .D,,[D,F,] .A,,[D,F,] | .G,,[G,D,] .A,,[E,A,] | .D,,[A,,D,] .[A,,D,]2 | .G,,[B,G,] .D,[B,G,] |
+[V:1] GB z2 | A2 AF | E2 z2 | FA A>B | AF DD/E/ | FF EE | D2 z2 |]
+w: 我 呀 | 我 爱 | 你 | 你 爱 我 | 我 爱 你 蜜 雪 冰 城 甜 蜜 | 蜜
+[V:2] .G,,[B,G,] .D,[B,G,] | .D,,[F,D,] .A,,[F,D,] | .A,,[A,C] .E,[A,C] | .D,,[F,D,] .A,,[F,D,] | .D,,[F,D,] .A,,[F,D,] | .G,,[G,D,] .A,,[E,A,] | .D,.A,, [D,,D,]2 |]
+```
+
+渲染效果：
+
+```music
+L:1/8
+Q:1/4=100
+M:2/4
+K:D
+V:1 clef=treble
+V:2 clef=bass
+%%MIDI program 32
+[V:1] z2 z f/g/ | aa a>b | af dd/e/ | ff ee | d2 z2 || FA A>B | AF DD/E/ |
+w: | | | | | 你 爱 我 | 我 爱 你 蜜 雪
+[V:2] z4 | D,[F,A,] .A,[F,A,] | .D,[F,A,] .A,[E,A,] | .G,,[G,D,] .A,,[E,A,] | .D,[F,A,] [D,,D,]2 || .D,,[D,F,] .A,,[D,F,] | .D,,[D,F,] .A,,[D,F,] |
+[V:1] FF ED | E2 z2 | FA A>B | AF DD/E/ | FF EE | D2 z2 | G2 G2 |
+w: 冰 城 甜 蜜 | 蜜 | 你 爱 我 | 我 爱 你 蜜 雪 冰 城 甜 蜜 | 蜜 | 你 爱
+[V:2] .G,,[B,G,] .D,[B,G,] | .A,,[A,C] .E,[A,C] | .D,,[D,F,] .A,,[D,F,] | .D,,[D,F,] .A,,[D,F,] | .G,,[G,D,] .A,,[E,A,] | .D,,[A,,D,] .[A,,D,]2 | .G,,[B,G,] .D,[B,G,] |
+[V:1] GB z2 | A2 AF | E2 z2 | FA A>B | AF DD/E/ | FF EE | D2 z2 |]
+w: 我 呀 | 我 爱 | 你 | 你 爱 我 | 我 爱 你 蜜 雪 冰 城 甜 蜜 | 蜜
+[V:2] .G,,[B,G,] .D,[B,G,] | .D,,[F,D,] .A,,[F,D,] | .A,,[A,C] .E,[A,C] | .D,,[F,D,] .A,,[F,D,] | .D,,[F,D,] .A,,[F,D,] | .G,,[G,D,] .A,,[E,A,] | .D,.A,, [D,,D,]2 |]
+```
+
+## 10. 原生 HTML 内容
 
 因为 MDX 的特性，你可以直接在 Markdown 中混用 HTML 标签，这对于一些特殊需求的内容展示非常有用。
 
@@ -393,3 +438,7 @@ MDX 其实支持直接混用 HTML，但是我先支持一下
   <summary>点我展开（原生 HTML 标签）</summary>
   <p>MDX 支持直接混用 HTML，你可以用它做补充说明区。</p>
 </details>
+
+## 最后
+
+剩下的我慢慢加，特此感谢纸鹿大佬开源，这里很多组件都是借鉴的纸鹿大佬的。虽然纸鹿大佬的组件语法有些我个人感觉写着有点小麻烦，但不得不说效果，样式都非常不错。

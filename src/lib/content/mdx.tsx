@@ -16,9 +16,11 @@ import { CodeBlockFigure } from "@/components/mdx/code-block-figure";
 import { GitHubCalendarCard } from "@/components/mdx/github-calendar-card";
 import { Icon } from "@/components/mdx/icon";
 import { MermaidDiagram } from "@/components/mdx/mermaid-diagram";
+import { MusicScore } from "@/components/mdx/music-score";
 import { ZoomableImage } from "@/components/mdx/zoomable-image";
 import { Card } from "@/components/ui/card";
 import { rehypeMermaid } from "@/lib/content/rehype-mermaid";
+import { rehypeMusic } from "@/lib/content/rehype-music";
 import { transformColonComponents } from "@/lib/content/remark-colon-components";
 import { cn } from "@/lib/utils";
 
@@ -212,6 +214,7 @@ const mdxComponents: Record<string, any> = {
   Icon: withDecodedProps(Icon),
   GitHubCalendarCard: withDecodedProps(GitHubCalendarCard),
   MermaidDiagram: withDecodedProps(MermaidDiagram),
+  MusicScore: withDecodedProps(MusicScore),
   Card: withDecodedProps(Card),
   Chat: withDecodedProps(Chat),
 };
@@ -238,6 +241,7 @@ export async function renderMdx(source: string) {
           rehypeSlug,
           rehypeKatex,
           rehypeMermaid,
+          rehypeMusic,
           [rehypeAutolinkHeadings, { behavior: "append" }],
           [rehypePrettyCode, prettyCodeOptions],
         ],
