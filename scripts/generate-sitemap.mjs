@@ -5,14 +5,43 @@ import matter from "gray-matter";
 const siteUrl = "https://blog.luckyfishes.site";
 const POSTS_PER_PAGE = 8;
 
+function collectMdxFiles(dir) {
+  if (!fs.existsSync(dir)) {
+    return [];
+  }
+
+  const entries = fs.readdirSync(dir, { withFileTypes: true });
+  const files = [];
+  for (const entry of entries) {
+    const entryPath = path.join(dir, entry.name);
+    if (entry.isDirectory()) {
+      files.push(...collectMdxFiles(entryPath));
+      continue;
+    }
+    if (entry.isFile() && entry.name.endsWith(".mdx")) {
+      files.push(entryPath);
+    }
+  }
+  return files;
+}
+
 function getVisiblePosts() {
   const dir = path.join(process.cwd(), "content/posts");
-  const files = fs.readdirSync(dir).filter((file) => file.endsWith(".mdx"));
+  const files = collectMdxFiles(dir);
+  const slugMap = new Map();
 
   return files
-    .map((file) => {
-      const slug = file.replace(/\.mdx$/, "");
-      const source = fs.readFileSync(path.join(dir, file), "utf8");
+    .map((filePath) => {
+      const slug = path.basename(filePath, ".mdx");
+      const existing = slugMap.get(slug);
+      if (existing) {
+        throw new Error(
+          `Duplicate post slug "${slug}" found in "${existing}" and "${filePath}".`,
+        );
+      }
+      slugMap.set(slug, filePath);
+
+      const source = fs.readFileSync(filePath, "utf8");
       const { data } = matter(source);
       return {
         slug,

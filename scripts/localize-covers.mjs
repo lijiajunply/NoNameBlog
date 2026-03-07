@@ -1,7 +1,7 @@
+import crypto from "node:crypto";
 import fs from "node:fs/promises";
 import path from "node:path";
 import matter from "gray-matter";
-import crypto from "node:crypto";
 
 const postsDir = path.join(process.cwd(), "content/posts");
 const coverDir = path.join(process.cwd(), "public/notion-covers");
@@ -26,6 +26,28 @@ function extFromType(contentType) {
 
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+async function collectMdxFiles(dir) {
+  try {
+    const entries = await fs.readdir(dir, { withFileTypes: true });
+    const files = [];
+
+    for (const entry of entries) {
+      const entryPath = path.join(dir, entry.name);
+      if (entry.isDirectory()) {
+        files.push(...(await collectMdxFiles(entryPath)));
+        continue;
+      }
+      if (entry.isFile() && entry.name.endsWith(".mdx")) {
+        files.push(entryPath);
+      }
+    }
+
+    return files;
+  } catch {
+    return [];
+  }
 }
 
 function escapeXml(input) {
@@ -89,16 +111,24 @@ async function fetchWithRetry(url, maxAttempts = 5) {
 
 async function main() {
   await fs.mkdir(coverDir, { recursive: true });
-  const files = (await fs.readdir(postsDir)).filter((f) => f.endsWith(".mdx"));
+  const files = await collectMdxFiles(postsDir);
 
   let updated = 0;
   let skipped = 0;
   let failed = 0;
   let fallback = 0;
+  const slugMap = new Map();
 
-  for (const file of files) {
-    const slug = file.replace(/\.mdx$/, "");
-    const filePath = path.join(postsDir, file);
+  for (const filePath of files) {
+    const slug = path.basename(filePath, ".mdx");
+    const existing = slugMap.get(slug);
+    if (existing) {
+      throw new Error(
+        `Duplicate post slug "${slug}" found in "${existing}" and "${filePath}".`,
+      );
+    }
+    slugMap.set(slug, filePath);
+
     const src = await fs.readFile(filePath, "utf8");
     const parsed = matter(src);
     const cover = parsed.data.cover;

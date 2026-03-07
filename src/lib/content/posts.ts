@@ -28,25 +28,61 @@ export type MonthlyCumulativeStat = {
 const postsDir = path.join(process.cwd(), "content/posts");
 const aboutPath = path.join(process.cwd(), "content/pages/about.mdx");
 
-function getPostSlugs() {
+type PostEntry = {
+  slug: string;
+  filePath: string;
+};
+
+function collectPostFiles(dir: string): string[] {
+  if (!fs.existsSync(dir)) {
+    return [];
+  }
+
+  const entries = fs.readdirSync(dir, { withFileTypes: true });
+  const files: string[] = [];
+
+  for (const entry of entries) {
+    const entryPath = path.join(dir, entry.name);
+    if (entry.isDirectory()) {
+      files.push(...collectPostFiles(entryPath));
+      continue;
+    }
+
+    if (entry.isFile() && entry.name.endsWith(".mdx")) {
+      files.push(entryPath);
+    }
+  }
+
+  return files;
+}
+
+function getPostEntries(): PostEntry[] {
   if (!fs.existsSync(postsDir)) {
     return [];
   }
 
-  return fs
-    .readdirSync(postsDir)
-    .filter((file) => file.endsWith(".mdx"))
-    .map((file) => file.replace(/\.mdx$/, ""));
+  const entries = new Map<string, string>();
+  for (const filePath of collectPostFiles(postsDir)) {
+    const slug = path.basename(filePath, ".mdx");
+    const existingPath = entries.get(slug);
+    if (existingPath) {
+      throw new Error(
+        `Duplicate post slug "${slug}" found in "${existingPath}" and "${filePath}".`,
+      );
+    }
+    entries.set(slug, filePath);
+  }
+
+  return [...entries.entries()].map(([slug, filePath]) => ({ slug, filePath }));
 }
 
-function readPostFile(slug: string): Post {
-  const fullPath = path.join(postsDir, `${slug}.mdx`);
-  const source = fs.readFileSync(fullPath, "utf8");
+function readPostFile(entry: PostEntry): Post {
+  const source = fs.readFileSync(entry.filePath, "utf8");
   const { data, content } = matter(source);
   const frontmatter = postFrontmatterSchema.parse(data);
 
   return {
-    slug,
+    slug: entry.slug,
     frontmatter,
     content,
     readingTime: readingTime(content).text,
@@ -65,7 +101,7 @@ function sortPosts(posts: Post[]) {
 export function getAllPosts(options?: { includeDrafts?: boolean }) {
   const includeDrafts = options?.includeDrafts ?? false;
 
-  const posts = getPostSlugs().map(readPostFile);
+  const posts = getPostEntries().map(readPostFile);
   const visiblePosts = includeDrafts
     ? posts
     : posts.filter((post) => !post.frontmatter.draft);
@@ -74,12 +110,12 @@ export function getAllPosts(options?: { includeDrafts?: boolean }) {
 }
 
 export function getPostBySlug(slug: string) {
-  const postPath = path.join(postsDir, `${slug}.mdx`);
-  if (!fs.existsSync(postPath)) {
+  const postEntry = getPostEntries().find((entry) => entry.slug === slug);
+  if (!postEntry) {
     return null;
   }
 
-  const post = readPostFile(slug);
+  const post = readPostFile(postEntry);
   if (post.frontmatter.draft && process.env.NODE_ENV === "production") {
     return null;
   }
