@@ -14,7 +14,7 @@ export type Heading = {
 export type Post = {
   slug: string;
   frontmatter: PostFrontmatter;
-  content: string | null;
+  content: string;
   readingTime: string;
   headings: Heading[];
 };

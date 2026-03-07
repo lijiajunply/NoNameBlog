@@ -38,7 +38,8 @@ function getPosts() {
 const items = getPosts()
   .map((post) => {
     const url = `${site.siteUrl}/posts/${post.slug}/`;
-    return `\n      <item>\n        <title>${escapeXml(post.data.title)}</title>\n        <link>${url}</link>\n        <guid>${url}</guid>\n        <pubDate>${new Date(post.data.date).toUTCString()}</pubDate>\n        <description>${escapeXml(post.data.summary)}</description>\n      </item>`;
+    const summary = post.data.summary ?? "";
+    return `\n      <item>\n        <title>${escapeXml(post.data.title)}</title>\n        <link>${url}</link>\n        <guid>${url}</guid>\n        <pubDate>${new Date(post.data.date).toUTCString()}</pubDate>\n        <description>${escapeXml(summary)}</description>\n      </item>`;
   })
   .join("\n");
 

@@ -27,9 +27,11 @@ export async function generateMetadata({
     return {};
   }
 
+  const summary = post.frontmatter.summary ?? undefined;
+
   return {
     title: post.frontmatter.title,
-    description: post.frontmatter.summary,
+    description: summary,
     keywords: post.frontmatter.tags,
     alternates: {
       canonical: `${siteConfig.siteUrl}/posts/${post.slug}/`,
@@ -39,7 +41,7 @@ export async function generateMetadata({
       locale: siteConfig.locale,
       url: `${siteConfig.siteUrl}/posts/${post.slug}/`,
       title: post.frontmatter.title,
-      description: post.frontmatter.summary,
+      description: summary,
       siteName: siteConfig.siteName,
       publishedTime: `${post.frontmatter.date}T00:00:00+08:00`,
       tags: post.frontmatter.tags,
@@ -55,7 +57,7 @@ export async function generateMetadata({
     twitter: {
       card: "summary_large_image",
       title: post.frontmatter.title,
-      description: post.frontmatter.summary,
+      description: summary,
       images: ["/og-default.svg"],
     },
   };
@@ -71,6 +73,7 @@ export default async function PostPage({ params }: PostPageProps) {
 
   const content = await renderMdx(post.content);
   const { category, tags } = post.frontmatter;
+  const summary = post.frontmatter.summary ?? undefined;
   const posts = getAllPosts();
   const currentIndex = posts.findIndex((item) => item.slug === post.slug);
   const previousPost = currentIndex > 0 ? posts[currentIndex - 1] : null;
@@ -82,7 +85,7 @@ export default async function PostPage({ params }: PostPageProps) {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
     headline: post.frontmatter.title,
-    description: post.frontmatter.summary,
+    description: summary,
     author: {
       "@type": "Person",
       name: siteConfig.author,
@@ -121,9 +124,9 @@ export default async function PostPage({ params }: PostPageProps) {
           >
             {post.frontmatter.title}
           </h1>
-          <p className="text-neutral-600 dark:text-neutral-300">
-            {post.frontmatter.summary}
-          </p>
+          {summary ? (
+            <p className="text-neutral-600 dark:text-neutral-300">{summary}</p>
+          ) : null}
           <div className="flex flex-wrap gap-2">
             {category ? (
               <Link href={`/categories/${encodeURIComponent(category)}`}>

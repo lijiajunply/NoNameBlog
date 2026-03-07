@@ -13,6 +13,70 @@
       </item>
 
       <item>
+        <title>Flutter 安装与初体验</title>
+        <link>https://blog.luckyfishes.site/posts/flutter-1/</link>
+        <guid>https://blog.luckyfishes.site/posts/flutter-1/</guid>
+        <pubDate>Mon, 29 Dec 2025 00:00:00 GMT</pubDate>
+        <description></description>
+      </item>
+
+      <item>
+        <title>关于 Flutter 的一些基本概念</title>
+        <link>https://blog.luckyfishes.site/posts/flutter-2/</link>
+        <guid>https://blog.luckyfishes.site/posts/flutter-2/</guid>
+        <pubDate>Mon, 29 Dec 2025 00:00:00 GMT</pubDate>
+        <description></description>
+      </item>
+
+      <item>
+        <title>Flutter项目一 写一个 Todo 应用</title>
+        <link>https://blog.luckyfishes.site/posts/flutter-3/</link>
+        <guid>https://blog.luckyfishes.site/posts/flutter-3/</guid>
+        <pubDate>Mon, 29 Dec 2025 00:00:00 GMT</pubDate>
+        <description></description>
+      </item>
+
+      <item>
+        <title>从南山到南山：众创空间的旅途</title>
+        <link>https://blog.luckyfishes.site/posts/ios-trip/</link>
+        <guid>https://blog.luckyfishes.site/posts/ios-trip/</guid>
+        <pubDate>Mon, 29 Dec 2025 00:00:00 GMT</pubDate>
+        <description>2025 年 4 月 7 日，iOS Club 再一次拥有了自己的活动室，虽然更应该称其为仓库</description>
+      </item>
+
+      <item>
+        <title>Old8Lang，一个两年还没有出1.0版本的编程语言</title>
+        <link>https://blog.luckyfishes.site/posts/old8lang-1/</link>
+        <guid>https://blog.luckyfishes.site/posts/old8lang-1/</guid>
+        <pubDate>Mon, 29 Dec 2025 00:00:00 GMT</pubDate>
+        <description>当我创建这个项目的时候，绝对想不到过了两年还没有出正式版...</description>
+      </item>
+
+      <item>
+        <title>全文搜索？直接上 PGSQL！</title>
+        <link>https://blog.luckyfishes.site/posts/pg-search/</link>
+        <guid>https://blog.luckyfishes.site/posts/pg-search/</guid>
+        <pubDate>Mon, 29 Dec 2025 00:00:00 GMT</pubDate>
+        <description>一个最近研究出来的东西</description>
+      </item>
+
+      <item>
+        <title>关于我是怎么完成 SSO （单点登录）的这档事</title>
+        <link>https://blog.luckyfishes.site/posts/sso/</link>
+        <guid>https://blog.luckyfishes.site/posts/sso/</guid>
+        <pubDate>Mon, 29 Dec 2025 00:00:00 GMT</pubDate>
+        <description>因为很多原因，社团需要写一个单点登录，最好是可以让大部分开源项目也能用上。于是我盯上了 OAuth 2 / OIDC...</description>
+      </item>
+
+      <item>
+        <title>还不知道怎么去选择项目的技术栈？速来看看这个！</title>
+        <link>https://blog.luckyfishes.site/posts/technology-stack/</link>
+        <guid>https://blog.luckyfishes.site/posts/technology-stack/</guid>
+        <pubDate>Mon, 29 Dec 2025 00:00:00 GMT</pubDate>
+        <description>说实话很多时候都有人问我这个项目应该用什么框架，那个项目用什么框架。但是每次说吧，又很害怕别人听不明白，而且没有什么总结性的东西。所以特此写一篇文章，简单总结一下常用的框架这些。</description>
+      </item>
+
+      <item>
         <title>数据结构（三）二叉树</title>
         <link>https://blog.luckyfishes.site/posts/datastructure-3/</link>
         <guid>https://blog.luckyfishes.site/posts/datastructure-3/</guid>

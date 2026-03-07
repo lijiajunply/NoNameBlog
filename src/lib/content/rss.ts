@@ -17,7 +17,8 @@ export function generateRssXml() {
   const items = posts
     .map((post) => {
       const url = `${siteConfig.siteUrl}/posts/${post.slug}/`;
-      return `\n      <item>\n        <title>${escapeXml(post.frontmatter.title)}</title>\n        <link>${url}</link>\n        <guid>${url}</guid>\n        <pubDate>${new Date(post.frontmatter.date).toUTCString()}</pubDate>\n        <description>${escapeXml(post.frontmatter.summary)}</description>\n      </item>`;
+      const summary = post.frontmatter.summary ?? "";
+      return `\n      <item>\n        <title>${escapeXml(post.frontmatter.title)}</title>\n        <link>${url}</link>\n        <guid>${url}</guid>\n        <pubDate>${new Date(post.frontmatter.date).toUTCString()}</pubDate>\n        <description>${escapeXml(summary)}</description>\n      </item>`;
     })
     .join("\n");
 
