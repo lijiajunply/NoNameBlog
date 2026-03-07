@@ -1,19 +1,24 @@
 import { compileMDX } from "next-mdx-remote/rsc";
-import type { ReactNode } from "react";
+import { createElement, type ReactNode } from "react";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
+import rehypeKatex from "rehype-katex";
 import rehypePrettyCode from "rehype-pretty-code";
 import rehypeSlug from "rehype-slug";
-import { remarkAlert } from "remark-github-blockquote-alert";
 import remarkGfm from "remark-gfm";
+import { remarkAlert } from "remark-github-blockquote-alert";
+import remarkMath from "remark-math";
 import { Area, AreaChart } from "@/components/charts/area-chart";
 import { Grid } from "@/components/charts/grid";
 import { ChartTooltip } from "@/components/charts/tooltip";
-import { CodeBlockFigure } from "@/components/mdx/code-block-figure";
 import { XAxis } from "@/components/charts/x-axis";
+import { CodeBlockFigure } from "@/components/mdx/code-block-figure";
 import { GitHubCalendarCard } from "@/components/mdx/github-calendar-card";
 import { Icon } from "@/components/mdx/icon";
+import { MermaidDiagram } from "@/components/mdx/mermaid-diagram";
 import { ZoomableImage } from "@/components/mdx/zoomable-image";
 import { Card } from "@/components/ui/card";
+import { rehypeMermaid } from "@/lib/content/rehype-mermaid";
+import { transformColonComponents } from "@/lib/content/remark-colon-components";
 import { cn } from "@/lib/utils";
 
 type MdxComponentProps = {
@@ -22,7 +27,33 @@ type MdxComponentProps = {
   [key: string]: any;
 };
 
-type MdxComponent = (props: MdxComponentProps) => ReactNode;
+const YAML_PROP_PREFIX = "__YAML__";
+
+function decodeYamlPropValue(value: unknown): unknown {
+  if (typeof value !== "string" || !value.startsWith(YAML_PROP_PREFIX)) {
+    return value;
+  }
+
+  try {
+    return JSON.parse(decodeURIComponent(value.slice(YAML_PROP_PREFIX.length)));
+  } catch {
+    return value;
+  }
+}
+
+function decodeYamlProps<T extends Record<string, any>>(props: T): T {
+  const decodedEntries = Object.entries(props).map(([key, value]) => [
+    key,
+    decodeYamlPropValue(value),
+  ]);
+  return Object.fromEntries(decodedEntries) as T;
+}
+
+function withDecodedProps<T extends MdxComponentProps>(
+  Component: (props: T) => ReactNode,
+) {
+  return (props: T) => createElement(Component, decodeYamlProps(props));
+}
 
 const mdxComponents: Record<string, any> = {
   h1: ({ className, children, ...props }: MdxComponentProps) => (
@@ -172,14 +203,15 @@ const mdxComponents: Record<string, any> = {
         {children}
       </figure>
     ),
-  AreaChart,
-  Area,
-  Grid,
-  ChartTooltip,
-  XAxis,
-  Icon,
-  GitHubCalendarCard,
-  Card,
+  AreaChart: withDecodedProps(AreaChart),
+  Area: withDecodedProps(Area),
+  Grid: withDecodedProps(Grid),
+  ChartTooltip: withDecodedProps(ChartTooltip),
+  XAxis: withDecodedProps(XAxis),
+  Icon: withDecodedProps(Icon),
+  GitHubCalendarCard: withDecodedProps(GitHubCalendarCard),
+  MermaidDiagram: withDecodedProps(MermaidDiagram),
+  Card: withDecodedProps(Card),
 };
 
 const prettyCodeOptions = {
@@ -191,15 +223,19 @@ const prettyCodeOptions = {
 };
 
 export async function renderMdx(source: string) {
+  const transformedSource = transformColonComponents(source);
+
   const { content } = await compileMDX({
-    source,
+    source: transformedSource,
     components: mdxComponents,
     options: {
       parseFrontmatter: false,
       mdxOptions: {
-        remarkPlugins: [remarkGfm, remarkAlert],
+        remarkPlugins: [remarkGfm, remarkAlert, remarkMath],
         rehypePlugins: [
           rehypeSlug,
+          rehypeKatex,
+          rehypeMermaid,
           [rehypeAutolinkHeadings, { behavior: "append" }],
           [rehypePrettyCode, prettyCodeOptions],
         ],

@@ -523,7 +523,6 @@ figure[data-rehype-pretty-code-figure] pre[data-language]::before {
   border-bottom: none;
 }
 
-
 /* Style for blockquotes to match Apple Notes */
 .prose blockquote {
   font-style: normal;
@@ -539,4 +538,21 @@ figure[data-rehype-pretty-code-figure] pre[data-language]::before {
   border-color: color-mix(in srgb, var(--foreground) 20%, transparent);
   color: var(--muted-foreground);
   background: color-mix(in srgb, var(--foreground) 8%, transparent);
+}
+
+/* KaTeX and Mermaid */
+.prose .katex-display {
+  margin: 1.25rem 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 0.25rem;
+}
+
+.prose .katex {
+  font-size: 1.05em;
+}
+
+.mermaid-diagram svg {
+  height: auto;
+  max-width: 100%;
 }
