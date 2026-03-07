@@ -148,7 +148,9 @@ async function main() {
     }
   }
 
-  console.log(`done: updated=${updated}, skipped=${skipped}, failed=${failed}, fallback=${fallback}`);
+  console.log(
+    `done: updated=${updated}, skipped=${skipped}, failed=${failed}, fallback=${fallback}`,
+  );
 }
 
 main().catch((err) => {

@@ -24,19 +24,15 @@ function getVisiblePosts() {
     .filter((post) => !post.draft);
 }
 
-const staticRoutes = [
-  "/",
-  "/about/",
-  "/friends/",
-  "/stats/",
-  "/search/",
-];
+const staticRoutes = ["/", "/about/", "/friends/", "/stats/", "/search/"];
 const posts = getVisiblePosts();
 const postRoutes = posts.map((post) => `/posts/${post.slug}/`);
 const tagRoutes = [
   ...new Set(
     posts.flatMap((post) =>
-      post.tags.filter(Boolean).map((tag) => `/tags/${encodeURIComponent(tag)}/`),
+      post.tags
+        .filter(Boolean)
+        .map((tag) => `/tags/${encodeURIComponent(tag)}/`),
     ),
   ),
 ];
@@ -51,7 +47,10 @@ const categoryRoutes = [
 const totalPages = Math.ceil(posts.length / POSTS_PER_PAGE);
 const paginationRoutes =
   totalPages > 1
-    ? Array.from({ length: totalPages - 1 }, (_, index) => `/page/${index + 2}/`)
+    ? Array.from(
+        { length: totalPages - 1 },
+        (_, index) => `/page/${index + 2}/`,
+      )
     : [];
 
 const urls = [

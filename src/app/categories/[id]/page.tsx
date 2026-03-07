@@ -41,7 +41,9 @@ export async function generateMetadata({
   };
 }
 
-export default async function CategoryDetailPage({ params }: CategoryPageProps) {
+export default async function CategoryDetailPage({
+  params,
+}: CategoryPageProps) {
   const { id } = await params;
   const name = decodeTaxonomyId(id);
   const posts = getPostsByCategory(name);

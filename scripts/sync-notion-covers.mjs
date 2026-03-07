@@ -15,9 +15,11 @@ const slugToPageId = {
   "python-2level-6": "1e0aaa72-a9bb-43a6-94f9-46887dd5d314",
   "linux-guide-ubuntu": "2b9ce026-debd-40a6-9566-b4783af7c51e",
   "linux-guide-debian": "e85184a7-4d88-4f0a-a3ca-738a69225786",
-  "arch-should-be-your-productivity-tool": "25eaa8e8-95fa-494d-a770-1f91bd8cae54",
+  "arch-should-be-your-productivity-tool":
+    "25eaa8e8-95fa-494d-a770-1f91bd8cae54",
   "python-from-entry-to-burial": "776ec947-9fe1-4bba-bb60-6ff0b60cb794",
-  "generate-character-drawing-from-a-picture": "404dbfcb-284c-4554-b80f-86cf3c4fb1de",
+  "generate-character-drawing-from-a-picture":
+    "404dbfcb-284c-4554-b80f-86cf3c4fb1de",
   "authentication-asp-net-core": "67f67561-3138-4824-84dd-d22407b311f9",
   "csharp-learn-1": "5c5549a9-03dd-45b2-9c81-d9c6db05ca03",
   "avalonia-2-initproj": "363947b9-8a66-4b55-ab33-f54674a8cdbb",
@@ -91,7 +93,8 @@ async function syncOne(slug, pageId) {
       },
     ],
   });
-  const rawCover = sync?.recordMap?.block?.[pageId]?.value?.format?.page_cover || "";
+  const rawCover =
+    sync?.recordMap?.block?.[pageId]?.value?.format?.page_cover || "";
   const cover = normalizeCover(rawCover);
 
   const nextData = buildFrontmatter(parsed.data, cover);
@@ -110,7 +113,9 @@ async function main() {
       const result = await syncOne(slug, pageId);
       results.push(result);
       if (!result.cover) withoutCover.push(slug);
-      console.log(`${slug}: ${result.cover ? "cover synced" : "no cover in notion"}`);
+      console.log(
+        `${slug}: ${result.cover ? "cover synced" : "no cover in notion"}`,
+      );
     } catch (err) {
       console.error(`${slug}: failed -> ${err.message}`);
     }
@@ -118,7 +123,9 @@ async function main() {
 
   console.log(`\nDone: ${results.length} files updated`);
   if (withoutCover.length > 0) {
-    console.log(`No cover in notion (${withoutCover.length}): ${withoutCover.join(", ")}`);
+    console.log(
+      `No cover in notion (${withoutCover.length}): ${withoutCover.join(", ")}`,
+    );
   }
 }
 

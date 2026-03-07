@@ -10,13 +10,7 @@ function toUrl(loc: string) {
 }
 
 export function generateSitemapXml() {
-  const staticPages = [
-    "",
-    "/about",
-    "/friends",
-    "/stats",
-    "/search",
-  ];
+  const staticPages = ["", "/about", "/friends", "/stats", "/search"];
   const posts = getAllPosts();
   const postPages = posts.map((post) => `/posts/${post.slug}`);
   const tagPages = getAllTags().map(
@@ -28,7 +22,10 @@ export function generateSitemapXml() {
   const totalPages = Math.ceil(posts.length / POSTS_PER_PAGE);
   const paginationPages =
     totalPages > 1
-      ? Array.from({ length: totalPages - 1 }, (_, index) => `/page/${index + 2}`)
+      ? Array.from(
+          { length: totalPages - 1 },
+          (_, index) => `/page/${index + 2}`,
+        )
       : [];
 
   const urls = [

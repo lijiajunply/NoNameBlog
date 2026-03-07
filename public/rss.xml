@@ -5,6 +5,14 @@
     <link>https://blog.luckyfishes.site</link>
     <description>一个简约的静态技术博客，记录开发与思考。</description>
       <item>
+        <title>Markdown 语法展示</title>
+        <link>https://blog.luckyfishes.site/posts/markdown-syntax-showcase/</link>
+        <guid>https://blog.luckyfishes.site/posts/markdown-syntax-showcase/</guid>
+        <pubDate>Sat, 07 Mar 2026 00:00:00 GMT</pubDate>
+        <description>完整演示本站当前支持的 Markdown 与 MDX 语法。</description>
+      </item>
+
+      <item>
         <title>数据结构（三）二叉树</title>
         <link>https://blog.luckyfishes.site/posts/datastructure-3/</link>
         <guid>https://blog.luckyfishes.site/posts/datastructure-3/</guid>

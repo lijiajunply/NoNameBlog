@@ -117,7 +117,9 @@ function normalizeSlug(slug, title, id) {
 }
 
 function quoteYaml(s) {
-  return `"${String(s ?? "").replaceAll("\\", "\\\\").replaceAll("\"", "\\\"")}"`;
+  return `"${String(s ?? "")
+    .replaceAll("\\", "\\\\")
+    .replaceAll('"', '\\"')}"`;
 }
 
 function cleanInlineMarkdownText(s) {
@@ -146,7 +148,9 @@ function getBlockText(block, blockMap) {
 
 function getCodeLanguage(block) {
   const lang = block?.value?.properties?.language?.[0]?.[0];
-  return String(lang || "").trim().toLowerCase();
+  return String(lang || "")
+    .trim()
+    .toLowerCase();
 }
 
 function getImageSource(block) {
@@ -217,7 +221,9 @@ function renderBlocks(ids, blockMap, indent = "") {
       if (childBody) out.push(quoteBlock(childBody, indent));
     } else if (children.length > 0 && !["toggle"].includes(v.type)) {
       const nextIndent =
-        v.type === "bulleted_list" || v.type === "numbered_list" || v.type === "to_do"
+        v.type === "bulleted_list" ||
+        v.type === "numbered_list" ||
+        v.type === "to_do"
           ? `${indent}  `
           : indent;
       const childBody = renderBlocks(children, blockMap, nextIndent).trimEnd();
@@ -268,17 +274,23 @@ async function exportOne(pageId) {
   const page = blockMap.get(pageId)?.value;
   if (!page) throw new Error(`No page block found for ${pageId}`);
 
-  const titleRaw = getPropertyBySchemaName(page, schema, "title", blockMap) || "Untitled";
+  const titleRaw =
+    getPropertyBySchemaName(page, schema, "title", blockMap) || "Untitled";
   const title = cleanInlineMarkdownText(titleRaw) || "Untitled";
   const slugRaw = getPropertyBySchemaName(page, schema, "slug", blockMap);
   const date = getDateProperty(page, schema, "date") || "2021-07-02";
   const summaryRaw =
-    getPropertyBySchemaName(page, schema, "summary", blockMap) || `${title}（Notion 导入）`;
-  const summary = cleanInlineMarkdownText(summaryRaw) || `${title}（Notion 导入）`;
+    getPropertyBySchemaName(page, schema, "summary", blockMap) ||
+    `${title}（Notion 导入）`;
+  const summary =
+    cleanInlineMarkdownText(summaryRaw) || `${title}（Notion 导入）`;
   const categoryRaw =
-    getPropertyBySchemaName(page, schema, "category", blockMap) || "Uncategorized";
+    getPropertyBySchemaName(page, schema, "category", blockMap) ||
+    "Uncategorized";
   const category = cleanInlineMarkdownText(categoryRaw) || "Uncategorized";
-  const tags = asTagArray(getPropertyBySchemaName(page, schema, "tags", blockMap));
+  const tags = asTagArray(
+    getPropertyBySchemaName(page, schema, "tags", blockMap),
+  );
   const status = getPropertyBySchemaName(page, schema, "status", blockMap);
   let cover = page?.format?.page_cover || "";
   if (cover.startsWith("/")) {

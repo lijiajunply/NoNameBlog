@@ -10,7 +10,12 @@ type ZoomableImageProps = {
   [key: string]: any;
 };
 
-export function ZoomableImage({ src, alt = "", className, ...props }: ZoomableImageProps) {
+export function ZoomableImage({
+  src,
+  alt = "",
+  className,
+  ...props
+}: ZoomableImageProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {

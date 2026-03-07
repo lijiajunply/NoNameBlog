@@ -88,7 +88,10 @@ export default function StatsPage() {
           ) : null}
         </div>
 
-        <AreaChart data={monthlyCumulative} margin={{ top: 10, right: 10, bottom: 20, left: 10 }}>
+        <AreaChart
+          data={monthlyCumulative}
+          margin={{ top: 10, right: 10, bottom: 20, left: 10 }}
+        >
           <Grid horizontal numTicksRows={4} />
           <Area
             dataKey="posts"
