@@ -13,6 +13,84 @@ type PostPageProps = {
   params: Promise<{ slug: string }>;
 };
 
+type LinkDirection = "previous" | "next";
+
+function hasPathByDirection(
+  startSlug: string,
+  targetSlug: string,
+  postsBySlug: Map<string, ReturnType<typeof getAllPosts>[number]>,
+  direction: LinkDirection,
+) {
+  const visited = new Set<string>();
+  let cursor: string | undefined = startSlug;
+
+  while (cursor && !visited.has(cursor)) {
+    if (cursor === targetSlug) {
+      return true;
+    }
+    visited.add(cursor);
+
+    const post = postsBySlug.get(cursor);
+    const linkedSlug =
+      direction === "next" ? post?.frontmatter.next : post?.frontmatter.previous;
+    cursor = linkedSlug && linkedSlug !== cursor ? linkedSlug : undefined;
+  }
+
+  return false;
+}
+
+function pickFallbackPost(
+  posts: ReturnType<typeof getAllPosts>,
+  currentIndex: number,
+  currentSlug: string,
+  postsBySlug: Map<string, ReturnType<typeof getAllPosts>[number]>,
+  direction: LinkDirection,
+) {
+  const step = direction === "next" ? 1 : -1;
+  let index = currentIndex + step;
+
+  while (index >= 0 && index < posts.length) {
+    const candidate = posts[index];
+    const createsCycle = hasPathByDirection(
+      candidate.slug,
+      currentSlug,
+      postsBySlug,
+      direction,
+    );
+    if (!createsCycle) {
+      return candidate;
+    }
+    index += step;
+  }
+
+  return null;
+}
+
+function resolveLinkedPost(
+  linkedSlug: string | undefined,
+  fallbackPost: ReturnType<typeof getAllPosts>[number] | null,
+  currentSlug: string,
+  postsBySlug: Map<string, ReturnType<typeof getAllPosts>[number]>,
+  direction: LinkDirection,
+) {
+  if (!linkedSlug || linkedSlug === currentSlug) {
+    return fallbackPost;
+  }
+
+  const linkedPost = postsBySlug.get(linkedSlug);
+  if (!linkedPost) {
+    return fallbackPost;
+  }
+
+  const createsCycle = hasPathByDirection(
+    linkedPost.slug,
+    currentSlug,
+    postsBySlug,
+    direction,
+  );
+  return createsCycle ? fallbackPost : linkedPost;
+}
+
 export function generateStaticParams() {
   return getAllPosts().map((post) => ({ slug: post.slug }));
 }
@@ -77,19 +155,28 @@ export default async function PostPage({ params }: PostPageProps) {
   const posts = getAllPosts();
   const postsBySlug = new Map(posts.map((item) => [item.slug, item]));
   const currentIndex = posts.findIndex((item) => item.slug === post.slug);
-  const defaultPreviousPost = currentIndex > 0 ? posts[currentIndex - 1] : null;
-  const defaultNextPost =
-    currentIndex >= 0 && currentIndex < posts.length - 1
-      ? posts[currentIndex + 1]
+  const defaultPreviousPost =
+    currentIndex >= 0
+      ? pickFallbackPost(posts, currentIndex, post.slug, postsBySlug, "previous")
       : null;
-  const previousPost =
-    post.frontmatter.previous && post.frontmatter.previous !== post.slug
-      ? (postsBySlug.get(post.frontmatter.previous) ?? defaultPreviousPost)
-      : defaultPreviousPost;
-  const nextPost =
-    post.frontmatter.next && post.frontmatter.next !== post.slug
-      ? (postsBySlug.get(post.frontmatter.next) ?? defaultNextPost)
-      : defaultNextPost;
+  const defaultNextPost =
+    currentIndex >= 0
+      ? pickFallbackPost(posts, currentIndex, post.slug, postsBySlug, "next")
+      : null;
+  const previousPost = resolveLinkedPost(
+    post.frontmatter.previous,
+    defaultPreviousPost,
+    post.slug,
+    postsBySlug,
+    "previous",
+  );
+  const nextPost = resolveLinkedPost(
+    post.frontmatter.next,
+    defaultNextPost,
+    post.slug,
+    postsBySlug,
+    "next",
+  );
   const articleJsonLd = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
