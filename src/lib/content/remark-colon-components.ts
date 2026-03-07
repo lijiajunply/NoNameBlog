@@ -4,7 +4,7 @@ type YamlData = Record<string, unknown>;
 const YAML_PROP_PREFIX = "__YAML__";
 
 const COMPONENT_START_RE = /^::([A-Za-z][A-Za-z0-9_]*)\s*$/;
-const DETAILS_START_RE = /^::\s*details(?:\s+(.*\S))?\s*$/i;
+const DETAILS_START_RE = /^::\s*details(?:\s+(\[open\]))?(?:\s+(.*\S))?\s*$/i;
 const DOUBLE_BLOCK_START_RE =
   /^::(?:[A-Za-z][A-Za-z0-9_]*|\s+details(?:\s+.*)?)\s*$/i;
 const BLOCK_END_RE = /^::\s*$/;
@@ -112,7 +112,8 @@ export function transformColonComponents(source: string): string {
     const detailsMatch = line.match(DETAILS_START_RE);
 
     if (detailsMatch) {
-      const summaryText = detailsMatch[1]?.trim() ?? "";
+      const isOpenByDefault = Boolean(detailsMatch[1]);
+      const summaryText = detailsMatch[2]?.trim() ?? "";
       const detailsBodyLines: string[] = [];
       let foundDetailsEnd = false;
       let cursor = index + 1;
@@ -180,7 +181,7 @@ export function transformColonComponents(source: string): string {
         : rawBody;
       const escapedSummary = escapeHtmlAttr(summaryText);
       const detailsNodeLines = [
-        "<details>",
+        isOpenByDefault ? "<details open>" : "<details>",
         `<summary>${escapedSummary || "Details"}</summary>`,
       ];
       if (transformedBody.trim()) {
