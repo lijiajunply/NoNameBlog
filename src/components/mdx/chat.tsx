@@ -9,13 +9,15 @@ type UserChatData = {
 };
 
 type ChatProps = {
-    userChatData: UserChatData[]; // Replace with actual type of chat data
+    data: UserChatData[]; // Replace with actual type of chat data
 };
-export function Chat({ userChatData }: ChatProps) {
-
+export function Chat({ data }: ChatProps) {
+    if (!data || data.length === 0) {
+        return <div>No chat data available.</div>;
+    }
     return (
         <section>
-            {userChatData.map((chat, index) => (
+            {data.map((chat, index) => (
                 <div key={index} className={`flex ${(!chat.userName || chat.isMe) ? "justify-end" : "justify-start"} mb-4`}>
                     <div className={`max-w-xs ${!chat.userName || chat.isMe ? "text-right" : "text-left"}`}>
                         <div style={{ fontSize: 12 }} className={`text-gray-600 dark:text-gray-400 pb-0.5`}>{chat.userName}</div>

@@ -15,6 +15,7 @@ import { Chat } from "@/components/mdx/chat";
 import { CodeBlockFigure } from "@/components/mdx/code-block-figure";
 import { GitHubCalendarCard } from "@/components/mdx/github-calendar-card";
 import { Icon } from "@/components/mdx/icon";
+import { LinkCard } from "@/components/mdx/link-card";
 import { MermaidDiagram } from "@/components/mdx/mermaid-diagram";
 import { MusicScore } from "@/components/mdx/music-score";
 import { ZoomableImage } from "@/components/mdx/zoomable-image";
@@ -217,6 +218,7 @@ const mdxComponents: Record<string, any> = {
   MusicScore: withDecodedProps(MusicScore),
   Card: withDecodedProps(Card),
   Chat: withDecodedProps(Chat),
+  LinkCard: withDecodedProps(LinkCard),
 };
 
 const prettyCodeOptions = {

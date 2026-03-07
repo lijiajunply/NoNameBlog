@@ -329,7 +329,7 @@ numTicks: 5
 
 ```yaml
 ::Chat
-userChatData:
+data:
   - userName: ""
     messages: "你好，最近怎么样？"
   - userName: "NoName"
@@ -343,7 +343,7 @@ userChatData:
 看看效果：
 
 ::Chat
-userChatData:
+data:
   - userName: ""
     messages: "你好，最近怎么样？"
   - userName: "NoName"
@@ -377,6 +377,26 @@ MDX 其实支持直接混用 HTML，但是我先支持一下
 :: details [open] 已经展开了
 MDX 其实支持直接混用 HTML，但是我先支持一下
 ::
+
+### 链接卡片
+
+```markdown
+::LinkCard
+icon: https://picsum.photos/100/100
+title: 标题
+description: 这是一行描述，如果不提供描述会展示域名
+url: https://blog.luckyfishes.site/
+::
+```
+
+::LinkCard
+icon: https://picsum.photos/100/100
+title: 标题
+description: 这是一行描述，如果不提供描述会展示域名
+url: https://blog.luckyfishes.site/
+::
+
+其实就有点像知乎的那个链接小卡片了
 
 ## 9. 乐谱
 
