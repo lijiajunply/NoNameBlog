@@ -1,9 +1,23 @@
+"use client";
+
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
-import type { Post } from "@/lib/content/posts";
 import { formatDate } from "@/lib/utils";
 
-export function PostCard({ post }: { post: Post }) {
+export type PostCardPost = {
+  slug: string;
+  frontmatter: {
+    title: string;
+    date: string;
+    summary?: string | null;
+    category?: string;
+    tags: string[];
+    cover?: string;
+  };
+  readingTime: string;
+};
+
+export function PostCard({ post }: { post: PostCardPost }) {
   const { category, tags, cover } = post.frontmatter;
   const summary = post.frontmatter.summary ?? undefined;
 

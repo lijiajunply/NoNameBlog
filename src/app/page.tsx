@@ -5,7 +5,7 @@ import AreaChart, { Area } from "@/components/charts/area-chart";
 import { Grid } from "@/components/charts/grid";
 import { ChartTooltip } from "@/components/charts/tooltip";
 import { XAxis } from "@/components/charts/x-axis";
-import { PostCard } from "@/components/post-card";
+import { PostFeedWithCategoryFilter } from "@/components/post-feed-with-category-filter";
 import { Badge } from "@/components/ui/badge";
 import { siteConfig } from "@/config/site";
 import {
@@ -28,8 +28,6 @@ export default function HomePage() {
   const posts = getAllPosts();
   const tags = getAllTags();
   const heroTags = tags.slice(0, 6);
-  const pagedPosts = posts.slice(0, POSTS_PER_PAGE);
-  const totalPages = Math.ceil(posts.length / POSTS_PER_PAGE);
   const chartData = getMonthlyCumulativeStats();
 
   return (
@@ -102,30 +100,10 @@ export default function HomePage() {
             最新文章
           </h2>
         </div>
-        <div className="grid gap-5">
-          {pagedPosts.map((post) => (
-            <div
-              key={post.slug}
-              className="transition-transform duration-300 hover:-translate-y-1"
-            >
-              <PostCard post={post} />
-            </div>
-          ))}
-        </div>
-        {totalPages > 1 ? (
-          <div className="flex items-center justify-between gap-3 pt-2">
-            <span className="text-sm text-neutral-500 dark:text-neutral-400">
-              第 1 / {totalPages} 页
-            </span>
-            <Link
-              href="/page/2/"
-              className="inline-flex items-center gap-1 rounded-xl border border-neutral-200 bg-white px-3 py-2 text-sm font-medium text-neutral-700 transition-colors hover:bg-neutral-100 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-200 dark:hover:bg-neutral-800"
-            >
-              下一页
-              <Icon icon="ph:arrow-right" className="h-4 w-4" />
-            </Link>
-          </div>
-        ) : null}
+        <PostFeedWithCategoryFilter
+          posts={posts}
+          postsPerPage={POSTS_PER_PAGE}
+        />
       </section>
     </div>
   );
