@@ -1,200 +1,167 @@
-<div
-    className="rounded-[30px] border border-white/70 bg-linear-to-b from-white/90 to-neutral-50/70 p-6 shadow-[0_14px_40px_-28px_rgba(15,23,42,0.35)] backdrop-blur-xl dark:border-white/10 dark:from-neutral-900/85 dark:to-neutral-900/55 md:p-9">
-    <h2 className="mt-4 mb-3 text-3xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100">
-        你好，我是 Luckyfish
-    </h2>
-    <div className="max-w-2xl text-[15px] leading-7 text-neutral-600 dark:text-neutral-300">
-        一个热爱创造和分享的开发者。这里主要记录我七里八里的内容。包括一些心得和技术分享。
+# 你好，我是LuckyFish
+
+一个热爱创造和分享的开发者。这里主要记录我七里八里的内容，包括一些心得和技术分享。
+
+
+## 教育
+
+<div className="flex flex-col gap-4">
+    <div className="group relative flex items-center justify-between overflow-hidden rounded-3xl border border-black/5 bg-white/50 p-5 backdrop-blur-xl transition-all hover:bg-white/80 dark:border-white/10 dark:bg-neutral-900/50 dark:hover:bg-neutral-900/80">
+        <div className="flex items-center gap-4">
+            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-500/10 text-blue-500 dark:bg-blue-400/10 dark:text-blue-400">
+                <Icon icon="mingcute:school-line" className="h-6 w-6" />
+            </div>
+            <div>
+                <div className="font-semibold text-neutral-900 dark:text-neutral-100">西安建筑科技大学 (XAUAT)</div>
+                <div className="text-sm text-neutral-500 dark:text-neutral-400">本科 - 工程力学</div>
+            </div>
+        </div>
+        <div className="text-sm font-medium text-neutral-400 dark:text-neutral-500">2022 - 2026</div>
     </div>
 </div>
 
-## 技术偏好
+## 工具
 
-<div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-    <div
-        className="group relative overflow-hidden rounded-[26px] border border-white/75 bg-white/78 p-6 shadow-[0_16px_38px_-28px_rgba(15,23,42,0.4)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_24px_40px_-24px_rgba(15,23,42,0.42)] dark:border-white/10 dark:bg-neutral-900/65">
-        <div
-            className="absolute inset-x-0 top-0 h-0.5 bg-linear-to-r from-transparent via-neutral-300/70 to-transparent dark:via-neutral-600/70"/>
-        <div className="flex items-center justify-between gap-3">
-            <div className="text-base font-semibold text-neutral-900 dark:text-neutral-100">
-                React / Next.js
+<div className="overflow-hidden rounded-3xl border border-black/5 bg-white/50 backdrop-blur-xl dark:border-white/10 dark:bg-neutral-900/50">
+    <div className="divide-y divide-black/5 dark:divide-white/10">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between p-4 transition-colors hover:bg-black/5 dark:hover:bg-white/5 md:px-6 md:py-4 gap-2">
+            <div className="flex items-center gap-4">
+                <Icon icon="logos:react" width="24" />
+                <span className="font-medium text-neutral-900 dark:text-neutral-100">React / Next.js</span>
             </div>
-            <div
-                className="rounded-full border border-neutral-200/80 bg-white/80 p-2 text-neutral-600 dark:border-neutral-700/80 dark:bg-neutral-900/80 dark:text-neutral-300">
-                <Icon icon="mingcute:code-line" width="16"/>
+            <span className="text-sm text-neutral-500 dark:text-neutral-400">前端开发 / 组件化 / 渲染策略</span>
+        </div>
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between p-4 transition-colors hover:bg-black/5 dark:hover:bg-white/5 md:px-6 md:py-4 gap-2">
+            <div className="flex items-center gap-4">
+                <Icon icon="logos:vue" width="24" />
+                <span className="font-medium text-neutral-900 dark:text-neutral-100">Vue</span>
             </div>
+            <span className="text-sm text-neutral-500 dark:text-neutral-400">前端开发 / 协作效率</span>
         </div>
-        <div className="mt-2 text-sm leading-relaxed text-neutral-600 dark:text-neutral-300">
-            组件化开发、路由与渲染策略、内容站点工程化。
-        </div>
-        <a href="https://nextjs.org/" target="_blank" rel="noreferrer"
-           className="mt-4 inline-block text-sm font-medium text-neutral-500 transition-colors hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100">
-            查看文档
-        </a>
-    </div>
-
-    <div
-        className="group relative overflow-hidden rounded-[26px] border border-white/75 bg-white/78 p-6 shadow-[0_16px_38px_-28px_rgba(15,23,42,0.4)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_24px_40px_-24px_rgba(15,23,42,0.42)] dark:border-white/10 dark:bg-neutral-900/65">
-        <div
-            className="absolute inset-x-0 top-0 h-0.5 bg-linear-to-r from-transparent via-neutral-300/70 to-transparent dark:via-neutral-600/70"/>
-        <div className="flex items-center justify-between gap-3">
-            <div className="text-base font-semibold text-neutral-900 dark:text-neutral-100">
-                Vue
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between p-4 transition-colors hover:bg-black/5 dark:hover:bg-white/5 md:px-6 md:py-4 gap-2">
+            <div className="flex items-center gap-4">
+                <Icon icon="logos:dotnet" width="24" />
+                <span className="font-medium text-neutral-900 dark:text-neutral-100">C# / .NET</span>
             </div>
-            <div
-                className="rounded-full border border-neutral-200/80 bg-white/80 p-2 text-neutral-600 dark:border-neutral-700/80 dark:bg-neutral-900/80 dark:text-neutral-300">
-                <Icon icon="mingcute:vue-line" width="16"/>
+            <span className="text-sm text-neutral-500 dark:text-neutral-400">工具开发 / 后端能力</span>
+        </div>
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between p-4 transition-colors hover:bg-black/5 dark:hover:bg-white/5 md:px-6 md:py-4 gap-2">
+            <div className="flex items-center gap-4">
+                <Icon icon="logos:python" width="24" />
+                <span className="font-medium text-neutral-900 dark:text-neutral-100">Python</span>
             </div>
+            <span className="text-sm text-neutral-500 dark:text-neutral-400">自动化 / 数据处理</span>
         </div>
-        <div className="mt-2 text-sm leading-relaxed text-neutral-600 dark:text-neutral-300">
-            熟悉生态与组件组织方式，关注可维护性和协作效率。
-        </div>
-        <a href="https://vuejs.org/" target="_blank" rel="noreferrer"
-           className="mt-4 inline-block text-sm font-medium text-neutral-500 transition-colors hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100">
-            查看文档
-        </a>
-    </div>
-
-    <div
-        className="group relative overflow-hidden rounded-[26px] border border-white/75 bg-white/78 p-6 shadow-[0_16px_38px_-28px_rgba(15,23,42,0.4)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_24px_40px_-24px_rgba(15,23,42,0.42)] dark:border-white/10 dark:bg-neutral-900/65">
-        <div
-            className="absolute inset-x-0 top-0 h-0.5 bg-linear-to-r from-transparent via-neutral-300/70 to-transparent dark:via-neutral-600/70"/>
-        <div className="flex items-center justify-between gap-3">
-            <div className="text-base font-semibold text-neutral-900 dark:text-neutral-100">
-                C# / .NET
-            </div>
-            <div
-                className="rounded-full border border-neutral-200/80 bg-white/80 p-2 text-neutral-600 dark:border-neutral-700/80 dark:bg-neutral-900/80 dark:text-neutral-300">
-                <Icon icon="mingcute:server-line" width="16"/>
-            </div>
-        </div>
-        <div className="mt-2 text-sm leading-relaxed text-neutral-600 dark:text-neutral-300">
-            工具开发与后端能力补全，注重稳定性和工程规范。
-        </div>
-        <a href="https://dotnet.microsoft.com/" target="_blank" rel="noreferrer"
-           className="mt-4 inline-block text-sm font-medium text-neutral-500 transition-colors hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100">
-            查看文档
-        </a>
-    </div>
-
-    <div
-        className="group relative overflow-hidden rounded-[26px] border border-white/75 bg-white/78 p-6 shadow-[0_16px_38px_-28px_rgba(15,23,42,0.4)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_24px_40px_-24px_rgba(15,23,42,0.42)] dark:border-white/10 dark:bg-neutral-900/65">
-        <div
-            className="absolute inset-x-0 top-0 h-0.5 bg-linear-to-r from-transparent via-neutral-300/70 to-transparent dark:via-neutral-600/70"/>
-        <div className="flex items-center justify-between gap-3">
-            <div className="text-base font-semibold text-neutral-900 dark:text-neutral-100">
-                Python
-            </div>
-            <div
-                className="rounded-full border border-neutral-200/80 bg-white/80 p-2 text-neutral-600 dark:border-neutral-700/80 dark:bg-neutral-900/80 dark:text-neutral-300">
-                <Icon icon="mingcute:ai-line" width="16"/>
-            </div>
-        </div>
-        <div className="mt-2 text-sm leading-relaxed text-neutral-600 dark:text-neutral-300">
-            脚本自动化与数据处理，快速验证想法和提升效率。
-        </div>
-        <a href="https://www.python.org/" target="_blank" rel="noreferrer"
-           className="mt-4 inline-block text-sm font-medium text-neutral-500 transition-colors hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100">
-            查看文档
-        </a>
     </div>
 </div>
 
-## 项目作品
+## 项目
 
 <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-    <a href="https://gitee.com/old8-lang-team/Old8Lang" target="_blank" rel="noreferrer"
-       className="no-underline!">
-        <div
-            className="group w-full rounded-2xl border border-white/70 bg-white/75 p-4 shadow-[0_12px_28px_-24px_rgba(15,23,42,0.45)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-0.5 hover:border-neutral-300/70 dark:border-white/10 dark:bg-neutral-900/65 dark:hover:border-neutral-700">
-            <div className="flex items-center justify-between gap-3">
-                <div className="text-sm font-semibold text-neutral-900 dark:text-neutral-100">
-                    Old8Lang
+    <a href="https://gitee.com/old8-lang-team/Old8Lang" target="_blank" rel="noreferrer" className="no-underline!">
+        <div className="group relative flex h-full flex-col justify-between overflow-hidden rounded-3xl border border-black/5 bg-white/50 p-6 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:bg-white/80 hover:shadow-md dark:border-white/10 dark:bg-neutral-900/50 dark:hover:bg-neutral-900/80">
+            <div>
+                <div className="flex items-center justify-between gap-3">
+                    <div className="text-base font-semibold text-neutral-900 dark:text-neutral-100">
+                        Old8Lang
+                    </div>
+                    <div className="flex h-8 w-8 items-center justify-center rounded-full bg-black/5 text-neutral-500 transition-colors group-hover:bg-black/10 dark:bg-white/10 dark:text-neutral-400 dark:group-hover:bg-white/20">
+                        <Icon icon="icon-park-outline:source-code" width="16" />
+                    </div>
                 </div>
-                <Icon icon="icon-park-outline:source-code" width="16"/>
-            </div>
-            <div className="mt-2 text-xs leading-relaxed text-neutral-500 dark:text-neutral-400">
-                一个可能是啥都有的语言。使用 C# 开发
+                <div className="mt-3 text-sm leading-relaxed text-neutral-500 dark:text-neutral-400">
+                    一个可能是啥都有的语言。使用 C# 开发
+                </div>
             </div>
         </div>
     </a>
 
-    <a href="https://gitee.com/luckyfishisdashen/iOSClub.AppMobile" target="_blank" rel="noreferrer"
-       className="no-underline!">
-        <div
-            className="group w-full rounded-2xl border border-white/70 bg-white/75 p-4 shadow-[0_12px_28px_-24px_rgba(15,23,42,0.45)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-0.5 hover:border-neutral-300/70 dark:border-white/10 dark:bg-neutral-900/65 dark:hover:border-neutral-700">
-            <div className="flex items-center justify-between gap-3">
-                <div className="text-sm font-semibold text-neutral-900 dark:text-neutral-100">
-                    iOS Club App
+    <a href="https://gitee.com/luckyfishisdashen/iOSClub.AppMobile" target="_blank" rel="noreferrer" className="no-underline!">
+        <div className="group relative flex h-full flex-col justify-between overflow-hidden rounded-3xl border border-black/5 bg-white/50 p-6 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:bg-white/80 hover:shadow-md dark:border-white/10 dark:bg-neutral-900/50 dark:hover:bg-neutral-900/80">
+            <div>
+                <div className="flex items-center justify-between gap-3">
+                    <div className="text-base font-semibold text-neutral-900 dark:text-neutral-100">
+                        iOS Club App
+                    </div>
+                    <div className="flex h-8 w-8 items-center justify-center rounded-full bg-black/5 text-neutral-500 transition-colors group-hover:bg-black/10 dark:bg-white/10 dark:text-neutral-400 dark:group-hover:bg-white/20">
+                        <Icon icon="icon-park-outline:source-code" width="16" />
+                    </div>
                 </div>
-                <Icon icon="icon-park-outline:source-code" width="16"/>
-            </div>
-            <div className="mt-2 text-xs leading-relaxed text-neutral-500 dark:text-neutral-400">
-                把建大囊括其中。 使用 Flutter 构建的跨平台应用
+                <div className="mt-3 text-sm leading-relaxed text-neutral-500 dark:text-neutral-400">
+                    把建大囊括其中。 使用 Flutter 构建的跨平台应用
+                </div>
             </div>
         </div>
     </a>
 
-    <a href="https://gitee.com/luckyfishisdashen/AvaNetEasyMusic" target="_blank" rel="noreferrer"
-       className="no-underline!">
-        <div
-            className="group w-full rounded-2xl border border-white/70 bg-white/75 p-4 shadow-[0_12px_28px_-24px_rgba(15,23,42,0.45)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-0.5 hover:border-neutral-300/70 dark:border-white/10 dark:bg-neutral-900/65 dark:hover:border-neutral-700">
-            <div className="flex items-center justify-between gap-3">
-                <div className="text-sm font-semibold text-neutral-900 dark:text-neutral-100">
-                    AvaNetEasyMusic
+    <a href="https://gitee.com/luckyfishisdashen/AvaNetEasyMusic" target="_blank" rel="noreferrer" className="no-underline!">
+        <div className="group relative flex h-full flex-col justify-between overflow-hidden rounded-3xl border border-black/5 bg-white/50 p-6 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:bg-white/80 hover:shadow-md dark:border-white/10 dark:bg-neutral-900/50 dark:hover:bg-neutral-900/80">
+            <div>
+                <div className="flex items-center justify-between gap-3">
+                    <div className="text-base font-semibold text-neutral-900 dark:text-neutral-100">
+                        AvaNetEasyMusic
+                    </div>
+                    <div className="flex h-8 w-8 items-center justify-center rounded-full bg-black/5 text-neutral-500 transition-colors group-hover:bg-black/10 dark:bg-white/10 dark:text-neutral-400 dark:group-hover:bg-white/20">
+                        <Icon icon="mdi:file-document-multiple-outline" width="16" />
+                    </div>
                 </div>
-                <Icon icon="mdi:file-document-multiple-outline" width="16"/>
-            </div>
-            <div className="mt-2 text-xs leading-relaxed text-neutral-500 dark:text-neutral-400">
-                使用 Avalonia 开发的第三方网易云音乐
+                <div className="mt-3 text-sm leading-relaxed text-neutral-500 dark:text-neutral-400">
+                    使用 Avalonia 开发的第三方网易云音乐
+                </div>
             </div>
         </div>
     </a>
 
-    <a href="https://gitee.com/luckyfishisdashen/XAUAT.EduApi" target="_blank" rel="noreferrer"
-       className="no-underline!">
-        <div
-            className="group w-full rounded-2xl border border-white/70 bg-white/75 p-4 shadow-[0_12px_28px_-24px_rgba(15,23,42,0.45)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-0.5 hover:border-neutral-300/70 dark:border-white/10 dark:bg-neutral-900/65 dark:hover:border-neutral-700">
-            <div className="flex items-center justify-between gap-3">
-                <div className="text-sm font-semibold text-neutral-900 dark:text-neutral-100">
-                    西建大教务系统第三方 API
+    <a href="https://gitee.com/luckyfishisdashen/XAUAT.EduApi" target="_blank" rel="noreferrer" className="no-underline!">
+        <div className="group relative flex h-full flex-col justify-between overflow-hidden rounded-3xl border border-black/5 bg-white/50 p-6 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:bg-white/80 hover:shadow-md dark:border-white/10 dark:bg-neutral-900/50 dark:hover:bg-neutral-900/80">
+            <div>
+                <div className="flex items-center justify-between gap-3">
+                    <div className="text-base font-semibold text-neutral-900 dark:text-neutral-100">
+                        西建大教务系统第三方 API
+                    </div>
+                    <div className="flex h-8 w-8 items-center justify-center rounded-full bg-black/5 text-neutral-500 transition-colors group-hover:bg-black/10 dark:bg-white/10 dark:text-neutral-400 dark:group-hover:bg-white/20">
+                        <Icon icon="mdi:map-search-outline" width="16" />
+                    </div>
                 </div>
-                <Icon icon="mdi:map-search-outline" width="16"/>
-            </div>
-            <div className="mt-2 text-xs leading-relaxed text-neutral-500 dark:text-neutral-400">
-                Asp.Net Core WebAPI
+                <div className="mt-3 text-sm leading-relaxed text-neutral-500 dark:text-neutral-400">
+                    Asp.Net Core WebAPI
+                </div>
             </div>
         </div>
     </a>
 
-    <a href="https://gitee.com/luckyfishisdashen/university_link_search" target="_blank" rel="noreferrer"
-       className="no-underline!">
-        <div
-            className="group w-full rounded-2xl border border-white/70 bg-white/75 p-4 shadow-[0_12px_28px_-24px_rgba(15,23,42,0.45)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-0.5 hover:border-neutral-300/70 dark:border-white/10 dark:bg-neutral-900/65 dark:hover:border-neutral-700">
-            <div className="flex items-center justify-between gap-3">
-                <div className="text-sm font-semibold text-neutral-900 dark:text-neutral-100">
-                    建大导航
+    <a href="https://gitee.com/luckyfishisdashen/university_link_search" target="_blank" rel="noreferrer" className="no-underline!">
+        <div className="group relative flex h-full flex-col justify-between overflow-hidden rounded-3xl border border-black/5 bg-white/50 p-6 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:bg-white/80 hover:shadow-md dark:border-white/10 dark:bg-neutral-900/50 dark:hover:bg-neutral-900/80">
+            <div>
+                <div className="flex items-center justify-between gap-3">
+                    <div className="text-base font-semibold text-neutral-900 dark:text-neutral-100">
+                        建大导航
+                    </div>
+                    <div className="flex h-8 w-8 items-center justify-center rounded-full bg-black/5 text-neutral-500 transition-colors group-hover:bg-black/10 dark:bg-white/10 dark:text-neutral-400 dark:group-hover:bg-white/20">
+                        <Icon icon="mdi:map-search-outline" width="16" />
+                    </div>
                 </div>
-                <Icon icon="mdi:map-search-outline" width="16"/>
-            </div>
-            <div className="mt-2 text-xs leading-relaxed text-neutral-500 dark:text-neutral-400">
-                Vue 3 + ASP.NET Core
+                <div className="mt-3 text-sm leading-relaxed text-neutral-500 dark:text-neutral-400">
+                    Vue 3 + ASP.NET Core
+                </div>
             </div>
         </div>
     </a>
 
-    <a href="https://gitee.com/luckyfishisdashen/NoNameBlog" target="_blank" rel="noreferrer"
-       className="no-underline!">
-        <div
-            className="group w-full rounded-2xl border border-white/70 bg-white/75 p-4 shadow-[0_12px_28px_-24px_rgba(15,23,42,0.45)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-0.5 hover:border-neutral-300/70 dark:border-white/10 dark:bg-neutral-900/65 dark:hover:border-neutral-700">
-            <div className="flex items-center justify-between gap-3">
-                <div className="text-sm font-semibold text-neutral-900 dark:text-neutral-100">
-                    No Name Blog
+    <a href="https://gitee.com/luckyfishisdashen/NoNameBlog" target="_blank" rel="noreferrer" className="no-underline!">
+        <div className="group relative flex h-full flex-col justify-between overflow-hidden rounded-3xl border border-black/5 bg-white/50 p-6 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:bg-white/80 hover:shadow-md dark:border-white/10 dark:bg-neutral-900/50 dark:hover:bg-neutral-900/80">
+            <div>
+                <div className="flex items-center justify-between gap-3">
+                    <div className="text-base font-semibold text-neutral-900 dark:text-neutral-100">
+                        No Name Blog
+                    </div>
+                    <div className="flex h-8 w-8 items-center justify-center rounded-full bg-black/5 text-neutral-500 transition-colors group-hover:bg-black/10 dark:bg-white/10 dark:text-neutral-400 dark:group-hover:bg-white/20">
+                        <Icon icon="mdi:map-search-outline" width="16" />
+                    </div>
                 </div>
-                <Icon icon="mdi:map-search-outline" width="16"/>
-            </div>
-            <div className="mt-2 text-xs leading-relaxed text-neutral-500 dark:text-neutral-400">
-                使用 Next.js 静态构建，也是本博客的开源项目
+                <div className="mt-3 text-sm leading-relaxed text-neutral-500 dark:text-neutral-400">
+                    使用 Next.js 静态构建，也是本博客的开源项目
+                </div>
             </div>
         </div>
     </a>
@@ -204,37 +171,29 @@
 username: lijiajunply
 ::
 
-## 联系方式
+## 社交
 
 <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
     <a href="https://www.zhihu.com/people/peopleintheworld" target="_blank" rel="noreferrer" className="no-underline!">
-        <div
-            className="group w-full rounded-2xl border border-white/70 bg-white/75 p-3 shadow-[0_12px_28px_-24px_rgba(15,23,42,0.45)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-0.5 hover:border-neutral-300/70 dark:border-white/10 dark:bg-neutral-900/65 dark:hover:border-neutral-700">
-            <div className="flex items-center gap-3">
-                <div
-                    className="rounded-full border border-neutral-200/80 bg-white/85 p-1.5 text-neutral-600 dark:border-neutral-700/80 dark:bg-neutral-900/85 dark:text-neutral-300">
-                    <Icon icon="simple-icons:zhihu" width="14"/>
-                </div>
-                <div>
-                    <div className="text-sm font-medium text-neutral-900 dark:text-neutral-100">Zhihu</div>
-                    <div className="text-xs text-neutral-500 dark:text-neutral-400">技术分享</div>
-                </div>
+        <div className="group flex items-center gap-4 rounded-3xl border border-black/5 bg-white/50 p-4 backdrop-blur-xl transition-all hover:bg-white/80 dark:border-white/10 dark:bg-neutral-900/50 dark:hover:bg-neutral-900/80">
+            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full text-blue-500 dark:text-blue-400">
+                <Icon icon="simple-icons:zhihu" width="20" />
+            </div>
+            <div>
+                <div className="font-semibold text-neutral-900 dark:text-neutral-100">Zhihu</div>
+                <div className="text-sm text-neutral-500 dark:text-neutral-400">技术分享</div>
             </div>
         </div>
     </a>
 
     <a href="https://github.com/lijiajunply" target="_blank" rel="noreferrer" className="no-underline!">
-        <div
-            className="group w-full rounded-2xl border border-white/70 bg-white/75 p-3 shadow-[0_12px_28px_-24px_rgba(15,23,42,0.45)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-0.5 hover:border-neutral-300/70 dark:border-white/10 dark:bg-neutral-900/65 dark:hover:border-neutral-700">
-            <div className="flex items-center gap-3">
-                <div
-                    className="rounded-full border border-neutral-200/80 bg-white/85 p-1.5 text-neutral-600 dark:border-neutral-700/80 dark:bg-neutral-900/85 dark:text-neutral-300">
-                    <Icon icon="mdi:github" width="14"/>
-                </div>
-                <div>
-                    <div className="text-sm font-medium text-neutral-900 dark:text-neutral-100">GitHub</div>
-                    <div className="text-xs text-neutral-500 dark:text-neutral-400">开源项目</div>
-                </div>
+        <div className="group flex items-center gap-4 rounded-3xl border border-black/5 bg-white/50 p-4 backdrop-blur-xl transition-all hover:bg-white/80 dark:border-white/10 dark:bg-neutral-900/50 dark:hover:bg-neutral-900/80">
+            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full text-zinc-800 dark:text-white">
+                <Icon icon="mdi:github" width="24" />
+            </div>
+            <div>
+                <div className="font-semibold text-neutral-900 dark:text-neutral-100">GitHub</div>
+                <div className="text-sm text-neutral-500 dark:text-neutral-400">开源项目</div>
             </div>
         </div>
     </a>
