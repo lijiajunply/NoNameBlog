@@ -61,7 +61,7 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="group relative w-full overflow-hidden rounded-3xl border border-black/5  p-6 backdrop-blur-xl transition-all duration-300  dark:border-white/10  dark:hover:bg-black/60">
+          <div className="hidden lg:block group relative w-full overflow-hidden rounded-3xl border border-black/5  p-6 backdrop-blur-xl transition-all duration-300  dark:border-white/10  dark:hover:bg-black/60">
             <div className="w-full">
               <AreaChart
                 data={chartData}
@@ -92,14 +92,6 @@ export default function HomePage() {
 
       {/* Latest Posts Section */}
       <section className="space-y-6">
-        <div className="flex items-center gap-3 px-2">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-neutral-100 text-neutral-700 dark:bg-neutral-800 dark:text-neutral-300">
-            <Icon icon="ph:article-duotone" className="h-5 w-5" />
-          </div>
-          <h2 className="text-2xl font-semibold tracking-tight text-neutral-900 dark:text-white">
-            最新文章
-          </h2>
-        </div>
         <PostFeedWithCategoryFilter
           posts={posts}
           postsPerPage={POSTS_PER_PAGE}

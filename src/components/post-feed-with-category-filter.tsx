@@ -5,7 +5,15 @@ import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import { PostCard, type PostCardPost } from "@/components/post-card";
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuLabel,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 type PostFeedWithCategoryFilterProps = {
   posts: PostCardPost[];
@@ -139,69 +147,52 @@ export function PostFeedWithCategoryFilter({
     }
   }, [activeCategory, safePage, router, pathname]);
 
-  const activeLabel =
-    activeCategory === "all" ? "全部分类" : `分类：${activeCategory}`;
+  const activeLabel = activeCategory === "all" ? "全部分类" : activeCategory;
 
   return (
-    <div className="space-y-4">
-      <div className="rounded-2xl border border-black/5 bg-white/60 p-3 backdrop-blur-xl dark:border-white/10 dark:bg-neutral-900/70">
-        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <div className="inline-flex w-fit items-center gap-2 rounded-full border border-black/5 bg-white/70 px-3 py-1 text-xs text-neutral-600 dark:border-white/10 dark:bg-black/20 dark:text-neutral-300">
-            <Icon icon="ph:funnel-duotone" className="h-4 w-4 text-sky-500" />
-            <span>{activeLabel}</span>
-            <span className="text-neutral-400 dark:text-neutral-500">·</span>
-            <span>{filteredPosts.length} 篇</span>
+    <div className="space-y-6">
+      <div className="flex items-center justify-between gap-3 px-2">
+        <div className="flex items-center gap-3">
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-neutral-100 text-neutral-700 dark:bg-neutral-800 dark:text-neutral-300">
+            <Icon icon="ph:article-duotone" className="h-5 w-5" />
           </div>
-          {activeCategory !== "all" ? (
+          <h2 className="text-2xl font-semibold tracking-tight text-neutral-900 dark:text-white">
+            最新文章
+          </h2>
+        </div>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
             <Button
               type="button"
               variant="ghost"
-              className="h-8 rounded-lg px-2 text-xs"
-              onClick={() => updateView("all", 1)}
+              className="h-9 rounded-xl border border-black/5 bg-white/70 px-3 text-sm text-neutral-700 hover:bg-white dark:border-white/10 dark:bg-neutral-900 dark:text-neutral-200 dark:hover:bg-neutral-800"
             >
-              清除筛选
+              <Icon icon="ph:funnel-duotone" className="h-4 w-4" />
+              {activeLabel}
+              <Icon icon="ph:caret-down-bold" className="h-3.5 w-3.5" />
             </Button>
-          ) : null}
-        </div>
-
-        <div className="mt-3 flex flex-wrap gap-2">
-          <Button
-            type="button"
-            variant={activeCategory === "all" ? "default" : "ghost"}
-            onClick={() => updateView("all", 1)}
-            className={cn(
-              "h-8 rounded-lg px-3 text-xs",
-              activeCategory === "all"
-                ? "bg-neutral-900 text-white dark:bg-white dark:text-neutral-900"
-                : "border border-black/5 bg-white/70 dark:border-white/10 dark:bg-neutral-950/50",
-            )}
-          >
-            全部
-            <span className="ml-1 text-[11px] opacity-75">
-              {allPosts.length}
-            </span>
-          </Button>
-
-          {categories.map((category) => (
-            <Button
-              key={category.name}
-              type="button"
-              variant={activeCategory === category.name ? "default" : "ghost"}
-              onClick={() => updateView(category.name, 1)}
-              className={cn(
-                "h-8 rounded-lg px-3 text-xs",
-                activeCategory === category.name
-                  ? "bg-neutral-900 text-white dark:bg-white dark:text-neutral-900"
-                  : "border border-black/5 bg-white/70 dark:border-white/10 dark:bg-neutral-950/50",
-              )}
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end" className="w-56">
+            <DropdownMenuLabel>筛选分类</DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuRadioGroup
+              value={activeCategory}
+              onValueChange={(value) => updateView(value, 1)}
             >
-              {category.name}
-              <span className="ml-1 text-[11px] opacity-75">
-                {category.count}
-              </span>
-            </Button>
-          ))}
-        </div>
+              <DropdownMenuRadioItem value="all">
+                全部 ({allPosts.length})
+              </DropdownMenuRadioItem>
+              {categories.map((category) => (
+                <DropdownMenuRadioItem
+                  key={category.name}
+                  value={category.name}
+                >
+                  {category.name} ({category.count})
+                </DropdownMenuRadioItem>
+              ))}
+            </DropdownMenuRadioGroup>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
 
       {visiblePosts.length > 0 ? (
