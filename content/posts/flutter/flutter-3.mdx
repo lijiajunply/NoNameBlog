@@ -41,7 +41,7 @@ previous: flutter-2
 
 那么，一个 Todo类应该是这样的：
 
-```text
+```dart
 class TodoModel {   
    String content;   
    bool isDone;   
@@ -73,7 +73,7 @@ class TodoModel {
 
 然后我们先来写 Todo 列表，我们在 Scaffold 类 的 body 参数上写上我们的列表，代表页面的主体：
 
-```text
+```dart
 ListView.builder(
     itemCount: todoList.length,
     itemBuilder: (context, index) {
