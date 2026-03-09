@@ -1,133 +1,222 @@
 "use client";
 
-import { useMemo } from "react";
+import type { FeatureCollection, Geometry } from "geojson";
+import {
+  ChoroplethChart,
+  ChoroplethFeatureComponent,
+  ChoroplethTooltip,
+} from "@/components/charts/choropleth";
 import type { NormalizedChoroplethSpec } from "./spec";
 
-type BuiltinFeature = {
+type MapFeatureProperties = {
   id: string;
   name: string;
-  path: string;
 };
 
 type BuiltinMap = {
-  title: string;
-  viewBox: string;
-  features: BuiltinFeature[];
+  center: [number, number];
+  scale: number;
+  data: GeoJSON.FeatureCollection<GeoJSON.Geometry, MapFeatureProperties>;
+};
+
+const CHINA_PROVINCES: FeatureCollection<Geometry, MapFeatureProperties> = {
+  type: "FeatureCollection",
+  features: [
+    {
+      type: "Feature",
+      properties: { id: "guangdong", name: "广东" },
+      geometry: {
+        type: "Polygon",
+        coordinates: [
+          [
+            [109.5, 25.0],
+            [117.8, 25.0],
+            [117.8, 21.0],
+            [109.5, 21.0],
+            [109.5, 25.0],
+          ],
+        ],
+      },
+    },
+    {
+      type: "Feature",
+      properties: { id: "zhejiang", name: "浙江" },
+      geometry: {
+        type: "Polygon",
+        coordinates: [
+          [
+            [118.0, 31.0],
+            [123.0, 31.0],
+            [123.0, 27.0],
+            [118.0, 27.0],
+            [118.0, 31.0],
+          ],
+        ],
+      },
+    },
+    {
+      type: "Feature",
+      properties: { id: "jiangsu", name: "江苏" },
+      geometry: {
+        type: "Polygon",
+        coordinates: [
+          [
+            [116.5, 35.5],
+            [121.5, 35.5],
+            [121.5, 30.5],
+            [116.5, 30.5],
+            [116.5, 35.5],
+          ],
+        ],
+      },
+    },
+    {
+      type: "Feature",
+      properties: { id: "sichuan", name: "四川" },
+      geometry: {
+        type: "Polygon",
+        coordinates: [
+          [
+            [98.5, 33.5],
+            [108.5, 33.5],
+            [108.5, 26.0],
+            [98.5, 26.0],
+            [98.5, 33.5],
+          ],
+        ],
+      },
+    },
+    {
+      type: "Feature",
+      properties: { id: "beijing", name: "北京" },
+      geometry: {
+        type: "Polygon",
+        coordinates: [
+          [
+            [115.8, 40.2],
+            [116.9, 40.2],
+            [116.9, 39.4],
+            [115.8, 39.4],
+            [115.8, 40.2],
+          ],
+        ],
+      },
+    },
+  ],
+};
+
+const WORLD_REGIONS: FeatureCollection<Geometry, MapFeatureProperties> = {
+  type: "FeatureCollection",
+  features: [
+    {
+      type: "Feature",
+      properties: { id: "north-america", name: "North America" },
+      geometry: {
+        type: "Polygon",
+        coordinates: [
+          [
+            [-170, 72],
+            [-50, 72],
+            [-50, 12],
+            [-170, 12],
+            [-170, 72],
+          ],
+        ],
+      },
+    },
+    {
+      type: "Feature",
+      properties: { id: "south-america", name: "South America" },
+      geometry: {
+        type: "Polygon",
+        coordinates: [
+          [
+            [-82, 12],
+            [-34, 12],
+            [-34, -56],
+            [-82, -56],
+            [-82, 12],
+          ],
+        ],
+      },
+    },
+    {
+      type: "Feature",
+      properties: { id: "europe", name: "Europe" },
+      geometry: {
+        type: "Polygon",
+        coordinates: [
+          [
+            [-11, 71],
+            [40, 71],
+            [40, 35],
+            [-11, 35],
+            [-11, 71],
+          ],
+        ],
+      },
+    },
+    {
+      type: "Feature",
+      properties: { id: "africa", name: "Africa" },
+      geometry: {
+        type: "Polygon",
+        coordinates: [
+          [
+            [-20, 35],
+            [52, 35],
+            [52, -35],
+            [-20, -35],
+            [-20, 35],
+          ],
+        ],
+      },
+    },
+    {
+      type: "Feature",
+      properties: { id: "asia", name: "Asia" },
+      geometry: {
+        type: "Polygon",
+        coordinates: [
+          [
+            [40, 78],
+            [180, 78],
+            [180, 5],
+            [40, 5],
+            [40, 78],
+          ],
+        ],
+      },
+    },
+    {
+      type: "Feature",
+      properties: { id: "oceania", name: "Oceania" },
+      geometry: {
+        type: "Polygon",
+        coordinates: [
+          [
+            [110, -10],
+            [180, -10],
+            [180, -48],
+            [110, -48],
+            [110, -10],
+          ],
+        ],
+      },
+    },
+  ],
 };
 
 const BUILTIN_MAPS: Record<string, BuiltinMap> = {
   "china-provinces": {
-    title: "China Provinces (Simplified)",
-    viewBox: "0 0 100 70",
-    features: [
-      {
-        id: "xinjiang",
-        name: "新疆",
-        path: "M4 18 L18 12 L22 22 L10 30 L4 24 Z",
-      },
-      {
-        id: "xizang",
-        name: "西藏",
-        path: "M16 34 L30 30 L34 40 L20 46 L14 40 Z",
-      },
-      { id: "qinghai", name: "青海", path: "M22 18 L34 16 L36 28 L24 30 Z" },
-      {
-        id: "gansu",
-        name: "甘肃",
-        path: "M34 16 L42 14 L46 22 L40 30 L36 28 Z",
-      },
-      {
-        id: "neimenggu",
-        name: "内蒙古",
-        path: "M42 12 L66 8 L70 16 L52 20 L46 22 Z",
-      },
-      {
-        id: "sichuan",
-        name: "四川",
-        path: "M36 30 L48 28 L50 36 L40 42 L34 38 Z",
-      },
-      {
-        id: "yunnan",
-        name: "云南",
-        path: "M34 42 L44 40 L46 50 L36 54 L30 48 Z",
-      },
-      {
-        id: "guangxi",
-        name: "广西",
-        path: "M48 48 L56 46 L58 54 L50 58 L46 52 Z",
-      },
-      {
-        id: "guangdong",
-        name: "广东",
-        path: "M58 48 L66 46 L68 54 L60 58 L56 52 Z",
-      },
-      {
-        id: "hunan",
-        name: "湖南",
-        path: "M54 40 L62 38 L64 46 L56 48 L52 44 Z",
-      },
-      {
-        id: "hubei",
-        name: "湖北",
-        path: "M54 32 L62 30 L64 38 L56 40 L52 36 Z",
-      },
-      {
-        id: "henan",
-        name: "河南",
-        path: "M56 24 L64 22 L66 30 L58 32 L54 28 Z",
-      },
-      {
-        id: "hebei",
-        name: "河北",
-        path: "M62 18 L70 16 L72 24 L64 24 L60 20 Z",
-      },
-      { id: "beijing", name: "北京", path: "M70 18 L72 18 L72 20 L70 20 Z" },
-      { id: "shandong", name: "山东", path: "M68 24 L76 24 L78 30 L70 30 Z" },
-      { id: "jiangsu", name: "江苏", path: "M68 32 L76 32 L76 38 L68 38 Z" },
-      { id: "zhejiang", name: "浙江", path: "M70 38 L76 38 L78 44 L72 46 Z" },
-      { id: "fujian", name: "福建", path: "M66 44 L72 46 L72 52 L66 52 Z" },
-    ],
+    center: [104, 33],
+    scale: 460,
+    data: CHINA_PROVINCES,
   },
   "world-countries": {
-    title: "World Regions (Simplified)",
-    viewBox: "0 0 120 70",
-    features: [
-      {
-        id: "north-america",
-        name: "North America",
-        path: "M4 8 L28 6 L34 16 L26 24 L10 22 L4 14 Z",
-      },
-      {
-        id: "south-america",
-        name: "South America",
-        path: "M24 28 L34 30 L36 44 L30 60 L22 56 L20 40 Z",
-      },
-      {
-        id: "europe",
-        name: "Europe",
-        path: "M56 10 L68 10 L70 18 L60 20 L54 16 Z",
-      },
-      {
-        id: "africa",
-        name: "Africa",
-        path: "M58 22 L70 24 L72 44 L64 58 L56 50 L54 34 Z",
-      },
-      {
-        id: "middle-east",
-        name: "Middle East",
-        path: "M72 20 L82 20 L84 28 L74 30 Z",
-      },
-      {
-        id: "asia",
-        name: "Asia",
-        path: "M72 10 L110 8 L114 24 L96 34 L82 30 L78 20 Z",
-      },
-      {
-        id: "oceania",
-        name: "Oceania",
-        path: "M96 42 L112 44 L110 56 L94 54 Z",
-      },
-    ],
+    center: [20, 18],
+    scale: 130,
+    data: WORLD_REGIONS,
   },
 };
 
@@ -150,12 +239,7 @@ export function ChoroplethChartBlock({
 }: {
   spec: NormalizedChoroplethSpec;
 }) {
-  const valueMap = useMemo(
-    () => new Map(spec.data.map((item) => [item.featureId, item.value])),
-    [spec.data],
-  );
   const map = BUILTIN_MAPS[spec.mapId];
-
   if (!map) {
     return (
       <div className="rounded-lg border border-amber-300/70 bg-amber-50/70 p-3 text-amber-900 text-sm dark:border-amber-700/70 dark:bg-amber-950/30 dark:text-amber-200">
@@ -164,6 +248,9 @@ export function ChoroplethChartBlock({
     );
   }
 
+  const valueMap = new Map(
+    spec.data.map((item) => [item.featureId, item.value]),
+  );
   const values = spec.data.map((item) => item.value);
   const min = values.length > 0 ? Math.min(...values) : 0;
   const max = values.length > 0 ? Math.max(...values) : 0;
@@ -178,38 +265,44 @@ export function ChoroplethChartBlock({
 
   return (
     <div className="space-y-3">
-      <svg
-        aria-label={spec.title || map.title}
-        className="h-auto w-full"
-        role="img"
-        viewBox={map.viewBox}
+      <ChoroplethChart
+        center={map.center}
+        data={map.data}
+        scale={map.scale}
+        zoomEnabled
       >
-        <title>{spec.title || map.title}</title>
-        {map.features.map((feature) => {
-          const value = valueMap.get(feature.id);
-          const color =
-            typeof value === "number"
-              ? colors[getQuantileIndex(value, min, max, colors.length)]
-              : "var(--chart-grid)";
-
-          return (
-            <path
-              d={feature.path}
-              fill={color}
-              key={feature.id}
-              stroke="var(--chart-background)"
-              strokeWidth={0.7}
-            >
-              <title>
-                {feature.name}
-                {typeof value === "number"
-                  ? `: ${value.toLocaleString()}`
-                  : ": no data"}
-              </title>
-            </path>
-          );
-        })}
-      </svg>
+        <ChoroplethFeatureComponent
+          getFeatureColor={(feature) => {
+            const id =
+              typeof feature.properties?.id === "string"
+                ? feature.properties.id
+                : "";
+            const value = valueMap.get(id);
+            if (typeof value !== "number") {
+              return "var(--chart-grid)";
+            }
+            return (
+              colors[getQuantileIndex(value, min, max, colors.length)] ||
+              "var(--chart-1)"
+            );
+          }}
+        />
+        <ChoroplethTooltip
+          getFeatureName={(feature) =>
+            typeof feature.properties?.name === "string"
+              ? feature.properties.name
+              : "Unknown"
+          }
+          getFeatureValue={(feature) => {
+            const id =
+              typeof feature.properties?.id === "string"
+                ? feature.properties.id
+                : "";
+            return valueMap.get(id);
+          }}
+          valueLabel="Heat"
+        />
+      </ChoroplethChart>
 
       <div className="flex items-center gap-2 text-xs">
         <span className="text-neutral-600 dark:text-neutral-400">Low</span>

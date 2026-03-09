@@ -20,20 +20,35 @@ importers:
       '@visx/event':
         specifier: ^4.0.1-alpha.0
         version: 4.0.1-alpha.0
+      '@visx/geo':
+        specifier: 4.0.1-alpha.0
+        version: 4.0.1-alpha.0(react@19.2.3)
       '@visx/gradient':
-        specifier: ^4.0.1-alpha.0
+        specifier: 4.0.1-alpha.0
         version: 4.0.1-alpha.0(react@19.2.3)
       '@visx/grid':
         specifier: ^4.0.1-alpha.0
         version: 4.0.1-alpha.0(react@19.2.3)
+      '@visx/group':
+        specifier: 4.0.1-alpha.0
+        version: 4.0.1-alpha.0(react@19.2.3)
+      '@visx/pattern':
+        specifier: 4.0.1-alpha.0
+        version: 4.0.1-alpha.0(react@19.2.3)
       '@visx/responsive':
-        specifier: ^4.0.1-alpha.0
+        specifier: 4.0.1-alpha.0
+        version: 4.0.1-alpha.0(react@19.2.3)
+      '@visx/sankey':
+        specifier: 4.0.1-alpha.0
         version: 4.0.1-alpha.0(react@19.2.3)
       '@visx/scale':
         specifier: ^4.0.1-alpha.0
         version: 4.0.1-alpha.0
       '@visx/shape':
-        specifier: ^4.0.1-alpha.0
+        specifier: 4.0.1-alpha.0
+        version: 4.0.1-alpha.0(react@19.2.3)
+      '@visx/zoom':
+        specifier: 4.0.1-alpha.0
         version: 4.0.1-alpha.0(react@19.2.3)
       abcjs:
         specifier: ^6.6.2
@@ -44,6 +59,15 @@ importers:
       d3-array:
         specifier: ^3.2.4
         version: 3.2.4
+      d3-geo:
+        specifier: ^3.1.1
+        version: 3.1.1
+      d3-sankey:
+        specifier: ^0.12.3
+        version: 0.12.3
+      d3-shape:
+        specifier: ^3.2.0
+        version: 3.2.0
       github-slugger:
         specifier: ^2.0.0
         version: 2.0.0
@@ -122,6 +146,9 @@ importers:
       tailwind-merge:
         specifier: ^3.5.0
         version: 3.5.0
+      topojson-client:
+        specifier: ^3.1.0
+        version: 3.1.0
       unified:
         specifier: ^11.0.5
         version: 11.0.5
@@ -144,12 +171,21 @@ importers:
       '@types/d3-array':
         specifier: ^3.2.2
         version: 3.2.2
+      '@types/d3-geo':
+        specifier: ^3.1.0
+        version: 3.1.0
+      '@types/d3-sankey':
+        specifier: ^0.12.5
+        version: 0.12.5
       '@types/d3-scale':
         specifier: ^4.0.9
         version: 4.0.9
       '@types/d3-shape':
         specifier: ^3.1.8
         version: 3.1.8
+      '@types/geojson':
+        specifier: ^7946.0.16
+        version: 7946.0.16
       '@types/mdast':
         specifier: ^4.0.4
         version: 4.0.4
@@ -1421,6 +1457,9 @@ packages:
   '@types/d3-interpolate@3.0.1':
     resolution: {integrity: sha512-jx5leotSeac3jr0RePOH1KdR9rISG91QIE4Q2PYTu4OymLTZfA3SrnURSLzKH48HmXVUru50b8nje4E79oQSQw==}
 
+  '@types/d3-path@1.0.11':
+    resolution: {integrity: sha512-4pQMp8ldf7UaB/gR8Fvvy69psNHkTpD/pVw3vmEi8iZAB9EPMBruB1JvHO4BIq9QkUUd2lV1F5YXpMNj7JPBpw==}
+
   '@types/d3-path@3.1.1':
     resolution: {integrity: sha512-VMZBYyQvbGmWyWVea0EHs/BwLgxc+MKi1zLDCONksozI4YJMcTt8ZEuIR4Sb1MMTE8MMW49v0IwI5+b7RmfWlg==}
 
@@ -1433,6 +1472,9 @@ packages:
   '@types/d3-random@3.0.3':
     resolution: {integrity: sha512-Imagg1vJ3y76Y2ea0871wpabqp613+8/r0mCLEBfdtqC7xMSfj9idOnmBYyMoULfHePJyxMAw3nWhJxzc+LFwQ==}
 
+  '@types/d3-sankey@0.12.5':
+    resolution: {integrity: sha512-/3RZSew0cLAtzGQ+C89hq/Rp3H20QJuVRSqFy6RKLe7E0B8kd2iOS1oBsodrgds4PcNVpqWhdUEng/SHvBcJ6Q==}
+
   '@types/d3-scale-chromatic@3.1.0':
     resolution: {integrity: sha512-iWMJgwkK7yTRmWqRB5plb1kadXyQ5Sj8V/zYlFGMUBbIPKQScw+Dku9cAAMgJG+z5GYDoMjWGLVOvjghDEFnKQ==}
 
@@ -1444,6 +1486,9 @@ packages:
 
   '@types/d3-selection@3.0.11':
     resolution: {integrity: sha512-bhAXu23DJWsrI45xafYpkQ4NtcKMwWnAC/vKrd2l+nxMFuvOT3XMYTIj2opv8vq8AO5Yh7Qac/nSeP/3zjTK0w==}
+
+  '@types/d3-shape@1.3.12':
+    resolution: {integrity: sha512-8oMzcd4+poSLGgV0R1Q1rOlx/xdmozS4Xab7np0eamFFUYq71AU9pOCJEFnkXW2aI/oXdVYJzw6pssbSut7Z9Q==}
 
   '@types/d3-shape@3.1.7':
     resolution: {integrity: sha512-VLvUQ33C+3J+8p+Daf+nYSOsjB4GXp19/S/aGo60m9h1v6XaxjiT82lKVWJCfzhtuZ3yD7i/TPeC/fuKLLOSmg==}
@@ -1522,11 +1567,24 @@ packages:
   '@ungap/structured-clone@1.3.0':
     resolution: {integrity: sha512-WmoN8qaIAo7WTYWbAZuG8PYEhn5fkz7dZrqTBZ7dtt//lL2Gwms1IcnQ5yHqjDfX8Ft5j4YzDM23f87zBfDe9g==}
 
+  '@use-gesture/core@10.3.1':
+    resolution: {integrity: sha512-WcINiDt8WjqBdUXye25anHiNxPc0VOrlT8F6LLkU6cycrOGUDyY/yyFmsg3k8i5OLvv25llc0QC45GhR/C8llw==}
+
+  '@use-gesture/react@10.3.1':
+    resolution: {integrity: sha512-Yy19y6O2GJq8f7CHf7L0nxL8bf4PZCPaVOCgJrusOeFHY1LvHgYXnmnXg6N5iwAnbgbZCDjo60SiM6IPJi9C5g==}
+    peerDependencies:
+      react: '>= 16.8.0'
+
   '@visx/curve@4.0.1-alpha.0':
     resolution: {integrity: sha512-jRu61Uz274pV1zyioXmboyrLutYbnKsgjj4njSGCnhdXj5GkZvZbg+ThDb6oOzoAnJOBRLz4rzPlWvNJOzuVMg==}
 
   '@visx/event@4.0.1-alpha.0':
     resolution: {integrity: sha512-EQqCMSv/s8NbFjo+hz3FKsvvYfP+2QslsFJ/24/O5l/W+7UC6J6aAvO0ujVwrTwdYbuQ+vhxKi1xdPdKR/qj1g==}
+
+  '@visx/geo@4.0.1-alpha.0':
+    resolution: {integrity: sha512-ZzeXrMgT1JjUZl1GaW3KecN2PkCCTDfYDeTD8+kvugC6umLKTsJ4+ii1GpjrgnPTtOBzZnJHCAknJ3mzaz/DRg==}
+    peerDependencies:
+      react: ^16.14.0 || ^17.0.0-0 || ^18.0.0-0 || ^19.0.0-0
 
   '@visx/gradient@4.0.1-alpha.0':
     resolution: {integrity: sha512-HxkxLdThV/gPaulw+t7/ESo7AtqIBq9IlHIkHi7lQqXe0Yl+x8rpM3KYlYqEZjtihD9CeEaVJjBbdY7fQb54IA==}
@@ -1543,11 +1601,21 @@ packages:
     peerDependencies:
       react: ^16.14.0 || ^17.0.0-0 || ^18.0.0-0 || ^19.0.0-0
 
+  '@visx/pattern@4.0.1-alpha.0':
+    resolution: {integrity: sha512-KCqHpjtHdu95uqamc5PIYG55Xp0w+7/Zz63k4eeZErwK1o0PN2rZiBiuodNtENL8NqIU2b5AP+XI/xXaUH0M4Q==}
+    peerDependencies:
+      react: ^16.14.0 || ^17.0.0-0 || ^18.0.0-0 || ^19.0.0-0
+
   '@visx/point@4.0.1-alpha.0':
     resolution: {integrity: sha512-ijTfr/Nx09f03vIj9nyTr3z4Xth4Y75427UaogJh6dnIRLMEFHQOwNu791sbfiNj0a+ZXuaE32h0vKrFe4/8Qg==}
 
   '@visx/responsive@4.0.1-alpha.0':
     resolution: {integrity: sha512-o+1zGywQZY0+yOx3Iw87wc4bbPJRr/HnIukTwfOz4UVyj9pB1OQNVHB7OORO1+LBHJceWpB31co/ZV9KHncKrA==}
+    peerDependencies:
+      react: ^16.14.0 || ^17.0.0-0 || ^18.0.0-0 || ^19.0.0-0
+
+  '@visx/sankey@4.0.1-alpha.0':
+    resolution: {integrity: sha512-bzF3MHdJ9A/KdWiGK7vy64A9MK8HhNldAxeUTiQd5wELdvx8YMHOkU8AxtKACWHveaoakthnesgQjbrEGt4oeg==}
     peerDependencies:
       react: ^16.14.0 || ^17.0.0-0 || ^18.0.0-0 || ^19.0.0-0
 
@@ -1561,6 +1629,11 @@ packages:
 
   '@visx/vendor@4.0.0-alpha.0':
     resolution: {integrity: sha512-6I+MuqXBcv9jnlcVowHoHKSdk9gXTWkHLKyqBwRWg7LY6A3Ei8SHfubpqGV5rBUSppxMq2RszPJUS6w+H0YgmQ==}
+
+  '@visx/zoom@4.0.1-alpha.0':
+    resolution: {integrity: sha512-f+Y3rI3Lhpn4wbkSQw3IPsqtcRbh/TcF4M4N5ETrciMXtkJVQNrYzzC6mgxN1fZcw2228oKZzNaMI7hpOLoPkw==}
+    peerDependencies:
+      react: ^16.14.0 || ^17.0.0-0 || ^18.0.0-0 || ^19.0.0-0
 
   '@zeit/schemas@2.36.0':
     resolution: {integrity: sha512-7kjMwcChYEzMKjeex9ZFXkt1AyNov9R5HZtjBKVsmVpw7pa7ZtlCGvCBC2vnnXctaYN+aRI61HjIqeetZW5ROg==}
@@ -1716,6 +1789,9 @@ packages:
   comma-separated-tokens@2.0.3:
     resolution: {integrity: sha512-Fu4hJdvzeylCfQPp9SGWidpzrMs7tTrlu6Vb8XGaRGck8QSNZJJp538Wrb60Lax4fPwR64ViY468OIUTbRlGZg==}
 
+  commander@2.20.3:
+    resolution: {integrity: sha512-GpVkmM8vF2vQUkj2LvZmD35JxeJOLCwJ9cUkugyk2nuhbv3+mJvpLYYt+0+USMxE+oj+ey/lJEnhZw75x/OMcQ==}
+
   commander@7.2.0:
     resolution: {integrity: sha512-QrWXB+ZQSVPmIWIhtEO9H+gwHaMGYiF5ChvoJ+K9ZGHG/sVsa6yiesAD1GC/x46sET00Xlwo1u49RVVVzvcSkw==}
     engines: {node: '>= 10'}
@@ -1840,6 +1916,10 @@ packages:
 
   d3-geo@3.1.0:
     resolution: {integrity: sha512-JEo5HxXDdDYXCaWdwLRt79y7giK8SbhZJbFWXqbRTolCHFI5jRqteLzCsq51NKbUoX0PjBVSohxrx+NoOUujYA==}
+    engines: {node: '>=12'}
+
+  d3-geo@3.1.1:
+    resolution: {integrity: sha512-637ln3gXKXOwhalDzinUgY83KzNWZRKbYubaG+fGVuc/dxO64RRljtCTnf5ecMyE1RIdtqpkVcq0IbtU2S8j2Q==}
     engines: {node: '>=12'}
 
   d3-hierarchy@3.1.2:
@@ -2967,6 +3047,10 @@ packages:
   tinyexec@1.0.2:
     resolution: {integrity: sha512-W/KYk+NFhkmsYpuHq5JykngiOCnxeVL8v8dFnqxSD8qEEdRfXk1SDM6JzNqcERbcGYj9tMrDQBYV9cjgnunFIg==}
     engines: {node: '>=18'}
+
+  topojson-client@3.1.0:
+    resolution: {integrity: sha512-605uxS6bcYxGXw9qi62XyrV6Q3xwbndjachmNxu8HWTtVPxZfEJN9fd/SZS1Q54Sn2y0TMyMxFj/cJINqGHrKw==}
+    hasBin: true
 
   trim-lines@3.0.1:
     resolution: {integrity: sha512-kRj8B+YHZCc9kQYdWfJB2/oUl9rA99qbowYYBtr4ui4mZyAQ2JpvVBd/6U2YloATfqBhBTSMhTpgBHtU0Mf3Rg==}
@@ -4361,6 +4445,8 @@ snapshots:
     dependencies:
       '@types/d3-color': 3.1.0
 
+  '@types/d3-path@1.0.11': {}
+
   '@types/d3-path@3.1.1': {}
 
   '@types/d3-polygon@3.0.2': {}
@@ -4368,6 +4454,10 @@ snapshots:
   '@types/d3-quadtree@3.0.6': {}
 
   '@types/d3-random@3.0.3': {}
+
+  '@types/d3-sankey@0.12.5':
+    dependencies:
+      '@types/d3-shape': 1.3.12
 
   '@types/d3-scale-chromatic@3.1.0': {}
 
@@ -4380,6 +4470,10 @@ snapshots:
       '@types/d3-time': 3.0.0
 
   '@types/d3-selection@3.0.11': {}
+
+  '@types/d3-shape@1.3.12':
+    dependencies:
+      '@types/d3-path': 1.0.11
 
   '@types/d3-shape@3.1.7':
     dependencies:
@@ -4486,6 +4580,13 @@ snapshots:
 
   '@ungap/structured-clone@1.3.0': {}
 
+  '@use-gesture/core@10.3.1': {}
+
+  '@use-gesture/react@10.3.1(react@19.2.3)':
+    dependencies:
+      '@use-gesture/core': 10.3.1
+      react: 19.2.3
+
   '@visx/curve@4.0.1-alpha.0':
     dependencies:
       '@visx/vendor': 4.0.0-alpha.0
@@ -4494,6 +4595,15 @@ snapshots:
     dependencies:
       '@types/react': 19.2.14
       '@visx/point': 4.0.1-alpha.0
+
+  '@visx/geo@4.0.1-alpha.0(react@19.2.3)':
+    dependencies:
+      '@types/geojson': 7946.0.16
+      '@types/react': 19.2.14
+      '@visx/group': 4.0.1-alpha.0(react@19.2.3)
+      '@visx/vendor': 4.0.0-alpha.0
+      classnames: 2.5.1
+      react: 19.2.3
 
   '@visx/gradient@4.0.1-alpha.0(react@19.2.3)':
     dependencies:
@@ -4517,6 +4627,12 @@ snapshots:
       classnames: 2.5.1
       react: 19.2.3
 
+  '@visx/pattern@4.0.1-alpha.0(react@19.2.3)':
+    dependencies:
+      '@types/react': 19.2.14
+      classnames: 2.5.1
+      react: 19.2.3
+
   '@visx/point@4.0.1-alpha.0': {}
 
   '@visx/responsive@4.0.1-alpha.0(react@19.2.3)':
@@ -4524,6 +4640,16 @@ snapshots:
       '@types/lodash': 4.17.24
       '@types/react': 19.2.14
       lodash: 4.17.23
+      react: 19.2.3
+
+  '@visx/sankey@4.0.1-alpha.0(react@19.2.3)':
+    dependencies:
+      '@types/d3-sankey': 0.12.5
+      '@types/react': 19.2.14
+      '@visx/group': 4.0.1-alpha.0(react@19.2.3)
+      '@visx/vendor': 4.0.0-alpha.0
+      classnames: 2.5.1
+      d3-sankey: 0.12.3
       react: 19.2.3
 
   '@visx/scale@4.0.1-alpha.0':
@@ -4567,6 +4693,13 @@ snapshots:
       d3-time: 3.1.0
       d3-time-format: 4.1.0
       internmap: 2.0.3
+
+  '@visx/zoom@4.0.1-alpha.0(react@19.2.3)':
+    dependencies:
+      '@types/react': 19.2.14
+      '@use-gesture/react': 10.3.1(react@19.2.3)
+      '@visx/event': 4.0.1-alpha.0
+      react: 19.2.3
 
   '@zeit/schemas@2.36.0': {}
 
@@ -4702,6 +4835,8 @@ snapshots:
 
   comma-separated-tokens@2.0.3: {}
 
+  commander@2.20.3: {}
+
   commander@7.2.0: {}
 
   commander@8.3.0: {}
@@ -4825,6 +4960,10 @@ snapshots:
     dependencies:
       d3-array: 3.2.4
 
+  d3-geo@3.1.1:
+    dependencies:
+      d3-array: 3.2.4
+
   d3-hierarchy@3.1.2: {}
 
   d3-interpolate@3.0.1:
@@ -4912,7 +5051,7 @@ snapshots:
       d3-fetch: 3.0.1
       d3-force: 3.0.0
       d3-format: 3.1.0
-      d3-geo: 3.1.0
+      d3-geo: 3.1.1
       d3-hierarchy: 3.1.2
       d3-interpolate: 3.0.1
       d3-path: 3.1.0
@@ -6466,6 +6605,10 @@ snapshots:
   tapable@2.3.0: {}
 
   tinyexec@1.0.2: {}
+
+  topojson-client@3.1.0:
+    dependencies:
+      commander: 2.20.3
 
   trim-lines@3.0.1: {}
 
