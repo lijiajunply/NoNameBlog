@@ -11,6 +11,13 @@ const BLOCK_END_RE = /^::\s*$/;
 const YAML_BODY_SPLIT_RE = /^---\s*$/;
 const LEGACY_COMPONENT_RE =
   /<(AreaChart|ChartTooltip|XAxis|GitHubCalendarCard|MermaidDiagram|Card)\b/;
+const LEGACY_CHART_BLOCK_COMPONENTS = new Set([
+  "AreaChart",
+  "Area",
+  "Grid",
+  "ChartTooltip",
+  "XAxis",
+]);
 
 function parseYamlProps(yamlSource: string): YamlData {
   const trimmed = yamlSource.trim();
@@ -204,6 +211,11 @@ export function transformColonComponents(source: string): string {
     }
 
     const componentName = componentMatch[1];
+    if (LEGACY_CHART_BLOCK_COMPONENTS.has(componentName)) {
+      throw new Error(
+        `Legacy chart block syntax "::${componentName}" is not supported. Use \`\`\`chart JSON code blocks instead. (line ${index + 1})`,
+      );
+    }
     const blockLines: string[] = [];
     let foundEnd = false;
     let cursor = index + 1;

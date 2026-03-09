@@ -7,10 +7,7 @@ import rehypeSlug from "rehype-slug";
 import remarkGfm from "remark-gfm";
 import { remarkAlert } from "remark-github-blockquote-alert";
 import remarkMath from "remark-math";
-import { Area, AreaChart } from "@/components/charts/area-chart";
-import { Grid } from "@/components/charts/grid";
-import { ChartTooltip } from "@/components/charts/tooltip";
-import { XAxis } from "@/components/charts/x-axis";
+import { ChartBlock } from "@/components/mdx/chart-block";
 import { Chat } from "@/components/mdx/chat";
 import { CodeBlockFigure } from "@/components/mdx/code-block-figure";
 import { GitHubCalendarCard } from "@/components/mdx/github-calendar-card";
@@ -20,6 +17,7 @@ import { MermaidDiagram } from "@/components/mdx/mermaid-diagram";
 import { MusicScore } from "@/components/mdx/music-score";
 import { ZoomableImage } from "@/components/mdx/zoomable-image";
 import { Card } from "@/components/ui/card";
+import { rehypeChart } from "@/lib/content/rehype-chart";
 import { rehypeMermaid } from "@/lib/content/rehype-mermaid";
 import { rehypeMusic } from "@/lib/content/rehype-music";
 import { transformColonComponents } from "@/lib/content/remark-colon-components";
@@ -212,18 +210,13 @@ const mdxComponents: Record<string, any> = {
       data-slot="kbd"
       className={cn(
         "bg-muted text-muted-foreground in-data-[slot=tooltip-content]:bg-background/20 in-data-[slot=tooltip-content]:text-background dark:in-data-[slot=tooltip-content]:bg-background/10 h-5 w-fit min-w-5 gap-1 rounded-sm px-1 font-sans text-xs font-medium [&_svg:not([class*='size-'])]:size-3 pointer-events-none inline-flex items-center justify-center select-none",
-        className
+        className,
       )}
       {...props}
     >
       {children}
     </kbd>
   ),
-  AreaChart: withDecodedProps(AreaChart),
-  Area: withDecodedProps(Area),
-  Grid: withDecodedProps(Grid),
-  ChartTooltip: withDecodedProps(ChartTooltip),
-  XAxis: withDecodedProps(XAxis),
   Icon: withDecodedProps(Icon),
   GitHubCalendarCard: withDecodedProps(GitHubCalendarCard),
   MermaidDiagram: withDecodedProps(MermaidDiagram),
@@ -231,6 +224,7 @@ const mdxComponents: Record<string, any> = {
   Card: withDecodedProps(Card),
   Chat: withDecodedProps(Chat),
   LinkCard: withDecodedProps(LinkCard),
+  ChartBlock: withDecodedProps(ChartBlock),
 };
 
 const prettyCodeOptions = {
@@ -254,6 +248,7 @@ export async function renderMdx(source: string) {
         rehypePlugins: [
           rehypeSlug,
           rehypeKatex,
+          rehypeChart,
           rehypeMermaid,
           rehypeMusic,
           [rehypeAutolinkHeadings, { behavior: "append" }],
