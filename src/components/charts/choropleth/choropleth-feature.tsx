@@ -27,6 +27,10 @@ export interface ChoroplethFeatureProps {
     feature: ChoroplethFeatureType,
     index: number,
   ) => string | null | undefined;
+  /** Enable motion-based path animations. Default: true */
+  animated?: boolean;
+  /** Hover interaction mode. "full" includes highlight/fade, "none" disables hover styling. Default: "full" */
+  hoverEffect?: "full" | "none";
 }
 
 interface AnimatedFeaturePathProps {
@@ -95,6 +99,46 @@ function AnimatedFeaturePath({
   );
 }
 
+interface StaticFeaturePathProps {
+  path: string;
+  fill: string;
+  stroke: string;
+  strokeWidth: number;
+  isFaded: boolean;
+  isHighlighted: boolean;
+  fadedOpacity: number;
+  onMouseEnter: () => void;
+  onMouseLeave: () => void;
+}
+
+function StaticFeaturePath({
+  path,
+  fill,
+  stroke,
+  strokeWidth,
+  isFaded,
+  isHighlighted,
+  fadedOpacity,
+  onMouseEnter,
+  onMouseLeave,
+}: StaticFeaturePathProps) {
+  const targetOpacity = isFaded ? fadedOpacity : isHighlighted ? 1 : 0.85;
+
+  return (
+    <path
+      className="cursor-pointer"
+      d={path}
+      fill={fill}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+      opacity={targetOpacity}
+      stroke={stroke}
+      strokeWidth={strokeWidth}
+      style={{ transition: "opacity 0.12s ease-out" }}
+    />
+  );
+}
+
 export function ChoroplethFeature({
   fill,
   stroke = "var(--background)",
@@ -103,6 +147,8 @@ export function ChoroplethFeature({
   getFeatureColor,
   patterns,
   getFeaturePattern,
+  animated = true,
+  hoverEffect = "full",
 }: ChoroplethFeatureProps) {
   const {
     features,
@@ -116,7 +162,17 @@ export function ChoroplethFeature({
     height,
   } = useChoropleth();
 
-  // Pre-calculate centroids for all features (only recalculates when features change)
+  // Pre-calculate paths for all features.
+  // Intentionally exclude pathGenerator from deps to avoid recalculating every hover update.
+  const featurePaths = useMemo(() => {
+    return features.map((feature) => {
+      const path = pathGenerator(feature);
+      return path && path.trim() !== "" ? path : null;
+    });
+  }, [features, height, width]);
+
+  // Pre-calculate centroids for all features.
+  // Intentionally exclude projectPoint from deps to avoid recalculating every hover update.
   const featureCentroids = useMemo(() => {
     return features.map((feature) => {
       try {
@@ -146,7 +202,7 @@ export function ChoroplethFeature({
       }
       return null;
     });
-  }, [features, projectPoint, width, height]);
+  }, [features, height, width]);
 
   // Get color for a feature
   const getFeatureColorFn = useCallback(
@@ -167,7 +223,8 @@ export function ChoroplethFeature({
   );
 
   // Check if any element is hovered
-  const isAnyHovered = hoveredFeatureIndex !== null;
+  const hasHoverStyling = hoverEffect === "full";
+  const isAnyHovered = hasHoverStyling && hoveredFeatureIndex !== null;
 
   return (
     <g className="choropleth-features">
@@ -176,10 +233,8 @@ export function ChoroplethFeature({
 
       {/* Feature paths */}
       {features.map((feature, index) => {
-        const path = pathGenerator(feature);
-
-        // Skip if path is empty or undefined
-        if (!path || path.trim() === "") {
+        const path = featurePaths[index];
+        if (!path) {
           return null;
         }
 
@@ -190,7 +245,9 @@ export function ChoroplethFeature({
         const centroid = featureCentroids[index];
 
         const handleMouseEnter = () => {
-          setHoveredFeatureIndex(index);
+          if (hasHoverStyling) {
+            setHoveredFeatureIndex(index);
+          }
           setTooltipData({
             featureIndex: index,
             x: centroid?.x ?? width / 2,
@@ -200,7 +257,9 @@ export function ChoroplethFeature({
         };
 
         const handleMouseLeave = () => {
-          setHoveredFeatureIndex(null);
+          if (hasHoverStyling) {
+            setHoveredFeatureIndex(null);
+          }
           setTooltipData(null);
         };
 
@@ -213,6 +272,25 @@ export function ChoroplethFeature({
           featureFill = getFeatureColorFn(feature, index);
         }
 
+        const key = `feature-${index}-${feature.properties?.name ?? feature.properties?.id ?? index}`;
+
+        if (!animated) {
+          return (
+            <StaticFeaturePath
+              fadedOpacity={fadedOpacity}
+              fill={featureFill}
+              isFaded={isFaded}
+              isHighlighted={isHighlighted}
+              key={key}
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+              path={path}
+              stroke={stroke}
+              strokeWidth={strokeWidth}
+            />
+          );
+        }
+
         return (
           <AnimatedFeaturePath
             animationDuration={animationDuration}
@@ -221,7 +299,7 @@ export function ChoroplethFeature({
             index={index}
             isFaded={isFaded}
             isHighlighted={isHighlighted}
-            key={`feature-${index}-${feature.properties?.name ?? feature.properties?.id ?? index}`}
+            key={key}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
             path={path}

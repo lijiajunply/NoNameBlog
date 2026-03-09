@@ -1,6 +1,9 @@
 "use client";
 
 import type { FeatureCollection, Geometry } from "geojson";
+import cnAtlas from "cn-atlas/cn-atlas.json";
+import countries110m from "world-atlas/countries-110m.json";
+import { feature as topojsonFeature } from "topojson-client";
 import {
   ChoroplethChart,
   ChoroplethFeatureComponent,
@@ -12,15 +15,68 @@ import type { NormalizedChoroplethSpec } from "./spec";
 type MapFeatureProperties = {
   id: string;
   name: string;
+  aliases?: string[];
 };
 
 type BuiltinMap = {
   center: [number, number];
   scale: number;
-  data: GeoJSON.FeatureCollection<GeoJSON.Geometry, MapFeatureProperties>;
+  data: FeatureCollection<Geometry, MapFeatureProperties>;
 };
 
-const CHINA_PROVINCES: FeatureCollection<Geometry, MapFeatureProperties> = {
+type TopologyLike = {
+  objects: Record<string, unknown>;
+};
+
+function normalizeFeatureKey(value: string): string {
+  return value.trim().toLowerCase();
+}
+
+function buildWorldCountriesFromTopojson(): FeatureCollection<
+  Geometry,
+  MapFeatureProperties
+> {
+  const topology = countries110m as unknown as TopologyLike;
+  const countriesObject = topology.objects.countries;
+
+  const collection = topojsonFeature(
+    topology as never,
+    countriesObject as never,
+  ) as unknown as FeatureCollection<Geometry | null, { name?: string }>;
+
+  return {
+    type: "FeatureCollection",
+    features: collection.features
+      .filter((feature) => feature.geometry !== null)
+      .map((feature, index) => {
+        const rawId =
+          typeof feature.id === "string" || typeof feature.id === "number"
+            ? String(feature.id)
+            : undefined;
+
+        const name =
+          typeof feature.properties?.name === "string" &&
+          feature.properties.name.trim().length > 0
+            ? feature.properties.name
+            : `Country ${index + 1}`;
+
+        return {
+          ...feature,
+          geometry: feature.geometry as Geometry,
+          properties: {
+            id: rawId && rawId.length > 0 ? rawId : normalizeFeatureKey(name),
+            name,
+            aliases: rawId ? [rawId, name] : [name],
+          },
+        };
+      }),
+  };
+}
+
+const CHINA_PROVINCES_FALLBACK: FeatureCollection<
+  Geometry,
+  MapFeatureProperties
+> = {
   type: "FeatureCollection",
   features: [
     {
@@ -106,107 +162,89 @@ const CHINA_PROVINCES: FeatureCollection<Geometry, MapFeatureProperties> = {
   ],
 };
 
-const WORLD_REGIONS: FeatureCollection<Geometry, MapFeatureProperties> = {
-  type: "FeatureCollection",
-  features: [
-    {
-      type: "Feature",
-      properties: { id: "north-america", name: "North America" },
-      geometry: {
-        type: "Polygon",
-        coordinates: [
-          [
-            [-170, 72],
-            [-50, 72],
-            [-50, 12],
-            [-170, 12],
-            [-170, 72],
-          ],
-        ],
-      },
-    },
-    {
-      type: "Feature",
-      properties: { id: "south-america", name: "South America" },
-      geometry: {
-        type: "Polygon",
-        coordinates: [
-          [
-            [-82, 12],
-            [-34, 12],
-            [-34, -56],
-            [-82, -56],
-            [-82, 12],
-          ],
-        ],
-      },
-    },
-    {
-      type: "Feature",
-      properties: { id: "europe", name: "Europe" },
-      geometry: {
-        type: "Polygon",
-        coordinates: [
-          [
-            [-11, 71],
-            [40, 71],
-            [40, 35],
-            [-11, 35],
-            [-11, 71],
-          ],
-        ],
-      },
-    },
-    {
-      type: "Feature",
-      properties: { id: "africa", name: "Africa" },
-      geometry: {
-        type: "Polygon",
-        coordinates: [
-          [
-            [-20, 35],
-            [52, 35],
-            [52, -35],
-            [-20, -35],
-            [-20, 35],
-          ],
-        ],
-      },
-    },
-    {
-      type: "Feature",
-      properties: { id: "asia", name: "Asia" },
-      geometry: {
-        type: "Polygon",
-        coordinates: [
-          [
-            [40, 78],
-            [180, 78],
-            [180, 5],
-            [40, 5],
-            [40, 78],
-          ],
-        ],
-      },
-    },
-    {
-      type: "Feature",
-      properties: { id: "oceania", name: "Oceania" },
-      geometry: {
-        type: "Polygon",
-        coordinates: [
-          [
-            [110, -10],
-            [180, -10],
-            [180, -48],
-            [110, -48],
-            [110, -10],
-          ],
-        ],
-      },
-    },
-  ],
-};
+function buildChinaProvincesFromTopojson(): FeatureCollection<
+  Geometry,
+  MapFeatureProperties
+> {
+  try {
+    const topology = cnAtlas as unknown as TopologyLike;
+    const provincesObject = topology.objects.provinces;
+
+    const collection = topojsonFeature(
+      topology as never,
+      provincesObject as never,
+    ) as unknown as FeatureCollection<
+      Geometry | null,
+      {
+        id?: string | number;
+        name?: string;
+        地名?: string;
+        区划码?: string | number;
+      }
+    >;
+
+    return {
+      type: "FeatureCollection",
+      features: collection.features
+        .filter((feature) => feature.geometry !== null)
+        .map((feature, index) => {
+          const code = (() => {
+            const rawCode =
+              feature.properties?.id ??
+              feature.properties?.区划码 ??
+              feature.id;
+            if (typeof rawCode === "string" || typeof rawCode === "number") {
+              return String(rawCode);
+            }
+            return "";
+          })();
+
+          const englishName =
+            typeof feature.properties?.name === "string" &&
+            feature.properties.name.trim().length > 0
+              ? feature.properties.name
+              : "";
+
+          const chineseName =
+            typeof feature.properties?.地名 === "string" &&
+            feature.properties.地名.trim().length > 0
+              ? feature.properties.地名
+              : "";
+
+          const id = (() => {
+            if (englishName) {
+              return normalizeFeatureKey(englishName);
+            }
+            if (code) {
+              return code;
+            }
+            return `china-province-${index + 1}`;
+          })();
+
+          const name = chineseName || englishName || `省份 ${index + 1}`;
+
+          const aliases = [id, code, englishName, chineseName].filter(
+            (value): value is string => value.length > 0,
+          );
+
+          return {
+            ...feature,
+            geometry: feature.geometry as Geometry,
+            properties: {
+              id,
+              name,
+              aliases,
+            },
+          };
+        }),
+    };
+  } catch {
+    return CHINA_PROVINCES_FALLBACK;
+  }
+}
+
+const CHINA_PROVINCES = buildChinaProvincesFromTopojson();
+const WORLD_COUNTRIES = buildWorldCountriesFromTopojson();
 
 const BUILTIN_MAPS: Record<string, BuiltinMap> = {
   "china-provinces": {
@@ -217,7 +255,7 @@ const BUILTIN_MAPS: Record<string, BuiltinMap> = {
   "world-countries": {
     center: [20, 18],
     scale: 130,
-    data: WORLD_REGIONS,
+    data: WORLD_COUNTRIES,
   },
 };
 
@@ -235,6 +273,48 @@ function getQuantileIndex(
   return Math.min(Math.max(index, 0), steps - 1);
 }
 
+function getFeatureIdCandidates(feature: {
+  properties?: { id?: string | number; name?: string; aliases?: string[] };
+}): string[] {
+  const rawId =
+    typeof feature.properties?.id === "string" ||
+    typeof feature.properties?.id === "number"
+      ? String(feature.properties.id)
+      : "";
+  const name =
+    typeof feature.properties?.name === "string" ? feature.properties.name : "";
+
+  const candidates = new Set<string>();
+
+  if (rawId.length > 0) {
+    candidates.add(rawId);
+    candidates.add(normalizeFeatureKey(rawId));
+
+    const withoutLeadingZeros = rawId.replace(/^0+/, "");
+    if (withoutLeadingZeros.length > 0) {
+      candidates.add(withoutLeadingZeros);
+      candidates.add(normalizeFeatureKey(withoutLeadingZeros));
+    }
+  }
+
+  if (name.length > 0) {
+    candidates.add(name);
+    candidates.add(normalizeFeatureKey(name));
+  }
+
+  if (Array.isArray(feature.properties?.aliases)) {
+    for (const alias of feature.properties.aliases) {
+      if (typeof alias !== "string" || alias.length === 0) {
+        continue;
+      }
+      candidates.add(alias);
+      candidates.add(normalizeFeatureKey(alias));
+    }
+  }
+
+  return Array.from(candidates);
+}
+
 export function ChoroplethChartBlock({
   spec,
 }: {
@@ -249,14 +329,39 @@ export function ChoroplethChartBlock({
     );
   }
 
-  const valueMap = new Map(
+  const rawValueMap = new Map(
     spec.data.map((item) => [item.featureId, item.value]),
   );
+  const normalizedValueMap = new Map(
+    spec.data.map((item) => [normalizeFeatureKey(item.featureId), item.value]),
+  );
+
+  const getValueByFeature = (feature: {
+    properties?: { id?: string | number; name?: string; aliases?: string[] };
+  }) => {
+    for (const candidate of getFeatureIdCandidates(feature)) {
+      const rawValue = rawValueMap.get(candidate);
+      if (typeof rawValue === "number") {
+        return rawValue;
+      }
+
+      const normalizedValue = normalizedValueMap.get(
+        normalizeFeatureKey(candidate),
+      );
+      if (typeof normalizedValue === "number") {
+        return normalizedValue;
+      }
+    }
+
+    return undefined;
+  };
+
   const values = spec.data.map((item) => item.value);
   const min = values.length > 0 ? Math.min(...values) : 0;
   const max = values.length > 0 ? Math.max(...values) : 0;
 
   const colors = CHOROPLETH_VIVID_SCALE;
+  const isChinaProvinceMap = spec.mapId === "china-provinces";
 
   return (
     <div className="space-y-3">
@@ -267,12 +372,11 @@ export function ChoroplethChartBlock({
         zoomEnabled
       >
         <ChoroplethFeatureComponent
+          animated={!isChinaProvinceMap}
+          fadedOpacity={isChinaProvinceMap ? 0.85 : 0.4}
+          hoverEffect={isChinaProvinceMap ? "none" : "full"}
           getFeatureColor={(feature) => {
-            const id =
-              typeof feature.properties?.id === "string"
-                ? feature.properties.id
-                : "";
-            const value = valueMap.get(id);
+            const value = getValueByFeature(feature);
             if (typeof value !== "number") {
               return "var(--chart-grid)";
             }
@@ -288,13 +392,7 @@ export function ChoroplethChartBlock({
               ? feature.properties.name
               : "Unknown"
           }
-          getFeatureValue={(feature) => {
-            const id =
-              typeof feature.properties?.id === "string"
-                ? feature.properties.id
-                : "";
-            return valueMap.get(id);
-          }}
+          getFeatureValue={(feature) => getValueByFeature(feature)}
           valueLabel="Heat"
         />
       </ChoroplethChart>
