@@ -6,6 +6,7 @@ import {
   SankeyNode,
   SankeyTooltip,
 } from "@/components/charts/sankey";
+import { CHART_VIVID_PALETTE } from "@/config/chart-palette";
 import type { NormalizedSankeySpec } from "./spec";
 
 export function SankeyChartBlock({ spec }: { spec: NormalizedSankeySpec }) {
@@ -37,8 +38,18 @@ export function SankeyChartBlock({ spec }: { spec: NormalizedSankeySpec }) {
 
   return (
     <SankeyChart data={data}>
-      <SankeyLink />
-      <SankeyNode />
+      <SankeyLink
+        getLinkColor={(_, index) =>
+          CHART_VIVID_PALETTE[index % CHART_VIVID_PALETTE.length] || "#2563eb"
+        }
+        strokeOpacity={0.42}
+        useGradient={false}
+      />
+      <SankeyNode
+        getNodeColor={(_, index) =>
+          CHART_VIVID_PALETTE[index % CHART_VIVID_PALETTE.length] || "#2563eb"
+        }
+      />
       <SankeyTooltip />
     </SankeyChart>
   );

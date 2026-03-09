@@ -6,6 +6,7 @@ import {
   ChoroplethFeatureComponent,
   ChoroplethTooltip,
 } from "@/components/charts/choropleth";
+import { CHOROPLETH_VIVID_SCALE } from "@/config/chart-palette";
 import type { NormalizedChoroplethSpec } from "./spec";
 
 type MapFeatureProperties = {
@@ -255,13 +256,7 @@ export function ChoroplethChartBlock({
   const min = values.length > 0 ? Math.min(...values) : 0;
   const max = values.length > 0 ? Math.max(...values) : 0;
 
-  const colors = [
-    "color-mix(in srgb, var(--chart-1) 20%, white)",
-    "color-mix(in srgb, var(--chart-1) 35%, white)",
-    "color-mix(in srgb, var(--chart-1) 50%, white)",
-    "color-mix(in srgb, var(--chart-1) 70%, white)",
-    "var(--chart-1)",
-  ];
+  const colors = CHOROPLETH_VIVID_SCALE;
 
   return (
     <div className="space-y-3">

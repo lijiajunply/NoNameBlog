@@ -3,13 +3,29 @@
 import { PieCenter } from "@/components/charts/pie-center";
 import { PieChart } from "@/components/charts/pie-chart";
 import { PieSlice } from "@/components/charts/pie-slice";
+import { CHART_VIVID_PALETTE } from "@/config/chart-palette";
 import type { NormalizedPieSpec } from "./spec";
 
+const MONO_PIE_COLOR_VARS = new Set([
+  "var(--chart-1)",
+  "var(--chart-2)",
+  "var(--chart-3)",
+  "var(--chart-4)",
+  "var(--chart-5)",
+]);
+
 export function PieChartBlock({ spec }: { spec: NormalizedPieSpec }) {
-  const data = spec.data.map((item) => ({
+  const resolvePieColor = (rawColor: string | undefined, index: number) => {
+    if (rawColor && !MONO_PIE_COLOR_VARS.has(rawColor)) {
+      return rawColor;
+    }
+    return CHART_VIVID_PALETTE[index % CHART_VIVID_PALETTE.length];
+  };
+
+  const data = spec.data.map((item, index) => ({
     label: item.name,
     value: item.value,
-    color: item.color,
+    color: resolvePieColor(item.color, index),
   }));
 
   return (
