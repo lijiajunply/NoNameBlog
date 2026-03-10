@@ -17,6 +17,7 @@ const navItems = [
   { href: "/stats/", label: "统计", icon: "mingcute:chart-line-line" },
   { href: "/about/", label: "关于", icon: "mingcute:information-line" },
   { href: "/friends/", label: "友链", icon: "mingcute:group-line" },
+  { href: "/write/", label: "写作", icon: "mingcute:pen-line" },
 ];
 
 export function SiteHeader() {

@@ -24,17 +24,19 @@ export function DateTicker({ currentIndex, labels, visible }: DateTickerProps) {
 
   // Get unique months and their indices
   const monthIndices = useMemo(() => {
-    const uniqueMonths: string[] = [];
-    const indices: number[] = [];
+    const segments: Array<{ month: string; startIndex: number }> = [];
 
     parsedLabels.forEach((label, index) => {
-      if (uniqueMonths.length === 0 || uniqueMonths.at(-1) !== label.month) {
-        uniqueMonths.push(label.month);
-        indices.push(index);
+      const lastSegment = segments.at(-1);
+      if (!lastSegment || lastSegment.month !== label.month) {
+        segments.push({
+          month: label.month,
+          startIndex: index,
+        });
       }
     });
 
-    return { uniqueMonths, indices };
+    return { segments };
   }, [parsedLabels]);
 
   // Find current month index
@@ -42,9 +44,14 @@ export function DateTicker({ currentIndex, labels, visible }: DateTickerProps) {
     if (currentIndex < 0 || currentIndex >= parsedLabels.length) {
       return 0;
     }
-    const currentMonth = parsedLabels[currentIndex]?.month;
-    return monthIndices.uniqueMonths.indexOf(currentMonth || "");
-  }, [currentIndex, parsedLabels, monthIndices]);
+    // Use the latest month segment whose start index is <= current index.
+    for (let i = monthIndices.segments.length - 1; i >= 0; i--) {
+      if (currentIndex >= monthIndices.segments[i].startIndex) {
+        return i;
+      }
+    }
+    return 0;
+  }, [currentIndex, parsedLabels.length, monthIndices.segments]);
 
   // Track previous month index
   const prevMonthIndexRef = useRef(-1);
@@ -88,13 +95,13 @@ export function DateTicker({ currentIndex, labels, visible }: DateTickerProps) {
           {/* Month stack */}
           <div className="relative h-6 overflow-hidden">
             <motion.div className="flex flex-col" style={{ y: monthY }}>
-              {monthIndices.uniqueMonths.map((month) => (
+              {monthIndices.segments.map((segment) => (
                 <div
                   className="flex h-6 shrink-0 items-center justify-center"
-                  key={month}
+                  key={`${segment.month}-${segment.startIndex}`}
                 >
                   <span className="whitespace-nowrap font-medium text-sm">
-                    {month}
+                    {segment.month}
                   </span>
                 </div>
               ))}
