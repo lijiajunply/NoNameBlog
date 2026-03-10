@@ -1,10 +1,18 @@
 import fs from "node:fs";
 import path from "node:path";
+import { Icon } from "@iconify/react";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { type Friend, friendSchema } from "@/lib/content/schema";
-import { Icon } from "@iconify/react";
+import { FriendsInputButton } from "@/components/friends-input-button";
+import { CodeBlockFigure } from "@/components/mdx/code-block-figure";
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupInput,
+  InputGroupText,
+} from "@/components/ui/input-group";
 import { siteConfig } from "@/config/site";
+import { type Friend, friendSchema } from "@/lib/content/schema";
 
 export const metadata: Metadata = {
   title: "友链",
@@ -26,6 +34,18 @@ function getFriends(): Friend[] {
 
 export default function FriendsPage() {
   const friends = getFriends();
+  const friendLinkTemplate = JSON.stringify(
+    {
+      name: "LuckyFish",
+      url: "https://blog.luckyfishes.site/",
+      description: "自己随便写的",
+      avatar: "https://blog.luckyfishes.site/favicon.ico",
+      category: "个人博客",
+    },
+    null,
+    2,
+  );
+  const friendLinkTemplateLines = friendLinkTemplate.split("\n");
 
   // Group friends by category
   const groupedFriends = friends.reduce(
@@ -76,7 +96,7 @@ export default function FriendsPage() {
                       <Icon icon="ph:arrow-up-right-bold" className="h-4 w-4" />
                     </div>
 
-                    <div className="relative flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-full border border-black/5 bg-white shadow-sm transition-transform duration-500 group-hover:scale-105 group-hover:rounded-xl dark:border-white/10 dark:bg-neutral-900">
+                    <div className="relative flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden bg-white transition-transform duration-500 group-hover:scale-105 rounded-xl dark:border-white/10 dark:bg-neutral-900">
                       {friend.avatar ? (
                         <img
                           src={friend.avatar}
@@ -116,7 +136,103 @@ export default function FriendsPage() {
 
       <div className="border border-dotted" style={{ height: 0.5 }}></div>
 
-      <div className={""}></div>
+      <div className="text-center text-2xl font-semibold">
+        无内鬼，加一下我的友链
+      </div>
+
+      <div className="flex flex-col gap-4 lg:flex-row lg:justify-between">
+        <div className="flex w-full flex-1 flex-col items-center justify-center gap-4">
+          <InputGroup>
+            <InputGroupInput
+              id="input-group-url"
+              placeholder="example.com"
+              value={"LuckyFish"}
+              readOnly
+            />
+            <InputGroupAddon>
+              <InputGroupText>我的名字</InputGroupText>
+            </InputGroupAddon>
+            <InputGroupAddon align="inline-end">
+              <FriendsInputButton text={"LuckyFish"} />
+            </InputGroupAddon>
+          </InputGroup>
+          <InputGroup>
+            <InputGroupInput
+              id="input-group-url"
+              placeholder="example.com"
+              value={"NoName Blog"}
+              readOnly
+            />
+            <InputGroupAddon>
+              <InputGroupText>博客名字</InputGroupText>
+            </InputGroupAddon>
+            <InputGroupAddon align="inline-end">
+              <FriendsInputButton text={"NoName Blog"} />
+            </InputGroupAddon>
+          </InputGroup>
+          <InputGroup>
+            <InputGroupInput
+              id="input-group-url"
+              placeholder="example.com"
+              value={"一条鱼的自娱自乐"}
+              readOnly
+            />
+            <InputGroupAddon>
+              <InputGroupText>网站介绍</InputGroupText>
+            </InputGroupAddon>
+            <InputGroupAddon align="inline-end">
+              <FriendsInputButton text={"一条鱼的自娱自乐"} />
+            </InputGroupAddon>
+          </InputGroup>
+          <InputGroup>
+            <InputGroupInput
+              id="input-group-url"
+              placeholder="example.com"
+              value={"https://blog.luckyfishes.site"}
+              readOnly
+            />
+            <InputGroupAddon>
+              <InputGroupText>网址</InputGroupText>
+            </InputGroupAddon>
+            <InputGroupAddon align="inline-end">
+              <FriendsInputButton text={"https://blog.luckyfishes.site"} />
+            </InputGroupAddon>
+          </InputGroup>
+          <InputGroup>
+            <InputGroupInput
+              id="input-group-url"
+              placeholder="example.com"
+              value={"https://blog.luckyfishes.site/favicon.ico"}
+              readOnly
+            />
+            <InputGroupAddon>
+              <InputGroupText>头像</InputGroupText>
+            </InputGroupAddon>
+            <InputGroupAddon align="inline-end">
+              <FriendsInputButton
+                text={"https://blog.luckyfishes.site/favicon.ico"}
+              />
+            </InputGroupAddon>
+          </InputGroup>
+        </div>
+        <div className="w-full min-w-0 pb-1.5 pt-1.5 lg:flex-1">
+          <CodeBlockFigure className="w-full" data-rehype-pretty-code-figure="">
+            <pre
+              data-language="json"
+              className="bg-neutral-50 dark:bg-neutral-950/70"
+            >
+              <code>
+                {friendLinkTemplateLines.map((line, index) => (
+                  <span key={`${index}-${line}`} data-line>
+                    {line}
+                    {index < friendLinkTemplateLines.length - 1 ? "\n" : ""}
+                  </span>
+                ))}
+              </code>
+            </pre>
+          </CodeBlockFigure>
+        </div>
+      </div>
     </div>
   );
 }
