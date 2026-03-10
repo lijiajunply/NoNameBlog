@@ -48,10 +48,86 @@ export function MermaidDiagram(props: MermaidDiagramProps) {
 
     const renderDiagram = async () => {
       try {
+        const isDark = resolvedTheme === "dark";
+
+        // Apple Style Constants
+        const appleBlue = isDark ? "#0A84FF" : "#007AFF";
+        const bgPrimary = isDark
+          ? "rgba(28, 28, 30, 0.65)"
+          : "rgba(255, 255, 255, 0.75)";
+        const bgCluster = isDark
+          ? "rgba(44, 44, 46, 0.4)"
+          : "rgba(242, 242, 247, 0.5)";
+        const borderPrimary = isDark
+          ? "rgba(255, 255, 255, 0.15)"
+          : "rgba(0, 0, 0, 0.1)";
+        const textPrimary = isDark ? "#F5F5F7" : "#1D1D1F";
+
         mermaid.initialize({
           startOnLoad: false,
           securityLevel: "loose",
-          theme: resolvedTheme === "dark" ? "dark" : "default",
+          theme: "base",
+          themeVariables: {
+            fontFamily:
+              "var(--font-sans), ui-sans-serif, system-ui, sans-serif",
+            primaryColor: bgPrimary,
+            primaryTextColor: textPrimary,
+            primaryBorderColor: borderPrimary,
+            lineColor: appleBlue,
+            secondaryColor: isDark ? "#3A3A3C" : "#E5E5EA",
+            tertiaryColor: bgCluster,
+            background: "transparent",
+            nodeBorder: borderPrimary,
+            clusterBkg: bgCluster,
+            clusterBorder: borderPrimary,
+            defaultLinkColor: appleBlue,
+            titleColor: textPrimary,
+            edgeLabelBackground: isDark ? "#1C1C1E" : "#FFFFFF",
+            nodeTextColor: textPrimary,
+          },
+          flowchart: {
+            htmlLabels: true,
+            curve: "basis",
+            nodeSpacing: 60,
+            rankSpacing: 60,
+          },
+          sequence: {
+            actorBkg: bgPrimary,
+            actorBorder: borderPrimary,
+            actorTextColor: textPrimary,
+            actorLineColor: appleBlue,
+            signalColor: appleBlue,
+            signalTextColor: textPrimary,
+            noteBkg: isDark
+              ? "rgba(58, 58, 60, 0.8)"
+              : "rgba(245, 245, 247, 0.8)",
+            noteTextColor: textPrimary,
+            noteBorder: borderPrimary,
+          },
+          themeCSS: `
+            .node rect, .node circle, .node ellipse, .node polygon, .node path {
+              rx: 16px;
+              ry: 16px;
+              filter: drop-shadow(0 4px 12px rgba(0, 0, 0, ${isDark ? "0.3" : "0.06"}));
+              stroke-width: 1px;
+            }
+            .cluster rect {
+              rx: 24px;
+              ry: 24px;
+              stroke-width: 1.5px;
+            }
+            .edgeLabel {
+              border-radius: 8px;
+              padding: 4px 8px;
+            }
+            .edgePath .path {
+              stroke-width: 2px;
+              opacity: 0.8;
+            }
+            .marker {
+              fill: ${appleBlue};
+            }
+          `,
         });
 
         const id = `mermaid-${Math.random().toString(36).slice(2, 10)}`;
@@ -119,7 +195,7 @@ export function MermaidDiagram(props: MermaidDiagramProps) {
     <div
       ref={containerRef}
       className={cn(
-        "mermaid-diagram my-6 overflow-x-auto rounded-xl border border-neutral-200/80 bg-white/60 p-4 dark:border-neutral-800 dark:bg-neutral-900/50",
+        "mermaid-diagram my-8 w-full overflow-x-auto rounded-2xl border border-black/5 bg-white/40 p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] backdrop-blur-xl dark:border-white/[0.08] dark:bg-black/20 dark:shadow-[0_8px_30px_rgb(0,0,0,0.1)]",
         props.className,
       )}
     />
