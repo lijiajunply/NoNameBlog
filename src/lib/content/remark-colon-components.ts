@@ -195,7 +195,6 @@ export function transformColonComponents(source: string): string {
 
       const defaultValue = props.defaultValue || tabsData[0]?.value || "";
       const tabsProps = { ...props, defaultValue } as any;
-      delete tabsProps.defaultValue;
 
       const tabsTriggerElements = tabsData
         .map((t) => `<TabsTrigger value="${t.value}">${t.label}</TabsTrigger>`)
