@@ -17,6 +17,7 @@ import { MermaidDiagram } from "@/components/mdx/mermaid-diagram";
 import { MusicScore } from "@/components/mdx/music-score";
 import { ZoomableImage } from "@/components/mdx/zoomable-image";
 import { Card } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { rehypeChart } from "@/lib/content/rehype-chart";
 import { rehypeMermaid } from "@/lib/content/rehype-mermaid";
 import { rehypeMusic } from "@/lib/content/rehype-music";
@@ -222,6 +223,10 @@ const mdxComponents: Record<string, any> = {
   MermaidDiagram: withDecodedProps(MermaidDiagram),
   MusicScore: withDecodedProps(MusicScore),
   Card: withDecodedProps(Card),
+  Tabs: withDecodedProps(Tabs),
+  TabsList: withDecodedProps(TabsList),
+  TabsTrigger: withDecodedProps(TabsTrigger),
+  TabsContent: withDecodedProps(TabsContent),
   Chat: withDecodedProps(Chat),
   LinkCard: withDecodedProps(LinkCard),
   ChartBlock: withDecodedProps(ChartBlock),

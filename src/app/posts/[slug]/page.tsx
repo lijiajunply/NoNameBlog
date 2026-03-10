@@ -32,7 +32,9 @@ function hasPathByDirection(
 
     const post = postsBySlug.get(cursor);
     const linkedSlug =
-      direction === "next" ? post?.frontmatter.next : post?.frontmatter.previous;
+      direction === "next"
+        ? post?.frontmatter.next
+        : post?.frontmatter.previous;
     cursor = linkedSlug && linkedSlug !== cursor ? linkedSlug : undefined;
   }
 
@@ -157,7 +159,13 @@ export default async function PostPage({ params }: PostPageProps) {
   const currentIndex = posts.findIndex((item) => item.slug === post.slug);
   const defaultPreviousPost =
     currentIndex >= 0
-      ? pickFallbackPost(posts, currentIndex, post.slug, postsBySlug, "previous")
+      ? pickFallbackPost(
+          posts,
+          currentIndex,
+          post.slug,
+          postsBySlug,
+          "previous",
+        )
       : null;
   const defaultNextPost =
     currentIndex >= 0

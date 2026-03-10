@@ -103,7 +103,7 @@ export function MermaidDiagram(props: MermaidDiagramProps) {
               : "rgba(245, 245, 247, 0.8)",
             noteTextColor: textPrimary,
             noteBorder: borderPrimary,
-          },
+          } as any,
           themeCSS: `
             .node rect, .node circle, .node ellipse, .node polygon, .node path {
               rx: 16px;

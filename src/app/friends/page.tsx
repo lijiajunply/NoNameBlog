@@ -114,11 +114,9 @@ export default function FriendsPage() {
         ))}
       </div>
 
-      <div className="border border-dotted" style={{height: 0.5}}></div>
+      <div className="border border-dotted" style={{ height: 0.5 }}></div>
 
-      <div className={''}>
-        
-      </div>
+      <div className={""}></div>
     </div>
   );
 }

@@ -97,6 +97,127 @@ export function transformColonComponents(source: string): string {
     }
 
     const trimmedStart = line.trimStart();
+    if (trimmedStart.startsWith("```tab")) {
+      const openingFence = trimmedStart.match(/^(`{3,}|~{3,})/)?.[0] || "```";
+      let cursor = index + 1;
+      const blockLines: string[] = [];
+      let tempInnerFence: string | null = null;
+      
+      while (cursor < lines.length) {
+        const current = lines[cursor] ?? "";
+        const trimmedCurrent = current.trimStart();
+
+        // Handle nested code blocks during collection
+        if (tempInnerFence) {
+          if (trimmedCurrent.startsWith(tempInnerFence)) {
+             tempInnerFence = null;
+          }
+          blockLines.push(current);
+          cursor += 1;
+          continue;
+        }
+
+        if (trimmedCurrent.startsWith("```") && !trimmedCurrent.startsWith("```tab") && current.trim() !== openingFence) {
+          tempInnerFence = "```";
+          blockLines.push(current);
+          cursor += 1;
+          continue;
+        }
+        if (trimmedCurrent.startsWith("~~~") && current.trim() !== openingFence) {
+          tempInnerFence = "~~~";
+          blockLines.push(current);
+          cursor += 1;
+          continue;
+        }
+
+        if (current.trim() === openingFence) {
+          break;
+        }
+        blockLines.push(current);
+        cursor += 1;
+      }
+
+      const sections: string[] = [];
+      let currentSection: string[] = [];
+      let inInnerFence: string | null = null;
+      let isFirstSeparatorFound = false;
+      let yamlStr = "";
+
+      for (const bLine of blockLines) {
+        const trimmed = bLine.trim();
+        
+        // Handle inner fences to avoid splitting on --- inside code blocks
+        if (inInnerFence) {
+          if (trimmed.startsWith(inInnerFence)) inInnerFence = null;
+          currentSection.push(bLine);
+          continue;
+        }
+        if (trimmed.startsWith("```") || trimmed.startsWith("~~~")) {
+          inInnerFence = trimmed.slice(0, 3);
+          currentSection.push(bLine);
+          continue;
+        }
+
+        if (YAML_BODY_SPLIT_RE.test(bLine)) {
+          if (!isFirstSeparatorFound) {
+            yamlStr = currentSection.join("\n");
+            isFirstSeparatorFound = true;
+          } else {
+            sections.push(currentSection.join("\n"));
+          }
+          currentSection = [];
+        } else {
+          currentSection.push(bLine);
+        }
+      }
+      sections.push(currentSection.join("\n"));
+
+      const props = parseYamlProps(yamlStr);
+      const labels = Array.isArray(props.tabs) ? props.tabs : [];
+      delete props.tabs;
+
+      const tabsData = sections
+        .map((s) => s.trim())
+        .filter((s, idx) => s.length > 0 || idx < labels.length)
+        .map((section, idx) => {
+          const label = labels[idx] || `Tab ${idx + 1}`;
+          return {
+            label,
+            content: transformColonComponents(section),
+            value: `tab-${idx}`,
+          };
+        });
+
+      if (tabsData.length === 0) {
+        index = cursor + 1;
+        continue;
+      }
+
+      const defaultValue = props.defaultValue || tabsData[0]?.value || "";
+      const tabsProps = { ...props, defaultValue } as any;
+      delete tabsProps.defaultValue;
+
+      const tabsTriggerElements = tabsData
+        .map((t) => `<TabsTrigger value="${t.value}">${t.label}</TabsTrigger>`)
+        .join("\n\n");
+
+      const tabsContentElements = tabsData
+        .map((t) => {
+           return `<TabsContent value="${t.value}">\n\n${t.content}\n\n</TabsContent>`;
+        })
+        .join("\n\n");
+
+      const tabsNode = buildMdxComponent(
+        "Tabs",
+        tabsProps,
+        `\n\n<TabsList>\n\n${tabsTriggerElements}\n\n</TabsList>\n\n${tabsContentElements}\n\n`,
+      );
+
+      output.push(tabsNode);
+      index = cursor + 1;
+      continue;
+    }
+
     if (trimmedStart.startsWith("```")) {
       fencedCodeMarker = "```";
       output.push(line);
