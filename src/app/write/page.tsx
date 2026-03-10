@@ -36,9 +36,9 @@ const initialSource = `# 标题
 2. 列表
 3. 列表
 
-[链接](https://github.com)
+[链接](https://blog.luckyfishes.site)
 
-![图片](https://github.com/uiwjs/react-codemirror/raw/master/assets/logo.png)
+![图片](https://blog.luckyfishes.site/favicon.ico)
 `;
 
 export default function WritePage() {
