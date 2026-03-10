@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/next";
 import type { Metadata } from "next";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
@@ -5,6 +6,9 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { siteConfig } from "@/config/site";
 import "katex/dist/katex.min.css";
 import "./globals.css";
+
+const isVercelAnalyticsEnabled =
+  process.env.NEXT_PUBLIC_VERCEL_ANALYTICS_ENABLED === "true";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.siteUrl),
@@ -83,6 +87,7 @@ export default function RootLayout({
             <SiteFooter />
           </div>
         </ThemeProvider>
+        {isVercelAnalyticsEnabled ? <Analytics /> : null}
       </body>
     </html>
   );

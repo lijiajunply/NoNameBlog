@@ -25,6 +25,13 @@ cp .env.example .env.local
 - `NEXT_PUBLIC_GISCUS_CATEGORY`：Discussion 分类名，例如 `Announcements`
 - `NEXT_PUBLIC_GISCUS_CATEGORY_ID`：分类 ID
 
+## Vercel Analytics 开关
+
+项目支持通过环境变量控制是否启用 Vercel Analytics：
+
+- `NEXT_PUBLIC_VERCEL_ANALYTICS_ENABLED=false`：默认关闭
+- `NEXT_PUBLIC_VERCEL_ANALYTICS_ENABLED=true`：启用
+
 ## 开源协议
 
 本项目使用 MIT 协议
