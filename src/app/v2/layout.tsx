@@ -28,7 +28,7 @@ export default function RootLayout({
   return (
     <SidebarProvider>
       <V2SidebarNav categories={categories} tags={tags} />
-      <SidebarInset className="p-0! min-h-screen dark:bg-[radial-gradient(circle_at_15%_10%,rgba(199,210,254,0.25),transparent_28%),radial-gradient(circle_at_85%_5%,rgba(251,191,36,0.15),transparent_35%)]">
+      <SidebarInset className="p-0! bg-fixed min-h-screen dark:bg-[radial-gradient(circle_at_15%_10%,rgba(199,210,254,0.25),transparent_28%),radial-gradient(circle_at_85%_5%,rgba(251,191,36,0.15),transparent_35%)]">
         <V2HeaderSlotProvider>
           <header className="sticky top-0 z-40 border-b border-neutral-200/50 bg-white/80 backdrop-blur-md dark:border-neutral-800/50 dark:bg-black/70">
             <div className="flex h-14 w-full items-center gap-3 px-4 md:px-10">
