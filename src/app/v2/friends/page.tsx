@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/input-group";
 import { siteConfig } from "@/config/site";
 import { type Friend, friendSchema } from "@/lib/content/schema";
+import { PostComments } from "@/components/post-comments";
 
 export const metadata: Metadata = {
   title: "友链",
@@ -233,6 +234,12 @@ export default function FriendsPage() {
           </CodeBlockFigure>
         </div>
       </div>
+
+      <div className="text-center font-semibold">
+        记得在评论区留言，写一下你的友链信息
+      </div>
+
+      <PostComments />
     </div>
   );
 }

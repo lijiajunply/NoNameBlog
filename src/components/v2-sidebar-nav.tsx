@@ -32,6 +32,7 @@ import {
 } from "@/components/ui/sidebar";
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
+import { ThemeToggle } from "./theme-toggle";
 
 type TaxonomyItem = {
   name: string;
@@ -101,7 +102,7 @@ export function V2SidebarNav({ categories, tags }: V2SidebarNavProps) {
         </SidebarMenu>
       </SidebarHeader>
 
-      <SidebarContent>
+      <SidebarContent className={'overflow-y-hidden hover:overflow-auto'}>
         <SidebarGroup>
           <SidebarGroupLabel>导航</SidebarGroupLabel>
           <SidebarGroupContent>
@@ -219,15 +220,8 @@ export function V2SidebarNav({ categories, tags }: V2SidebarNavProps) {
 
       <SidebarFooter>
         <SidebarMenu>
-          <SidebarMenuItem>
-            <SidebarMenuButton asChild tooltip="RSS">
-              <Link href="/rss.xml">RSS</Link>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-          <SidebarMenuItem>
-            <SidebarMenuButton asChild tooltip="Sitemap">
-              <Link href="/sitemap.xml">Sitemap</Link>
-            </SidebarMenuButton>
+          <SidebarMenuItem className="flex items-center justify-center"> 
+            <ThemeToggle />
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarFooter>

@@ -33,7 +33,7 @@ export default function HomePage() {
   return (
     <div className="space-y-16">
       {/* Hero Section - Apple/macOS Glassmorphism Style */}
-      <section className="relative overflow-hidden rounded-[30px] border border-black/5 bg-white/60 p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] backdrop-blur-3xl md:p-14 dark:border-white/10 dark:bg-neutral-900/80 dark:shadow-[0_8px_30px_rgb(0,0,0,0.1)]">
+      {/* <section className="relative overflow-hidden rounded-[30px] border border-black/5 bg-white/60 p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] backdrop-blur-3xl md:p-14 dark:border-white/10 dark:bg-neutral-900/80 dark:shadow-[0_8px_30px_rgb(0,0,0,0.1)]">
         <div className="grid items-center gap-12 lg:grid-cols-[1.2fr_1fr]">
           <div className="flex flex-col justify-center">
             <div className="mb-6 flex w-fit items-center gap-2 rounded-full border border-black/5 bg-white/50 px-3 py-1 text-xs font-medium text-neutral-600 backdrop-blur-md dark:border-white/10 dark:bg-black/50 dark:text-neutral-300">
@@ -88,7 +88,7 @@ export default function HomePage() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Latest Posts Section */}
       <section className="space-y-6">
