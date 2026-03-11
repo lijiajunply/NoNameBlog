@@ -36,13 +36,13 @@ const STORAGE_KEY = "mdx-editor-content";
 type SaveStatus = "idle" | "saving" | "saved" | "error";
 type ViewMode = "edit" | "preview" | "split";
 
-const initialSource = `# 欢迎使用 Write Studio
+const initialSource = `# 欢迎使用
 
-在这里可以自由撰写 Markdown / MDX，并实时查看渲染效果。
+在这里可以自由撰写 MDX，并实时查看渲染效果。
 
 ## 当前支持
 
-- 自动保存到本地草稿
+- 自动保存，刷新页面后不会消失，可以继续编辑
 - 实时 MDX 预览
 - 一键导出 \`.mdx\`
 - 复制源码到剪贴板
