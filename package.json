@@ -43,6 +43,7 @@
     "github-slugger": "^2.0.0",
     "gray-matter": "^4.0.3",
     "katex": "^0.16.37",
+    "lucide-react": "^0.577.0",
     "mermaid": "^11.12.3",
     "motion": "^12.34.3",
     "next": "16.1.6",

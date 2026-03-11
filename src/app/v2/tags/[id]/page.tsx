@@ -36,7 +36,7 @@ export async function generateMetadata({
   return {
     title: `标签: ${name}`,
     alternates: {
-      canonical: `${siteConfig.siteUrl}/tags/${encodeURIComponent(name)}/`,
+      canonical: `${siteConfig.siteUrl}/v2/tags/${encodeURIComponent(name)}/`,
     },
   };
 }
@@ -60,7 +60,7 @@ export default async function TagDetailPage({ params }: TagPageProps) {
       </p>
       <div className="grid gap-5">
         {posts.map((post) => (
-          <PostCard key={post.slug} post={post} />
+          <PostCard key={post.slug} post={post} routeBase="/v2" />
         ))}
       </div>
     </div>

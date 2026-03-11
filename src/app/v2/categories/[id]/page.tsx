@@ -36,7 +36,7 @@ export async function generateMetadata({
   return {
     title: `分类: ${name}`,
     alternates: {
-      canonical: `${siteConfig.siteUrl}/categories/${encodeURIComponent(name)}/`,
+      canonical: `${siteConfig.siteUrl}/v2/categories/${encodeURIComponent(name)}/`,
     },
   };
 }
@@ -62,7 +62,7 @@ export default async function CategoryDetailPage({
       </p>
       <div className="grid gap-5">
         {posts.map((post) => (
-          <PostCard key={post.slug} post={post} />
+          <PostCard key={post.slug} post={post} routeBase="/v2" />
         ))}
       </div>
     </div>

@@ -21,6 +21,7 @@ type PostFeedWithCategoryFilterProps = {
   initialCategory?: string;
   initialPage?: number;
   emptyText?: string;
+  routeBase?: string;
 };
 
 export function PostFeedWithCategoryFilter({
@@ -29,6 +30,7 @@ export function PostFeedWithCategoryFilter({
   initialCategory = "all",
   initialPage = 1,
   emptyText = "当前分类下暂无文章。",
+  routeBase = "",
 }: PostFeedWithCategoryFilterProps) {
   const pathname = usePathname();
   const router = useRouter();
@@ -202,7 +204,7 @@ export function PostFeedWithCategoryFilter({
               key={post.slug}
               className="transition-transform duration-300 hover:-translate-y-1"
             >
-              <PostCard post={post} />
+              <PostCard post={post} routeBase={routeBase} />
             </div>
           ))}
         </div>

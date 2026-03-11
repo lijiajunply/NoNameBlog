@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   title: "NoName Blog",
   description: "浏览最新文章、热门标签与博客更新趋势。",
   alternates: {
-    canonical: `${siteConfig.siteUrl}/`,
+    canonical: `${siteConfig.siteUrl}/v2/`,
   },
 };
 
@@ -49,7 +49,7 @@ export default function HomePage() {
               {heroTags.map((tag) => (
                 <Link
                   key={tag.name}
-                  href={`/tags/${encodeURIComponent(tag.name)}`}
+                  href={`/v2/tags/${encodeURIComponent(tag.name)}`}
                   className="transition-transform hover:scale-105 active:scale-95"
                 >
                   <Badge className="flex items-center gap-1.5 rounded-xl border-black/5 bg-white/60 px-3.5 py-1.5 text-sm font-medium text-neutral-700 backdrop-blur-sm hover:bg-white/80 dark:border-white/10 dark:bg-white/5 dark:text-neutral-200 dark:hover:bg-white/10">
@@ -95,6 +95,7 @@ export default function HomePage() {
         <PostFeedWithCategoryFilter
           posts={posts}
           postsPerPage={POSTS_PER_PAGE}
+          routeBase="/v2"
         />
       </section>
     </div>

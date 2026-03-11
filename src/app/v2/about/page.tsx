@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: "关于",
   description: "关于作者、技术栈与博客定位的介绍。",
   alternates: {
-    canonical: `${siteConfig.siteUrl}/about/`,
+    canonical: `${siteConfig.siteUrl}/v2/about/`,
   },
 };
 

@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   title: "友链",
   description: "朋友们的网站与项目推荐。",
   alternates: {
-    canonical: `${siteConfig.siteUrl}/friends/`,
+    canonical: `${siteConfig.siteUrl}/v2/friends/`,
   },
 };
 

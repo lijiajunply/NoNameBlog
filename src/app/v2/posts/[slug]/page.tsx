@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { PostToc } from "@/components/post-toc";
 import { PostComments } from "@/components/post-comments";
+import { PostToc } from "@/components/post-toc";
 import { Badge } from "@/components/ui/badge";
 import { siteConfig } from "@/config/site";
 import { renderMdx } from "@/lib/content/mdx";
@@ -114,12 +114,12 @@ export async function generateMetadata({
     description: summary,
     keywords: post.frontmatter.tags,
     alternates: {
-      canonical: `${siteConfig.siteUrl}/posts/${post.slug}/`,
+      canonical: `${siteConfig.siteUrl}/v2/posts/${post.slug}/`,
     },
     openGraph: {
       type: "article",
       locale: siteConfig.locale,
-      url: `${siteConfig.siteUrl}/posts/${post.slug}/`,
+      url: `${siteConfig.siteUrl}/v2/posts/${post.slug}/`,
       title: post.frontmatter.title,
       description: summary,
       siteName: siteConfig.siteName,
@@ -200,7 +200,7 @@ export default async function PostPage({ params }: PostPageProps) {
     },
     mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": `${siteConfig.siteUrl}/posts/${post.slug}/`,
+      "@id": `${siteConfig.siteUrl}/v2/posts/${post.slug}/`,
     },
     datePublished: `${post.frontmatter.date}T00:00:00+08:00`,
     dateModified: `${post.frontmatter.date}T00:00:00+08:00`,
@@ -211,10 +211,9 @@ export default async function PostPage({ params }: PostPageProps) {
     <article
       className={`grid gap-8 ${post.headings.length > 0 ? "lg:grid-cols-[minmax(0,1fr)_240px]" : ""}`}
     >
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
-      />
+      <script type="application/ld+json">
+        {JSON.stringify(articleJsonLd)}
+      </script>
       <section className="min-w-0 lg:rounded-3xl lg:border lg:border-neutral-200/70 lg:bg-white/75 md:p-10 lg:dark:border-neutral-800/80 lg:dark:bg-neutral-900/75">
         <div className="mb-6 space-y-4">
           <div className="flex flex-wrap items-center gap-2 text-sm text-neutral-500">
@@ -233,12 +232,12 @@ export default async function PostPage({ params }: PostPageProps) {
           ) : null}
           <div className="flex flex-wrap gap-2">
             {category ? (
-              <Link href={`/categories/${encodeURIComponent(category)}`}>
+              <Link href={`/v2/categories/${encodeURIComponent(category)}`}>
                 <Badge>分类: {category}</Badge>
               </Link>
             ) : null}
             {tags.map((tag) => (
-              <Link key={tag} href={`/tags/${encodeURIComponent(tag)}`}>
+              <Link key={tag} href={`/v2/tags/${encodeURIComponent(tag)}`}>
                 <Badge>#{tag}</Badge>
               </Link>
             ))}
@@ -257,7 +256,7 @@ export default async function PostPage({ params }: PostPageProps) {
           >
             {previousPost ? (
               <Link
-                href={`/posts/${previousPost.slug}`}
+                href={`/v2/posts/${previousPost.slug}`}
                 className="group rounded-2xl border border-neutral-200/80 bg-neutral-50/80 p-4 transition-colors hover:border-neutral-300 hover:bg-neutral-100/80 dark:border-neutral-800 dark:bg-neutral-950/60 dark:hover:border-neutral-700 dark:hover:bg-neutral-900/70"
               >
                 <p className="text-xs text-neutral-500">上一篇</p>
@@ -270,7 +269,7 @@ export default async function PostPage({ params }: PostPageProps) {
             )}
             {nextPost ? (
               <Link
-                href={`/posts/${nextPost.slug}`}
+                href={`/v2/posts/${nextPost.slug}`}
                 className="group rounded-2xl border border-neutral-200/80 bg-neutral-50/80 p-4 text-right transition-colors hover:border-neutral-300 hover:bg-neutral-100/80 dark:border-neutral-800 dark:bg-neutral-950/60 dark:hover:border-neutral-700 dark:hover:bg-neutral-900/70"
               >
                 <p className="text-xs text-neutral-500">下一篇</p>

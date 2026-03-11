@@ -16,7 +16,7 @@ import { formatDate } from "@/lib/utils";
 export const metadata: Metadata = {
   title: "统计",
   alternates: {
-    canonical: `${siteConfig.siteUrl}/stats/`,
+    canonical: `${siteConfig.siteUrl}/v2/stats/`,
   },
 };
 

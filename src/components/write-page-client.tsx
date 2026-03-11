@@ -15,7 +15,7 @@ const editorExtensions = [
     codeLanguages: languages,
     addKeymap: true,
   }),
-  EditorView.lineWrapping, // 启用行内换行
+  EditorView.lineWrapping,
 ];
 const PREVIEW_DEBOUNCE_MS = 150;
 
@@ -41,7 +41,7 @@ const initialSource = `# 标题
 ![图片](https://blog.luckyfishes.site/favicon.ico)
 `;
 
-export default function WritePage() {
+export function WritePageClient() {
   const { resolvedTheme } = useTheme();
   const [value, setValue] = useState(initialSource);
   const [content, setContent] = useState<ReactNode>(null);
@@ -83,8 +83,8 @@ export default function WritePage() {
   }, [value]);
 
   return (
-    <div className="mx-auto grid min-h-144 grid-cols-1 gap-6 lg:h-[calc(100vh-250px)] lg:grid-cols-2">
-      <section className="h-full overflow-hidden rounded-2xl border border-neutral-200 dark:border-neutral-800 relative pt-2 bg-gray-100 dark:bg-gray-900">
+    <div className="mx-auto grid min-h-[36rem] grid-cols-1 gap-6 lg:h-[calc(100vh-250px)] lg:grid-cols-2">
+      <section className="relative h-full overflow-hidden rounded-2xl border border-neutral-200 bg-gray-100 pt-2 dark:border-neutral-800 dark:bg-gray-900">
         <span className="code-mac-dots" aria-hidden />
         <CodeMirror
           value={value}
@@ -99,7 +99,7 @@ export default function WritePage() {
             setValue(nextValue);
           }}
           theme={resolvedTheme === "dark" ? atomone : vscodeLight}
-          className="h-full mt-5 text-sm [&_.cm-editor]:h-full [&_.cm-scroller]:overflow-auto"
+          className="mt-5 h-full text-sm [&_.cm-editor]:h-full [&_.cm-scroller]:overflow-auto"
         />
       </section>
       <article className="prose prose-neutral max-w-none overflow-auto rounded-2xl border border-neutral-200 p-6 dark:prose-invert dark:border-neutral-800">
