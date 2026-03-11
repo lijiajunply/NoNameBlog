@@ -33,6 +33,7 @@ import {
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
 import { ThemeToggle } from "./theme-toggle";
+import { fa } from "zod/v4/locales";
 
 type TaxonomyItem = {
   name: string;
@@ -64,8 +65,8 @@ export function V2SidebarNav({ categories, tags }: V2SidebarNavProps) {
   const pathname = usePathname();
   const isCategoryRoute = pathname.startsWith("/v2/categories/");
   const isTagRoute = pathname.startsWith("/v2/tags/");
-  const [isCategoryOpen, setIsCategoryOpen] = useState(true);
-  const [isTagOpen, setIsTagOpen] = useState(true);
+  const [isCategoryOpen, setIsCategoryOpen] = useState(false);
+  const [isTagOpen, setIsTagOpen] = useState(false);
 
   useEffect(() => {
     if (isCategoryRoute) {
@@ -161,11 +162,7 @@ export function V2SidebarNav({ categories, tags }: V2SidebarNavProps) {
                       </SidebarMenuItem>
                     );
                   })
-                ) : (
-                  <p className="px-2 py-1.5 text-xs text-sidebar-foreground/70">
-                    暂无分类
-                  </p>
-                )}
+                ) : (<></>)}
               </SidebarMenu>
             </SidebarGroupContent>
           ) : null}
@@ -208,9 +205,7 @@ export function V2SidebarNav({ categories, tags }: V2SidebarNavProps) {
                     );
                   })
                 ) : (
-                  <p className="px-2 py-1.5 text-xs text-sidebar-foreground/70">
-                    暂无标签
-                  </p>
+                  <></>
                 )}
               </SidebarMenu>
             </SidebarGroupContent>
