@@ -33,7 +33,9 @@ import {
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
 import { ThemeToggle } from "./theme-toggle";
-import { fa } from "zod/v4/locales";
+import { ButtonGroup } from "./ui/button-group";
+import { Button } from "./ui/button";
+import { Icon } from "@iconify/react";
 
 type TaxonomyItem = {
   name: string;
@@ -215,7 +217,36 @@ export function V2SidebarNav({ categories, tags }: V2SidebarNavProps) {
 
       <SidebarFooter>
         <SidebarMenu>
-          <SidebarMenuItem className="flex items-center justify-center"> 
+          <SidebarMenuItem className="flex items-center justify-center">
+            <ButtonGroup>
+              <Button variant="outline" size={'icon-sm'}>
+                <a href="https://github.com/lijiajunply" target="_blank" rel="noopener" title="GitHub">
+                  <Icon icon="lucide:github" width="16" height="16" />
+                </a>
+              </Button>
+              <Button variant="outline" size={'icon-sm'}>
+                <a href="https://www.zhihu.com/people/peopleintheworld" target="_blank" rel="noopener" title="知乎">
+                  <Icon icon="simple-icons:zhihu" width="16" height="16" />
+                </a>
+              </Button>
+              <Button variant="outline" size={'icon-sm'}>
+                <a href="https://space.bilibili.com/8911949" target="_blank" rel="noopener" title="哔哩哔哩">
+                  <Icon icon="simple-icons:bilibili" width="16" height="16" />
+                </a>
+              </Button>
+              <Button variant="outline" size={'icon-sm'}>
+                <a href="/rss.xml" target="_blank" rel="noopener" title="Bilibili">
+                <Icon icon="heroicons:rss-16-solid" width="16" height="16" />
+                </a>
+              </Button>
+              <Button variant="outline" size={'icon-sm'}>
+                <a href="https://www.travellings.cn/go.html" target="_blank" rel="noopener" title="开往-友链接力">
+                  <Icon icon="fa7-solid:train-subway" width="16" height="16" />
+                </a>
+              </Button>
+            </ButtonGroup>
+          </SidebarMenuItem>
+          <SidebarMenuItem className="flex items-center justify-center mt-4">
             <ThemeToggle />
           </SidebarMenuItem>
         </SidebarMenu>
