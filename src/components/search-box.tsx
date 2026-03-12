@@ -68,7 +68,7 @@ export function SearchBox() {
           throw new Error("PagefindUI unavailable");
         }
 
-        new window.PagefindUI({
+        const ui = new window.PagefindUI({
           element: "#search",
           showSubResults: true,
           resetStyles: false,
@@ -82,6 +82,25 @@ export function SearchBox() {
             load_more: "加载更多",
           },
         });
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const p = urlParams.get("p");
+        if (p) {
+          setTimeout(() => {
+            const uiInstance = ui as any;
+            if (typeof uiInstance.triggerSearch === "function") {
+              uiInstance.triggerSearch(p);
+            } else {
+              const input = document.querySelector(
+                ".pagefind-ui__search-input",
+              ) as HTMLInputElement;
+              if (input) {
+                input.value = p;
+                input.dispatchEvent(new Event("input", { bubbles: true }));
+              }
+            }
+          }, 100);
+        }
 
         if (mounted) {
           setState("ready");

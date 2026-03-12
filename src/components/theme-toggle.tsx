@@ -36,10 +36,10 @@ export function ThemeToggle() {
 
   return (
     <>
-      {/* Mobile: Single cycling button */}
+      {/* Mobile & Collapsed Sidebar: Single cycling button */}
       <button
         onClick={cycleTheme}
-        className="flex h-[34px] w-[34px] items-center justify-center rounded-full bg-neutral-200/50 p-[3px] shadow-inner backdrop-blur-xl transition-colors hover:bg-neutral-300/50 active:scale-95 dark:bg-neutral-800/50 dark:hover:bg-neutral-700/50 md:hidden"
+        className="flex h-[34px] w-[34px] items-center justify-center rounded-full bg-neutral-200/50 p-[3px] shadow-inner backdrop-blur-xl transition-colors hover:bg-neutral-300/50 active:scale-95 dark:bg-neutral-800/50 dark:hover:bg-neutral-700/50 md:group-data-[collapsible=icon]:flex md:hidden"
         aria-label={`当前主题: ${currentThemeObj.label}，点击切换`}
         title={`当前主题: ${currentThemeObj.label}`}
       >
@@ -48,9 +48,9 @@ export function ThemeToggle() {
         </div>
       </button>
 
-      {/* Desktop: Apple-style Segmented Control */}
+      {/* Desktop Expanded: Apple-style Segmented Control */}
       <div
-        className="hidden md:flex relative items-center rounded-full bg-neutral-200/50 p-[3px] shadow-inner backdrop-blur-xl transition-colors duration-300 dark:bg-neutral-800/50"
+        className="hidden md:group-data-[collapsible=icon]:hidden md:flex relative items-center rounded-full bg-neutral-200/50 p-[3px] shadow-inner backdrop-blur-xl transition-colors duration-300 dark:bg-neutral-800/50"
         role="radiogroup"
         aria-label="切换主题"
       >

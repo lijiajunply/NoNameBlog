@@ -1,5 +1,6 @@
 "use client";
 
+import { Icon } from "@iconify/react";
 import {
   ChartAreaIcon,
   ChevronRightIcon,
@@ -13,7 +14,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import {
   Sidebar,
@@ -24,6 +25,7 @@ import {
   SidebarGroupContent,
   SidebarGroupLabel,
   SidebarHeader,
+  SidebarInput,
   SidebarMenu,
   SidebarMenuBadge,
   SidebarMenuButton,
@@ -33,9 +35,8 @@ import {
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
 import { ThemeToggle } from "./theme-toggle";
-import { ButtonGroup } from "./ui/button-group";
 import { Button } from "./ui/button";
-import { Icon } from "@iconify/react";
+import { ButtonGroup } from "./ui/button-group";
 
 type TaxonomyItem = {
   name: string;
@@ -49,7 +50,6 @@ type V2SidebarNavProps = {
 
 const navItems = [
   { href: "/v2/", label: "首页", icon: HomeIcon },
-  { href: "/v2/search/", label: "搜索", icon: SearchIcon },
   { href: "/v2/stats/", label: "统计", icon: ChartAreaIcon },
   { href: "/v2/about/", label: "关于", icon: InfoIcon },
   { href: "/v2/friends/", label: "友链", icon: Link2Icon },
@@ -65,10 +65,22 @@ function isPathActive(pathname: string, href: string) {
 
 export function V2SidebarNav({ categories, tags }: V2SidebarNavProps) {
   const pathname = usePathname();
+  const router = useRouter();
+  const [searchQuery, setSearchQuery] = useState("");
   const isCategoryRoute = pathname.startsWith("/v2/categories/");
   const isTagRoute = pathname.startsWith("/v2/tags/");
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
   const [isTagOpen, setIsTagOpen] = useState(false);
+
+  useEffect(() => {
+    if (pathname === "/v2/search/") {
+      const params = new URLSearchParams(window.location.search);
+      const p = params.get("p");
+      if (p) setSearchQuery(p);
+    } else {
+      setSearchQuery("");
+    }
+  }, [pathname]);
 
   useEffect(() => {
     if (isCategoryRoute) {
@@ -103,9 +115,54 @@ export function V2SidebarNav({ categories, tags }: V2SidebarNavProps) {
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
+
+        <form
+          className="group-data-[collapsible=icon]:hidden mt-2"
+          onSubmit={(e) => {
+            e.preventDefault();
+            if (searchQuery.trim()) {
+              router.push(
+                `/v2/search/?p=${encodeURIComponent(searchQuery.trim())}`,
+              );
+            } else {
+              router.push("/v2/search/");
+            }
+          }}
+        >
+          <SidebarGroup className="py-0 px-0">
+            <SidebarGroupContent className="relative">
+              <label htmlFor="search" className="sr-only">
+                搜索
+              </label>
+              <SidebarInput
+                id="search"
+                placeholder="搜索..."
+                className="pl-8 bg-neutral-100/50 dark:bg-neutral-800/50 focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:border-neutral-300 dark:focus-visible:border-neutral-700"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+              <SearchIcon className="pointer-events-none absolute left-2 top-1/2 size-4 -translate-y-1/2 select-none opacity-50" />
+            </SidebarGroupContent>
+          </SidebarGroup>
+        </form>
+
+        <SidebarMenu className="hidden group-data-[collapsible=icon]:flex mt-2">
+          <SidebarMenuItem>
+            <SidebarMenuButton
+              asChild
+              tooltip="搜索"
+              isActive={pathname === "/v2/search/"}
+            >
+              <Link href="/v2/search/">
+                <SearchIcon />
+                <span>搜索</span>
+              </Link>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
       </SidebarHeader>
 
-      <SidebarContent className={'overflow-y-hidden hover:overflow-auto'}>
+      <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel>导航</SidebarGroupLabel>
           <SidebarGroupContent>
@@ -145,26 +202,26 @@ export function V2SidebarNav({ categories, tags }: V2SidebarNavProps) {
           {isCategoryOpen ? (
             <SidebarGroupContent>
               <SidebarMenu>
-                {categories.length ? (
-                  categories.map((category) => {
-                    const href = `/v2/categories/${encodeURIComponent(category.name)}`;
-                    return (
-                      <SidebarMenuItem key={category.name}>
-                        <SidebarMenuButton
-                          asChild
-                          isActive={pathname === href}
-                          tooltip={category.name}
-                        >
-                          <Link href={href}>
-                            <FolderIcon />
-                            <span>{category.name}</span>
-                          </Link>
-                        </SidebarMenuButton>
-                        <SidebarMenuBadge>{category.count}</SidebarMenuBadge>
-                      </SidebarMenuItem>
-                    );
-                  })
-                ) : (<></>)}
+                {categories.length
+                  ? categories.map((category) => {
+                      const href = `/v2/categories/${encodeURIComponent(category.name)}`;
+                      return (
+                        <SidebarMenuItem key={category.name}>
+                          <SidebarMenuButton
+                            asChild
+                            isActive={pathname === href}
+                            tooltip={category.name}
+                          >
+                            <Link href={href}>
+                              <FolderIcon />
+                              <span>{category.name}</span>
+                            </Link>
+                          </SidebarMenuButton>
+                          <SidebarMenuBadge>{category.count}</SidebarMenuBadge>
+                        </SidebarMenuItem>
+                      );
+                    })
+                  : null}
               </SidebarMenu>
             </SidebarGroupContent>
           ) : null}
@@ -187,28 +244,26 @@ export function V2SidebarNav({ categories, tags }: V2SidebarNavProps) {
           {isTagOpen ? (
             <SidebarGroupContent>
               <SidebarMenu>
-                {tags.length ? (
-                  tags.map((tag) => {
-                    const href = `/v2/tags/${encodeURIComponent(tag.name)}`;
-                    return (
-                      <SidebarMenuItem key={tag.name}>
-                        <SidebarMenuButton
-                          asChild
-                          isActive={pathname === href}
-                          tooltip={tag.name}
-                        >
-                          <Link href={href}>
-                            <TagIcon />
-                            <span>{tag.name}</span>
-                          </Link>
-                        </SidebarMenuButton>
-                        <SidebarMenuBadge>{tag.count}</SidebarMenuBadge>
-                      </SidebarMenuItem>
-                    );
-                  })
-                ) : (
-                  <></>
-                )}
+                {tags.length
+                  ? tags.map((tag) => {
+                      const href = `/v2/tags/${encodeURIComponent(tag.name)}`;
+                      return (
+                        <SidebarMenuItem key={tag.name}>
+                          <SidebarMenuButton
+                            asChild
+                            isActive={pathname === href}
+                            tooltip={tag.name}
+                          >
+                            <Link href={href}>
+                              <TagIcon />
+                              <span>{tag.name}</span>
+                            </Link>
+                          </SidebarMenuButton>
+                          <SidebarMenuBadge>{tag.count}</SidebarMenuBadge>
+                        </SidebarMenuItem>
+                      );
+                    })
+                  : null}
               </SidebarMenu>
             </SidebarGroupContent>
           ) : null}
@@ -217,36 +272,61 @@ export function V2SidebarNav({ categories, tags }: V2SidebarNavProps) {
 
       <SidebarFooter>
         <SidebarMenu>
-          <SidebarMenuItem className="flex items-center justify-center">
+          <SidebarMenuItem className="flex items-center justify-center group-data-[collapsible=icon]:hidden">
             <ButtonGroup>
-              <Button variant="outline" size={'icon-sm'}>
-                <a href="https://github.com/lijiajunply" target="_blank" rel="noopener" title="GitHub">
+              <Button variant="outline" size={"icon-sm"}>
+                <a
+                  href="https://github.com/lijiajunply"
+                  target="_blank"
+                  rel="noopener"
+                  title="GitHub"
+                >
                   <Icon icon="lucide:github" width="16" height="16" />
                 </a>
               </Button>
-              <Button variant="outline" size={'icon-sm'}>
-                <a href="https://www.zhihu.com/people/peopleintheworld" target="_blank" rel="noopener" title="知乎">
+              <Button variant="outline" size={"icon-sm"}>
+                <a
+                  href="https://www.zhihu.com/people/peopleintheworld"
+                  target="_blank"
+                  rel="noopener"
+                  title="知乎"
+                >
                   <Icon icon="simple-icons:zhihu" width="16" height="16" />
                 </a>
               </Button>
-              <Button variant="outline" size={'icon-sm'}>
-                <a href="https://space.bilibili.com/8911949" target="_blank" rel="noopener" title="哔哩哔哩">
+              <Button variant="outline" size={"icon-sm"}>
+                <a
+                  href="https://space.bilibili.com/8911949"
+                  target="_blank"
+                  rel="noopener"
+                  title="哔哩哔哩"
+                >
                   <Icon icon="simple-icons:bilibili" width="16" height="16" />
                 </a>
               </Button>
-              <Button variant="outline" size={'icon-sm'}>
-                <a href="/rss.xml" target="_blank" rel="noopener" title="Bilibili">
-                <Icon icon="heroicons:rss-16-solid" width="16" height="16" />
+              <Button variant="outline" size={"icon-sm"}>
+                <a
+                  href="/rss.xml"
+                  target="_blank"
+                  rel="noopener"
+                  title="Bilibili"
+                >
+                  <Icon icon="heroicons:rss-16-solid" width="16" height="16" />
                 </a>
               </Button>
-              <Button variant="outline" size={'icon-sm'}>
-                <a href="https://www.travellings.cn/go.html" target="_blank" rel="noopener" title="开往-友链接力">
+              <Button variant="outline" size={"icon-sm"}>
+                <a
+                  href="https://www.travellings.cn/go.html"
+                  target="_blank"
+                  rel="noopener"
+                  title="开往-友链接力"
+                >
                   <Icon icon="fa7-solid:train-subway" width="16" height="16" />
                 </a>
               </Button>
             </ButtonGroup>
           </SidebarMenuItem>
-          <SidebarMenuItem className="flex items-center justify-center mt-4">
+          <SidebarMenuItem className="flex items-center justify-center mt-4 group-data-[collapsible=icon]:mt-0">
             <ThemeToggle />
           </SidebarMenuItem>
         </SidebarMenu>
