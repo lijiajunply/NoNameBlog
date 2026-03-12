@@ -6,6 +6,10 @@ type Props = {
   params: Promise<{ keyword?: string[] }>;
 };
 
+export function generateStaticParams() {
+  return [{ keyword: undefined }];
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { keyword } = await params;
   const searchTerm = keyword?.[0];
