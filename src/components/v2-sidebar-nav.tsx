@@ -122,7 +122,7 @@ export function V2SidebarNav({ categories, tags }: V2SidebarNavProps) {
             e.preventDefault();
             if (searchQuery.trim()) {
               router.push(
-                `/v2/search/?p=${encodeURIComponent(searchQuery.trim())}`,
+                `/v2/search/${encodeURIComponent(searchQuery.trim())}`,
               );
             } else {
               router.push("/v2/search/");

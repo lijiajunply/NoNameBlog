@@ -53,7 +53,11 @@ function loadStyle(href: string) {
   document.head.appendChild(link);
 }
 
-export function SearchBox() {
+type SearchBoxProps = {
+  initialKeyword?: string;
+};
+
+export function SearchBox({ initialKeyword }: SearchBoxProps) {
   const [state, setState] = useState<"loading" | "ready" | "error">("loading");
 
   useEffect(() => {
@@ -85,17 +89,19 @@ export function SearchBox() {
 
         const urlParams = new URLSearchParams(window.location.search);
         const p = urlParams.get("p");
-        if (p) {
+        const keyword = initialKeyword || p;
+
+        if (keyword) {
           setTimeout(() => {
             const uiInstance = ui as any;
             if (typeof uiInstance.triggerSearch === "function") {
-              uiInstance.triggerSearch(p);
+              uiInstance.triggerSearch(keyword);
             } else {
               const input = document.querySelector(
                 ".pagefind-ui__search-input",
               ) as HTMLInputElement;
               if (input) {
-                input.value = p;
+                input.value = keyword;
                 input.dispatchEvent(new Event("input", { bubbles: true }));
               }
             }
@@ -117,7 +123,7 @@ export function SearchBox() {
     return () => {
       mounted = false;
     };
-  }, []);
+  }, [initialKeyword]);
 
   if (state === "error") {
     return (
