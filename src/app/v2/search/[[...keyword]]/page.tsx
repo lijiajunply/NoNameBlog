@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { SearchBox } from "@/components/search-box";
 import { siteConfig } from "@/config/site";
+import { Input } from "@/components/ui/input";
+import { useState } from "react";
 
 type Props = {
   params: Promise<{ keyword?: string[] }>;
@@ -25,17 +27,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function SearchPage({ params }: Props) {
   const { keyword } = await params;
-  const searchTerm = keyword?.[0];
+  const [searchTerm, setSearchTerm] = useState(keyword?.[0] || "");
 
   return (
     <div className="space-y-6">
       <h1 className="text-3xl font-semibold tracking-tight text-neutral-900 dark:text-white">
         全文搜索
       </h1>
-      <p className="text-neutral-600 dark:text-neutral-300">
-        输入关键字,搜索文章标题和正文内容。
-      </p>
-      <SearchBox initialKeyword={searchTerm} />
+
+    {searchTerm ? <Input placeholder="搜索..." defaultValue={searchTerm} onChange={x => setSearchTerm(x.target.value)} /> : <SearchBox initialKeyword={searchTerm} />}
+
     </div>
   );
 }
