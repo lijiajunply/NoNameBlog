@@ -15,9 +15,9 @@ import {
   useRef,
   useState,
 } from "react";
+import { useHeaderSlotContext } from "@/components/header-slot";
 import { Card } from "@/components/ui/card";
 import { Tabs, TabsContent } from "@/components/ui/tabs";
-import { useV2HeaderSlotContext } from "@/components/v2-header-slot";
 import { renderMdx } from "@/lib/content/mdx";
 import { cn } from "@/lib/utils";
 
@@ -56,7 +56,7 @@ export function hello(name: string) {
 
 export function WritePageClient() {
   const { resolvedTheme } = useTheme();
-  const { setHeaderContent, clearHeaderContent } = useV2HeaderSlotContext();
+  const { setHeaderContent, clearHeaderContent } = useHeaderSlotContext();
   const [value, setValue] = useState(initialSource);
   const [content, setContent] = useState<ReactNode>(null);
   const [renderError, setRenderError] = useState<string | null>(null);

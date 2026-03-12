@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-NoName Blog is a static blog built with Next.js 16, featuring MDX content, custom chart components, and a dual-layout system (v1 and v2). The project is configured for static export and deployed as a static site.
+NoName Blog is a static blog built with Next.js 16, featuring MDX content, custom chart components, and a sidebar-based application layout. The project is configured for static export and deployed as a static site.
 
 ## Development Commands
 
@@ -34,14 +34,9 @@ pnpm format
 - **Content Processing**: `src/lib/content/posts.ts` handles reading, parsing, and aggregating posts
 - **MDX Compilation**: `src/lib/content/mdx.tsx` configures MDX with custom components and rehype/remark plugins
 
-### Dual Layout System
+### Layout System
 
-The project has two distinct layouts:
-
-1. **V1 Layout** (`src/app/(routes)/`): Traditional header/footer layout with centered content
-2. **V2 Layout** (`src/app/v2/`): Sidebar-based layout using shadcn/ui Sidebar component with collapsible navigation
-
-Both layouts share the same content source but provide different UX patterns.
+The project uses a sidebar-based application layout in `src/app/(routes)/`, built on top of the shadcn/ui Sidebar component with collapsible navigation.
 
 ### MDX Custom Components
 
@@ -111,5 +106,5 @@ Custom plugins in `src/lib/content/`:
 - This is a static site (Next.js `output: "export"`), so no server-side runtime features
 - Posts are read from filesystem at build time, not runtime
 - Duplicate post slugs will throw an error during build
-- The v2 layout fetches all posts/categories/tags at layout level for sidebar navigation
+- The app layout fetches all posts/categories/tags at layout level for sidebar navigation
 - Biome is used for linting and formatting (not ESLint/Prettier)

@@ -9,24 +9,22 @@ import {
   useState,
 } from "react";
 
-type V2HeaderSlotContextValue = {
+type HeaderSlotContextValue = {
   headerContent: ReactNode | null;
   setHeaderContent: (node: ReactNode | null) => void;
   clearHeaderContent: () => void;
 };
 
-const V2HeaderSlotContext = createContext<V2HeaderSlotContextValue | null>(
-  null,
-);
+const HeaderSlotContext = createContext<HeaderSlotContextValue | null>(null);
 
-export function V2HeaderSlotProvider({ children }: { children: ReactNode }) {
+export function HeaderSlotProvider({ children }: { children: ReactNode }) {
   const [headerContent, setHeaderContent] = useState<ReactNode | null>(null);
 
   const clearHeaderContent = useCallback(() => {
     setHeaderContent(null);
   }, []);
 
-  const value = useMemo<V2HeaderSlotContextValue>(
+  const value = useMemo<HeaderSlotContextValue>(
     () => ({
       headerContent,
       setHeaderContent,
@@ -36,23 +34,23 @@ export function V2HeaderSlotProvider({ children }: { children: ReactNode }) {
   );
 
   return (
-    <V2HeaderSlotContext.Provider value={value}>
+    <HeaderSlotContext.Provider value={value}>
       {children}
-    </V2HeaderSlotContext.Provider>
+    </HeaderSlotContext.Provider>
   );
 }
 
-export function useV2HeaderSlotContext() {
-  const context = useContext(V2HeaderSlotContext);
+export function useHeaderSlotContext() {
+  const context = useContext(HeaderSlotContext);
   if (!context) {
     throw new Error(
-      "useV2HeaderSlotContext must be used within V2HeaderSlotProvider.",
+      "useHeaderSlotContext must be used within HeaderSlotProvider.",
     );
   }
   return context;
 }
 
-export function V2HeaderSlot() {
-  const { headerContent } = useV2HeaderSlotContext();
+export function HeaderSlot() {
+  const { headerContent } = useHeaderSlotContext();
   return <>{headerContent}</>;
 }

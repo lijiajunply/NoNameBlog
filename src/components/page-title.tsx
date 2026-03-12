@@ -9,7 +9,7 @@ type PostMeta = {
   category?: string;
 };
 
-type V2PageTitleProps = {
+type PageTitleProps = {
   posts: PostMeta[];
   routeBase?: string;
 };
@@ -81,10 +81,10 @@ function buildBreadcrumb(pathname: string, posts: PostMeta[], routeBase: string)
   return ["当前页"];
 }
 
-export function V2PageTitle({
+export function PageTitle({
   posts,
   routeBase = "",
-}: V2PageTitleProps) {
+}: PageTitleProps) {
   const pathname = usePathname();
   const breadcrumbs = buildBreadcrumb(pathname, posts, routeBase);
   const breadcrumbKeys = breadcrumbs.reduce<string[]>((acc, crumb) => {

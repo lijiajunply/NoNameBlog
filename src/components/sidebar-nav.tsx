@@ -43,7 +43,7 @@ type TaxonomyItem = {
   count: number;
 };
 
-type V2SidebarNavProps = {
+type SidebarNavProps = {
   categories: TaxonomyItem[];
   tags: TaxonomyItem[];
   routeBase?: string;
@@ -102,11 +102,11 @@ function isPathActive(pathname: string, href: string) {
   );
 }
 
-export function V2SidebarNav({
+export function SidebarNav({
   categories,
   tags,
   routeBase = "",
-}: V2SidebarNavProps) {
+}: SidebarNavProps) {
   const pathname = usePathname();
   const router = useRouter();
   const base = normalizeRouteBase(routeBase);
