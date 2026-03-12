@@ -38,7 +38,7 @@ export default function RootLayout({
               </div>
             </div>
           </header>
-          <main className="mx-auto w-full max-w-6xl flex-1 px-6 py-8 md:px-10">
+          <main className="mx-auto w-full container flex-1 px-6 py-8 md:px-10 dark:bg-transparent">
             {children}
           </main>
           <SiteFooter />

@@ -37,6 +37,7 @@ import { cn } from "@/lib/utils";
 import { ThemeToggle } from "./theme-toggle";
 import { Button } from "./ui/button";
 import { ButtonGroup } from "./ui/button-group";
+import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
 
 type TaxonomyItem = {
   name: string;
@@ -250,23 +251,23 @@ export function SidebarNav({
               <SidebarMenu>
                 {categories.length
                   ? categories.map((category) => {
-                      const href = `${categoriesPrefix}${encodeURIComponent(category.name)}`;
-                      return (
-                        <SidebarMenuItem key={category.name}>
-                          <SidebarMenuButton
-                            asChild
-                            isActive={pathname === href}
-                            tooltip={category.name}
-                          >
-                            <Link href={href}>
-                              <FolderIcon />
-                              <span>{category.name}</span>
-                            </Link>
-                          </SidebarMenuButton>
-                          <SidebarMenuBadge>{category.count}</SidebarMenuBadge>
-                        </SidebarMenuItem>
-                      );
-                    })
+                    const href = `${categoriesPrefix}${encodeURIComponent(category.name)}`;
+                    return (
+                      <SidebarMenuItem key={category.name}>
+                        <SidebarMenuButton
+                          asChild
+                          isActive={pathname === href}
+                          tooltip={category.name}
+                        >
+                          <Link href={href}>
+                            <FolderIcon />
+                            <span>{category.name}</span>
+                          </Link>
+                        </SidebarMenuButton>
+                        <SidebarMenuBadge>{category.count}</SidebarMenuBadge>
+                      </SidebarMenuItem>
+                    );
+                  })
                   : null}
               </SidebarMenu>
             </SidebarGroupContent>
@@ -292,23 +293,23 @@ export function SidebarNav({
               <SidebarMenu>
                 {tags.length
                   ? tags.map((tag) => {
-                      const href = `${tagsPrefix}${encodeURIComponent(tag.name)}`;
-                      return (
-                        <SidebarMenuItem key={tag.name}>
-                          <SidebarMenuButton
-                            asChild
-                            isActive={pathname === href}
-                            tooltip={tag.name}
-                          >
-                            <Link href={href}>
-                              <TagIcon />
-                              <span>{tag.name}</span>
-                            </Link>
-                          </SidebarMenuButton>
-                          <SidebarMenuBadge>{tag.count}</SidebarMenuBadge>
-                        </SidebarMenuItem>
-                      );
-                    })
+                    const href = `${tagsPrefix}${encodeURIComponent(tag.name)}`;
+                    return (
+                      <SidebarMenuItem key={tag.name}>
+                        <SidebarMenuButton
+                          asChild
+                          isActive={pathname === href}
+                          tooltip={tag.name}
+                        >
+                          <Link href={href}>
+                            <TagIcon />
+                            <span>{tag.name}</span>
+                          </Link>
+                        </SidebarMenuButton>
+                        <SidebarMenuBadge>{tag.count}</SidebarMenuBadge>
+                      </SidebarMenuItem>
+                    );
+                  })
                   : null}
               </SidebarMenu>
             </SidebarGroupContent>
@@ -320,56 +321,94 @@ export function SidebarNav({
         <SidebarMenu>
           <SidebarMenuItem className="flex items-center justify-center group-data-[collapsible=icon]:hidden">
             <ButtonGroup>
-              <Button variant="outline" size={"icon-sm"}>
-                <a
-                  href="https://github.com/lijiajunply"
-                  target="_blank"
-                  rel="noopener"
-                  title="GitHub"
-                >
-                  <Icon icon="lucide:github" width="16" height="16" />
-                </a>
-              </Button>
-              <Button variant="outline" size={"icon-sm"}>
-                <a
-                  href="https://www.zhihu.com/people/peopleintheworld"
-                  target="_blank"
-                  rel="noopener"
-                  title="知乎"
-                >
-                  <Icon icon="simple-icons:zhihu" width="16" height="16" />
-                </a>
-              </Button>
-              <Button variant="outline" size={"icon-sm"}>
-                <a
-                  href="https://space.bilibili.com/8911949"
-                  target="_blank"
-                  rel="noopener"
-                  title="哔哩哔哩"
-                >
-                  <Icon icon="simple-icons:bilibili" width="16" height="16" />
-                </a>
-              </Button>
-              <Button variant="outline" size={"icon-sm"}>
-                <a
-                  href="/rss.xml"
-                  target="_blank"
-                  rel="noopener"
-                  title="Bilibili"
-                >
-                  <Icon icon="heroicons:rss-16-solid" width="16" height="16" />
-                </a>
-              </Button>
-              <Button variant="outline" size={"icon-sm"}>
-                <a
-                  href="https://www.travellings.cn/go.html"
-                  target="_blank"
-                  rel="noopener"
-                  title="开往-友链接力"
-                >
-                  <Icon icon="fa7-solid:train-subway" width="16" height="16" />
-                </a>
-              </Button>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button variant="outline" size={"icon-sm"}>
+                    <a
+                      href="https://github.com/lijiajunply"
+                      target="_blank"
+                      rel="noopener"
+                      title="GitHub"
+                    >
+                      <Icon icon="lucide:github" width="16" height="16" />
+                    </a>
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Github 主页</p>
+                </TooltipContent>
+              </Tooltip>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button variant="outline" size={"icon-sm"}>
+                    <a
+                      href="https://www.zhihu.com/people/peopleintheworld"
+                      target="_blank"
+                      rel="noopener"
+                      title="知乎"
+                    >
+                      <Icon icon="simple-icons:zhihu" width="16" height="16" />
+                    </a>
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>知乎主页</p>
+                </TooltipContent>
+              </Tooltip>
+
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button variant="outline" size={"icon-sm"}>
+                    <a
+                      href="https://space.bilibili.com/8911949"
+                      target="_blank"
+                      rel="noopener"
+                      title="哔哩哔哩"
+                    >
+                      <Icon icon="simple-icons:bilibili" width="16" height="16" />
+                    </a>
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>B站主页</p>
+                </TooltipContent>
+              </Tooltip>
+
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button variant="outline" size={"icon-sm"}>
+                    <a
+                      href="/rss.xml"
+                      target="_blank"
+                      rel="noopener"
+                      title="Bilibili"
+                    >
+                      <Icon icon="heroicons:rss-16-solid" width="16" height="16" />
+                    </a>
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>RSS 订阅</p>
+                </TooltipContent>
+              </Tooltip>
+
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button variant="outline" size={"icon-sm"}>
+                    <a
+                      href="https://www.travellings.cn/go.html"
+                      target="_blank"
+                      rel="noopener"
+                      title="开往-友链接力"
+                    >
+                      <Icon icon="fa7-solid:train-subway" width="16" height="16" />
+                    </a>
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>开往-友链接力</p>
+                </TooltipContent>
+              </Tooltip>
             </ButtonGroup>
           </SidebarMenuItem>
           <SidebarMenuItem className="flex items-center justify-center mt-4 group-data-[collapsible=icon]:mt-0">

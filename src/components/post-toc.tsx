@@ -96,7 +96,7 @@ export function PostToc({ headings }: { headings: Heading[] }) {
   }
 
   return (
-    <aside className="sticky top-24 hidden max-h-[70vh] overflow-y-auto rounded-2xl border border-neutral-200/70 bg-white/80 p-4 backdrop-blur-xl lg:block dark:border-neutral-800/70 dark:bg-neutral-900/80">
+    <aside className="sticky top-24 hidden max-h-[80vh] overflow-y-auto p-4 backdrop-blur-xl lg:block">
       <h3 className="mb-2 text-sm font-semibold text-neutral-900 dark:text-neutral-100">
         目录
       </h3>
