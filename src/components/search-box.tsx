@@ -1,155 +1,186 @@
 "use client";
 
-import { useEffect, useId, useRef, useState } from "react";
+import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
 
-type PagefindUiOptions = {
-  element: string;
-  showSubResults?: boolean;
-  resetStyles?: boolean;
-  translations?: {
-    placeholder?: string;
-    clear_search?: string;
-    load_more?: string;
-    search_label?: string;
-    zero_results?: string;
-    many_results?: string;
-    one_result?: string;
+type PagefindSearchItemData = {
+  url: string;
+  excerpt: string;
+  meta?: {
+    title?: string;
   };
+  sub_results?: Array<{
+    title: string;
+    url: string;
+    excerpt: string;
+  }>;
 };
 
-type PagefindUiInstance = {
-  triggerSearch?: (term: string) => void;
+type PagefindSearchItem = {
+  id: string;
+  data: () => Promise<PagefindSearchItemData>;
 };
 
-type PagefindUiCtor = new (
-  options: PagefindUiOptions,
-) => PagefindUiInstance | unknown;
+type PagefindSearchResponse = {
+  results: PagefindSearchItem[];
+};
 
-declare global {
-  interface Window {
-    PagefindUI?: PagefindUiCtor;
-  }
-}
+type PagefindModule = {
+  search: (
+    term: string,
+    options?: {
+      filters?: Record<string, unknown>;
+      sort?: Record<string, unknown>;
+    },
+  ) => Promise<PagefindSearchResponse>;
+};
 
-function loadScript(src: string) {
-  return new Promise<void>((resolve, reject) => {
-    const existing = document.querySelector(`script[src="${src}"]`);
-    if (existing) {
-      resolve();
-      return;
-    }
-
-    const script = document.createElement("script");
-    script.src = src;
-    script.async = true;
-    script.onload = () => resolve();
-    script.onerror = () => reject(new Error(`Failed to load ${src}`));
-    document.body.appendChild(script);
-  });
-}
-
-function loadStyle(href: string) {
-  if (document.querySelector(`link[href="${href}"]`)) {
-    return;
-  }
-
-  const link = document.createElement("link");
-  link.rel = "stylesheet";
-  link.href = href;
-  document.head.appendChild(link);
-}
-
-function syncSearchTerm(
-  container: HTMLDivElement,
-  ui: PagefindUiInstance | null,
-  keyword: string,
-) {
-  const input = container.querySelector(
-    ".pagefind-ui__search-input",
-  ) as HTMLInputElement | null;
-
-  if (input) {
-    input.value = keyword;
-    input.dispatchEvent(new Event("input", { bubbles: true }));
-  }
-
-  if (keyword && typeof ui?.triggerSearch === "function") {
-    ui.triggerSearch(keyword);
-  }
-}
+type SearchResult = {
+  id: string;
+  title: string;
+  url: string;
+  excerpt: string;
+  subResults: Array<{
+    title: string;
+    url: string;
+    excerpt: string;
+  }>;
+};
 
 type SearchBoxProps = {
   keyword?: string;
   emptyMessage?: string;
 };
 
+function normalizeUrl(url: string) {
+  try {
+    const parsed = new URL(url, window.location.origin);
+    return `${parsed.pathname}${parsed.search}${parsed.hash}`;
+  } catch {
+    return url;
+  }
+}
+
+function decodeHtmlEntities(value: string) {
+  if (typeof document === "undefined") {
+    return value;
+  }
+
+  const textarea = document.createElement("textarea");
+  textarea.innerHTML = value;
+  return textarea.value;
+}
+
+function renderExcerpt(excerpt: string, keyPrefix: string) {
+  const segments = excerpt.split(/(<mark>.*?<\/mark>)/g).filter(Boolean);
+  let offset = 0;
+
+  return segments.map((segment) => {
+    const key = `${keyPrefix}-${offset}-${segment.length}`;
+    offset += segment.length;
+
+    if (segment.startsWith("<mark>") && segment.endsWith("</mark>")) {
+      const content = segment.replace(/^<mark>|<\/mark>$/g, "");
+      return <mark key={key}>{decodeHtmlEntities(content)}</mark>;
+    }
+
+    return <span key={key}>{decodeHtmlEntities(segment)}</span>;
+  });
+}
+
 export function SearchBox({
   keyword = "",
   emptyMessage = "输入关键字后即可查看搜索结果。",
 }: SearchBoxProps) {
-  const [state, setState] = useState<"loading" | "ready" | "error">("loading");
-  const containerId = useId().replace(/:/g, "");
-  const rootRef = useRef<HTMLDivElement | null>(null);
-  const uiRef = useRef<PagefindUiInstance | null>(null);
+  const [state, setState] = useState<"idle" | "loading" | "ready" | "error">(
+    "idle",
+  );
+  const [results, setResults] = useState<SearchResult[]>([]);
+  const moduleRef = useRef<PagefindModule | null>(null);
   const normalizedKeyword = keyword.trim();
 
   useEffect(() => {
-    let mounted = true;
+    let cancelled = false;
 
-    async function init() {
+    async function loadPagefind() {
+      if (moduleRef.current) {
+        return moduleRef.current;
+      }
+
       try {
-        loadStyle("/pagefind/pagefind-ui.css");
-        await loadScript("/pagefind/pagefind-ui.js");
+        const importPagefind = new Function("path", "return import(path)") as (
+          path: string,
+        ) => Promise<PagefindModule>;
+        const pagefind = await importPagefind("/pagefind/pagefind.js");
 
-        if (!mounted || !rootRef.current) {
+        if (!cancelled) {
+          moduleRef.current = pagefind;
+        }
+
+        return pagefind;
+      } catch {
+        if (!cancelled) {
+          setState("error");
+        }
+
+        return null;
+      }
+    }
+
+    async function runSearch() {
+      if (!normalizedKeyword) {
+        setResults([]);
+        setState("idle");
+        return;
+      }
+
+      setState("loading");
+
+      const pagefind = await loadPagefind();
+      if (!pagefind) {
+        return;
+      }
+
+      try {
+        const response = await pagefind.search(normalizedKeyword);
+        const hydratedResults = await Promise.all(
+          response.results.map(async (result) => {
+            const data = await result.data();
+
+            return {
+              id: result.id,
+              title: data.meta?.title ?? data.url,
+              url: normalizeUrl(data.url),
+              excerpt: data.excerpt,
+              subResults:
+                data.sub_results?.map((item) => ({
+                  title: item.title,
+                  url: normalizeUrl(item.url),
+                  excerpt: item.excerpt,
+                })) ?? [],
+            } satisfies SearchResult;
+          }),
+        );
+
+        if (cancelled) {
           return;
         }
 
-        if (!window.PagefindUI) {
-          throw new Error("PagefindUI unavailable");
-        }
-
-        rootRef.current.innerHTML = "";
-        uiRef.current = new window.PagefindUI({
-          element: `#${containerId}`,
-          showSubResults: true,
-          resetStyles: false,
-          translations: {
-            placeholder: "搜索标题或正文...",
-            clear_search: "清空",
-            search_label: "搜索",
-            zero_results: "未找到结果",
-            one_result: "[COUNT] 条结果",
-            many_results: "[COUNT] 条结果",
-            load_more: "加载更多",
-          },
-        }) as PagefindUiInstance;
-
-        if (mounted) {
-          setState("ready");
-        }
+        setResults(hydratedResults);
+        setState("ready");
       } catch {
-        if (mounted) {
+        if (!cancelled) {
           setState("error");
         }
       }
     }
 
-    void init();
+    void runSearch();
 
     return () => {
-      mounted = false;
-      uiRef.current = null;
+      cancelled = true;
     };
-  }, [containerId]);
-
-  useEffect(() => {
-    if (state !== "ready" || !rootRef.current) {
-      return;
-    }
-
-    syncSearchTerm(rootRef.current, uiRef.current, normalizedKeyword);
-  }, [normalizedKeyword, state]);
+  }, [normalizedKeyword]);
 
   if (state === "error") {
     return (
@@ -159,21 +190,69 @@ export function SearchBox({
     );
   }
 
+  if (!normalizedKeyword) {
+    return (
+      <p className="text-sm text-neutral-500 dark:text-neutral-400">
+        {emptyMessage}
+      </p>
+    );
+  }
+
   return (
     <div className="space-y-4">
       {state === "loading" ? (
-        <p className="text-sm text-neutral-500">搜索模块加载中...</p>
+        <p className="text-sm text-neutral-500">搜索中...</p>
       ) : null}
-      {!normalizedKeyword && state === "ready" ? (
+
+      {state === "ready" && results.length === 0 ? (
         <p className="text-sm text-neutral-500 dark:text-neutral-400">
-          {emptyMessage}
+          未找到和 “{normalizedKeyword}” 相关的结果。
         </p>
       ) : null}
-      <div
-        ref={rootRef}
-        id={containerId}
-        className="pagefind-ui [&_.pagefind-ui__form]:hidden"
-      />
+
+      {results.length > 0 ? (
+        <ol className="space-y-4">
+          {results.map((result) => (
+            <li
+              key={result.id}
+              className="rounded-2xl border border-neutral-200/80 bg-white/70 p-4 dark:border-neutral-800 dark:bg-neutral-950/60"
+            >
+              <div className="space-y-2">
+                <Link
+                  href={result.url}
+                  className="text-base font-semibold text-neutral-900 transition hover:text-neutral-600 dark:text-white dark:hover:text-neutral-300"
+                >
+                  {result.title}
+                </Link>
+                <p className="text-sm leading-6 text-neutral-600 dark:text-neutral-300">
+                  {renderExcerpt(result.excerpt, result.id)}
+                </p>
+              </div>
+
+              {result.subResults.length > 0 ? (
+                <div className="mt-4 space-y-2 border-t border-neutral-200/70 pt-4 dark:border-neutral-800">
+                  {result.subResults.slice(0, 3).map((item) => (
+                    <div key={`${result.id}-${item.url}`} className="space-y-1">
+                      <Link
+                        href={item.url}
+                        className="text-sm font-medium text-neutral-800 transition hover:text-neutral-600 dark:text-neutral-200 dark:hover:text-neutral-400"
+                      >
+                        {item.title}
+                      </Link>
+                      <p className="text-sm leading-6 text-neutral-500 dark:text-neutral-400">
+                        {renderExcerpt(
+                          item.excerpt,
+                          `${result.id}-${item.url}`,
+                        )}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              ) : null}
+            </li>
+          ))}
+        </ol>
+      ) : null}
     </div>
   );
 }
