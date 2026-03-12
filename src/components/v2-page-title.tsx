@@ -11,16 +11,16 @@ type PostMeta = {
 
 type V2PageTitleProps = {
   posts: PostMeta[];
+  routeBase?: string;
 };
 
-const staticLabels: Record<string, string> = {
-  "/v2": "主页",
-  "/v2/search": "搜索",
-  "/v2/stats": "统计",
-  "/v2/about": "关于",
-  "/v2/friends": "友链",
-  "/v2/write": "写作",
-};
+function normalizeRouteBase(routeBase: string) {
+  if (!routeBase || routeBase === "/") {
+    return "";
+  }
+
+  return routeBase.endsWith("/") ? routeBase.slice(0, -1) : routeBase;
+}
 
 function normalizePath(pathname: string) {
   if (pathname.length > 1 && pathname.endsWith("/")) {
@@ -37,15 +37,27 @@ function decodeSegment(segment: string) {
   }
 }
 
-function buildBreadcrumb(pathname: string, posts: PostMeta[]) {
+function buildBreadcrumb(pathname: string, posts: PostMeta[], routeBase: string) {
   const normalizedPath = normalizePath(pathname);
+  const base = normalizeRouteBase(routeBase);
+  const staticLabels: Record<string, string> = {
+    [base || "/"]: "主页",
+    [`${base}/search`]: "搜索",
+    [`${base}/stats`]: "统计",
+    [`${base}/about`]: "关于",
+    [`${base}/friends`]: "友链",
+    [`${base}/write`]: "写作",
+  };
+  const postsPrefix = `${base}/posts/`;
+  const categoriesPrefix = `${base}/categories/`;
+  const tagsPrefix = `${base}/tags/`;
 
   if (staticLabels[normalizedPath]) {
     return [staticLabels[normalizedPath]];
   }
 
-  if (normalizedPath.startsWith("/v2/posts/")) {
-    const slug = decodeSegment(normalizedPath.replace("/v2/posts/", ""));
+  if (normalizedPath.startsWith(postsPrefix)) {
+    const slug = decodeSegment(normalizedPath.replace(postsPrefix, ""));
     const post = posts.find((item) => item.slug === slug);
 
     const crumbs = ["文章"];
@@ -56,24 +68,25 @@ function buildBreadcrumb(pathname: string, posts: PostMeta[]) {
     return crumbs;
   }
 
-  if (normalizedPath.startsWith("/v2/categories/")) {
-    const category = decodeSegment(
-      normalizedPath.replace("/v2/categories/", ""),
-    );
+  if (normalizedPath.startsWith(categoriesPrefix)) {
+    const category = decodeSegment(normalizedPath.replace(categoriesPrefix, ""));
     return ["分类", category];
   }
 
-  if (normalizedPath.startsWith("/v2/tags/")) {
-    const tag = decodeSegment(normalizedPath.replace("/v2/tags/", ""));
+  if (normalizedPath.startsWith(tagsPrefix)) {
+    const tag = decodeSegment(normalizedPath.replace(tagsPrefix, ""));
     return ["标签", tag];
   }
 
   return ["当前页"];
 }
 
-export function V2PageTitle({ posts }: V2PageTitleProps) {
+export function V2PageTitle({
+  posts,
+  routeBase = "",
+}: V2PageTitleProps) {
   const pathname = usePathname();
-  const breadcrumbs = buildBreadcrumb(pathname, posts);
+  const breadcrumbs = buildBreadcrumb(pathname, posts, routeBase);
   const breadcrumbKeys = breadcrumbs.reduce<string[]>((acc, crumb) => {
     const previous = acc[acc.length - 1];
     acc.push(previous ? `${previous}>${crumb}` : crumb);

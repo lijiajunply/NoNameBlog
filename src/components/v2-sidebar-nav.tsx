@@ -46,34 +46,83 @@ type TaxonomyItem = {
 type V2SidebarNavProps = {
   categories: TaxonomyItem[];
   tags: TaxonomyItem[];
+  routeBase?: string;
 };
 
-const navItems = [
-  { href: "/v2/", label: "首页", icon: HomeIcon },
-  { href: "/v2/stats/", label: "统计", icon: ChartAreaIcon },
-  { href: "/v2/about/", label: "关于", icon: InfoIcon },
-  { href: "/v2/friends/", label: "友链", icon: Link2Icon },
-  { href: "/v2/write/", label: "写作", icon: FilePenLineIcon },
-] as const;
-
-function isPathActive(pathname: string, href: string) {
-  if (href === "/v2/") {
-    return pathname === href;
+function normalizeRouteBase(routeBase: string) {
+  if (!routeBase || routeBase === "/") {
+    return "";
   }
-  return pathname === href || pathname.startsWith(href);
+
+  return routeBase.endsWith("/") ? routeBase.slice(0, -1) : routeBase;
 }
 
-export function V2SidebarNav({ categories, tags }: V2SidebarNavProps) {
+function withRouteBase(routeBase: string, path: string) {
+  const base = normalizeRouteBase(routeBase);
+  return path === "/" ? `${base}/` || "/" : `${base}${path}/`;
+}
+
+function createNavItems(routeBase: string) {
+  return [
+    { href: withRouteBase(routeBase, "/"), label: "首页", icon: HomeIcon },
+    {
+      href: withRouteBase(routeBase, "/stats"),
+      label: "统计",
+      icon: ChartAreaIcon,
+    },
+    { href: withRouteBase(routeBase, "/about"), label: "关于", icon: InfoIcon },
+    {
+      href: withRouteBase(routeBase, "/friends"),
+      label: "友链",
+      icon: Link2Icon,
+    },
+    {
+      href: withRouteBase(routeBase, "/write"),
+      label: "写作",
+      icon: FilePenLineIcon,
+    },
+  ] as const;
+}
+
+function isPathActive(pathname: string, href: string) {
+  const normalizedPathname =
+    pathname.length > 1 && pathname.endsWith("/")
+      ? pathname.slice(0, -1)
+      : pathname;
+  const normalizedHref =
+    href.length > 1 && href.endsWith("/") ? href.slice(0, -1) : href;
+
+  if (normalizedHref === "/") {
+    return normalizedPathname === "/";
+  }
+
+  return (
+    normalizedPathname === normalizedHref ||
+    normalizedPathname.startsWith(`${normalizedHref}/`)
+  );
+}
+
+export function V2SidebarNav({
+  categories,
+  tags,
+  routeBase = "",
+}: V2SidebarNavProps) {
   const pathname = usePathname();
   const router = useRouter();
+  const base = normalizeRouteBase(routeBase);
+  const navItems = createNavItems(base);
+  const homeHref = withRouteBase(base, "/");
+  const searchHref = withRouteBase(base, "/search");
+  const categoriesPrefix = `${base}/categories/`;
+  const tagsPrefix = `${base}/tags/`;
   const [searchQuery, setSearchQuery] = useState("");
-  const isCategoryRoute = pathname.startsWith("/v2/categories/");
-  const isTagRoute = pathname.startsWith("/v2/tags/");
+  const isCategoryRoute = pathname.startsWith(categoriesPrefix);
+  const isTagRoute = pathname.startsWith(tagsPrefix);
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
   const [isTagOpen, setIsTagOpen] = useState(false);
 
   useEffect(() => {
-    if (pathname === "/v2/search/") {
+    if (pathname === searchHref) {
       const params = new URLSearchParams(window.location.search);
       setSearchQuery(params.get("q") ?? params.get("p") ?? "");
     } else {
@@ -99,7 +148,7 @@ export function V2SidebarNav({ categories, tags }: V2SidebarNavProps) {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton asChild size="lg">
-              <Link href="/v2/">
+              <Link href={homeHref}>
                 <Image
                   src="/favicon.ico"
                   className="h-8 w-8 rounded-sm"
@@ -121,8 +170,8 @@ export function V2SidebarNav({ categories, tags }: V2SidebarNavProps) {
             e.preventDefault();
             const nextQuery = searchQuery.trim();
             const nextHref = nextQuery
-              ? `/v2/search/?q=${encodeURIComponent(nextQuery)}`
-              : "/v2/search/";
+              ? `${searchHref}?q=${encodeURIComponent(nextQuery)}`
+              : searchHref;
             router.push(nextHref);
           }}
         >
@@ -148,9 +197,9 @@ export function V2SidebarNav({ categories, tags }: V2SidebarNavProps) {
             <SidebarMenuButton
               asChild
               tooltip="搜索"
-              isActive={pathname === "/v2/search/"}
+              isActive={pathname === searchHref}
             >
-              <Link href="/v2/search/">
+              <Link href={searchHref}>
                 <SearchIcon />
                 <span>搜索</span>
               </Link>
@@ -201,7 +250,7 @@ export function V2SidebarNav({ categories, tags }: V2SidebarNavProps) {
               <SidebarMenu>
                 {categories.length
                   ? categories.map((category) => {
-                      const href = `/v2/categories/${encodeURIComponent(category.name)}`;
+                      const href = `${categoriesPrefix}${encodeURIComponent(category.name)}`;
                       return (
                         <SidebarMenuItem key={category.name}>
                           <SidebarMenuButton
@@ -243,7 +292,7 @@ export function V2SidebarNav({ categories, tags }: V2SidebarNavProps) {
               <SidebarMenu>
                 {tags.length
                   ? tags.map((tag) => {
-                      const href = `/v2/tags/${encodeURIComponent(tag.name)}`;
+                      const href = `${tagsPrefix}${encodeURIComponent(tag.name)}`;
                       return (
                         <SidebarMenuItem key={tag.name}>
                           <SidebarMenuButton

@@ -2,9 +2,11 @@ import fs from "node:fs";
 import path from "node:path";
 import { Icon } from "@iconify/react";
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { FriendsInputButton } from "@/components/friends-input-button";
 import { CodeBlockFigure } from "@/components/mdx/code-block-figure";
+import { PostComments } from "@/components/post-comments";
 import {
   InputGroup,
   InputGroupAddon,
@@ -98,11 +100,13 @@ export default function FriendsPage() {
 
                     <div className="relative flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden bg-white transition-transform duration-500 group-hover:scale-105 rounded-xl dark:border-white/10 dark:bg-neutral-900">
                       {friend.avatar ? (
-                        <img
+                        <Image
                           src={friend.avatar}
                           alt={friend.name}
                           className="h-full w-full object-cover"
-                          loading="lazy"
+                          width={64}
+                          height={64}
+                          unoptimized
                         />
                       ) : (
                         <span className="text-2xl font-semibold text-neutral-400 dark:text-neutral-500">
@@ -233,6 +237,12 @@ export default function FriendsPage() {
           </CodeBlockFigure>
         </div>
       </div>
+
+      <div className="text-center font-semibold">
+        记得在评论区留言，写一下你的友链信息
+      </div>
+
+      <PostComments />
     </div>
   );
 }
