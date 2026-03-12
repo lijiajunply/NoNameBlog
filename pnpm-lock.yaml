@@ -41,16 +41,10 @@ importers:
       '@visx/geo':
         specifier: 4.0.1-alpha.0
         version: 4.0.1-alpha.0(react@19.2.3)
-      '@visx/gradient':
-        specifier: 4.0.1-alpha.0
-        version: 4.0.1-alpha.0(react@19.2.3)
       '@visx/grid':
         specifier: ^4.0.1-alpha.0
         version: 4.0.1-alpha.0(react@19.2.3)
       '@visx/group':
-        specifier: 4.0.1-alpha.0
-        version: 4.0.1-alpha.0(react@19.2.3)
-      '@visx/pattern':
         specifier: 4.0.1-alpha.0
         version: 4.0.1-alpha.0(react@19.2.3)
       '@visx/responsive':
@@ -149,9 +143,6 @@ importers:
       rehype-slug:
         specifier: ^6.0.0
         version: 6.0.0
-      rehype-stringify:
-        specifier: ^10.0.1
-        version: 10.0.1
       remark-gfm:
         specifier: ^4.0.1
         version: 4.0.1
@@ -164,9 +155,6 @@ importers:
       remark-parse:
         specifier: ^11.0.0
         version: 11.0.0
-      remark-rehype:
-        specifier: ^11.1.2
-        version: 11.1.2
       serve:
         specifier: ^14.2.5
         version: 14.2.6
@@ -1837,11 +1825,6 @@ packages:
     peerDependencies:
       react: ^16.14.0 || ^17.0.0-0 || ^18.0.0-0 || ^19.0.0-0
 
-  '@visx/gradient@4.0.1-alpha.0':
-    resolution: {integrity: sha512-HxkxLdThV/gPaulw+t7/ESo7AtqIBq9IlHIkHi7lQqXe0Yl+x8rpM3KYlYqEZjtihD9CeEaVJjBbdY7fQb54IA==}
-    peerDependencies:
-      react: ^16.14.0 || ^17.0.0-0 || ^18.0.0-0 || ^19.0.0-0
-
   '@visx/grid@4.0.1-alpha.0':
     resolution: {integrity: sha512-rycutGmTHO+znNdPumheWMglm7YfpffvRwUkVy5zy4WoORIuKTMkDxwnOzHG2xMxU3EE/YCd37xFV5AxA30yeg==}
     peerDependencies:
@@ -1849,11 +1832,6 @@ packages:
 
   '@visx/group@4.0.1-alpha.0':
     resolution: {integrity: sha512-V19l7iQ7jccBv8kao/EByuI6o4xtxzzLV9nqVI1hRvmdzTVsuLpqlwzYCZUXJaTVvUWf8s4D2SQFjGkj/Nw+0w==}
-    peerDependencies:
-      react: ^16.14.0 || ^17.0.0-0 || ^18.0.0-0 || ^19.0.0-0
-
-  '@visx/pattern@4.0.1-alpha.0':
-    resolution: {integrity: sha512-KCqHpjtHdu95uqamc5PIYG55Xp0w+7/Zz63k4eeZErwK1o0PN2rZiBiuodNtENL8NqIU2b5AP+XI/xXaUH0M4Q==}
     peerDependencies:
       react: ^16.14.0 || ^17.0.0-0 || ^18.0.0-0 || ^19.0.0-0
 
@@ -3144,9 +3122,6 @@ packages:
 
   rehype-slug@6.0.0:
     resolution: {integrity: sha512-lWyvf/jwu+oS5+hL5eClVd3hNdmwM1kAC0BUvEGD19pajQMIzcNUd/k9GsfQ+FfECvX+JE+e9/btsKH0EjJT6A==}
-
-  rehype-stringify@10.0.1:
-    resolution: {integrity: sha512-k9ecfXHmIPuFVI61B9DeLPN0qFHfawM6RsuX48hoqlaKSF61RskNjSm1lI8PhBEM0MRdLxVVm4WmTqJQccH9mA==}
 
   remark-gfm@4.0.1:
     resolution: {integrity: sha512-1quofZ2RQ9EWdeN34S79+KExV1764+wCUGop5CPL1WGdD0ocPpu91lzPGbwWMECpEpd42kJGQwzRfyov9j4yNg==}
@@ -5297,11 +5272,6 @@ snapshots:
       classnames: 2.5.1
       react: 19.2.3
 
-  '@visx/gradient@4.0.1-alpha.0(react@19.2.3)':
-    dependencies:
-      '@types/react': 19.2.14
-      react: 19.2.3
-
   '@visx/grid@4.0.1-alpha.0(react@19.2.3)':
     dependencies:
       '@types/react': 19.2.14
@@ -5314,12 +5284,6 @@ snapshots:
       react: 19.2.3
 
   '@visx/group@4.0.1-alpha.0(react@19.2.3)':
-    dependencies:
-      '@types/react': 19.2.14
-      classnames: 2.5.1
-      react: 19.2.3
-
-  '@visx/pattern@4.0.1-alpha.0(react@19.2.3)':
     dependencies:
       '@types/react': 19.2.14
       classnames: 2.5.1
@@ -7087,12 +7051,6 @@ snapshots:
       hast-util-heading-rank: 3.0.0
       hast-util-to-string: 3.0.1
       unist-util-visit: 5.1.0
-
-  rehype-stringify@10.0.1:
-    dependencies:
-      '@types/hast': 3.0.4
-      hast-util-to-html: 9.0.5
-      unified: 11.0.5
 
   remark-gfm@4.0.1:
     dependencies:
