@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 
 type PagefindUiOptions = {
   element: string;
@@ -59,6 +60,7 @@ type SearchBoxProps = {
 
 export function SearchBox({ initialKeyword }: SearchBoxProps) {
   const [state, setState] = useState<"loading" | "ready" | "error">("loading");
+  const pathname = usePathname();
 
   useEffect(() => {
     let mounted = true;
@@ -87,21 +89,26 @@ export function SearchBox({ initialKeyword }: SearchBoxProps) {
           },
         });
 
+        // 支持多种格式：
+        // 1. /v2/search#Markdown (hash)
+        // 2. /v2/search?p=Markdown (query param)
+        // 3. initialKeyword prop
         const urlParams = new URLSearchParams(window.location.search);
         const p = urlParams.get("p");
-        const keyword = initialKeyword || p;
+        const hash = window.location.hash.slice(1); // 移除 # 号
+        const keyword = initialKeyword || hash || p;
 
         if (keyword) {
           setTimeout(() => {
             const uiInstance = ui as any;
             if (typeof uiInstance.triggerSearch === "function") {
-              uiInstance.triggerSearch(keyword);
+              uiInstance.triggerSearch(decodeURIComponent(keyword));
             } else {
               const input = document.querySelector(
                 ".pagefind-ui__search-input",
               ) as HTMLInputElement;
               if (input) {
-                input.value = keyword;
+                input.value = decodeURIComponent(keyword);
                 input.dispatchEvent(new Event("input", { bubbles: true }));
               }
             }
@@ -123,7 +130,7 @@ export function SearchBox({ initialKeyword }: SearchBoxProps) {
     return () => {
       mounted = false;
     };
-  }, [initialKeyword]);
+  }, [initialKeyword, pathname]);
 
   if (state === "error") {
     return (
