@@ -75,8 +75,7 @@ export function V2SidebarNav({ categories, tags }: V2SidebarNavProps) {
   useEffect(() => {
     if (pathname === "/v2/search/") {
       const params = new URLSearchParams(window.location.search);
-      const p = params.get("p");
-      if (p) setSearchQuery(p);
+      setSearchQuery(params.get("q") ?? params.get("p") ?? "");
     } else {
       setSearchQuery("");
     }
@@ -120,13 +119,11 @@ export function V2SidebarNav({ categories, tags }: V2SidebarNavProps) {
           className="group-data-[collapsible=icon]:hidden mt-2"
           onSubmit={(e) => {
             e.preventDefault();
-            if (searchQuery.trim()) {
-              router.push(
-                `/v2/search/${encodeURIComponent(searchQuery.trim())}`,
-              );
-            } else {
-              router.push("/v2/search/");
-            }
+            const nextQuery = searchQuery.trim();
+            const nextHref = nextQuery
+              ? `/v2/search/?q=${encodeURIComponent(nextQuery)}`
+              : "/v2/search/";
+            router.push(nextHref);
           }}
         >
           <SidebarGroup className="py-0 px-0">

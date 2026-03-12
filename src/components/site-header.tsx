@@ -1,6 +1,7 @@
 "use client";
 
 import { Icon } from "@iconify/react";
+import { SearchIcon } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
@@ -24,6 +25,7 @@ export function SiteHeader() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
+  const [searchKeyword, setSearchKeyword] = useState("");
   const pathname = usePathname();
 
   // Prevent body scroll when overlays are open
@@ -229,8 +231,23 @@ export function SiteHeader() {
                         <Icon icon="mingcute:close-line" className="h-4 w-4" />
                       </button>
                     </div>
-                    <div className="search-modal-body">
-                      <SearchBox />
+                    <div className="search-modal-body space-y-4">
+                      <div className="relative">
+                        <SearchIcon className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-neutral-400" />
+                        <input
+                          type="search"
+                          placeholder="搜索标题或正文..."
+                          value={searchKeyword}
+                          onChange={(event) =>
+                            setSearchKeyword(event.target.value)
+                          }
+                          className="h-11 w-full rounded-xl border border-neutral-200 bg-white pl-10 pr-4 text-sm text-neutral-900 outline-none transition focus:border-neutral-400 dark:border-neutral-800 dark:bg-neutral-950 dark:text-white dark:focus:border-neutral-600"
+                        />
+                      </div>
+                      <SearchBox
+                        keyword={searchKeyword}
+                        emptyMessage="输入关键字后即可开始搜索。"
+                      />
                     </div>
                   </motion.div>
                 </motion.div>
