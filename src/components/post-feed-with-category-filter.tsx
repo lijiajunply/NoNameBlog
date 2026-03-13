@@ -14,6 +14,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useIsMobile } from "@/hooks/use-mobile";
+import { ToggleGroup, ToggleGroupItem } from "./ui/toggle-group";
 
 type PostFeedWithCategoryFilterProps = {
   posts: PostCardPost[];
@@ -36,6 +38,7 @@ export function PostFeedWithCategoryFilter({
   const router = useRouter();
   const [selectedCategory, setSelectedCategory] = useState(initialCategory);
   const [currentPage, setCurrentPage] = useState(initialPage);
+  const [contextListShow, setContextListShow] = useState<'list' | 'grid'>(useIsMobile() ? 'list' : 'grid');
   const allPosts = posts;
 
   const categories = useMemo(() => {
@@ -163,7 +166,16 @@ export function PostFeedWithCategoryFilter({
           </h2>
         </div>
         <div className="flex gap-2">
-          
+          <ToggleGroup variant="outline"
+            type="single" 
+            size="sm" value={contextListShow} onValueChange={(value) => setContextListShow(value as 'list' | 'grid')}>
+            <ToggleGroupItem value="list" aria-label="list">
+              <Icon icon="lucide:list" className="h-5 w-5" />
+            </ToggleGroupItem>
+            <ToggleGroupItem value="grid" aria-label="grid">
+              <Icon icon="lucide:grid-2x2" className="h-5 w-5" />
+            </ToggleGroupItem>
+          </ToggleGroup>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button
@@ -201,11 +213,11 @@ export function PostFeedWithCategoryFilter({
       </div>
 
       {visiblePosts.length > 0 ? (
-        <div className="grid gap-5">
+        <div className={`grid gap-6 ${contextListShow === 'list' ? 'grid-cols-1' : 'grid-cols-2'}`}>
           {visiblePosts.map((post) => (
             <div
               key={post.slug}
-              className="transition-transform duration-300 hover:-translate-y-1"
+              className="transition-transform duration-300 hover:-translate-y-1 h-full"
             >
               <PostCard post={post} routeBase={routeBase} />
             </div>
