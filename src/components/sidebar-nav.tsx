@@ -11,6 +11,7 @@ import {
   Link2Icon,
   SearchIcon,
   TagIcon,
+  LoaderPinwheel
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -78,10 +79,15 @@ function createNavItems(routeBase: string) {
       icon: Link2Icon,
     },
     {
+      href: withRouteBase(routeBase, "/moments"),
+      label: "朋友圈",
+      icon: LoaderPinwheel,
+    },
+    {
       href: withRouteBase(routeBase, "/write"),
       label: "写作",
       icon: FilePenLineIcon,
-    },
+    }
   ] as const;
 }
 
