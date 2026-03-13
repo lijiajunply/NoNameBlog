@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "cli": "node scripts/cli.mjs",
     "build": "next build",
     "postbuild": "node scripts/generate-rss.mjs && node scripts/generate-sitemap.mjs && node -e \"const fs=require('fs'); fs.copyFileSync('public/rss.xml', 'out/rss.xml'); fs.copyFileSync('public/sitemap.xml', 'out/sitemap.xml')\" && pagefind --site out",
     "start": "serve -s out -l tcp://0.0.0.0:${PORT:-3000}",

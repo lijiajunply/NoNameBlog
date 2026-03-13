@@ -162,39 +162,42 @@ export function PostFeedWithCategoryFilter({
             最新文章
           </h2>
         </div>
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button
-              type="button"
-              variant="ghost"
-              className="h-9 rounded-xl border border-black/5 bg-white/70 px-3 text-sm text-neutral-700 hover:bg-white dark:border-white/10 dark:bg-neutral-900 dark:text-neutral-200 dark:hover:bg-neutral-800"
-            >
-              <Icon icon="ph:funnel-duotone" className="h-4 w-4" />
-              {activeLabel}
-              <Icon icon="ph:caret-down-bold" className="h-3.5 w-3.5" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="w-56">
-            <DropdownMenuLabel>筛选分类</DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuRadioGroup
-              value={activeCategory}
-              onValueChange={(value) => updateView(value, 1)}
-            >
-              <DropdownMenuRadioItem value="all">
-                全部 ({allPosts.length})
-              </DropdownMenuRadioItem>
-              {categories.map((category) => (
-                <DropdownMenuRadioItem
-                  key={category.name}
-                  value={category.name}
-                >
-                  {category.name} ({category.count})
+        <div className="flex gap-2">
+          
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button
+                type="button"
+                variant="ghost"
+                className="h-9 rounded-xl border border-black/5 bg-white/70 px-3 text-sm text-neutral-700 hover:bg-white dark:border-white/10 dark:bg-neutral-900 dark:text-neutral-200 dark:hover:bg-neutral-800"
+              >
+                <Icon icon="ph:funnel-duotone" className="h-4 w-4" />
+                {activeLabel}
+                <Icon icon="ph:caret-down-bold" className="h-3.5 w-3.5" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-56">
+              <DropdownMenuLabel>筛选分类</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuRadioGroup
+                value={activeCategory}
+                onValueChange={(value) => updateView(value, 1)}
+              >
+                <DropdownMenuRadioItem value="all">
+                  全部 ({allPosts.length})
                 </DropdownMenuRadioItem>
-              ))}
-            </DropdownMenuRadioGroup>
-          </DropdownMenuContent>
-        </DropdownMenu>
+                {categories.map((category) => (
+                  <DropdownMenuRadioItem
+                    key={category.name}
+                    value={category.name}
+                  >
+                    {category.name} ({category.count})
+                  </DropdownMenuRadioItem>
+                ))}
+              </DropdownMenuRadioGroup>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
       </div>
 
       {visiblePosts.length > 0 ? (
