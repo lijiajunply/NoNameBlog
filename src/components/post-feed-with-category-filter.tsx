@@ -38,7 +38,17 @@ export function PostFeedWithCategoryFilter({
   const router = useRouter();
   const [selectedCategory, setSelectedCategory] = useState(initialCategory);
   const [currentPage, setCurrentPage] = useState(initialPage);
-  const [contextListShow, setContextListShow] = useState<'list' | 'grid'>(useIsMobile() ? 'list' : 'grid');
+  const [contextListShow, setContextListShow] = useState<'list' | 'grid'>(() => (typeof window !== 'undefined' && window.innerWidth < 1024 ? 'list' : 'grid'));
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+    const handleResize = () => {
+      setContextListShow(window.innerWidth < 1024 ? 'list' : 'grid');
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
   const allPosts = posts;
 
   const categories = useMemo(() => {

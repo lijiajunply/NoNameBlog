@@ -1,3 +1,5 @@
+import z from "zod";
+
 export const siteConfig = {
   siteUrl: "https://blog.luckyfishes.site",
   siteName: "NoName Blog",
@@ -6,8 +8,9 @@ export const siteConfig = {
   locale: "zh_CN",
   keywords: ["技术博客", "编程", "前端", "后端", "Next.js", "随笔"],
   socialLinks: {
-    github: "https://github.com",
-    x: "https://x.com",
+    github: "https://github.com/lijiajunply",
+    zhihu: "https://www.zhihu.com/people/peopleintheworld",
+
   },
 };
 

@@ -330,7 +330,7 @@ export function SidebarNav({
                       rel="noopener"
                       title="GitHub"
                     >
-                      <Icon icon="lucide:github" width="16" height="16" />
+                      <Icon icon="lucide:github" width="16" height="16" className="text-zinc-800 dark:text-white"/>
                     </a>
                   </Button>
                 </TooltipTrigger>
@@ -347,7 +347,7 @@ export function SidebarNav({
                       rel="noopener"
                       title="知乎"
                     >
-                      <Icon icon="simple-icons:zhihu" width="16" height="16" />
+                      <Icon icon="simple-icons:zhihu" width="16" height="16" className="text-blue-500 dark:text-blue-400"/>
                     </a>
                   </Button>
                 </TooltipTrigger>
@@ -365,7 +365,7 @@ export function SidebarNav({
                       rel="noopener"
                       title="哔哩哔哩"
                     >
-                      <Icon icon="simple-icons:bilibili" width="16" height="16" />
+                      <Icon icon="simple-icons:bilibili" width="16" height="16" className="text-pink-600 dark:text-pink-400"/>
                     </a>
                   </Button>
                 </TooltipTrigger>
@@ -383,7 +383,7 @@ export function SidebarNav({
                       rel="noopener"
                       title="Bilibili"
                     >
-                      <Icon icon="heroicons:rss-16-solid" width="16" height="16" />
+                      <Icon icon="heroicons:rss-16-solid" width="16" height="16" className="text-emerald-700 dark:text-emerald-300"/>
                     </a>
                   </Button>
                 </TooltipTrigger>
