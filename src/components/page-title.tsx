@@ -47,6 +47,7 @@ function buildBreadcrumb(pathname: string, posts: PostMeta[], routeBase: string)
     [`${base}/about`]: "关于",
     [`${base}/friends`]: "友链",
     [`${base}/write`]: "写作",
+    [`${base}/moments`]: "朋友圈",
   };
   const postsPrefix = `${base}/posts/`;
   const categoriesPrefix = `${base}/categories/`;
