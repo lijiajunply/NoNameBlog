@@ -2,15 +2,10 @@
 
 import { ChevronRightIcon } from "lucide-react";
 import { usePathname } from "next/navigation";
-
-type PostMeta = {
-  slug: string;
-  title: string;
-  category?: string;
-};
+import type { BreadcrumbPostMeta } from "@/types/navigation";
 
 type PageTitleProps = {
-  posts: PostMeta[];
+  posts: BreadcrumbPostMeta[];
   routeBase?: string;
 };
 
@@ -37,7 +32,11 @@ function decodeSegment(segment: string) {
   }
 }
 
-function buildBreadcrumb(pathname: string, posts: PostMeta[], routeBase: string) {
+function buildBreadcrumb(
+  pathname: string,
+  posts: BreadcrumbPostMeta[],
+  routeBase: string,
+) {
   const normalizedPath = normalizePath(pathname);
   const base = normalizeRouteBase(routeBase);
   const staticLabels: Record<string, string> = {
@@ -70,7 +69,9 @@ function buildBreadcrumb(pathname: string, posts: PostMeta[], routeBase: string)
   }
 
   if (normalizedPath.startsWith(categoriesPrefix)) {
-    const category = decodeSegment(normalizedPath.replace(categoriesPrefix, ""));
+    const category = decodeSegment(
+      normalizedPath.replace(categoriesPrefix, ""),
+    );
     return ["分类", category];
   }
 
@@ -82,10 +83,7 @@ function buildBreadcrumb(pathname: string, posts: PostMeta[], routeBase: string)
   return ["当前页"];
 }
 
-export function PageTitle({
-  posts,
-  routeBase = "",
-}: PageTitleProps) {
+export function PageTitle({ posts, routeBase = "" }: PageTitleProps) {
   const pathname = usePathname();
   const breadcrumbs = buildBreadcrumb(pathname, posts, routeBase);
   const breadcrumbKeys = breadcrumbs.reduce<string[]>((acc, crumb) => {

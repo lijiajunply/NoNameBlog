@@ -3,12 +3,7 @@ import type { Heading, PhrasingContent, Root } from "mdast";
 import remarkParse from "remark-parse";
 import { unified } from "unified";
 import { visit } from "unist-util-visit";
-
-type TocHeading = {
-  depth: 1 | 2 | 3;
-  text: string;
-  id: string;
-};
+import type { PostHeading } from "@/types/content";
 
 function extractText(children: PhrasingContent[]): string {
   return children
@@ -27,10 +22,10 @@ function extractText(children: PhrasingContent[]): string {
     .join("");
 }
 
-export function extractHeadings(markdown: string): TocHeading[] {
+export function extractHeadings(markdown: string): PostHeading[] {
   const tree = unified().use(remarkParse).parse(markdown) as Root;
   const slugger = new GithubSlugger();
-  const headings: TocHeading[] = [];
+  const headings: PostHeading[] = [];
 
   visit(tree, "heading", (node: Heading) => {
     if (node.depth !== 1 && node.depth !== 2 && node.depth !== 3) {

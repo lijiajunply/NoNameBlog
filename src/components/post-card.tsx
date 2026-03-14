@@ -1,20 +1,9 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { formatDate } from "@/lib/utils";
-
-export type PostCardPost = {
-  slug: string;
-  frontmatter: {
-    title: string;
-    date: string;
-    summary?: string | null;
-    category?: string;
-    tags: string[];
-    cover?: string;
-  };
-  readingTime: string;
-};
+import type { PostSummary } from "@/types/content";
 
 function normalizeRouteBase(routeBase: string) {
   if (!routeBase) {
@@ -27,7 +16,7 @@ export function PostCard({
   post,
   routeBase = "",
 }: {
-  post: PostCardPost;
+  post: PostSummary;
   routeBase?: string;
 }) {
   const { cover } = post.frontmatter;
@@ -53,17 +42,22 @@ export function PostCard({
           ) : null}
         </div>
         {cover ? (
-          <img
-            src={cover}
-            alt={post.frontmatter.title}
-            className="absolute h-full object-cover top-0 right-0 aspect-video hidden lg:block backdrop-blur-lg"
-            style={{
-              opacity: 0.75,
-              width: "40%",
-            }}
-            loading="lazy"
-          />
+          <div
+            className="absolute right-0 top-0 hidden h-full lg:block"
+            style={{ width: "40%" }}
+          >
+            <Image
+              src={cover}
+              alt={post.frontmatter.title}
+              className="h-full w-full object-cover backdrop-blur-lg"
+              fill
+              loading="lazy"
+              unoptimized
+              style={{ opacity: 0.75 }}
+            />
+          </div>
         ) : null}
-      </div></Link>
+      </div>
+    </Link>
   );
 }

@@ -12,8 +12,6 @@ export const postFrontmatterSchema = z.object({
   next: z.string().min(1).optional(),
 });
 
-export type PostFrontmatter = z.infer<typeof postFrontmatterSchema>;
-
 export const friendSchema = z.object({
   name: z.string().min(1),
   url: z.string().url(),
@@ -22,5 +20,3 @@ export const friendSchema = z.object({
   order: z.number().int().optional(),
   category: z.string().default("其他"),
 });
-
-export type Friend = z.infer<typeof friendSchema>;

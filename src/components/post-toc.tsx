@@ -2,14 +2,9 @@
 
 import { type MouseEvent, useEffect, useMemo, useState } from "react";
 import { cn } from "@/lib/utils";
+import type { PostHeading } from "@/types/content";
 
-type Heading = {
-  depth: 1 | 2 | 3;
-  text: string;
-  id: string;
-};
-
-export function PostToc({ headings }: { headings: Heading[] }) {
+export function PostToc({ headings }: { headings: PostHeading[] }) {
   const [activeId, setActiveId] = useState<string>("");
   const headingIds = useMemo(() => headings.map((item) => item.id), [headings]);
 

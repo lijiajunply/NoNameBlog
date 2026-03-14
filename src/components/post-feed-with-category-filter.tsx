@@ -3,7 +3,7 @@
 import { Icon } from "@iconify/react";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
-import { PostCard, type PostCardPost } from "@/components/post-card";
+import { PostCard } from "@/components/post-card";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -14,10 +14,11 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import type { PostSummary } from "@/types/content";
 import { ToggleGroup, ToggleGroupItem } from "./ui/toggle-group";
 
 type PostFeedWithCategoryFilterProps = {
-  posts: PostCardPost[];
+  posts: PostSummary[];
   postsPerPage?: number;
   initialCategory?: string;
   initialPage?: number;
@@ -37,13 +38,15 @@ export function PostFeedWithCategoryFilter({
   const router = useRouter();
   const [selectedCategory, setSelectedCategory] = useState(initialCategory);
   const [currentPage, setCurrentPage] = useState(initialPage);
-  const [contextListShow, setContextListShow] = useState<'list' | 'grid'>(() => (typeof window !== 'undefined' && window.innerWidth < 1024 ? 'list' : 'grid'));
+  const [contextListShow, setContextListShow] = useState<"list" | "grid">(() =>
+    typeof window !== "undefined" && window.innerWidth < 1024 ? "list" : "grid",
+  );
   useEffect(() => {
     if (typeof window === "undefined") {
       return;
     }
     const handleResize = () => {
-      setContextListShow(window.innerWidth < 1024 ? 'list' : 'grid');
+      setContextListShow(window.innerWidth < 1024 ? "list" : "grid");
     };
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
@@ -175,9 +178,15 @@ export function PostFeedWithCategoryFilter({
           </h2>
         </div>
         <div className="flex gap-2">
-          <ToggleGroup variant="outline"
-            type="single" 
-            size="sm" value={contextListShow} onValueChange={(value) => setContextListShow(value as 'list' | 'grid')}>
+          <ToggleGroup
+            variant="outline"
+            type="single"
+            size="sm"
+            value={contextListShow}
+            onValueChange={(value) =>
+              setContextListShow(value as "list" | "grid")
+            }
+          >
             <ToggleGroupItem value="list" aria-label="list">
               <Icon icon="lucide:list" className="h-5 w-5" />
             </ToggleGroupItem>
@@ -222,7 +231,9 @@ export function PostFeedWithCategoryFilter({
       </div>
 
       {visiblePosts.length > 0 ? (
-        <div className={`grid gap-6 ${contextListShow === 'list' ? 'grid-cols-1' : 'grid-cols-2'}`}>
+        <div
+          className={`grid gap-6 ${contextListShow === "list" ? "grid-cols-1" : "grid-cols-2"}`}
+        >
           {visiblePosts.map((post) => (
             <div
               key={post.slug}

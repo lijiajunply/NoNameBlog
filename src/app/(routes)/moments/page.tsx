@@ -1,11 +1,12 @@
 import fs from "node:fs";
 import path from "node:path";
 import type { Metadata } from "next";
+import { MomentsCard } from "@/components/moment-cards";
 import { siteConfig } from "@/config/site";
 import { readRssXml } from "@/lib/content/rss-client";
-import { type Friend, friendSchema } from "@/lib/content/schema";
-import type { FriendFeedItem, RssItem } from "@/types/rss-item";
-import { MomentsCard } from "@/components/moment-cards";
+import { friendSchema } from "@/lib/content/schema";
+import type { Friend } from "@/types/content";
+import type { FriendFeedItem } from "@/types/rss";
 
 export const metadata: Metadata = {
   title: "朋友圈",
@@ -76,14 +77,14 @@ async function getFriendFeedItems(friends: Friend[]) {
         return [key, item];
       }),
     ).values(),
-  ).sort((a, b) => new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime());
+  ).sort(
+    (a, b) => new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime(),
+  );
 }
 
 export default async function MomentsPage() {
   const friends = getFriends();
   const items = await getFriendFeedItems(friends);
 
-  return (
-    <MomentsCard items={items} />
-  );
+  return <MomentsCard items={items} />;
 }

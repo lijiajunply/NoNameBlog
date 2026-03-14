@@ -14,7 +14,8 @@ import {
   InputGroupText,
 } from "@/components/ui/input-group";
 import { siteConfig } from "@/config/site";
-import { type Friend, friendSchema } from "@/lib/content/schema";
+import { friendSchema } from "@/lib/content/schema";
+import type { Friend } from "@/types/content";
 
 export const metadata: Metadata = {
   title: "友链",

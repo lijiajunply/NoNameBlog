@@ -2,28 +2,9 @@ import fs from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
 import readingTime from "reading-time";
-import { type PostFrontmatter, postFrontmatterSchema } from "./schema";
+import type { MonthlyCumulativeStat, Post } from "@/types/content";
+import { postFrontmatterSchema } from "./schema";
 import { extractHeadings } from "./toc";
-
-export type Heading = {
-  depth: 1 | 2 | 3;
-  text: string;
-  id: string;
-};
-
-export type Post = {
-  slug: string;
-  frontmatter: PostFrontmatter;
-  content: string;
-  readingTime: string;
-  headings: Heading[];
-};
-
-export type MonthlyCumulativeStat = {
-  date: string;
-  posts: number;
-  tags: number;
-};
 
 const postsDir = path.join(process.cwd(), "content/posts");
 const aboutPath = path.join(process.cwd(), "content/pages/about.mdx");
