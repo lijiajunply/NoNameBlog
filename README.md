@@ -173,6 +173,10 @@ npm run cli -- tags
 
 - `content/posts/markdown-syntax-showcase.mdx`
 
+如果你准备给项目新增一种自制 Markdown 语法，而不是单纯新增一个 MDX 组件，建议先看：
+
+- `docs/custom-syntax-guide.md`
+
 ## 站点页面
 
 项目当前包含这些主要页面：
