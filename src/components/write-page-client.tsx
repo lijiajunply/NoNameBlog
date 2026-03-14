@@ -450,11 +450,6 @@ function EditorPanel({
 }) {
   return (
     <Card className="relative h-[62vh] overflow-hidden rounded-3xl border-[color-mix(in_srgb,var(--foreground)_10%,transparent)] bg-[color-mix(in_srgb,var(--background)_94%,transparent)] p-0 shadow-[0_18px_48px_-34px_color-mix(in_srgb,var(--foreground)_35%,transparent)] backdrop-blur-xl lg:h-[calc(100vh-16rem)]">
-      <div className="absolute top-4 left-4 z-10 inline-flex items-center gap-2">
-        <span className="size-2 rounded-full bg-[#ff5f56]" />
-        <span className="size-2 rounded-full bg-[#ffbd2e]" />
-        <span className="size-2 rounded-full bg-[#27c93f]" />
-      </div>
       <CodeMirror
         value={value}
         height="100%"
@@ -466,7 +461,7 @@ function EditorPanel({
         extensions={editorExtensions}
         onChange={onChange}
         theme={theme === "dark" ? atomone : vscodeLight}
-        className="h-full pt-8 text-sm [&_.cm-content]:pb-16 [&_.cm-editor]:h-full [&_.cm-editor]:bg-transparent [&_.cm-gutters]:bg-transparent [&_.cm-scroller]:overflow-auto"
+        className="h-full text-sm [&_.cm-content]:pb-16 [&_.cm-editor]:h-full [&_.cm-editor]:bg-transparent [&_.cm-gutters]:bg-transparent [&_.cm-scroller]:overflow-auto"
       />
     </Card>
   );

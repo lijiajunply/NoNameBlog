@@ -33,9 +33,11 @@ export function MomentsCard({ items }: { items: FriendFeedItem[] }) {
           type="single"
           size="sm"
           value={contextListShow}
-          onValueChange={(value) =>
-            setContextListShow(value as "list" | "grid")
-          }
+          onValueChange={(value) => {
+            if (value === "list" || value === "grid") {
+              setContextListShow(value);
+            }
+          }}
         >
           <ToggleGroupItem value="list" aria-label="list">
             <Icon icon="lucide:list" className="h-5 w-5" />

@@ -155,6 +155,12 @@ code {
   text-underline-offset: 3px;
 }
 
+.prose code::before,
+.prose code::after {
+  content: "";
+}
+
+
 /* Prevent long inline content from forcing article width expansion */
 .prose :where(p, li, blockquote, td, th, h1, h2, h3, h4, h5, h6) {
   overflow-wrap: anywhere;

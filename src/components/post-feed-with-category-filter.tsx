@@ -38,7 +38,7 @@ export function PostFeedWithCategoryFilter({
   const router = useRouter();
   const [selectedCategory, setSelectedCategory] = useState(initialCategory);
   const [currentPage, setCurrentPage] = useState(initialPage);
-  const [contextListShow, setContextListShow] = useState<"list" | "grid">(() =>
+  const [contextListShow, setContextListShow] = useState(() =>
     typeof window !== "undefined" && window.innerWidth < 1024 ? "list" : "grid",
   );
   useEffect(() => {
@@ -183,9 +183,11 @@ export function PostFeedWithCategoryFilter({
             type="single"
             size="sm"
             value={contextListShow}
-            onValueChange={(value) =>
-              setContextListShow(value as "list" | "grid")
-            }
+            onValueChange={(value) => {
+              if (value === "list" || value === "grid") {
+                setContextListShow(value);
+              }
+            }}
           >
             <ToggleGroupItem value="list" aria-label="list">
               <Icon icon="lucide:list" className="h-5 w-5" />
@@ -194,6 +196,7 @@ export function PostFeedWithCategoryFilter({
               <Icon icon="lucide:grid-2x2" className="h-5 w-5" />
             </ToggleGroupItem>
           </ToggleGroup>
+
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button
