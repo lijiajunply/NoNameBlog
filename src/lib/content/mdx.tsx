@@ -221,6 +221,7 @@ const mdxComponents: Record<string, any> = {
     </kbd>
   ),
   Icon: withDecodedProps(Icon),
+  Image: withDecodedProps(ZoomableImage),
   GitHubCalendarCard: withDecodedProps(GitHubCalendarCard),
   MermaidDiagram: withDecodedProps(MermaidDiagram),
   MusicScore: withDecodedProps(MusicScore),

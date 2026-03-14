@@ -1,22 +1,104 @@
 "use client";
 
+import type { ComponentPropsWithoutRef, CSSProperties } from "react";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 
-type ZoomableImageProps = {
+const DEFAULT_IMAGE_WIDTH = "75%";
+
+type ZoomableImageProps = Omit<
+  ComponentPropsWithoutRef<"img">,
+  "src" | "alt" | "width" | "height" | "style"
+> & {
   src?: string;
   alt?: string;
   className?: string;
-  [key: string]: any;
+  width?: number | string;
+  height?: number | string;
+  title?: string;
+  style?: CSSProperties;
 };
+
+function normalizeCssLength(value: number | string | undefined) {
+  if (typeof value === "number") {
+    return `${value}px`;
+  }
+
+  if (typeof value !== "string") {
+    return undefined;
+  }
+
+  const trimmedValue = value.trim();
+
+  if (!trimmedValue) {
+    return undefined;
+  }
+
+  if (/^\d+(\.\d+)?$/.test(trimmedValue)) {
+    return `${trimmedValue}px`;
+  }
+
+  return trimmedValue;
+}
+
+function parseDimensionMetadata(title?: string) {
+  if (!title) {
+    return {};
+  }
+
+  const metadata = title.matchAll(
+    /\b(width|w|height|h)\s*[:=]\s*("(?:[^"]+)"|'(?:[^']+)'|[^,\s;]+)/gi,
+  );
+  const parsed: { width?: string; height?: string } = {};
+
+  for (const [, rawKey, rawValue] of metadata) {
+    const key = rawKey.toLowerCase();
+    const cleanedValue = rawValue.replace(/^['"]|['"]$/g, "").trim();
+
+    if (!cleanedValue) {
+      continue;
+    }
+
+    if (key === "width" || key === "w") {
+      parsed.width = cleanedValue;
+    }
+
+    if (key === "height" || key === "h") {
+      parsed.height = cleanedValue;
+    }
+  }
+
+  return parsed;
+}
 
 export function ZoomableImage({
   src,
   alt = "",
   className,
+  width,
+  height,
+  title,
+  style,
   ...props
 }: ZoomableImageProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const dimensionMetadata = parseDimensionMetadata(title);
+  const imageStyle = {
+    ...style,
+    width:
+      normalizeCssLength(width) ??
+      normalizeCssLength(dimensionMetadata.width) ??
+      style?.width ??
+      DEFAULT_IMAGE_WIDTH,
+    height:
+      normalizeCssLength(height) ??
+      normalizeCssLength(dimensionMetadata.height) ??
+      style?.height,
+  };
+  const titleProp =
+    title && !dimensionMetadata.width && !dimensionMetadata.height
+      ? title
+      : undefined;
 
   useEffect(() => {
     if (!isOpen) {
@@ -60,15 +142,17 @@ export function ZoomableImage({
               "rounded-2xl border cursor-zoom-in border-neutral-200/50 shadow-sm dark:border-neutral-800/50 mt-0 mb-0",
               className,
             )}
-            style={{ width: '75%' }}
+            width={undefined}
+            height={undefined}
+            title={titleProp}
+            style={imageStyle}
             {...props}
           />
         </button>
-        <div className="text-sm text-neutral-500 mt-2 text-center">
-          {alt}
-        </div>
+        {alt ? (
+          <div className="text-sm text-neutral-500 mt-2 text-center">{alt}</div>
+        ) : null}
       </div>
-
 
       {isOpen ? (
         <button

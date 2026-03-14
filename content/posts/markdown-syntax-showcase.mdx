@@ -116,7 +116,9 @@ $$
 \sum_{i=1}^{n} i = \frac{n(n+1)}{2}
 $$
 
-## 6. Mermaid 图表示例
+## 6. Mermaid 图表
+
+> Mermaid 的语法说实话我是一点不会，反正自带着有，不需要我去专门写语法，也蛮不错的。要是让我写的话那我就要拿 json 或者 yaml 来写了。具体参考我下面自制的组件语法
 
 ```mermaid
 flowchart LR
@@ -135,13 +137,45 @@ flowchart TD
 
 ## 7. 图片与脚注
 
-图片（本站会渲染为可缩放图像）：
+### 图片
+
+基本语法:
+
+```markdown
+![演示封面图](/notion-covers/plugin-recommendations.png)
+```
 
 ![演示封面图](/notion-covers/plugin-recommendations.png)
+
+也支持自定义大小：
+
+```markdown
+![演示封面图](/notion-covers/plugin-recommendations.png "width=320 height=180")
+![演示封面图](/notion-covers/plugin-recommendations.png "width=75%")
+```
+
+![演示封面图](/notion-covers/plugin-recommendations.png "width=320 height=180")
+
+> 一般来说默认是 75% 宽度
+
+### 脚注
+
+语法来说：
+
+```markdown
+这是一句带脚注的文字[^mdx-note]。
+
+[^mdx-note]: 脚注来自 GFM 能力，适合放补充说明或引用来源。
+```
+
+实际渲染效果：
 
 这是一句带脚注的文字[^mdx-note]。
 
 [^mdx-note]: 脚注来自 GFM 能力，适合放补充说明或引用来源。
+
+> [!TIP]
+> 与此同时，脚注会自动渲染到文章最底下，并且会有个大标题 `Footnotes` 。这里的大标题是自适应渲染的 —— 你文章的最大标题是多少他就是多少。例如你给的是 `#` ，那么就会渲染成 `# Footnotes` 。
 
 ## 8. 我自制的一些小组件
 
@@ -682,7 +716,7 @@ tabs: ["苹果", "橘子"]
 这是一个关于橘子的内容。
 ```
 
-### 左右对照（多语言/工具示例）
+### 一个经典示例
 
 这是一个典型的多包管理器命令对照示例，演示了如何在 Tab 中嵌套代码块：
 
