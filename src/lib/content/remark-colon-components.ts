@@ -19,6 +19,28 @@ const LEGACY_CHART_BLOCK_COMPONENTS = new Set([
   "XAxis",
 ]);
 
+type InlineComponentMatch = {
+  body: string;
+  name: string;
+  option: string;
+  params: Record<string, string>;
+};
+
+type InlineComponentDefinition = {
+  componentName: string;
+  buildProps: (match: InlineComponentMatch) => YamlData;
+};
+
+const INLINE_COMPONENT_DEFINITIONS: Record<string, InlineComponentDefinition> = {
+  badge: {
+    componentName: "Badge",
+    buildProps: ({ option, params }) => {
+      const shape = params.shape || params.variant || option || "default";
+      return { shape };
+    },
+  },
+};
+
 function parseYamlProps(yamlSource: string): YamlData {
   const trimmed = yamlSource.trim();
 
@@ -56,12 +78,176 @@ function escapeHtmlAttr(raw: string): string {
     .replaceAll(">", "&gt;");
 }
 
+function escapeHtmlText(raw: string): string {
+  return raw
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;");
+}
+
 function serializeAttrValue(value: unknown): string {
   if (typeof value === "string") {
     return escapeHtmlAttr(value);
   }
 
   return `${YAML_PROP_PREFIX}${encodeURIComponent(JSON.stringify(value))}`;
+}
+
+function findInlineComponentEnd(
+  value: string,
+  startIndex: number,
+  endChar: "]" | ")",
+) {
+  for (let index = startIndex; index < value.length; index += 1) {
+    if (value[index] !== endChar) {
+      continue;
+    }
+
+    if (value[index - 1] === "\\") {
+      continue;
+    }
+
+    return index;
+  }
+
+  return -1;
+}
+
+function buildInlineComponent(match: InlineComponentMatch): string | null {
+  const definition = INLINE_COMPONENT_DEFINITIONS[match.name];
+
+  if (!definition) {
+    return null;
+  }
+
+  return buildMdxComponent(
+    definition.componentName,
+    definition.buildProps(match),
+    escapeHtmlText(match.body),
+  );
+}
+
+function parseInlineComponentParams(option: string) {
+  const trimmed = option.trim();
+
+  if (!trimmed || !trimmed.includes("=")) {
+    return {
+      option: trimmed,
+      params: {} as Record<string, string>,
+    };
+  }
+
+  const params: Record<string, string> = {};
+
+  for (const segment of trimmed.split(",")) {
+    const entry = segment.trim();
+
+    if (!entry) {
+      continue;
+    }
+
+    const separatorIndex = entry.indexOf("=");
+
+    if (separatorIndex === -1) {
+      return {
+        option: trimmed,
+        params: {} as Record<string, string>,
+      };
+    }
+
+    const key = entry.slice(0, separatorIndex).trim();
+    const value = entry.slice(separatorIndex + 1).trim();
+
+    if (!key) {
+      return {
+        option: trimmed,
+        params: {} as Record<string, string>,
+      };
+    }
+
+    params[key] = value;
+  }
+
+  return {
+    option: "",
+    params,
+  };
+}
+
+function transformInlineComponents(line: string): string {
+  if (!line.includes(":")) {
+    return line;
+  }
+
+  let output = "";
+  let cursor = 0;
+
+  while (cursor < line.length) {
+    const start = line.indexOf(":", cursor);
+
+    if (start === -1) {
+      output += line.slice(cursor);
+      break;
+    }
+
+    if (start > 0 && line[start - 1] === "\\") {
+      output += line.slice(cursor, start - 1) + ":";
+      cursor = start + 1;
+      continue;
+    }
+
+    const nameMatch = line
+      .slice(start)
+      .match(/^:([A-Za-z][A-Za-z0-9_-]*)\[/);
+
+    if (!nameMatch) {
+      output += line.slice(cursor, start + 1);
+      cursor = start + 1;
+      continue;
+    }
+
+    const name = nameMatch[1];
+    const bodyStart = start + nameMatch[0].length;
+    const bodyEnd = findInlineComponentEnd(line, bodyStart, "]");
+
+    if (bodyEnd === -1 || line[bodyEnd + 1] !== "(") {
+      output += line.slice(cursor, bodyStart);
+      cursor = bodyStart;
+      continue;
+    }
+
+    const optionStart = bodyEnd + 2;
+    const optionEnd = findInlineComponentEnd(line, optionStart, ")");
+
+    if (optionEnd === -1) {
+      output += line.slice(cursor, optionStart);
+      cursor = optionStart;
+      continue;
+    }
+
+    const body = line.slice(bodyStart, bodyEnd);
+    const parsedOption = parseInlineComponentParams(
+      line.slice(optionStart, optionEnd),
+    );
+    const inlineComponent = buildInlineComponent({
+      body,
+      name,
+      option: parsedOption.option,
+      params: parsedOption.params,
+    });
+
+    if (!inlineComponent) {
+      output += line.slice(cursor, optionEnd + 1);
+      cursor = optionEnd + 1;
+      continue;
+    }
+
+    output += line.slice(cursor, start);
+    output += inlineComponent;
+    cursor = optionEnd + 1;
+  }
+
+  return output;
 }
 
 /**
@@ -325,7 +511,7 @@ export function transformColonComponents(source: string): string {
     const componentMatch = line.match(COMPONENT_START_RE);
 
     if (!componentMatch) {
-      output.push(line);
+      output.push(transformInlineComponents(line));
       index += 1;
       continue;
     }

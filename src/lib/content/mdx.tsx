@@ -16,6 +16,7 @@ import { LinkCard } from "@/components/mdx/link-card";
 import { MermaidDiagram } from "@/components/mdx/mermaid-diagram";
 import { MusicScore } from "@/components/mdx/music-score";
 import { ZoomableImage } from "@/components/mdx/zoomable-image";
+import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { rehypeChart } from "@/lib/content/rehype-chart";
@@ -225,6 +226,7 @@ const mdxComponents: Record<string, any> = {
   GitHubCalendarCard: withDecodedProps(GitHubCalendarCard),
   MermaidDiagram: withDecodedProps(MermaidDiagram),
   MusicScore: withDecodedProps(MusicScore),
+  Badge: withDecodedProps(Badge),
   Card: withDecodedProps(Card),
   Tabs: withDecodedProps(Tabs),
   TabsList: withDecodedProps(TabsList),

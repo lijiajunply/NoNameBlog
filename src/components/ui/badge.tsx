@@ -1,14 +1,20 @@
 import type { HTMLAttributes } from "react";
 import { cn } from "@/lib/utils";
 
+type BadgeProps = HTMLAttributes<HTMLSpanElement> & {
+  shape?: "default" | "round";
+};
+
 export function Badge({
   className,
+  shape = "round",
   ...props
-}: HTMLAttributes<HTMLSpanElement>) {
+}: BadgeProps) {
   return (
     <span
       className={cn(
-        "inline-flex items-center rounded-full border border-neutral-200 bg-white/70 px-2.5 py-1 text-xs text-neutral-600 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-300",
+        "inline-flex items-center border border-neutral-200 bg-white/70 px-2.5 py-1 text-xs text-neutral-600 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-300",
+        shape === "round" ? "rounded-full" : "rounded-md",
         className,
       )}
       {...props}
