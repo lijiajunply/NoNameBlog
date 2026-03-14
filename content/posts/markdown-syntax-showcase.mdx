@@ -726,7 +726,7 @@ w: 我 呀 | 我 爱 | 你 | 你 爱 我 | 我 爱 你 蜜 雪 冰 城 甜 蜜 |
 
 ## 11. 选项卡 (Tabs)
 
-现在支持使用 ` ```tab ` 代码块语法。这种方式比直接写 MDX 组件更简洁，且对 Markdown 编辑器更友好。
+现在支持使用 `::tabs` 自制块语法。这种方式比直接写 MDX 组件更简洁，且对 Markdown 编辑器更友好。
 
 ### 基础用法
 
@@ -735,31 +735,31 @@ w: 我 呀 | 我 爱 | 你 | 你 爱 我 | 我 爱 你 蜜 雪 冰 城 甜 蜜 |
 2. 使用 `---` 分隔配置与内容，以及分隔不同的选项卡内容。
 
 ````markdown
-```tab
+::tabs
 tabs: ["苹果", "橘子"]
 ---
 这是一个关于苹果的内容。支持 **Markdown**。
 ---
 这是一个关于橘子的内容。
-```
+::
 ````
 
 实际渲染效果：
 
-```tab
+::tabs
 tabs: ["苹果", "橘子"]
 ---
 这是一个关于苹果的内容。支持 **Markdown**。
 ---
 这是一个关于橘子的内容。
-```
+::
 
 ### 一个经典示例
 
 这是一个典型的多包管理器命令对照示例，演示了如何在 Tab 中嵌套代码块：
 
 ````markdown
-```tab
+::tabs
 tabs: ["pnpm", "npm", "yarn"]
 ---
 ```bash
@@ -773,12 +773,12 @@ npm install lucide-react
 ```bash
 yarn add lucide-react
 ```
-```
+::
 ````
 
 实际渲染效果：
 
-```tab
+::tabs
 tabs: ["pnpm", "npm", "yarn"]
 ---
 ```bash
@@ -792,7 +792,7 @@ npm install lucide-react
 ```bash
 yarn add lucide-react
 ```
-```
+::
 
 
 ## 最后

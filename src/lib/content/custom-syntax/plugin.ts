@@ -3,7 +3,7 @@ import { componentBlockHandler } from "@/lib/content/custom-syntax/handlers/comp
 import { detailsBlockHandler } from "@/lib/content/custom-syntax/handlers/details-block";
 import { inlineBadgeHandler } from "@/lib/content/custom-syntax/handlers/inline-badge";
 import { legacyGuardBlockHandler } from "@/lib/content/custom-syntax/handlers/legacy-guard";
-import { tabsFenceHandler } from "@/lib/content/custom-syntax/handlers/tabs-fence";
+import { tabsBlockHandler } from "@/lib/content/custom-syntax/handlers/tabs-block";
 import type {
   CustomSyntaxBlockHandler,
   CustomSyntaxInlineHandler,
@@ -24,7 +24,7 @@ import {
 const BLOCK_HANDLERS: CustomSyntaxBlockHandler[] = [
   legacyGuardBlockHandler,
   detailsBlockHandler,
-  tabsFenceHandler,
+  tabsBlockHandler,
   componentBlockHandler,
 ].sort((left, right) => (right.priority ?? 0) - (left.priority ?? 0));
 

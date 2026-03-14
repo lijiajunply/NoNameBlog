@@ -1,6 +1,58 @@
 import type { RootContent } from "mdast";
 import type { CustomSyntaxBlockHandler } from "@/lib/content/custom-syntax/types";
-import { YAML_BODY_SPLIT_RE } from "@/lib/content/custom-syntax/utils";
+import {
+  BLOCK_END_RE,
+  YAML_BODY_SPLIT_RE,
+} from "@/lib/content/custom-syntax/utils";
+
+const TABS_START_RE = /^::tabs\s*$/i;
+
+function findTabsEnd(lines: string[], startLine: number) {
+  let cursor = startLine + 1;
+  let nestedDepth = 0;
+  let innerFenceMarker: "```" | "~~~" | null = null;
+
+  while (cursor <= lines.length) {
+    const current = lines[cursor - 1] ?? "";
+
+    if (innerFenceMarker) {
+      if (current.trimStart().startsWith(innerFenceMarker)) {
+        innerFenceMarker = null;
+      }
+      cursor += 1;
+      continue;
+    }
+
+    const trimmedCurrent = current.trimStart();
+    if (trimmedCurrent.startsWith("```")) {
+      innerFenceMarker = "```";
+      cursor += 1;
+      continue;
+    }
+    if (trimmedCurrent.startsWith("~~~")) {
+      innerFenceMarker = "~~~";
+      cursor += 1;
+      continue;
+    }
+
+    if (TABS_START_RE.test(current)) {
+      nestedDepth += 1;
+      cursor += 1;
+      continue;
+    }
+
+    if (BLOCK_END_RE.test(current)) {
+      if (nestedDepth === 0) {
+        return cursor;
+      }
+      nestedDepth -= 1;
+    }
+
+    cursor += 1;
+  }
+
+  return -1;
+}
 
 function splitTabSections(value: string) {
   const lines = value.split(/\r?\n/);
@@ -54,22 +106,43 @@ function splitTabSections(value: string) {
   };
 }
 
-export const tabsFenceHandler: CustomSyntaxBlockHandler = {
+export const tabsBlockHandler: CustomSyntaxBlockHandler = {
   kind: "container",
-  match: ({ children, index }) => {
+  match: ({ children, index, getNodeSource }) => {
     const node = children[index];
-    return node?.type === "code" && node.lang === "tab";
-  },
-  name: "tabs-fence",
-  priority: 5,
-  transform: (context) => {
-    const node = context.children[context.index];
 
-    if (node?.type !== "code" || node.lang !== "tab") {
-      return { consumed: 1, nodes: node ? [node] : [] };
+    if (!node) {
+      return false;
     }
 
-    const { sections, yamlSource } = splitTabSections(node.value);
+    const snippet = getNodeSource(node);
+    const firstLine = snippet.split(/\r?\n/, 1)[0]?.trim() ?? "";
+    return TABS_START_RE.test(firstLine);
+  },
+  name: "tabs-block",
+  priority: 20,
+  transform: (context) => {
+    const node = context.children[context.index];
+    const startLine = node.position?.start?.line;
+
+    if (!startLine) {
+      return { consumed: 1, nodes: [node] };
+    }
+
+    const openingLine = context.getLine(startLine).trim();
+
+    if (!TABS_START_RE.test(openingLine)) {
+      return { consumed: 1, nodes: [node] };
+    }
+
+    const endLine = findTabsEnd(context.lines, startLine);
+
+    if (endLine === -1) {
+      throw new Error(`Unclosed "::tabs" block at line ${startLine}`);
+    }
+
+    const blockLines = context.lines.slice(startLine, endLine - 1);
+    const { sections, yamlSource } = splitTabSections(blockLines.join("\n"));
     const props = context.parseYamlProps(yamlSource);
     const labels = Array.isArray(props.tabs) ? props.tabs : [];
     delete props.tabs;
@@ -87,7 +160,10 @@ export const tabsFenceHandler: CustomSyntaxBlockHandler = {
       }));
 
     if (tabsData.length === 0) {
-      return { consumed: 1, nodes: [] };
+      return {
+        consumed: context.consumeThroughLine(endLine),
+        nodes: [],
+      };
     }
 
     const defaultValue =
@@ -109,7 +185,7 @@ export const tabsFenceHandler: CustomSyntaxBlockHandler = {
     );
 
     return {
-      consumed: 1,
+      consumed: context.consumeThroughLine(endLine),
       nodes: [
         context.createFlowElement("Tabs", tabsProps, [
           context.createFlowElement("TabsList", {}, tabsListChildren),
