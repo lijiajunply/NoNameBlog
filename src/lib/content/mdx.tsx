@@ -19,6 +19,7 @@ import { ZoomableImage } from "@/components/mdx/zoomable-image";
 import { Card } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { rehypeChart } from "@/lib/content/rehype-chart";
+import { rehypeFootnotesHeading } from "@/lib/content/rehype-footnotes-heading";
 import { rehypeMermaid } from "@/lib/content/rehype-mermaid";
 import { rehypeMusic } from "@/lib/content/rehype-music";
 import { transformColonComponents } from "@/lib/content/remark-colon-components";
@@ -262,6 +263,7 @@ export async function renderMdx(source: string) {
           rehypeChart,
           rehypeMermaid,
           rehypeMusic,
+          rehypeFootnotesHeading,
           [rehypeAutolinkHeadings, { behavior: "append" }],
           [rehypePrettyCode, prettyCodeOptions],
         ],
