@@ -23,7 +23,10 @@ import { rehypeChart } from "@/lib/content/rehype-chart";
 import { rehypeFootnotesHeading } from "@/lib/content/rehype-footnotes-heading";
 import { rehypeMermaid } from "@/lib/content/rehype-mermaid";
 import { rehypeMusic } from "@/lib/content/rehype-music";
-import { transformColonComponents } from "@/lib/content/remark-colon-components";
+import {
+  createCustomSyntaxRemarkPlugin,
+  YAML_PROP_PREFIX,
+} from "@/lib/content/remark-colon-components";
 import { remarkSuperSub } from "@/lib/content/remark-supersub";
 import { cn } from "@/lib/utils";
 
@@ -32,8 +35,6 @@ type MdxComponentProps = {
   children?: ReactNode;
   [key: string]: any;
 };
-
-const YAML_PROP_PREFIX = "__YAML__";
 
 function decodeYamlPropValue(value: unknown): unknown {
   if (typeof value !== "string" || !value.startsWith(YAML_PROP_PREFIX)) {
@@ -246,15 +247,14 @@ const prettyCodeOptions = {
 };
 
 export async function renderMdx(source: string) {
-  const transformedSource = transformColonComponents(source);
-
   const { content } = await compileMDX({
-    source: transformedSource,
+    source,
     components: mdxComponents,
     options: {
       parseFrontmatter: false,
       mdxOptions: {
         remarkPlugins: [
+          createCustomSyntaxRemarkPlugin,
           [remarkGfm, { singleTilde: false }],
           remarkAlert,
           remarkMath,
