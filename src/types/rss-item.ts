@@ -4,3 +4,5 @@ export type RssItem = {
   description: string;
   pubDate: string;
 };
+
+export type FriendFeedItem = RssItem & { name: string; avatar: string | undefined };
