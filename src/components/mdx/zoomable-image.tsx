@@ -45,23 +45,30 @@ export function ZoomableImage({
 
   return (
     <>
-      <button
-        type="button"
-        onClick={() => setIsOpen(true)}
-        className="my-8 block w-full cursor-zoom-in rounded-2xl text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400 dark:focus-visible:ring-neutral-500"
-        aria-label="点击查看大图"
-      >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={src}
-          alt={alt}
-          className={cn(
-            "w-full rounded-2xl border border-neutral-200/50 shadow-sm dark:border-neutral-800/50",
-            className,
-          )}
-          {...props}
-        />
-      </button>
+      <div className="mb-4 mt-6">
+        <button
+          type="button"
+          onClick={() => setIsOpen(true)}
+          className="mt-0 mb-0 w-full rounded-2xl flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400 dark:focus-visible:ring-neutral-500"
+          aria-label="点击查看大图"
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={src}
+            alt={alt}
+            className={cn(
+              "rounded-2xl border cursor-zoom-in border-neutral-200/50 shadow-sm dark:border-neutral-800/50 mt-0 mb-0",
+              className,
+            )}
+            style={{ width: '75%' }}
+            {...props}
+          />
+        </button>
+        <div className="text-sm text-neutral-500 mt-2 text-center">
+          {alt}
+        </div>
+      </div>
+
 
       {isOpen ? (
         <button

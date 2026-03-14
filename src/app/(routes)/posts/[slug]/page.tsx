@@ -251,7 +251,7 @@ export default async function PostPage({ params }: PostPageProps) {
           {content}
         </div>
 
-        <div className="mt-12 mb-4 border border-neutral-200/80 p-4 rounded-lg dark:border-neutral-800 bg-gray-50/90 dark:bg-gray-900/60">
+        <div className="mt-16 mb-4 border border-neutral-200/80 p-4 rounded-lg dark:border-neutral-800 bg-gray-50/90 dark:bg-gray-900/60">
             <div className="font-semibold">
               许可协议
             </div>
