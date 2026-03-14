@@ -22,6 +22,7 @@ import { rehypeChart } from "@/lib/content/rehype-chart";
 import { rehypeMermaid } from "@/lib/content/rehype-mermaid";
 import { rehypeMusic } from "@/lib/content/rehype-music";
 import { transformColonComponents } from "@/lib/content/remark-colon-components";
+import { remarkSuperSub } from "@/lib/content/remark-supersub";
 import { cn } from "@/lib/utils";
 
 type MdxComponentProps = {
@@ -249,7 +250,12 @@ export async function renderMdx(source: string) {
     options: {
       parseFrontmatter: false,
       mdxOptions: {
-        remarkPlugins: [remarkGfm, remarkAlert, remarkMath],
+        remarkPlugins: [
+          [remarkGfm, { singleTilde: false }],
+          remarkAlert,
+          remarkMath,
+          remarkSuperSub,
+        ],
         rehypePlugins: [
           rehypeSlug,
           rehypeKatex,

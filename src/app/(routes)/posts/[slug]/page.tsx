@@ -250,6 +250,16 @@ export default async function PostPage({ params }: PostPageProps) {
         >
           {content}
         </div>
+
+        <div className="mt-12 mb-4 border border-neutral-200/80 p-4 rounded-lg dark:border-neutral-800 bg-gray-50/90 dark:bg-gray-900/60">
+            <div className="font-semibold">
+              许可协议
+            </div>
+            <div className="text-sm text-neutral-600 dark:text-neutral-400">
+              本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans" target="_black">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。
+            </div>
+        </div>
+
         {previousPost || nextPost ? (
           <nav
             className="mt-10 grid gap-3 sm:grid-cols-2"
