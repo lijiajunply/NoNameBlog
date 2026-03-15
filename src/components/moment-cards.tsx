@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import type { FriendFeedItem } from "@/types/rss";
 import { ToggleGroup, ToggleGroupItem } from "./ui/toggle-group";
 
-const ITEMS_PER_PAGE = 20;
+const ITEMS_PER_PAGE = 10;
 
 export function MomentsContent() {
   const [items, setItems] = useState<FriendFeedItem[]>([]);
