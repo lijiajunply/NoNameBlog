@@ -145,16 +145,17 @@ export function MomentsCard({ items }: { items: FriendFeedItem[] }) {
               href={item.link}
               target="_blank"
               rel="noreferrer"
-              className="min-h-20 w-full gap-4 rounded-lg border border-gray-200 p-4 shadow-sm hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700"
+              className="group min-h-20 w-full gap-4 rounded-lg p-4 border border-neutral-200/70 bg-white/80 shadow-[0_6px_30px_-18px_rgba(0,0,0,0.2)] backdrop-blur-sm dark:border-neutral-800/80 dark:bg-neutral-900/80 transition-transform duration-300 hover:-translate-y-1"
             >
               <div className="flex items-center">
-                <div className="relative size-16 overflow-hidden rounded-full">
+                <div className="relative size-12 md:size-16 flex-none overflow-hidden rounded-full">
                   {item.avatar ? (
                     <Image
                       src={item.avatar}
                       alt={item.name}
                       className="object-cover"
                       fill
+                      loading="lazy"
                       unoptimized
                     />
                   ) : (
@@ -164,13 +165,13 @@ export function MomentsCard({ items }: { items: FriendFeedItem[] }) {
                   )}
                 </div>
                 <div className="ml-4">
-                  <h3 className="truncate text-lg font-medium">{item.title}</h3>
+                  <h3 className="text-lg font-medium">{item.title}</h3>
                   <div className="mt-1 text-sm text-gray-500">
                     {new Date(item.pubDate).toLocaleString("zh-CN", {})}
                   </div>
                 </div>
               </div>
-              <div className="ml-20 mt-1 text-sm text-gray-500">
+              <div className="ml-16 md:ml-20 mt-1 text-sm text-gray-800 dark:text-gray-200">
                 {item.description}
               </div>
             </a>
