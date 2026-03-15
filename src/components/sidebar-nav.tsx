@@ -335,6 +335,7 @@ export function SidebarNav({
                       target="_blank"
                       rel="noopener"
                       title="GitHub"
+                      className="w-full h-full flex items-center justify-center"
                     >
                       <Icon icon="lucide:github" width="16" height="16" className="text-zinc-800 dark:text-white"/>
                     </a>
@@ -352,6 +353,7 @@ export function SidebarNav({
                       target="_blank"
                       rel="noopener"
                       title="知乎"
+                      className="w-full h-full flex items-center justify-center"
                     >
                       <Icon icon="simple-icons:zhihu" width="16" height="16" className="text-blue-500 dark:text-blue-400"/>
                     </a>
@@ -370,6 +372,7 @@ export function SidebarNav({
                       target="_blank"
                       rel="noopener"
                       title="哔哩哔哩"
+                      className="w-full h-full flex items-center justify-center"
                     >
                       <Icon icon="simple-icons:bilibili" width="16" height="16" className="text-pink-600 dark:text-pink-400"/>
                     </a>
@@ -388,6 +391,7 @@ export function SidebarNav({
                       target="_blank"
                       rel="noopener"
                       title="Bilibili"
+                      className="w-full h-full flex items-center justify-center"
                     >
                       <Icon icon="heroicons:rss-16-solid" width="16" height="16" className="text-emerald-700 dark:text-emerald-300"/>
                     </a>
@@ -406,6 +410,7 @@ export function SidebarNav({
                       target="_blank"
                       rel="noopener"
                       title="开往-友链接力"
+                      className="w-full h-full flex items-center justify-center"
                     >
                       <Icon icon="fa7-solid:train-subway" width="16" height="16" />
                     </a>
