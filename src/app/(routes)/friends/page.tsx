@@ -42,7 +42,7 @@ export default function FriendsPage() {
       name: "LuckyFish",
       url: "https://blog.luckyfishes.site/",
       description: "自己随便写的",
-      avatar: "https://blog.luckyfishes.site/favicon.ico",
+      avatar: "https://blog.luckyfishes.site/avatar.png",
       category: "个人博客",
     },
     null,
@@ -66,15 +66,11 @@ export default function FriendsPage() {
       {/* Friends Grouped Lists */}
       <div className="space-y-12">
         {Object.entries(groupedFriends).map(([category, items]) => (
-          <section key={category} className="space-y-6">
+          <section key={category} className="space-y-6 mt-3">
             <div className="flex items-center gap-3 px-2">
               <h2 className="text-2xl font-semibold tracking-tight text-neutral-900 dark:text-white">
                 {category}
               </h2>
-              <div className="h-px flex-1 bg-neutral-200 dark:bg-neutral-800" />
-              <span className="text-sm font-medium text-neutral-400">
-                {items.length} links
-              </span>
             </div>
 
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -207,7 +203,7 @@ export default function FriendsPage() {
             <InputGroupInput
               id="input-group-url"
               placeholder="example.com"
-              value={"https://blog.luckyfishes.site/favicon.ico"}
+              value={"https://blog.luckyfishes.site/avatar.png"}
               readOnly
             />
             <InputGroupAddon>
@@ -215,7 +211,7 @@ export default function FriendsPage() {
             </InputGroupAddon>
             <InputGroupAddon align="inline-end">
               <FriendsInputButton
-                text={"https://blog.luckyfishes.site/favicon.ico"}
+                text={"https://blog.luckyfishes.site/avatar.png"}
               />
             </InputGroupAddon>
           </InputGroup>

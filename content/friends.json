@@ -1,13 +1,5 @@
 [
   {
-    "name": "LuckyFish",
-    "url": "https://blog.luckyfishes.site/",
-    "description": "自己随便写的",
-    "avatar": "https://q1.qlogo.cn/g?b=qq&nk=2383690354&s=4",
-    "order": 3,
-    "category": "个人博客"
-  },
-  {
     "name": "GuuGuai",
     "url": "https://blog.guuguai.site/",
     "description": "一个什么都可能会写的博客",

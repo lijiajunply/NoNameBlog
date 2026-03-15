@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { PostToc } from "@/components/post-toc";
 import { PostComments } from "@/components/post-comments";
+import { PostToc } from "@/components/post-toc";
 import { Badge } from "@/components/ui/badge";
 import { siteConfig } from "@/config/site";
 import { renderMdx } from "@/lib/content/mdx";
@@ -152,7 +153,7 @@ export default async function PostPage({ params }: PostPageProps) {
   }
 
   const content = await renderMdx(post.content);
-  const { category, tags } = post.frontmatter;
+  const { category, cover, tags } = post.frontmatter;
   const summary = post.frontmatter.summary ?? undefined;
   const posts = getAllPosts();
   const postsBySlug = new Map(posts.map((item) => [item.slug, item]));
@@ -160,12 +161,12 @@ export default async function PostPage({ params }: PostPageProps) {
   const defaultPreviousPost =
     currentIndex >= 0
       ? pickFallbackPost(
-          posts,
-          currentIndex,
-          post.slug,
-          postsBySlug,
-          "previous",
-        )
+        posts,
+        currentIndex,
+        post.slug,
+        postsBySlug,
+        "previous",
+      )
       : null;
   const defaultNextPost =
     currentIndex >= 0
@@ -216,33 +217,72 @@ export default async function PostPage({ params }: PostPageProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
       />
       <section className="min-w-0 md:p-10 lg:pl-14 xl:pl-20">
-        <div className="mb-6 space-y-4">
-          <div className="flex flex-wrap items-center gap-2 text-sm text-neutral-500">
-            <span>{formatDate(post.frontmatter.date)}</span>
-            <span>·</span>
-            <span>{post.readingTime}</span>
+        {cover ? (
+          <div className="mb-6">
+            <figure className="relative overflow-hidden rounded-[28px] border border-neutral-200/80 dark:border-neutral-800">
+              <div className="relative aspect-[16/7] w-full">
+                <Image
+                  src={cover}
+                  alt={`${post.frontmatter.title} 封面`}
+                  fill
+                  className="object-cover"
+                  priority
+                  unoptimized
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/35" />
+                <div className="absolute left-4 top-4 flex flex-wrap items-center gap-2 text-sm font-semibold text-white/95 md:left-6 md:top-5 md:text-4">
+                  <span>{formatDate(post.frontmatter.date)}</span>
+                  <span>·</span>
+                  <span>{post.readingTime}</span>
+                </div>
+                <div className="absolute inset-x-4 bottom-4 md:inset-x-6 md:bottom-6">
+                  <h1
+                    className="line-clamp-2 text-3xl font-semibold tracking-tight text-white md:text-5xl"
+                    data-pagefind-meta="title"
+                  >
+                    {post.frontmatter.title}
+                  </h1>
+                  {summary ? (
+                    <p className="mt-4 text-lg text-neutral-400">
+                      {summary}
+                    </p>
+                  ) : null}
+                </div>
+              </div>
+            </figure>
+
           </div>
-          <h1
-            className="text-3xl font-semibold tracking-tight text-neutral-900 md:text-4xl dark:text-white"
-            data-pagefind-meta="title"
-          >
-            {post.frontmatter.title}
-          </h1>
-          {summary ? (
-            <p className="text-neutral-600 dark:text-neutral-300">{summary}</p>
-          ) : null}
-          <div className="flex flex-wrap gap-2">
-            {category ? (
-              <Link href={`/categories/${encodeURIComponent(category)}`}>
-                <Badge>分类: {category}</Badge>
-              </Link>
+        ) : (
+          <div className="mb-6 space-y-4">
+            <div className="flex flex-wrap items-center gap-2 text-sm text-neutral-500">
+              <span>{formatDate(post.frontmatter.date)}</span>
+              <span>·</span>
+              <span>{post.readingTime}</span>
+            </div>
+            <h1
+              className="text-3xl font-semibold tracking-tight text-neutral-900 md:text-4xl dark:text-white"
+              data-pagefind-meta="title"
+            >
+              {post.frontmatter.title}
+            </h1>
+            {summary ? (
+              <p className="text-neutral-600 dark:text-neutral-300">
+                {summary}
+              </p>
             ) : null}
-            {tags.map((tag) => (
-              <Link key={tag} href={`/tags/${encodeURIComponent(tag)}`}>
-                <Badge>#{tag}</Badge>
-              </Link>
-            ))}
           </div>
+        )}
+        <div className="mb-6 flex flex-wrap gap-2">
+          {category ? (
+            <Link href={`/categories/${encodeURIComponent(category)}`}>
+              <Badge>分类: {category}</Badge>
+            </Link>
+          ) : null}
+          {tags.map((tag) => (
+            <Link key={tag} href={`/tags/${encodeURIComponent(tag)}`}>
+              <Badge>#{tag}</Badge>
+            </Link>
+          ))}
         </div>
         <div
           className="prose prose-neutral min-w-0 max-w-none dark:prose-invert"
@@ -252,12 +292,17 @@ export default async function PostPage({ params }: PostPageProps) {
         </div>
 
         <div className="mt-16 mb-4 border border-neutral-200/80 p-4 rounded-lg dark:border-neutral-800 bg-gray-50/90 dark:bg-gray-900/60">
-            <div className="font-semibold">
-              许可协议
-            </div>
-            <div className="text-sm text-neutral-600 dark:text-neutral-400">
-              本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans" target="_black">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。
-            </div>
+          <div className="font-semibold">许可协议</div>
+          <div className="text-sm text-neutral-600 dark:text-neutral-400">
+            本文采用{" "}
+            <a
+              href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans"
+              target="_black"
+            >
+              署名-非商业性使用-相同方式共享 4.0 国际
+            </a>{" "}
+            许可协议，转载请注明出处。
+          </div>
         </div>
 
         {previousPost || nextPost ? (
