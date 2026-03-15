@@ -1,5 +1,6 @@
 import { Analytics } from "@vercel/analytics/next";
 import type { Metadata } from "next";
+import { GlobalRouteLoader } from "@/components/global-route-loader";
 import { ThemeProvider } from "@/components/theme-provider";
 import { siteConfig } from "@/config/site";
 import "katex/dist/katex.min.css";
@@ -71,6 +72,7 @@ export default function RootLayout({
   return (
     <html lang="zh-CN" suppressHydrationWarning>
       <body>
+        <GlobalRouteLoader />
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
