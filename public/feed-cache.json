@@ -1,0 +1,538 @@
+[
+  {
+    "title": "实习后买了一堆东西",
+    "link": "https://blog.zhilu.site/2026/buy-right",
+    "description": "键盘鼠标显示器，手环VR小东西。可以买贵的，但不能买贵了。",
+    "pubDate": "2026-02-23T03:02:12Z",
+    "name": "纸鹿本鹿",
+    "avatar": "https://www.zhilu.site/api/avatar.png"
+  },
+  {
+    "title": "未上岸指北：考研常识篇其一",
+    "link": "https://blog.guuguai.site/2026/kaoyan-guide-1",
+    "description": "2025年考研复盘。既然无法分享成功经验，那就聊聊失败者（没出成绩，目前预计是）的视角。本文作为系列第一篇，重点梳理考研流程、志愿规则与一些其它常识。",
+    "pubDate": "2026-02-01T13:54:33Z",
+    "name": "GuuGuai",
+    "avatar": "https://cravatar.cn/avatar/646331BFF8F19A0E05679C3CC0FC54D6"
+  },
+  {
+    "title": "如何获取GCP6位验证码:中行借记卡预授权记录查询",
+    "link": "https://blog.guuguai.site/2026/boc-google-cloud",
+    "description": "双信息交易模式的简单介绍，以及中行借记卡查询预授权记录的方法",
+    "pubDate": "2026-01-23T02:44:27Z",
+    "name": "GuuGuai",
+    "avatar": "https://cravatar.cn/avatar/646331BFF8F19A0E05679C3CC0FC54D6"
+  },
+  {
+    "title": "谈谈不受欢迎的博客技术特征",
+    "link": "https://blog.zhilu.site/2025/unpopular-blog-tech",
+    "description": "从弹窗干扰到服务滥用，文章剖析博客网站「自以为在优化，实则在添堵」的负面技术特征。",
+    "pubDate": "2025-10-07T08:06:46Z",
+    "name": "纸鹿本鹿",
+    "avatar": "https://www.zhilu.site/api/avatar.png"
+  },
+  {
+    "title": "我们的设备被拿来做了什么：软件的背景行为",
+    "link": "https://blog.zhilu.site/2025/background-behavior",
+    "description": "软件为了利益添加不合用户预期的「背景行为」，无论早晚都会暴雷。你我都可能是「背景行为」的波及者，你享受了免费，你的设备在为你打工。",
+    "pubDate": "2025-08-17T17:16:02Z",
+    "name": "纸鹿本鹿",
+    "avatar": "https://www.zhilu.site/api/avatar.png"
+  },
+  {
+    "title": "生成式AI正在生成",
+    "link": "https://blog.zhilu.site/2025/ai-abuse",
+    "description": "2025年初我对AI内容泛滥感到不适，但察觉内容空洞的人只有少数。生成式AI在2025一整年迭代太快，以至于2026年初整理好的这些文字显得有些过时。",
+    "pubDate": "2025-06-10T13:52:43Z",
+    "name": "纸鹿本鹿",
+    "avatar": "https://www.zhilu.site/api/avatar.png"
+  },
+  {
+    "title": "前端字体二三事",
+    "link": "https://blog.zhilu.site/2025/font-tips",
+    "description": "前端字体排版有许多细节需要注意，文章从我的实际开发经验出发，介绍合成字形、对齐技巧、排版优化，以及自己的一些踩坑心得。",
+    "pubDate": "2025-04-16T00:49:50Z",
+    "name": "纸鹿本鹿",
+    "avatar": "https://www.zhilu.site/api/avatar.png"
+  },
+  {
+    "title": "深色模式开发的最佳实践",
+    "link": "https://blog.zhilu.site/2025/dark-mode-guide",
+    "description": "前端深色模式不止于 prefers-color-scheme，完整解析自动检测、手动切换的实现方案，解决闪屏、样式冲突、变量管理等常见痛点，提供稳健的深色模式最佳实践。",
+    "pubDate": "2025-04-14T02:07:16Z",
+    "name": "纸鹿本鹿",
+    "avatar": "https://www.zhilu.site/api/avatar.png"
+  },
+  {
+    "title": "寻不回手工油糕",
+    "link": "https://blog.zhilu.site/2025/oil-cakes",
+    "description": "油糕的酥皮，是从什么时候开始不往下掉的？",
+    "pubDate": "2025-02-16T04:30:24Z",
+    "name": "纸鹿本鹿",
+    "avatar": "https://www.zhilu.site/api/avatar.png"
+  },
+  {
+    "title": "一些数码外设的评价和“捡垃圾”心得",
+    "link": "https://blog.zhilu.site/2024/digital-products-bought",
+    "description": "记录了在不同阶段购买和使用的键鼠、充电宝和耳机等数码产品的使用体验、优缺点以及购买理由，并总结在“捡垃圾”过程中积累的心得体会。",
+    "pubDate": "2024-12-19T11:24:26Z",
+    "name": "纸鹿本鹿",
+    "avatar": "https://www.zhilu.site/api/avatar.png"
+  },
+  {
+    "title": "朋友的 Vivado 和 Modelsim 装上了吗",
+    "link": "https://blog.zhilu.site/2024/vivado-modelsim-rescue",
+    "description": "明明只是遵照教程配置硬件开发环境，Vivado 添加许可证后却没有产品 License，Modelsim 注册机也会在生成许可证后闪退。教程竟不能覆盖这些情况了！亲自动手，误打误撞地在种种机缘巧合之下，探索 Windows 的种种「环境之谜」。",
+    "pubDate": "2024-12-03T00:00:41Z",
+    "name": "纸鹿本鹿",
+    "avatar": "https://www.zhilu.site/api/avatar.png"
+  },
+  {
+    "title": "迟到三月的年末博客杂谈：动力、文章和内容",
+    "link": "https://blog.zhilu.site/2024/blog-record",
+    "description": "为什么写博客、写什么样的博客——讲述我的博客历程，以及自己关于博客的思考。",
+    "pubDate": "2024-11-19T00:08:07Z",
+    "name": "纸鹿本鹿",
+    "avatar": "https://www.zhilu.site/api/avatar.png"
+  },
+  {
+    "title": "VitePress 不完全优化指南",
+    "link": "https://blog.zhilu.site/2024/vitepress-enhancement",
+    "description": "VitePress 的基本使用与定制技巧，涵盖项目初始化、汉化配置、图标引入、自定义主题等内容，旨在利用 VitePress 构建美观、高效的静态站点。",
+    "pubDate": "2024-11-03T09:54:50Z",
+    "name": "纸鹿本鹿",
+    "avatar": "https://www.zhilu.site/api/avatar.png"
+  },
+  {
+    "title": "给电脑新手的笔记本开荒指南导读",
+    "link": "https://blog.zhilu.site/2024/new-laptop-guide",
+    "description": "成为电脑高手，机魂大悦，人亦绥。我已避开联想预装软件所带问题的瓢泼大雨，而持续收到新手关于厂商作恶所致问题的咨询，却是相伴许久的潮湿。总结成文，恶意软件退!退!退！",
+    "pubDate": "2024-10-28T00:23:08Z",
+    "name": "纸鹿本鹿",
+    "avatar": "https://www.zhilu.site/api/avatar.png"
+  },
+  {
+    "title": "再谈考试时钟：技术之外的思考",
+    "link": "https://blog.zhilu.site/2024/exam-clock-thinking",
+    "description": "通过回忆高中生活和开发考试时钟的经历，结合遇到的其他事例，点出了技术与人文关怀的关联，并呼吁注重用户体验。",
+    "pubDate": "2024-10-18T08:50:35Z",
+    "name": "纸鹿本鹿",
+    "avatar": "https://www.zhilu.site/api/avatar.png"
+  },
+  {
+    "title": "今日校园见闻：我已经出离高兴了",
+    "link": "https://blog.zhilu.site/2024/observe-at-school",
+    "description": "今日关键词是“高兴”，取外卖、打扫卫生、宣讲会、Java 课都高兴；第二天听说了学生手册考试、电信校招、舍长查课等事，也很高兴；第三天发现文章的预见性，《高兴》就此收笔。",
+    "pubDate": "2024-10-09T14:32:05Z",
+    "name": "纸鹿本鹿",
+    "avatar": "https://www.zhilu.site/api/avatar.png"
+  },
+  {
+    "title": "MC扫盲之版本/启动器/正盗版/外置登录",
+    "link": "https://blog.guuguai.site/2024/minecraft-version",
+    "description": "为仙建世界社团的新同学准备的入坑指南，解析Java版与基岩版的区别、正版购买渠道、启动器选择建议，以及正版登录、离线登录与外置登录（皮肤站）背后的验证原理。",
+    "pubDate": "2024-10-08T11:45:48Z",
+    "name": "GuuGuai",
+    "avatar": "https://cravatar.cn/avatar/646331BFF8F19A0E05679C3CC0FC54D6"
+  },
+  {
+    "title": "配置并差点运行不了 Java Applet",
+    "link": "https://blog.zhilu.site/2024/run-java-applets",
+    "description": "为了完成大学《Java 语言程序设计》课程的实验报告，尝试配置旧版 Java 环境并成功运行 Java Applet，最终认为实际应用价值有限。",
+    "pubDate": "2024-09-26T01:12:42Z",
+    "name": "纸鹿本鹿",
+    "avatar": "https://www.zhilu.site/api/avatar.png"
+  },
+  {
+    "title": "Windows 上的开源软件入门",
+    "link": "https://blog.zhilu.site/2024/sfd-xupt",
+    "description": "软件自由日西邮站上的一场分享，从 CLI、GUI、开源协议、GitHub 讲起，推荐了一些开源软件。",
+    "pubDate": "2024-09-17T09:51:12Z",
+    "name": "纸鹿本鹿",
+    "avatar": "https://www.zhilu.site/api/avatar.png"
+  },
+  {
+    "title": "博客进化：从 Hexo 到 Nuxt Content",
+    "link": "https://blog.zhilu.site/2024/blog-using-nuxt",
+    "description": "抬笔一挥，便洒出占半的前端样式代码。开发功能并不慢，样式优化与问题修复却很耗时间。博客前端的现代化转型，且听我话其分晓。",
+    "pubDate": "2024-08-27T10:30:55Z",
+    "name": "纸鹿本鹿",
+    "avatar": "https://www.zhilu.site/api/avatar.png"
+  },
+  {
+    "title": "祖母的90年代南昌差旅之险",
+    "link": "https://blog.zhilu.site/2024/grandma-high-point",
+    "description": "祖母与祖父差旅南昌，谈判发电机组销售事宜，在对方公司欲骗欲抢之时，化解危机并挽回损失。",
+    "pubDate": "2024-08-24T22:46:54Z",
+    "name": "纸鹿本鹿",
+    "avatar": "https://www.zhilu.site/api/avatar.png"
+  },
+  {
+    "title": "Java版的译名是Mojang官方翻译的吗？",
+    "link": "https://blog.guuguai.site/2024/minecraft-translations-new",
+    "description": "为仙建世界社团的同学们简单介绍Minecraft Java版基于Crowdin平台的社区翻译机制，解释为何Java版翻译既非Mojang官方制作也非外包，并简单叙述译名从讨论到采纳的流程。",
+    "pubDate": "2024-08-07T03:09:03Z",
+    "name": "GuuGuai",
+    "avatar": "https://cravatar.cn/avatar/646331BFF8F19A0E05679C3CC0FC54D6"
+  },
+  {
+    "title": "Linux 下通过 Samba 共享文件夹",
+    "link": "https://blog.zhilu.site/2024/linux-samba",
+    "description": "Linux 作为 SMB 协议服务器，向其他设备提供共享文件夹服务。",
+    "pubDate": "2024-08-04T13:11:03Z",
+    "name": "纸鹿本鹿",
+    "avatar": "https://www.zhilu.site/api/avatar.png"
+  },
+  {
+    "title": "从“端口无法访问”到本地环境问题——朋友的博客踩坑记录",
+    "link": "https://blog.zhilu.site/2024/all-pits-stepped",
+    "description": "M 来找我帮忙，从服务器搭建博客到本地 Windows 环境问题，他把坑几乎全踩了一遍。少配少错。可他博客至今空空如也，所以我发出完整踩坑过程，希望能帮助到更多人。",
+    "pubDate": "2024-07-24T13:20:57Z",
+    "name": "纸鹿本鹿",
+    "avatar": "https://www.zhilu.site/api/avatar.png"
+  },
+  {
+    "title": "Windows 空间管理/清理指南",
+    "link": "https://blog.zhilu.site/2024/windows-storage",
+    "description": "“软件装D盘”是且仅是旧日的经验之谈，如果想让电脑用起来更顺手，“无为而治”或许是个好选择。",
+    "pubDate": "2024-07-12T16:29:36Z",
+    "name": "纸鹿本鹿",
+    "avatar": "https://www.zhilu.site/api/avatar.png"
+  },
+  {
+    "title": "遭遇APP乱象：老人的「钱袋子」开线了",
+    "link": "https://blog.zhilu.site/2024/auto-payment",
+    "description": "继运营商扣费之后，家中老人又被华为宰了。扣款金额不多，但这无疑是对用户知情权利的践踏和侮辱。诱导自动扣款，开通容易取消难，是互联网APP们的丑恶常态。",
+    "pubDate": "2024-07-07T11:52:56Z",
+    "name": "纸鹿本鹿",
+    "avatar": "https://www.zhilu.site/api/avatar.png"
+  },
+  {
+    "title": "封面被 Linux QQ 官方用了，但是有一些小缺陷",
+    "link": "https://blog.zhilu.site/2024/cover-copied",
+    "description": "怀疑 Linux QQ 团队使用了作者的封面图片，严谨求证后发现事实确实如此，并且因此找到了 Linux QQ 官网的 bug。",
+    "pubDate": "2024-06-18T05:23:05Z",
+    "name": "纸鹿本鹿",
+    "avatar": "https://www.zhilu.site/api/avatar.png"
+  },
+  {
+    "title": "Windows 终端体验优化指南",
+    "link": "https://blog.zhilu.site/2024/windows-terminal",
+    "description": "一篇优化 Windows Terminal 体验的指南，涵盖 PowerShell 增强、Oh My Posh 主题配置、集成 Git Bash 以及终端美化等方面。",
+    "pubDate": "2024-06-16T14:48:57Z",
+    "name": "纸鹿本鹿",
+    "avatar": "https://www.zhilu.site/api/avatar.png"
+  },
+  {
+    "title": "有问题，就要讲出来。",
+    "link": "https://blog.zhilu.site/2024/problem-solved",
+    "description": "讲出来，修好了学校不通的路，解决了别人和我使用博客主题时遇到的问题，用 Nuxt.js 重构了个人网站，也配好了 Stylelint 和 Windows 上的 clangd。",
+    "pubDate": "2024-06-04T00:02:36Z",
+    "name": "纸鹿本鹿",
+    "avatar": "https://www.zhilu.site/api/avatar.png"
+  },
+  {
+    "title": "上课不带电脑之：我走了多少弯路？",
+    "link": "https://blog.guuguai.site/2024/no-computer-to-class",
+    "description": "记录我在尝试用安卓平板代替笔记本电脑上课的折腾过程。从 Moonlight 串流、Termux 跑 Linux 容器，到 VSCode 远程隧道、本地运行 Jupyter，最终定格在服务器部署 code-server 的多次尝试与总结。",
+    "pubDate": "2024-05-28T08:00:10Z",
+    "name": "GuuGuai",
+    "avatar": "https://cravatar.cn/avatar/646331BFF8F19A0E05679C3CC0FC54D6"
+  },
+  {
+    "title": "从 CSS 排序折腾到 Stylelint 和 pnpm",
+    "link": "https://blog.zhilu.site/2024/css-sort",
+    "description": "试图不走寻常路，通过 pnpm 全局安装 Stylelint 实现 CSS 排序，却遭遇诸多挑战。理想的方案是否真的可行？",
+    "pubDate": "2024-05-21T14:44:44Z",
+    "name": "纸鹿本鹿",
+    "avatar": "https://www.zhilu.site/api/avatar.png"
+  },
+  {
+    "title": "使用 DOSBox 的多种方式",
+    "link": "https://blog.zhilu.site/2024/dosbox-setup",
+    "description": "DOSBox 放大画面、自动挂载、网页版和 VS Code 插件。",
+    "pubDate": "2024-05-11T08:05:40Z",
+    "name": "纸鹿本鹿",
+    "avatar": "https://www.zhilu.site/api/avatar.png"
+  },
+  {
+    "title": "VScode更换Vtuber风格LOGO",
+    "link": "https://blog.guuguai.site/2024/vscode-vtuber-logo",
+    "description": "介绍使用 Custom CSS and JS Loader 扩展修改 VSCode 默认背景 LOGO 的方法，实现编辑器界面的个性化定制。",
+    "pubDate": "2024-05-05T02:39:42Z",
+    "name": "GuuGuai",
+    "avatar": "https://cravatar.cn/avatar/646331BFF8F19A0E05679C3CC0FC54D6"
+  },
+  {
+    "title": "MATLAB如何导入Word文档中的表格数据",
+    "link": "https://blog.guuguai.site/2024/math-model-word-input",
+    "description": "24年西建大数模校赛C题中，题目数据以表格的形式放进了word文档之中，部分同学被这个数据导入给卡住了，对着word里面的数据无从下手，其实MATLAB提供了从word中导入表格数据的函数。",
+    "pubDate": "2024-05-04T03:17:03Z",
+    "name": "GuuGuai",
+    "avatar": "https://cravatar.cn/avatar/646331BFF8F19A0E05679C3CC0FC54D6"
+  },
+  {
+    "title": "今日有「假」",
+    "link": "https://blog.zhilu.site/2024/fake-today",
+    "description": "外卖空包、无知造谣、钓鱼网站、山寨品牌、开源倒卖，世界这个草台班子有些「假」。",
+    "pubDate": "2024-05-03T04:22:31Z",
+    "name": "纸鹿本鹿",
+    "avatar": "https://www.zhilu.site/api/avatar.png"
+  },
+  {
+    "title": "把博客文章按年份放在子文件夹中了",
+    "link": "https://blog.zhilu.site/2024/blog-link-pattern",
+    "description": "同时更改了文章链接前缀，编写了跳转脚本，后来通过平台重定向规则实现更规范的跳转。",
+    "pubDate": "2024-04-29T03:10:18Z",
+    "name": "纸鹿本鹿",
+    "avatar": "https://www.zhilu.site/api/avatar.png"
+  },
+  {
+    "title": "写过的奇妙代码。",
+    "link": "https://blog.zhilu.site/2024/magic-code",
+    "description": "这些代码不算是 Best Practice，也不算是常见的写法，令人眼前一亮/黑。",
+    "pubDate": "2024-04-07T04:32:11Z",
+    "name": "纸鹿本鹿",
+    "avatar": "https://www.zhilu.site/api/avatar.png"
+  },
+  {
+    "title": "Arch Linux 启动引导修复",
+    "link": "https://blog.zhilu.site/2024/archlinux-boot-repair",
+    "description": "可以修复绝大多数 Arch Linux 无法启动的问题。",
+    "pubDate": "2024-04-01T15:14:39Z",
+    "name": "纸鹿本鹿",
+    "avatar": "https://www.zhilu.site/api/avatar.png"
+  },
+  {
+    "title": "第一次海淘-日淘市集与筋斗云专线",
+    "link": "https://blog.guuguai.site/2024/haitao-ritao",
+    "description": "记录了我第一次通过日淘市集代购平台在煤炉（Mercari）入手《白箱》设定集的全过程。涵盖了放弃其它平台的原因、日淘市集各项手续费明细、筋斗云专线的备案与清关流程，并附带了长达 21 天的完整物流时间线供参考。",
+    "pubDate": "2024-03-29T11:42:36Z",
+    "name": "GuuGuai",
+    "avatar": "https://cravatar.cn/avatar/646331BFF8F19A0E05679C3CC0FC54D6"
+  },
+  {
+    "title": "在延长今天和期待明天之间",
+    "link": "https://blog.zhilu.site/2024/balancing-today-tomorrow",
+    "description": "一位大学生充实而琐碎的一天校园生活，在忙碌中对自我生活节奏和时间安排的反思。",
+    "pubDate": "2024-03-21T15:45:08Z",
+    "name": "纸鹿本鹿",
+    "avatar": "https://www.zhilu.site/api/avatar.png"
+  },
+  {
+    "title": "今日无事，除了一些技术咨询",
+    "link": "https://blog.zhilu.site/2024/helping-day",
+    "description": "一天中帮助朋友们解决各类问题，如软件警告甄别、平板选购咨询、远程协作实现、签到操作指导、下载文件查找、卸载工具推荐、AI代码探讨，展现技术分享与互助的价值。",
+    "pubDate": "2024-03-10T13:14:38Z",
+    "name": "纸鹿本鹿",
+    "avatar": "https://www.zhilu.site/api/avatar.png"
+  },
+  {
+    "title": "系统引导配置分享",
+    "link": "https://blog.zhilu.site/2024/boot-management",
+    "description": "指哪里就启动哪里——在 Windows 和 Linux 系统下实现重启至特定 EFI 引导项。",
+    "pubDate": "2024-03-01T06:06:19Z",
+    "name": "纸鹿本鹿",
+    "avatar": "https://www.zhilu.site/api/avatar.png"
+  },
+  {
+    "title": "病毒高占用CPU，三天杀俩",
+    "link": "https://blog.zhilu.site/2024/virus-trueupdate",
+    "description": "2024年2月两次处理同一病毒导致随机进程名高CPU占用问题，推测源自盗版软件，成功清理TrueUpdate Client引入的相关病毒脚本。",
+    "pubDate": "2024-02-29T15:54:43Z",
+    "name": "纸鹿本鹿",
+    "avatar": "https://www.zhilu.site/api/avatar.png"
+  },
+  {
+    "title": "Mifare classic 1k卡片笔记",
+    "link": "https://blog.guuguai.site/2024/mifare-class-1k",
+    "description": "由于一些原因折腾了一段时间M1卡，留下一些笔记备忘。",
+    "pubDate": "2024-02-29T13:29:35Z",
+    "name": "GuuGuai",
+    "avatar": "https://cravatar.cn/avatar/646331BFF8F19A0E05679C3CC0FC54D6"
+  },
+  {
+    "title": "运营商又想多收话费了",
+    "link": "https://blog.zhilu.site/2024/carrier-overbilling",
+    "description": "亲身经历的三个电信服务案例，揭示了三大运营商诱导扣费的问题。",
+    "pubDate": "2024-02-23T10:32:25Z",
+    "name": "纸鹿本鹿",
+    "avatar": "https://www.zhilu.site/api/avatar.png"
+  },
+  {
+    "title": "我的银行卡",
+    "link": "https://blog.guuguai.site/2024/my-card",
+    "description": "盘点我持有的各大银行借记卡，展示中国银行洛天依、CCG、Bilibili、招商银行花嫁卡等二次元联名卡面，分享各张卡片的申请途径、申请经历、卡bin、有效期等基本信息。",
+    "pubDate": "2024-02-20T08:14:29Z",
+    "name": "GuuGuai",
+    "avatar": "https://cravatar.cn/avatar/646331BFF8F19A0E05679C3CC0FC54D6"
+  },
+  {
+    "title": "如何查找二次元插画原图以及作者",
+    "link": "https://blog.guuguai.site/2024/pic-search",
+    "description": "介绍了 SauceNAO、ascii2d 以及 Google 识图等搜图工具的使用方法和技巧，通过实际案例演示如何从一张残缺的图片找到原图。",
+    "pubDate": "2024-02-09T07:23:17Z",
+    "name": "GuuGuai",
+    "avatar": "https://cravatar.cn/avatar/646331BFF8F19A0E05679C3CC0FC54D6"
+  },
+  {
+    "title": "电脑连接手机，手机给电脑传文件……",
+    "link": "https://blog.zhilu.site/2024/link-util",
+    "description": "在同一局域网下，电脑与手机之间互传文件、屏幕投影和远程控制的各种方法。",
+    "pubDate": "2024-01-31T16:28:48Z",
+    "name": "纸鹿本鹿",
+    "avatar": "https://www.zhilu.site/api/avatar.png"
+  },
+  {
+    "title": "MATLAB-笔记1",
+    "link": "https://blog.guuguai.site/2024/matlab-note1",
+    "description": "MATLAB学习笔记，为数学建模竞赛的一点准备。",
+    "pubDate": "2024-01-29T07:29:45Z",
+    "name": "GuuGuai",
+    "avatar": "https://cravatar.cn/avatar/646331BFF8F19A0E05679C3CC0FC54D6"
+  },
+  {
+    "title": "过去一年薅的羊毛",
+    "link": "https://blog.guuguai.site/2024/clip-coupons-2023",
+    "description": "2023年我到底薅了多少羊毛？一些薅羊毛经历的总结，涵盖了各大平台各种类型的羊毛。",
+    "pubDate": "2024-01-22T15:00:51Z",
+    "name": "GuuGuai",
+    "avatar": "https://cravatar.cn/avatar/646331BFF8F19A0E05679C3CC0FC54D6"
+  },
+  {
+    "title": "Github22端口被占用",
+    "link": "https://blog.guuguai.site/2024/github-22-timeout",
+    "description": "发文章的时候发现Github 22端口被占用，写一篇文章备忘。",
+    "pubDate": "2024-01-21T05:22:23Z",
+    "name": "GuuGuai",
+    "avatar": "https://cravatar.cn/avatar/646331BFF8F19A0E05679C3CC0FC54D6"
+  },
+  {
+    "title": "数学建模初步认知",
+    "link": "https://blog.guuguai.site/2024/math-model-note",
+    "description": "学习数学建模的一点笔记，描述了对数学建模论文写作套路的初步认知。",
+    "pubDate": "2024-01-20T16:29:33Z",
+    "name": "GuuGuai",
+    "avatar": "https://cravatar.cn/avatar/646331BFF8F19A0E05679C3CC0FC54D6"
+  },
+  {
+    "title": "Moonlight 串流指南",
+    "link": "https://blog.zhilu.site/2024/moonlight-streaming-guide",
+    "description": "服务端Sunshine设置、客户端分辨率调整、隐私屏功能实现及触摸优化。",
+    "pubDate": "2024-01-18T10:58:55Z",
+    "name": "纸鹿本鹿",
+    "avatar": "https://www.zhilu.site/api/avatar.png"
+  },
+  {
+    "title": "SSH 免密登录",
+    "link": "https://blog.zhilu.site/2023/ssh-key-login",
+    "description": "生成SSH密钥，启用公钥认证，将公钥添加至授权列表，实现 Windows/Linux/GitHub SSH 免密登录。",
+    "pubDate": "2023-12-25T08:15:00Z",
+    "name": "纸鹿本鹿",
+    "avatar": "https://www.zhilu.site/api/avatar.png"
+  },
+  {
+    "title": "Spacedesk串流指南",
+    "link": "https://blog.guuguai.site/2023/spacedesk-streaming-guide",
+    "description": "介绍 Spacedesk 屏幕串流方案，利用局域网将手机、平板等设备变为电脑的第二显示器，支持音频同步与触摸操作，适合低成本组建双屏环境。",
+    "pubDate": "2023-12-13T14:57:08Z",
+    "name": "GuuGuai",
+    "avatar": "https://cravatar.cn/avatar/646331BFF8F19A0E05679C3CC0FC54D6"
+  },
+  {
+    "title": "Termux 简单指南",
+    "link": "https://blog.zhilu.site/2023/termux-guide",
+    "description": "Termux 安装、配置 SSH，切换国内源，安装 ZSH、X11 图形界面，探索更多可能性。",
+    "pubDate": "2023-11-13T13:50:08Z",
+    "name": "纸鹿本鹿",
+    "avatar": "https://www.zhilu.site/api/avatar.png"
+  },
+  {
+    "title": "Tailscale 不完全使用指南",
+    "link": "https://blog.zhilu.site/2023/tailscale-incomplete-guide",
+    "description": "Tailscale 搭建虚拟局域网，支持多设备间轻松实现 Windows 文件共享、SSH 访问、远程桌面及 Moonlight 游戏串流。",
+    "pubDate": "2023-10-08T02:34:00Z",
+    "name": "纸鹿本鹿",
+    "avatar": "https://www.zhilu.site/api/avatar.png"
+  },
+  {
+    "title": "Windows 安装指南",
+    "link": "https://blog.zhilu.site/2023/windows-setup-guide",
+    "description": "使用 Ventoy、微 PE、Dism++ 安装系统，绕过账户限制并激活 Office 与 Windows，合理分区布局使数据安全有序。",
+    "pubDate": "2023-09-24T04:00:00Z",
+    "name": "纸鹿本鹿",
+    "avatar": "https://www.zhilu.site/api/avatar.png"
+  },
+  {
+    "title": "Arch Linux 易用性及美化",
+    "link": "https://blog.zhilu.site/2023/archlinux-beautify",
+    "description": "Plasma 桌面环境下优化小键盘、触摸板行为，配置字体。",
+    "pubDate": "2023-07-24T13:27:45Z",
+    "name": "纸鹿本鹿",
+    "avatar": "https://www.zhilu.site/api/avatar.png"
+  },
+  {
+    "title": "Arch Linux 初步配置",
+    "link": "https://blog.zhilu.site/2023/archlinux-configure",
+    "description": "在 Arch Linux 系统上安装配置必备软件，如蓝牙、Yay、Zsh、输入法等。",
+    "pubDate": "2023-06-24T01:31:15Z",
+    "name": "纸鹿本鹿",
+    "avatar": "https://www.zhilu.site/api/avatar.png"
+  },
+  {
+    "title": "使用 ArchInstall 安装 Arch Linux",
+    "link": "https://blog.zhilu.site/2023/archinstall-guide",
+    "description": "在2025年3月版的 Arch Linux 安装镜像的基础上，使用 ArchInstall 安装系统全过程。",
+    "pubDate": "2023-05-23T12:37:07Z",
+    "name": "纸鹿本鹿",
+    "avatar": "https://www.zhilu.site/api/avatar.png"
+  },
+  {
+    "title": "VS Code 简单配置项",
+    "link": "https://blog.zhilu.site/2023/vscode-simple-config",
+    "description": "简单配置 VS Code，启用字体连字、平滑滚动、自动换行等功能，并提供了前端实用配置和常用快捷键，提升编辑器体验。",
+    "pubDate": "2023-04-13T12:05:50Z",
+    "name": "纸鹿本鹿",
+    "avatar": "https://www.zhilu.site/api/avatar.png"
+  },
+  {
+    "title": "他修电脑又遇到了我",
+    "link": "https://blog.zhilu.site/2021/classroom-pc-3",
+    "description": "纸鹿在高中时又被喊去修教室电脑了，并且又和信息中心的凤师傅碰上了……",
+    "pubDate": "2021-12-05T03:03:00Z",
+    "name": "纸鹿本鹿",
+    "avatar": "https://www.zhilu.site/api/avatar.png"
+  },
+  {
+    "title": "修监控",
+    "link": "https://blog.guuguai.site/2021/story-about-feng",
+    "description": "初稿曾发布于野生技协QQ群，本文以一场荒诞的“监控维修”为隐喻，影射高中时期某位信息老师在修理希沃展台时的离奇操作：放着正经故障不顾，反倒对班级电脑指点江山，进行了一系列难以理解的“无效优化”。",
+    "pubDate": "2021-07-08T16:00:00Z",
+    "name": "GuuGuai",
+    "avatar": "https://cravatar.cn/avatar/646331BFF8F19A0E05679C3CC0FC54D6"
+  },
+  {
+    "title": "修监控 (授权转载)",
+    "link": "https://blog.zhilu.site/2021/classroom-pc-2",
+    "description": "本文为 GuuGuai 所作的一篇影射性作品，文章记录了一位前来维修监控的师傅却因整顿校门而遭到反对的故事。而现实中，也发生过类似的事件。高中的IT凤师傅来到某班维修展台画面时断时续问题，但可能受到之前“展台卡顿——系统问题却误修展台本体”一事的影响，他将“扳手”伸向了电脑……",
+    "pubDate": "2021-07-08T16:00:00Z",
+    "name": "纸鹿本鹿",
+    "avatar": "https://www.zhilu.site/api/avatar.png"
+  },
+  {
+    "title": "电脑是你修坏的吗",
+    "link": "https://blog.zhilu.site/2021/classroom-pc-1",
+    "description": "教室一体机性能孱弱，19班教室电脑被其他班的学生换了系统，视频展台程序打开就卡死，于是被喊来帮忙的纸鹿正好与前来维修的高中的IT凤师傅撞见……",
+    "pubDate": "2021-04-05T16:00:00Z",
+    "name": "纸鹿本鹿",
+    "avatar": "https://www.zhilu.site/api/avatar.png"
+  },
+  {
+    "title": "被大块落冰砸中的话——",
+    "link": "https://blog.zhilu.site/2010s/danger-falling-ice",
+    "description": "放学路上遇到这种事情，也许就会当场重伤失去意识了吧。好在“第六感”救了我和朋友。",
+    "pubDate": "2018-01-04T13:25:54Z",
+    "name": "纸鹿本鹿",
+    "avatar": "https://www.zhilu.site/api/avatar.png"
+  }
+]
