@@ -1,11 +1,59 @@
 [
   {
+    "title": "洪绘图标助手更新：获取应用图标、将你的图标对mac进行适配",
+    "link": "https://blog.zhheo.com/p/z9rm5p4p.html",
+    "description": "这篇文章介绍了\"洪绘图标助手\"这款全新应用图标工具,它基于之前的\"应用图标库\"重构升级,主要解决网页版应用在macOS上作为独立应用使用时的图标显示问题。该工具目前提供两个核心功能:应用图标搜索功能,用户输入应用名称即可获取并下载图标,适用于调研、制作PPT等场景;图标适配mac功能,专门解决使用Chrome或Edge创建网页应用时图标显示异常的问题,用户只需将图标图片导入,选择模式后通过\"访访显示\"\"显示简介\"\"拖入图标\"的方式,轻松为应用更换美观的macOS样式图标,有效提升了网页应用的视觉体验和使用舒适度。",
+    "pubDate": "Mon, 16 Mar 2026 02:17:56 GMT",
+    "name": "张洪Heo",
+    "avatar": "https://img.zhheo.com/i/67d8fa75943e4.webp"
+  },
+  {
+    "title": "超级制图上手：图片上的文字如何用AI修改？无痕改字一键出图",
+    "link": "https://blog.zhheo.com/p/yynnxi2c.html",
+    "description": "这篇文章介绍了一款名为“超级制图”的AI图片编辑应用，特别适合设计师处理文字修改需求。该应用的核心功能“无痕改字”能够智能替换图片中的文字内容，以修改微信余额数字为例，用户只需框选文本区域并输入新内容，AI就能自动调整文字的位置、大小和粗细，实现较为自然的修改效果。虽然部分情况下效果仍需反复尝试，但作为免费功能已能满足日常改字需求，为处理图片文字修改提供了便捷的AI解决方案。",
+    "pubDate": "Wed, 11 Mar 2026 02:46:25 GMT",
+    "name": "张洪Heo",
+    "avatar": "https://img.zhheo.com/i/67d8fa75943e4.webp"
+  },
+  {
+    "title": "用虚拟机养龙虾，在Mac上通过Lume使用虚拟机的隔离环境安装OpenClaw",
+    "link": "https://blog.zhheo.com/p/h6k74j9o.html",
+    "description": "作者在主力机直接部署OpenClaw时因指令失误险些改全文件权限，遂弃用本地电脑，转而采用虚拟机在Mac上搭建安全环境，并详细给出安装Lume、部署OpenClaw及后台运行、接入QQ的完整步骤，提醒要在独立环境中“养”好AI。",
+    "pubDate": "Tue, 10 Mar 2026 03:30:41 GMT",
+    "name": "张洪Heo",
+    "avatar": "https://img.zhheo.com/i/67d8fa75943e4.webp"
+  },
+  {
+    "title": "如何创作AI歌曲？从生成歌词、歌曲创作、专辑封面到音乐发行",
+    "link": "https://blog.zhheo.com/p/cpw1bogx.html",
+    "description": "这篇文章介绍了作者分享的AI音乐创作全流程，将AI音乐创作比作抽卡，分为歌词抽卡和作曲抽卡。作者使用扣子工具通过技能调用生成歌词，以华夏文明风格rap为例展示创作成果，还提供了调好的技能链接。作曲用suno工具，免费用户可同时创作4首，可选择声音性别，下载音乐后可通过抖音创作实验室AI作曲功能进行洗歌优化。最后通过抖音创作实验室AI编辑器混音，完成原创歌曲发布，审核需数小时。作者认为AI创作重在过程乐趣，不必过度追求商业收益。",
+    "pubDate": "Tue, 03 Mar 2026 02:22:12 GMT",
+    "name": "张洪Heo",
+    "avatar": "https://img.zhheo.com/i/67d8fa75943e4.webp"
+  },
+  {
+    "title": "洪绘历史记录发布！无限存储你的浏览器历史记录，防止历史记录被自动删除",
+    "link": "https://blog.zhheo.com/p/0tr5lmby.html",
+    "description": "这篇文章介绍了作者开发的浏览器插件“洪绘历史记录”。该插件旨在替代UI不佳、操作反人类且不支持中文的History Trends Unlimited插件，解决浏览器仅能保存三个月历史记录的痛点，方便用户查找更早的网页记录。插件加入了“简约”模式，可将相同网站的历史记录折叠显示，提升查找效率。同时，它支持导入History Trends Unlimited导出的历史记录，用户可在Google Chrome和Edge应用商店下载安装。",
+    "pubDate": "Wed, 25 Feb 2026 03:13:58 GMT",
+    "name": "张洪Heo",
+    "avatar": "https://img.zhheo.com/i/67d8fa75943e4.webp"
+  },
+  {
     "title": "实习后买了一堆东西",
     "link": "https://blog.zhilu.site/2026/buy-right",
     "description": "键盘鼠标显示器，手环VR小东西。可以买贵的，但不能买贵了。",
     "pubDate": "2026-02-23T03:02:12Z",
     "name": "纸鹿本鹿",
     "avatar": "https://www.zhilu.site/api/avatar.png"
+  },
+  {
+    "title": "红包封面：祝大家新的一年发大财啦！",
+    "link": "https://blog.zhheo.com/p/ulnwjohw.html",
+    "description": "这篇文章介绍了又到一年一度的Guli封面发放时刻，向大家表达过去支持的感谢，提前拜年祝大家新年发大财。还展示了红包封面样式，推出全新财神版本Guli，呼吁大家赶快到公众号领取。",
+    "pubDate": "Wed, 04 Feb 2026 04:06:54 GMT",
+    "name": "张洪Heo",
+    "avatar": "https://img.zhheo.com/i/67d8fa75943e4.webp"
   },
   {
     "title": "未上岸指北：考研常识篇其一",
@@ -22,6 +70,118 @@
     "pubDate": "2026-01-23T02:44:27Z",
     "name": "GuuGuai",
     "avatar": "https://cravatar.cn/avatar/646331BFF8F19A0E05679C3CC0FC54D6"
+  },
+  {
+    "title": "如何将 FinalcutPro的fcpxml文件转换为srt字幕？导出srt字幕方法",
+    "link": "https://blog.zhheo.com/p/obo78geq.html",
+    "description": "这篇文章提到作者有将 finalcutpro 字幕转换为 srt 格式的需求，发现市面上此类软件价格昂贵。作者经研究，把原本用脚本实现的功能做成转换网页，方便自用及后续使用。若存在 bug 欢迎反馈，使用地址为https://fcpxml.zhheo.com/ ，用户直接拖拽 fcpxml 文件到网页，即可下载 srt 字幕文件 。",
+    "pubDate": "Thu, 22 Jan 2026 04:19:17 GMT",
+    "name": "张洪Heo",
+    "avatar": "https://img.zhheo.com/i/67d8fa75943e4.webp"
+  },
+  {
+    "title": "如何免水印下载豆包生成的图片？豆包AI图去水印，无水印下载",
+    "link": "https://blog.zhheo.com/p/tw9uwtki.html",
+    "description": "这篇文章介绍了因抠图需求激增，相比 PS，用豆包抠图更便捷，复制粘贴图片并指令 “抠图” 即可，但保存图片有水印。为去除水印，可使用 doubao - downloader 工具，它支持油猴插件和浏览器插件两种安装方式。文中给出项目及安装地址，还详细说明了不同网络环境下油猴脚本和浏览器插件的具体安装步骤。",
+    "pubDate": "Wed, 14 Jan 2026 05:31:42 GMT",
+    "name": "张洪Heo",
+    "avatar": "https://img.zhheo.com/i/67d8fa75943e4.webp"
+  },
+  {
+    "title": "Mac中罗技鼠标键盘近期失灵问题解决方法，Logi Options 打不开",
+    "link": "https://blog.zhheo.com/p/9jbu7q9r.html",
+    "description": "这篇文章介绍了作者在用的logi master 3s鼠标前进和后退按钮失灵，驱动打不开，发现是罗技外设Mac用户普遍遇到的问题，因应用程序所需证书过期，且影响应用内更新程序。罗技官方提供解决方法，针对Options+、G HUB分别给出下载链接及操作步骤，macOS 12 Monterey用户还有专用补丁工具。作者发文旨在分享解决办法。",
+    "pubDate": "Mon, 12 Jan 2026 07:42:24 GMT",
+    "name": "张洪Heo",
+    "avatar": "https://img.zhheo.com/i/67d8fa75943e4.webp"
+  },
+  {
+    "title": "Mac如何将纯图片PDF转换成嵌入文字的PDF？让纯图PDF支持选中复制",
+    "link": "https://blog.zhheo.com/p/9vtjebeo.html",
+    "description": "这篇文章介绍了纯图PDF操作困难，如发给AI读取耗时久。发现Mac预览app自带嵌入文字功能，利用`macOS Monterey`后空格预览图片可选中复制的特性实现。具体操作是用预览app打开PDF，选择文件 - 导出，勾选“嵌入文本”，存储后等待计算，大文件需耐心等待，完成后即可得到嵌入文本的PDF，方便选中文本。",
+    "pubDate": "Mon, 12 Jan 2026 04:26:04 GMT",
+    "name": "张洪Heo",
+    "avatar": "https://img.zhheo.com/i/67d8fa75943e4.webp"
+  },
+  {
+    "title": "我在2026年推荐的Mac软件",
+    "link": "https://blog.zhheo.com/p/vtyyrfd3.html",
+    "description": "这篇文章分享作者正在使用的Mac软件。AI对话选豆包与ChatGPT；即梦用于AI出图；Ice免费管理菜单栏；Folo做信息订阅；SyncTime同步重要文件；Keka解压缩；Upscayl无损放大图片；Bitwarden管理密码。还列举此前推荐且仍在用的如Pixpin截图等软件，文末给出历史Mac软件推荐文章链接。",
+    "pubDate": "Thu, 25 Dec 2025 10:39:00 GMT",
+    "name": "张洪Heo",
+    "avatar": "https://img.zhheo.com/i/67d8fa75943e4.webp"
+  },
+  {
+    "title": "在Mac上使用快捷指令解决：已损坏，无法打开。你应该将它移到废纸篓",
+    "link": "https://blog.zhheo.com/p/tsk1v2fy.html",
+    "description": "这篇文章介绍了在Mac上安装软件时，常遇“已损坏，无法打开，应移到废纸篓”的情况。通常需用 sudo xattr -r -d com.apple.quarantine 解决签名问题，但记忆或现场查找该命令较费劲。作者将其打包成快捷指令，右键单击选择执行即可，还提供了快捷指令地址。",
+    "pubDate": "Wed, 24 Dec 2025 02:41:58 GMT",
+    "name": "张洪Heo",
+    "avatar": "https://img.zhheo.com/i/67d8fa75943e4.webp"
+  },
+  {
+    "title": "如何移除Mac中访达多余的菜单项？还你一个清爽的访达右键菜单",
+    "link": "https://blog.zhheo.com/p/hiubxt8w.html",
+    "description": "这篇文章介绍了作者在 Mac 上因常使用右键菜单进行文件操作脚本，安装软件后右键菜单被添加许多多余菜单项，如豆包、百度网盘、WPS 等。文章提供两种清理方法：一是阻止访达扩展，进入系统偏好设置搜索扩展，关闭文件提供程序或访达扩展中不需要的软件；二是移除服务，在系统偏好设置搜索 “键盘快捷键”，取消服务里文件或文件夹中相关项的勾选。",
+    "pubDate": "Tue, 23 Dec 2025 09:35:43 GMT",
+    "name": "张洪Heo",
+    "avatar": "https://img.zhheo.com/i/67d8fa75943e4.webp"
+  },
+  {
+    "title": "提示 SMS Fee 无法登录怎么办，跳过 SMS Fee 方法",
+    "link": "https://blog.zhheo.com/p/41n5tavc.html",
+    "description": "这篇文章介绍了作者更换到 17 设备时，某聊天软件登录遇坑，提示 SMS Fee 要求付费，国区号付不了，美区要一美元多。尝试第三方客户端可用其他设备验证码登录。还发现网络不好时官方客户端有通行密钥登录方式，建议大家绑定通行密钥。并分享在旧手机重置情况下，通过设备 code 登录第三方客户端，借助 Bitwarden 测试版客户端等一系列操作保留通行密钥实现登录的过程。",
+    "pubDate": "Tue, 23 Dec 2025 01:51:02 GMT",
+    "name": "张洪Heo",
+    "avatar": "https://img.zhheo.com/i/67d8fa75943e4.webp"
+  },
+  {
+    "title": "从iPhone13Pro换到iPhone17，我的iPhone17上手体验",
+    "link": "https://blog.zhheo.com/p/1rb05exh.html",
+    "description": "这篇文章介绍了作者因心仪已久且趁国补恢复，在京东冲动消费购买iPhone 17，2小时送达，入手价5499元。作者建议非淘宝、抖音官方旗舰店等购买者录制开箱视频，先激活手机完成国补，后恢复出厂设置重新激活以迁移旧手机数据。还分享了新手机直观体验，如滑动适应后不错、更轻、支持息屏显示等，以及相机控制、静音按键等功能设置，最后总结新手机体验超13 Pro，对旧手机调侃“吃掉” 。",
+    "pubDate": "Mon, 22 Dec 2025 02:36:59 GMT",
+    "name": "张洪Heo",
+    "avatar": "https://img.zhheo.com/i/67d8fa75943e4.webp"
+  },
+  {
+    "title": "宝塔安装应用提示：指定日志文件不存在解决方法",
+    "link": "https://blog.zhheo.com/p/uiddzdni.html",
+    "description": "这篇文章介绍了作者因之前服务器常崩溃死机而进行升级，在项目迁移时装宝塔插件时提示报错。经查看报错信息，发现是找不到 /etc/redhat - release 文件。因作者使用Ubuntu24系统，通过创建一个假的该文件，成功解决插件安装问题 。",
+    "pubDate": "Thu, 18 Dec 2025 06:18:02 GMT",
+    "name": "张洪Heo",
+    "avatar": "https://img.zhheo.com/i/67d8fa75943e4.webp"
+  },
+  {
+    "title": "一口气拔了3个智齿，分享一下拔智齿的经历",
+    "link": "https://blog.zhheo.com/p/h6gaomlz.html",
+    "description": "这篇文章介绍了作者一次性拔除三颗智齿的经历，包括术前的心理准备、拔牙当天的饮食安排及拔牙过程中的情况。作者详细描述了拔牙后医生给出的注意事项，并分享了自己术后恢复的一些方法，如使用退热贴和冰袋进行冰敷以减轻肿胀。此外，还提到了拔牙当天的饮食选择，主要是冷食和饮料。",
+    "pubDate": "Mon, 15 Dec 2025 08:57:53 GMT",
+    "name": "张洪Heo",
+    "avatar": "https://img.zhheo.com/i/67d8fa75943e4.webp"
+  },
+  {
+    "title": "微信小程序链接转换为二维码？扫码直接跳转到小程序指定页面",
+    "link": "https://blog.zhheo.com/p/x76r8o7c.html",
+    "description": "这篇文章介绍了作者在做海报时，因购买指定影院场次电影票分享只有链接无二维码，传播不便。经查找，发现可通过这家网站将小程序链接转二维码，该网站输入链接点击生成，每日 5 个免费额度，打开无广告，解决了作者做海报需扫码便捷购票的难题。",
+    "pubDate": "Mon, 15 Dec 2025 05:13:42 GMT",
+    "name": "张洪Heo",
+    "avatar": "https://img.zhheo.com/i/67d8fa75943e4.webp"
+  },
+  {
+    "title": "豆包输入法上手：我觉得就当个语音输入法就行",
+    "link": "https://blog.zhheo.com/p/kyb9o9mz.html",
+    "description": "这篇文章介绍了作者对豆包输入法的测试体验。作者发现豆包输入法换行需手动操作，且换行后语音输入状态取消，无法边输入边编辑。其识别率较高，达 95% 以上，但会保留口语化词汇，输入过快标点可能补全不全。作者还将豆包与微信、iOS 自带输入法对比，指出豆包需联网使用，功能有缺失。综合来看，作者认为若无需大量语音输入，微信输入法更适用，自己将卸载豆包输入法。",
+    "pubDate": "Fri, 12 Dec 2025 07:57:25 GMT",
+    "name": "张洪Heo",
+    "avatar": "https://img.zhheo.com/i/67d8fa75943e4.webp"
+  },
+  {
+    "title": "免费商用字体：淘宝买菜体下载",
+    "link": "https://blog.zhheo.com/p/pn28oq4x.html",
+    "description": "这篇文章介绍了作者最近在做图时重新发现的一款早期发布的字体。它的中文和数字部分表现灵动且活泼，设计上十分好用，虽然英文字形在粗细上略显奇怪，但整体依然值得安装体验。作者附上了字体的展示图，并提供了网盘下载链接以及相关的法律声明，方便读者获取与参考。",
+    "pubDate": "Tue, 09 Dec 2025 09:41:20 GMT",
+    "name": "张洪Heo",
+    "avatar": "https://img.zhheo.com/i/67d8fa75943e4.webp"
   },
   {
     "title": "谈谈不受欢迎的博客技术特征",
