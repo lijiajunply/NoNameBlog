@@ -31,7 +31,7 @@ export default function RootLayout({
             <div className="flex h-14 w-full items-center gap-3 px-4 md:px-10">
               <div className="flex min-w-0 items-center gap-3">
                 <SidebarTrigger />
-                <PageTitle posts={posts} />
+                <PageTitle posts={posts} categories={categories} tags={tags} />
               </div>
               <div className="ml-auto min-w-0">
                 <HeaderSlot />
