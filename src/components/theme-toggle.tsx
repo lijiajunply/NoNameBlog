@@ -26,12 +26,64 @@ export function ThemeToggle() {
     { value: "dark", icon: "lucide:moon", label: "暗色" },
   ] as const;
 
+  const handleThemeChange = (newTheme: string, e?: React.MouseEvent) => {
+    // Fallback if view transitions are not supported or user prefers reduced motion
+    if (
+      !document.startViewTransition ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+      setTheme(newTheme);
+      return;
+    }
+
+    const targetTheme =
+      newTheme === "system"
+        ? window.matchMedia("(prefers-color-scheme: dark)").matches
+          ? "dark"
+          : "light"
+        : newTheme;
+
+    if (targetTheme === resolvedTheme) {
+      setTheme(newTheme);
+      return;
+    }
+
+    const x = e ? e.clientX : window.innerWidth / 2;
+    const y = e ? e.clientY : window.innerHeight / 2;
+    const endRadius = Math.hypot(
+      Math.max(x, innerWidth - x),
+      Math.max(y, innerHeight - y),
+    );
+
+    const transition = document.startViewTransition(() => {
+      setTheme(newTheme);
+    });
+
+    transition.ready.then(() => {
+      const clipPath = [
+        `circle(0px at ${x}px ${y}px)`,
+        `circle(${endRadius}px at ${x}px ${y}px)`,
+      ];
+
+      document.documentElement.animate(
+        {
+          clipPath,
+        },
+        {
+          duration: 500,
+          easing: "ease-in-out",
+          pseudoElement: "::view-transition-new(root)",
+        },
+      );
+    });
+  };
+
   // Single cycle toggle for mobile
   const currentThemeObj = themes.find((t) => t.value === theme) || themes[1];
-  const cycleTheme = () => {
-    if (theme === "light") setTheme("system");
-    else if (theme === "system") setTheme("dark");
-    else setTheme("light");
+  const cycleTheme = (e: React.MouseEvent) => {
+    if (theme === "light") handleThemeChange("system", e);
+    else if (theme === "system") handleThemeChange("dark", e);
+    else handleThemeChange("light", e);
   };
 
   return (
@@ -59,7 +111,7 @@ export function ThemeToggle() {
           return (
             <button
               key={t.value}
-              onClick={() => setTheme(t.value)}
+              onClick={(e) => handleThemeChange(t.value, e)}
               className={`relative flex h-7 w-8 items-center justify-center rounded-full text-sm font-medium transition-all duration-300 ${
                 isActive
                   ? "text-neutral-900 dark:text-white"
