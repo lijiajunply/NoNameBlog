@@ -14,8 +14,8 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const categories = getAllCategories().slice(0, 8);
-  const tags = getAllTags().slice(0, 12);
+  const categories = getAllCategories();
+  const tags = getAllTags();
   const posts = getAllPosts().map((post) => ({
     slug: post.slug,
     title: post.frontmatter.title,
