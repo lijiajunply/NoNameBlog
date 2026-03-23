@@ -15,6 +15,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import type { PostSummary } from "@/types/content";
+import { PaginationPagePicker } from "./pagination-page-picker";
 import { ToggleGroup, ToggleGroupItem } from "./ui/toggle-group";
 
 type PostFeedWithCategoryFilterProps = {
@@ -264,9 +265,11 @@ export function PostFeedWithCategoryFilter({
             <Icon icon="ph:arrow-left" className="h-4 w-4" />
             上一页
           </Button>
-          <span className="text-sm text-neutral-500 dark:text-neutral-400">
-            第 {safePage} / {totalPages} 页
-          </span>
+          <PaginationPagePicker
+            currentPage={safePage}
+            totalPages={totalPages}
+            onSelectPage={(page) => updateView(activeCategory, page)}
+          />
           <Button
             type="button"
             variant="ghost"

@@ -4,11 +4,20 @@ import { Icon } from "@iconify/react";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { PaginationPagePicker } from "@/components/pagination-page-picker";
 import { Button } from "@/components/ui/button";
 import type { FriendFeedItem } from "@/types/rss";
 import { ToggleGroup, ToggleGroupItem } from "./ui/toggle-group";
 
 const ITEMS_PER_PAGE = 10;
+const MOMENT_SKELETON_KEYS = [
+  "moment-skeleton-1",
+  "moment-skeleton-2",
+  "moment-skeleton-3",
+  "moment-skeleton-4",
+  "moment-skeleton-5",
+  "moment-skeleton-6",
+] as const;
 
 export function MomentsContent() {
   const [items, setItems] = useState<FriendFeedItem[]>([]);
@@ -19,17 +28,27 @@ export function MomentsContent() {
       .then((res) => res.json())
       .then((data: FriendFeedItem[]) => {
         data.forEach((item) => {
-          if (item.description.length >= 80){
-            item.description = item.description.substring(0, 80)
-            if (item.description.endsWith("。") || item.description.endsWith("！") || item.description.endsWith("?") || item.description.endsWith(".") || item.description.endsWith("!") || item.description.endsWith("?")){
-              item.description = item.description.substring(0, item.description.length - 1)
+          if (item.description.length >= 80) {
+            item.description = item.description.substring(0, 80);
+            if (
+              item.description.endsWith("。") ||
+              item.description.endsWith("！") ||
+              item.description.endsWith("?") ||
+              item.description.endsWith(".") ||
+              item.description.endsWith("!") ||
+              item.description.endsWith("?")
+            ) {
+              item.description = item.description.substring(
+                0,
+                item.description.length - 1,
+              );
             }
 
-            if (!item.description.endsWith("...")){
+            if (!item.description.endsWith("...")) {
               item.description += "...";
             }
           }
-        })
+        });
         setItems(data);
         setLoading(false);
       })
@@ -43,10 +62,9 @@ export function MomentsContent() {
           <h2 className="text-2xl font-bold">朋友圈</h2>
         </div>
         <div className="mt-4 grid grid-cols-2 gap-4">
-          {Array.from({ length: 6 }).map((_, i) => (
-            // biome-ignore lint/suspicious/noArrayIndexKey: skeleton placeholder
+          {MOMENT_SKELETON_KEYS.map((key) => (
             <div
-              key={i}
+              key={key}
               className="min-h-20 animate-pulse rounded-lg border border-gray-200 p-4 dark:border-gray-700 dark:bg-gray-800"
             >
               <div className="flex items-center gap-4">
@@ -203,9 +221,11 @@ export function MomentsCard({ items }: { items: FriendFeedItem[] }) {
             <Icon icon="ph:arrow-left" className="h-4 w-4" />
             上一页
           </Button>
-          <span className="text-sm text-neutral-500 dark:text-neutral-400">
-            第 {safePage} / {totalPages} 页
-          </span>
+          <PaginationPagePicker
+            currentPage={safePage}
+            totalPages={totalPages}
+            onSelectPage={updatePage}
+          />
           <Button
             type="button"
             variant="ghost"
