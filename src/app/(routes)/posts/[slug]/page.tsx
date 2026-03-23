@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PostComments } from "@/components/post-comments";
+import { PostShareHeader } from "@/components/post-share-header";
 import { PostToc } from "@/components/post-toc";
 import { Badge } from "@/components/ui/badge";
 import { siteConfig } from "@/config/site";
@@ -155,18 +156,19 @@ export default async function PostPage({ params }: PostPageProps) {
   const content = await renderMdx(post.content);
   const { category, cover, tags } = post.frontmatter;
   const summary = post.frontmatter.summary ?? undefined;
+  const postUrl = `${siteConfig.siteUrl}/posts/${post.slug}/`;
   const posts = getAllPosts();
   const postsBySlug = new Map(posts.map((item) => [item.slug, item]));
   const currentIndex = posts.findIndex((item) => item.slug === post.slug);
   const defaultPreviousPost =
     currentIndex >= 0
       ? pickFallbackPost(
-        posts,
-        currentIndex,
-        post.slug,
-        postsBySlug,
-        "previous",
-      )
+          posts,
+          currentIndex,
+          post.slug,
+          postsBySlug,
+          "previous",
+        )
       : null;
   const defaultNextPost =
     currentIndex >= 0
@@ -201,7 +203,7 @@ export default async function PostPage({ params }: PostPageProps) {
     },
     mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": `${siteConfig.siteUrl}/posts/${post.slug}/`,
+      "@id": postUrl,
     },
     datePublished: `${post.frontmatter.date}T00:00:00+08:00`,
     dateModified: `${post.frontmatter.date}T00:00:00+08:00`,
@@ -217,6 +219,11 @@ export default async function PostPage({ params }: PostPageProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
       />
       <section className="min-w-0 md:p-10 lg:pl-14 xl:pl-20">
+        <PostShareHeader
+          title={post.frontmatter.title}
+          summary={summary}
+          url={postUrl}
+        />
         {cover ? (
           <div className="mb-6">
             <figure className="relative overflow-hidden rounded-[28px] border border-neutral-200/80 dark:border-neutral-800">
@@ -243,14 +250,11 @@ export default async function PostPage({ params }: PostPageProps) {
                     {post.frontmatter.title}
                   </h1>
                   {summary ? (
-                    <p className="mt-4 text-lg text-neutral-400">
-                      {summary}
-                    </p>
+                    <p className="mt-4 text-lg text-neutral-400">{summary}</p>
                   ) : null}
                 </div>
               </div>
             </figure>
-
           </div>
         ) : (
           <div className="mb-6 space-y-4">

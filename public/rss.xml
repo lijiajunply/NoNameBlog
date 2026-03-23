@@ -5,6 +5,14 @@
     <link>https://blog.luckyfishes.site</link>
     <description>一个简约的静态技术博客，记录开发与思考。</description>
       <item>
+        <title>AI 综合症者的一点思考</title>
+        <link>https://blog.luckyfishes.site/posts/ai_think/</link>
+        <guid>https://blog.luckyfishes.site/posts/ai_think/</guid>
+        <pubDate>Sun, 22 Mar 2026 00:00:00 GMT</pubDate>
+        <description>关于 AI 技术发展和应用的一个思考。这是一个很最近最近的故事，关于我自己...</description>
+      </item>
+
+      <item>
         <title>Markdown 语法展示</title>
         <link>https://blog.luckyfishes.site/posts/markdown-syntax-showcase/</link>
         <guid>https://blog.luckyfishes.site/posts/markdown-syntax-showcase/</guid>
