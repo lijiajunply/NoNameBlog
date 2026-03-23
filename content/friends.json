@@ -24,6 +24,14 @@
     "category": "个人博客"
   },
   {
+    "name": "Borry",
+    "url": "https://blog.borry.org/",
+    "description": "Nothing.",
+    "avatar": "https://img.notionusercontent.com/s3/prod-files-secure%2Fa5a46c38-63f0-4f6a-ab7a-2cd059e716c8%2F391a20ae-0430-4fbe-8d16-3861cfab2148%2FT5IEfGy2_400x400.jpg/size/w=1080?exp=1774368734&sig=M7P5icoRJ6HA5VJ2SsAzgPO8b3GgYhp9ZDFPhvrXSG0&id=07e87827-a1ad-4410-91ec-62eaa010ce6d&table=collection&userId=a98f818c-e509-4579-9121-7897441ca9ff",
+    "order": 4,
+    "category": "个人博客"
+  },
+  {
     "name": "西建大iOS Club",
     "url": "https://www.xauat.site/",
     "description": "西建大较大和较为知名的科技类社团",

@@ -480,6 +480,14 @@
     "avatar": "https://www.zhilu.site/api/avatar.png"
   },
   {
+    "title": "使用Github Action来进行CI/CD",
+    "link": "https://blog.borry.org/article/github-action-ci",
+    "description": "使用Github Action来进行自动部署到服务器",
+    "pubDate": "Tue, 12 Mar 2024 00:00:00 GMT",
+    "name": "Borry",
+    "avatar": "https://img.notionusercontent.com/s3/prod-files-secure%2Fa5a46c38-63f0-4f6a-ab7a-2cd059e716c8%2F391a20ae-0430-4fbe-8d16-3861cfab2148%2FT5IEfGy2_400x400.jpg/size/w=1080?exp=1774368734&sig=M7P5icoRJ6HA5VJ2SsAzgPO8b3GgYhp9ZDFPhvrXSG0&id=07e87827-a1ad-4410-91ec-62eaa010ce6d&table=collection&userId=a98f818c-e509-4579-9121-7897441ca9ff"
+  },
+  {
     "title": "今日无事，除了一些技术咨询",
     "link": "https://blog.zhilu.site/2024/helping-day",
     "description": "一天中帮助朋友们解决各类问题，如软件警告甄别、平板选购咨询、远程协作实现、签到操作指导、下载文件查找、卸载工具推荐、AI代码探讨，展现技术分享与互助的价值。",
@@ -600,6 +608,14 @@
     "avatar": "https://cravatar.cn/avatar/646331BFF8F19A0E05679C3CC0FC54D6"
   },
   {
+    "title": "Tailscale 杂谈NAT",
+    "link": "https://blog.borry.org/article/tailscale-net",
+    "description": "NAT是什么，Tailscale是怎么实现的异地组网和端到端连接",
+    "pubDate": "Mon, 20 Nov 2023 00:00:00 GMT",
+    "name": "Borry",
+    "avatar": "https://img.notionusercontent.com/s3/prod-files-secure%2Fa5a46c38-63f0-4f6a-ab7a-2cd059e716c8%2F391a20ae-0430-4fbe-8d16-3861cfab2148%2FT5IEfGy2_400x400.jpg/size/w=1080?exp=1774368734&sig=M7P5icoRJ6HA5VJ2SsAzgPO8b3GgYhp9ZDFPhvrXSG0&id=07e87827-a1ad-4410-91ec-62eaa010ce6d&table=collection&userId=a98f818c-e509-4579-9121-7897441ca9ff"
+  },
+  {
     "title": "Termux 简单指南",
     "link": "https://blog.zhilu.site/2023/termux-guide",
     "description": "Termux 安装、配置 SSH，切换国内源，安装 ZSH、X11 图形界面，探索更多可能性。",
@@ -624,6 +640,22 @@
     "avatar": "https://www.zhilu.site/api/avatar.png"
   },
   {
+    "title": "HTTP分块编码传输",
+    "link": "https://blog.borry.org/article/http-chunked",
+    "description": "关于HTTP的长连接、短连接和如何使用fiber来实现chunked分块编码传输",
+    "pubDate": "Thu, 14 Sep 2023 00:00:00 GMT",
+    "name": "Borry",
+    "avatar": "https://img.notionusercontent.com/s3/prod-files-secure%2Fa5a46c38-63f0-4f6a-ab7a-2cd059e716c8%2F391a20ae-0430-4fbe-8d16-3861cfab2148%2FT5IEfGy2_400x400.jpg/size/w=1080?exp=1774368734&sig=M7P5icoRJ6HA5VJ2SsAzgPO8b3GgYhp9ZDFPhvrXSG0&id=07e87827-a1ad-4410-91ec-62eaa010ce6d&table=collection&userId=a98f818c-e509-4579-9121-7897441ca9ff"
+  },
+  {
+    "title": "Nginx配置反向代理",
+    "link": "https://blog.borry.org/article/nginx-reverse-proxy",
+    "description": "反向代理和正向代理，如何复用端口等",
+    "pubDate": "Tue, 12 Sep 2023 00:00:00 GMT",
+    "name": "Borry",
+    "avatar": "https://img.notionusercontent.com/s3/prod-files-secure%2Fa5a46c38-63f0-4f6a-ab7a-2cd059e716c8%2F391a20ae-0430-4fbe-8d16-3861cfab2148%2FT5IEfGy2_400x400.jpg/size/w=1080?exp=1774368734&sig=M7P5icoRJ6HA5VJ2SsAzgPO8b3GgYhp9ZDFPhvrXSG0&id=07e87827-a1ad-4410-91ec-62eaa010ce6d&table=collection&userId=a98f818c-e509-4579-9121-7897441ca9ff"
+  },
+  {
     "title": "Arch Linux 易用性及美化",
     "link": "https://blog.zhilu.site/2023/archlinux-beautify",
     "description": "Plasma 桌面环境下优化小键盘、触摸板行为，配置字体。",
@@ -632,12 +664,28 @@
     "avatar": "https://www.zhilu.site/api/avatar.png"
   },
   {
+    "title": "使用环境变量存储SSH私钥格式错误",
+    "link": "https://blog.borry.org/article/ssh-environment-key",
+    "description": "在使用Zeabur等托管平台时，使用环境变量来存储Key遇到的问题",
+    "pubDate": "Wed, 19 Jul 2023 00:00:00 GMT",
+    "name": "Borry",
+    "avatar": "https://img.notionusercontent.com/s3/prod-files-secure%2Fa5a46c38-63f0-4f6a-ab7a-2cd059e716c8%2F391a20ae-0430-4fbe-8d16-3861cfab2148%2FT5IEfGy2_400x400.jpg/size/w=1080?exp=1774368734&sig=M7P5icoRJ6HA5VJ2SsAzgPO8b3GgYhp9ZDFPhvrXSG0&id=07e87827-a1ad-4410-91ec-62eaa010ce6d&table=collection&userId=a98f818c-e509-4579-9121-7897441ca9ff"
+  },
+  {
     "title": "Arch Linux 初步配置",
     "link": "https://blog.zhilu.site/2023/archlinux-configure",
     "description": "在 Arch Linux 系统上安装配置必备软件，如蓝牙、Yay、Zsh、输入法等。",
     "pubDate": "2023-06-24T01:31:15Z",
     "name": "纸鹿本鹿",
     "avatar": "https://www.zhilu.site/api/avatar.png"
+  },
+  {
+    "title": "深澜自助服务中心分析",
+    "link": "https://blog.borry.org/article/srun-analyse",
+    "description": "校园网自助服务中心模拟登陆",
+    "pubDate": "Fri, 23 Jun 2023 00:00:00 GMT",
+    "name": "Borry",
+    "avatar": "https://img.notionusercontent.com/s3/prod-files-secure%2Fa5a46c38-63f0-4f6a-ab7a-2cd059e716c8%2F391a20ae-0430-4fbe-8d16-3861cfab2148%2FT5IEfGy2_400x400.jpg/size/w=1080?exp=1774368734&sig=M7P5icoRJ6HA5VJ2SsAzgPO8b3GgYhp9ZDFPhvrXSG0&id=07e87827-a1ad-4410-91ec-62eaa010ce6d&table=collection&userId=a98f818c-e509-4579-9121-7897441ca9ff"
   },
   {
     "title": "使用 ArchInstall 安装 Arch Linux",
