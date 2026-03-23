@@ -30,8 +30,8 @@ export default function StatsPage() {
   return (
     <div className="space-y-12 pb-16">
       {/* Header Section */}
-      <div className="space-y-4 px-2 sm:px-0">
-        <h1 className="text-4xl font-semibold tracking-tight text-neutral-900 dark:text-white">
+      <div className="px-2 sm:px-0">
+        <h1 className="text-2xl font-semibold tracking-tight text-neutral-900 dark:text-white">
           统计数据
         </h1>
         <p className="text-lg text-neutral-500 dark:text-neutral-400">
@@ -42,13 +42,13 @@ export default function StatsPage() {
       {/* Stats Grid */}
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {/* Total Posts Card */}
-        <div className="group relative overflow-hidden rounded-[2rem] border border-black/5 bg-white/60 p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:bg-white/80 hover:shadow-[0_8px_40px_rgb(0,0,0,0.08)] dark:border-white/10 dark:bg-neutral-900/60 dark:shadow-[0_8px_30px_rgb(0,0,0,0.1)] dark:hover:bg-neutral-900/80 dark:hover:shadow-[0_8px_40px_rgb(0,0,0,0.2)]">
+        <div className="group relative overflow-hidden rounded-4xl border border-black/5 bg-white/60 p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:bg-white/80 hover:shadow-[0_8px_40px_rgb(0,0,0,0.08)] dark:border-white/10 dark:bg-neutral-900/60 dark:shadow-[0_8px_30px_rgb(0,0,0,0.1)] dark:hover:bg-neutral-900/80 dark:hover:shadow-[0_8px_40px_rgb(0,0,0,0.2)]">
           <div className="flex h-full flex-col justify-between gap-6">
             <div className="flex items-center justify-between">
               <span className="text-sm font-medium text-neutral-500 dark:text-neutral-400">
                 总文章
               </span>
-              <div className="flex h-12 w-12 items-center justify-center rounded-[1rem] bg-blue-500/10 text-blue-500 transition-transform duration-300 group-hover:scale-110 dark:bg-blue-500/20 dark:text-blue-400">
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-500/10 text-blue-500 transition-transform duration-300 group-hover:scale-110 dark:bg-blue-500/20 dark:text-blue-400">
                 <Icon icon="solar:document-text-bold-duotone" className="h-6 w-6" />
               </div>
             </div>
@@ -64,13 +64,13 @@ export default function StatsPage() {
         </div>
 
         {/* Total Tags Card */}
-        <div className="group relative overflow-hidden rounded-[2rem] border border-black/5 bg-white/60 p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:bg-white/80 hover:shadow-[0_8px_40px_rgb(0,0,0,0.08)] dark:border-white/10 dark:bg-neutral-900/60 dark:shadow-[0_8px_30px_rgb(0,0,0,0.1)] dark:hover:bg-neutral-900/80 dark:hover:shadow-[0_8px_40px_rgb(0,0,0,0.2)]">
+        <div className="group relative overflow-hidden rounded-4xl border border-black/5 bg-white/60 p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:bg-white/80 hover:shadow-[0_8px_40px_rgb(0,0,0,0.08)] dark:border-white/10 dark:bg-neutral-900/60 dark:shadow-[0_8px_30px_rgb(0,0,0,0.1)] dark:hover:bg-neutral-900/80 dark:hover:shadow-[0_8px_40px_rgb(0,0,0,0.2)]">
           <div className="flex h-full flex-col justify-between gap-6">
             <div className="flex items-center justify-between">
               <span className="text-sm font-medium text-neutral-500 dark:text-neutral-400">
                 总标签
               </span>
-              <div className="flex h-12 w-12 items-center justify-center rounded-[1rem] bg-emerald-500/10 text-emerald-500 transition-transform duration-300 group-hover:scale-110 dark:bg-emerald-500/20 dark:text-emerald-400">
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-500/10 text-emerald-500 transition-transform duration-300 group-hover:scale-110 dark:bg-emerald-500/20 dark:text-emerald-400">
                 <Icon icon="solar:tag-bold-duotone" className="h-6 w-6" />
               </div>
             </div>
@@ -86,13 +86,13 @@ export default function StatsPage() {
         </div>
 
         {/* Categories Card */}
-        <div className="group relative overflow-hidden rounded-[2rem] border border-black/5 bg-white/60 p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:bg-white/80 hover:shadow-[0_8px_40px_rgb(0,0,0,0.08)] dark:border-white/10 dark:bg-neutral-900/60 dark:shadow-[0_8px_30px_rgb(0,0,0,0.1)] dark:hover:bg-neutral-900/80 dark:hover:shadow-[0_8px_40px_rgb(0,0,0,0.2)]">
+        <div className="group relative overflow-hidden rounded-4xl border border-black/5 bg-white/60 p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:bg-white/80 hover:shadow-[0_8px_40px_rgb(0,0,0,0.08)] dark:border-white/10 dark:bg-neutral-900/60 dark:shadow-[0_8px_30px_rgb(0,0,0,0.1)] dark:hover:bg-neutral-900/80 dark:hover:shadow-[0_8px_40px_rgb(0,0,0,0.2)]">
           <div className="flex h-full flex-col justify-between gap-6">
             <div className="flex items-center justify-between">
               <span className="text-sm font-medium text-neutral-500 dark:text-neutral-400">
                 分类数
               </span>
-              <div className="flex h-12 w-12 items-center justify-center rounded-[1rem] bg-amber-500/10 text-amber-500 transition-transform duration-300 group-hover:scale-110 dark:bg-amber-500/20 dark:text-amber-400">
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-amber-500/10 text-amber-500 transition-transform duration-300 group-hover:scale-110 dark:bg-amber-500/20 dark:text-amber-400">
                 <Icon icon="solar:folder-with-files-bold-duotone" className="h-6 w-6" />
               </div>
             </div>
@@ -108,13 +108,13 @@ export default function StatsPage() {
         </div>
 
         {/* Last Updated Card */}
-        <div className="group relative overflow-hidden rounded-[2rem] border border-black/5 bg-white/60 p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:bg-white/80 hover:shadow-[0_8px_40px_rgb(0,0,0,0.08)] dark:border-white/10 dark:bg-neutral-900/60 dark:shadow-[0_8px_30px_rgb(0,0,0,0.1)] dark:hover:bg-neutral-900/80 dark:hover:shadow-[0_8px_40px_rgb(0,0,0,0.2)]">
+        <div className="group relative overflow-hidden rounded-4xl border border-black/5 bg-white/60 p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:bg-white/80 hover:shadow-[0_8px_40px_rgb(0,0,0,0.08)] dark:border-white/10 dark:bg-neutral-900/60 dark:shadow-[0_8px_30px_rgb(0,0,0,0.1)] dark:hover:bg-neutral-900/80 dark:hover:shadow-[0_8px_40px_rgb(0,0,0,0.2)]">
           <div className="flex h-full flex-col justify-between gap-6">
             <div className="flex items-center justify-between">
               <span className="text-sm font-medium text-neutral-500 dark:text-neutral-400">
                 最近更新
               </span>
-              <div className="flex h-12 w-12 items-center justify-center rounded-[1rem] bg-purple-500/10 text-purple-500 transition-transform duration-300 group-hover:scale-110 dark:bg-purple-500/20 dark:text-purple-400">
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-purple-500/10 text-purple-500 transition-transform duration-300 group-hover:scale-110 dark:bg-purple-500/20 dark:text-purple-400">
                 <Icon icon="solar:calendar-date-bold-duotone" className="h-6 w-6" />
               </div>
             </div>
@@ -143,7 +143,7 @@ export default function StatsPage() {
           </div>
         </div>
 
-        <div className="h-[300px] w-full sm:h-[400px]">
+        <div className="h-75 w-full sm:h-100">
           <AreaChart
             data={monthlyCumulative}
             margin={{ top: 20, right: 20, bottom: 20, left: 20 }}

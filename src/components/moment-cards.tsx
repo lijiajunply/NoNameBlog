@@ -18,6 +18,18 @@ export function MomentsContent() {
     fetch("/feed-cache.json")
       .then((res) => res.json())
       .then((data: FriendFeedItem[]) => {
+        data.forEach((item) => {
+          if (item.description.length >= 80){
+            item.description = item.description.substring(0, 80)
+            if (item.description.endsWith("。") || item.description.endsWith("！") || item.description.endsWith("?") || item.description.endsWith(".") || item.description.endsWith("!") || item.description.endsWith("?")){
+              item.description = item.description.substring(0, item.description.length - 1)
+            }
+
+            if (!item.description.endsWith("...")){
+              item.description += "...";
+            }
+          }
+        })
         setItems(data);
         setLoading(false);
       })

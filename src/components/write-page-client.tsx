@@ -17,6 +17,11 @@ import {
 } from "react";
 import { useHeaderSlotContext } from "@/components/header-slot";
 import { Card } from "@/components/ui/card";
+import {
+  ResizableHandle,
+  ResizablePanel,
+  ResizablePanelGroup,
+} from "@/components/ui/resizable";
 import { Tabs, TabsContent } from "@/components/ui/tabs";
 import { renderMdx } from "@/lib/content/mdx";
 import { cn } from "@/lib/utils";
@@ -298,28 +303,41 @@ export function WritePageClient() {
             value={value}
             onChange={setValue}
             theme={resolvedTheme}
+            activeView={activeView}
           />
         </TabsContent>
 
         <TabsContent value="preview" className="mt-0">
-          <PreviewPanel content={content} renderError={renderError} />
+          <PreviewPanel content={content} renderError={renderError} activeView={activeView} />
         </TabsContent>
 
         <TabsContent value="split" className="mt-0">
           {isDesktop ? (
-            <div className="grid gap-4 lg:grid-cols-2">
-              <EditorPanel
-                value={value}
-                onChange={setValue}
-                theme={resolvedTheme}
-              />
-              <PreviewPanel content={content} renderError={renderError} />
-            </div>
+            <ResizablePanelGroup
+              orientation="horizontal"
+              className="min-h-[calc(100vh-16rem)]"
+            >
+              <ResizablePanel defaultSize={'50%'} minSize={'32%'}>
+                <EditorPanel
+                  value={value}
+                  onChange={setValue}
+                  theme={resolvedTheme}
+                  activeView={activeView}
+                />
+              </ResizablePanel>
+
+              <ResizableHandle withHandle />
+
+              <ResizablePanel defaultSize={'50%'} minSize={'28%'}>
+                <PreviewPanel content={content} renderError={renderError} activeView={activeView} />
+              </ResizablePanel>
+            </ResizablePanelGroup>
           ) : (
             <EditorPanel
               value={value}
               onChange={setValue}
               theme={resolvedTheme}
+              activeView={activeView}
             />
           )}
         </TabsContent>
@@ -443,13 +461,15 @@ function EditorPanel({
   value,
   onChange,
   theme,
+  activeView
 }: {
   value: string;
   onChange: (value: string) => void;
   theme: string | undefined;
+  activeView: ViewMode;
 }) {
   return (
-    <Card className="relative h-[62vh] overflow-hidden rounded-3xl border-[color-mix(in_srgb,var(--foreground)_10%,transparent)] bg-[color-mix(in_srgb,var(--background)_94%,transparent)] p-0 shadow-[0_18px_48px_-34px_color-mix(in_srgb,var(--foreground)_35%,transparent)] backdrop-blur-xl lg:h-[calc(100vh-16rem)]">
+    <Card className={`relative h-[62vh] overflow-hidden ${activeView === 'split' ? 'rounded-l-3xl! rounded-r-none' : 'rounded-3xl'} border-[color-mix(in_srgb,var(--foreground)_10%,transparent)] bg-[color-mix(in_srgb,var(--background)_94%,transparent)] p-0 shadow-[0_18px_48px_-34px_color-mix(in_srgb,var(--foreground)_35%,transparent)] backdrop-blur-xl lg:h-[calc(100vh-16rem)]`}>
       <CodeMirror
         value={value}
         height="100%"
@@ -470,14 +490,16 @@ function EditorPanel({
 function PreviewPanel({
   content,
   renderError,
+  activeView
 }: {
   content: ReactNode;
   renderError: string | null;
+  activeView: ViewMode;
 }) {
   return (
-    <Card className="h-[62vh] overflow-auto rounded-[1.5rem] border-[color:color-mix(in_srgb,var(--foreground)_10%,transparent)] bg-[color:color-mix(in_srgb,var(--background)_95%,transparent)] p-5 shadow-[0_18px_48px_-34px_color-mix(in_srgb,var(--foreground)_35%,transparent)] backdrop-blur-xl lg:h-[calc(100vh-16rem)] lg:p-8">
+    <Card className={`h-[62vh] overflow-auto ${activeView === 'split' ? 'rounded-r-3xl rounded-l-none' : 'rounded-3xl'} border-[color-mix(in_srgb,var(--foreground)_10%,transparent)] bg-[color-mix(in_srgb,var(--background)_95%,transparent)] p-5 shadow-[0_18px_48px_-34px_color-mix(in_srgb,var(--foreground)_35%,transparent)] backdrop-blur-xl lg:h-[calc(100vh-16rem)] lg:p-8`}>
       {renderError ? (
-        <div className="flex items-start gap-2 rounded-xl border border-[color:color-mix(in_srgb,#ff3b30_36%,transparent)] bg-[color:color-mix(in_srgb,#ff3b30_12%,transparent)] px-4 py-3 text-sm text-[color:color-mix(in_srgb,#ff3b30_80%,var(--foreground))]">
+        <div className="flex items-start gap-2 rounded-xl border border-[color-mix(in_srgb,#ff3b30_36%,transparent)] bg-[color-mix(in_srgb,#ff3b30_12%,transparent)] px-4 py-3 text-sm text-[color-mix(in_srgb,#ff3b30_80%,var(--foreground))]">
           <Icon icon="mingcute:warning-line" className="mt-0.5 shrink-0" />
           <p>{renderError}</p>
         </div>
