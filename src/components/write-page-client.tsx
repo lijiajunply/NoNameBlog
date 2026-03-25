@@ -582,21 +582,6 @@ export function WritePageClient() {
         </p>
       ) : null}
 
-      {DEV_FILE_SYSTEM_ENABLED ? (
-        <DevWorkspaceStatus
-          directoryLabel={directoryLabel}
-          fileAccessError={fileAccessError}
-          hasSelectedFile={hasSelectedFile}
-          hasUnsavedFileChanges={hasUnsavedFileChanges}
-          isFileSystemSupported={isFileSystemSupported}
-          selectedFileLabel={
-            selectedPostFile
-              ? `content/posts/${selectedPostFile.relativePath}`
-              : null
-          }
-        />
-      ) : null}
-
       <Tabs value={activeView} className="relative z-10">
         <TabsContent value="edit" className="mt-0">
           <EditorPanel
