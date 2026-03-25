@@ -16,7 +16,16 @@ import {
   useState,
 } from "react";
 import { useHeaderSlotContext } from "@/components/header-slot";
+import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuLabel,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import {
   ResizableHandle,
   ResizablePanel,
@@ -36,10 +45,52 @@ const editorExtensions = [
 ];
 const PREVIEW_DEBOUNCE_MS = 180;
 const SAVE_DEBOUNCE_MS = 900;
-const STORAGE_KEY = "mdx-editor-content";
+const STORAGE_KEY_PREFIX = "mdx-editor-content";
+const ACTIVE_FILE_STORAGE_KEY = "mdx-editor-active-file";
+const DEV_FILE_SYSTEM_ENABLED = process.env.NODE_ENV === "development";
 
 type SaveStatus = "idle" | "saving" | "saved" | "error";
 type ViewMode = "edit" | "preview" | "split";
+type FileSaveStatus = "idle" | "saving" | "saved" | "error";
+
+type LocalPermissionDescriptor = {
+  mode?: "read" | "readwrite";
+};
+
+type LocalWritableFileStream = {
+  write: (data: string) => Promise<void>;
+  close: () => Promise<void>;
+};
+
+type LocalFileHandle = {
+  kind: "file";
+  name: string;
+  getFile: () => Promise<File>;
+  createWritable: () => Promise<LocalWritableFileStream>;
+  requestPermission?: (
+    descriptor?: LocalPermissionDescriptor,
+  ) => Promise<PermissionState>;
+};
+
+type LocalDirectoryHandle = {
+  kind: "directory";
+  name: string;
+  values: () => AsyncIterable<LocalDirectoryHandle | LocalFileHandle>;
+};
+
+type EditablePostFile = {
+  id: string;
+  name: string;
+  relativePath: string;
+  handle: LocalFileHandle;
+};
+
+type WindowWithDirectoryPicker = Window &
+  typeof globalThis & {
+    showDirectoryPicker?: (options?: {
+      mode?: "read" | "readwrite";
+    }) => Promise<LocalDirectoryHandle>;
+  };
 
 const initialSource = `# 欢迎使用
 
@@ -59,6 +110,39 @@ export function hello(name: string) {
 \`\`\`
 `;
 
+function getDraftStorageKey(fileId: string | null) {
+  return `${STORAGE_KEY_PREFIX}:${fileId ?? "__scratch__"}`;
+}
+
+async function collectEditablePostFiles(
+  directoryHandle: LocalDirectoryHandle,
+  parentPath = "",
+): Promise<EditablePostFile[]> {
+  const files: EditablePostFile[] = [];
+
+  for await (const entry of directoryHandle.values()) {
+    const relativePath = parentPath
+      ? `${parentPath}/${entry.name}`
+      : entry.name;
+
+    if (entry.kind === "directory") {
+      files.push(...(await collectEditablePostFiles(entry, relativePath)));
+      continue;
+    }
+
+    if (entry.name.endsWith(".mdx")) {
+      files.push({
+        id: relativePath,
+        name: entry.name,
+        relativePath,
+        handle: entry,
+      });
+    }
+  }
+
+  return files.toSorted((a, b) => a.relativePath.localeCompare(b.relativePath));
+}
+
 export function WritePageClient() {
   const { resolvedTheme } = useTheme();
   const { setHeaderContent, clearHeaderContent } = useHeaderSlotContext();
@@ -66,12 +150,29 @@ export function WritePageClient() {
   const [content, setContent] = useState<ReactNode>(null);
   const [renderError, setRenderError] = useState<string | null>(null);
   const [saveStatus, setSaveStatus] = useState<SaveStatus>("idle");
+  const [fileSaveStatus, setFileSaveStatus] = useState<FileSaveStatus>("idle");
   const [actionMessage, setActionMessage] = useState<string | null>(null);
   const [activeView, setActiveView] = useState<ViewMode>("edit");
   const [isDesktop, setIsDesktop] = useState(false);
+  const [selectedFileId, setSelectedFileId] = useState<string | null>(null);
+  const [fileSourceValue, setFileSourceValue] = useState<string | null>(null);
+  const [postFiles, setPostFiles] = useState<EditablePostFile[]>([]);
+  const [isLoadingFiles, setIsLoadingFiles] = useState(false);
+  const [directoryLabel, setDirectoryLabel] = useState<string | null>(null);
+  const [fileAccessError, setFileAccessError] = useState<string | null>(null);
+  const [isFileSystemSupported, setIsFileSystemSupported] = useState(false);
   const isInitialMount = useRef(true);
   const hasInitializedView = useRef(false);
   const taskIdRef = useRef(0);
+  const preferredFileIdRef = useRef<string | null>(null);
+
+  const selectedPostFile = useMemo(
+    () => postFiles.find((file) => file.id === selectedFileId) ?? null,
+    [postFiles, selectedFileId],
+  );
+  const hasSelectedFile = selectedPostFile !== null;
+  const hasUnsavedFileChanges =
+    hasSelectedFile && fileSourceValue !== null && value !== fileSourceValue;
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(min-width: 1024px)");
@@ -99,8 +200,18 @@ export function WritePageClient() {
   }, []);
 
   useEffect(() => {
-    const saved = localStorage.getItem(STORAGE_KEY);
-    setValue(saved || initialSource);
+    const activeFileId = localStorage.getItem(ACTIVE_FILE_STORAGE_KEY);
+    const draft = localStorage.getItem(
+      getDraftStorageKey(activeFileId || null),
+    );
+
+    preferredFileIdRef.current = activeFileId;
+    setValue(draft || initialSource);
+    setSelectedFileId(activeFileId || null);
+    setIsFileSystemSupported(
+      typeof (window as WindowWithDirectoryPicker).showDirectoryPicker ===
+        "function",
+    );
   }, []);
 
   useEffect(() => {
@@ -113,7 +224,7 @@ export function WritePageClient() {
     setSaveStatus("saving");
     const timeoutId = window.setTimeout(() => {
       try {
-        localStorage.setItem(STORAGE_KEY, value);
+        localStorage.setItem(getDraftStorageKey(selectedFileId), value);
         setSaveStatus("saved");
       } catch {
         setSaveStatus("error");
@@ -123,7 +234,7 @@ export function WritePageClient() {
     return () => {
       window.clearTimeout(timeoutId);
     };
-  }, [value]);
+  }, [value, selectedFileId]);
 
   useEffect(() => {
     let unmounted = false;
@@ -219,11 +330,12 @@ export function WritePageClient() {
   const handleClear = useCallback(() => {
     if (window.confirm("确定要清空当前内容吗？此操作不可撤销。")) {
       setValue("");
-      localStorage.removeItem(STORAGE_KEY);
+      localStorage.removeItem(getDraftStorageKey(selectedFileId));
       setSaveStatus("idle");
+      setFileSaveStatus("idle");
       setActionMessage("内容已清空");
     }
-  }, []);
+  }, [selectedFileId]);
 
   const handleCopy = useCallback(async () => {
     try {
@@ -234,10 +346,172 @@ export function WritePageClient() {
     }
   }, [value]);
 
+  const handleConnectDirectory = useCallback(async () => {
+    const windowWithPicker = window as WindowWithDirectoryPicker;
+    if (!windowWithPicker.showDirectoryPicker) {
+      setFileAccessError(
+        "当前浏览器不支持目录读写，请改用 Chromium 内核浏览器。",
+      );
+      return;
+    }
+
+    try {
+      setIsLoadingFiles(true);
+      setFileAccessError(null);
+      const directoryHandle = await windowWithPicker.showDirectoryPicker({
+        mode: "readwrite",
+      });
+      const files = await collectEditablePostFiles(directoryHandle);
+
+      setPostFiles(files);
+      setDirectoryLabel(directoryHandle.name);
+      setActionMessage(
+        files.length
+          ? `已连接 ${directoryHandle.name}，找到 ${files.length} 个 MDX 文件`
+          : `已连接 ${directoryHandle.name}，但还没有找到 MDX 文件`,
+      );
+
+      if (!files.length) {
+        return;
+      }
+
+      const preferredFileId = preferredFileIdRef.current;
+      if (
+        preferredFileId &&
+        files.some((file) => file.id === preferredFileId)
+      ) {
+        const draftSource = localStorage.getItem(
+          getDraftStorageKey(preferredFileId),
+        );
+        const matchedFile = files.find((file) => file.id === preferredFileId);
+
+        if (matchedFile) {
+          const diskSource = await (await matchedFile.handle.getFile()).text();
+          setSelectedFileId(matchedFile.id);
+          setFileSourceValue(diskSource);
+          setFileSaveStatus("idle");
+          setValue(draftSource ?? diskSource);
+        }
+      } else {
+        setSelectedFileId(null);
+        setFileSourceValue(null);
+      }
+    } catch (error) {
+      if (error instanceof DOMException && error.name === "AbortError") {
+        return;
+      }
+
+      setFileAccessError(
+        error instanceof Error ? error.message : "连接目录失败，请重试。",
+      );
+    } finally {
+      setIsLoadingFiles(false);
+    }
+  }, []);
+
+  const handleSaveToFile = useCallback(async () => {
+    if (!selectedPostFile) {
+      return;
+    }
+
+    try {
+      setFileSaveStatus("saving");
+      setFileAccessError(null);
+      const permission = await selectedPostFile.handle.requestPermission?.({
+        mode: "readwrite",
+      });
+
+      if (permission === "denied") {
+        throw new Error("目录写入权限被拒绝，无法保存文件。");
+      }
+
+      const writable = await selectedPostFile.handle.createWritable();
+      await writable.write(value);
+      await writable.close();
+
+      setFileSourceValue(value);
+      setFileSaveStatus("saved");
+      setActionMessage(`已保存到 ${selectedPostFile.relativePath}`);
+    } catch (error) {
+      setFileSaveStatus("error");
+      setFileAccessError(
+        error instanceof Error ? error.message : "保存文件失败，请重试。",
+      );
+    }
+  }, [selectedPostFile, value]);
+
+  const handleSelectFile = useCallback(
+    async (fileId: string) => {
+      if (fileId === selectedFileId) {
+        return;
+      }
+
+      if (
+        hasUnsavedFileChanges &&
+        !window.confirm("当前文件还有未写回磁盘的内容，确定切换吗？")
+      ) {
+        return;
+      }
+
+      const nextFile = postFiles.find((file) => file.id === fileId);
+      if (!nextFile) {
+        return;
+      }
+
+      try {
+        setFileAccessError(null);
+        const diskSource = await (await nextFile.handle.getFile()).text();
+        const localDraft = localStorage.getItem(
+          getDraftStorageKey(nextFile.id),
+        );
+        const nextValue = localDraft ?? diskSource;
+
+        setSelectedFileId(nextFile.id);
+        setFileSourceValue(diskSource);
+        setFileSaveStatus("idle");
+        setValue(nextValue);
+        preferredFileIdRef.current = nextFile.id;
+        localStorage.setItem(ACTIVE_FILE_STORAGE_KEY, nextFile.id);
+        setActionMessage(
+          localDraft && localDraft !== diskSource
+            ? `已打开 ${nextFile.relativePath}，并恢复本地草稿`
+            : `已打开 ${nextFile.relativePath}`,
+        );
+      } catch (error) {
+        setFileAccessError(
+          error instanceof Error ? error.message : "读取文件失败，请重试。",
+        );
+      }
+    },
+    [hasUnsavedFileChanges, postFiles, selectedFileId],
+  );
+
   const headerContent = useMemo(
     () => (
       <WriteHeaderControls
         activeView={activeView}
+        devFileActions={
+          DEV_FILE_SYSTEM_ENABLED ? (
+            <DevHeaderFileActions
+              files={postFiles}
+              fileCount={postFiles.length}
+              fileSaveStatus={fileSaveStatus}
+              hasSelectedFile={hasSelectedFile}
+              hasUnsavedFileChanges={hasUnsavedFileChanges}
+              isFileSystemSupported={isFileSystemSupported}
+              isLoadingFiles={isLoadingFiles}
+              onConnectDirectory={handleConnectDirectory}
+              onSaveToFile={handleSaveToFile}
+              onSelectFile={handleSelectFile}
+              selectedFileId={selectedFileId}
+              selectedFileLabel={
+                selectedPostFile
+                  ? `content/posts/${selectedPostFile.relativePath}`
+                  : null
+              }
+            />
+          ) : null
+        }
         isDesktop={isDesktop}
         onChangeView={setActiveView}
         onCopy={handleCopy}
@@ -259,6 +533,17 @@ export function WritePageClient() {
       handleCopy,
       handleExport,
       handleClear,
+      handleConnectDirectory,
+      handleSaveToFile,
+      handleSelectFile,
+      postFiles,
+      fileSaveStatus,
+      hasSelectedFile,
+      hasUnsavedFileChanges,
+      isFileSystemSupported,
+      isLoadingFiles,
+      selectedFileId,
+      selectedPostFile,
     ],
   );
 
@@ -297,6 +582,21 @@ export function WritePageClient() {
         </p>
       ) : null}
 
+      {DEV_FILE_SYSTEM_ENABLED ? (
+        <DevWorkspaceStatus
+          directoryLabel={directoryLabel}
+          fileAccessError={fileAccessError}
+          hasSelectedFile={hasSelectedFile}
+          hasUnsavedFileChanges={hasUnsavedFileChanges}
+          isFileSystemSupported={isFileSystemSupported}
+          selectedFileLabel={
+            selectedPostFile
+              ? `content/posts/${selectedPostFile.relativePath}`
+              : null
+          }
+        />
+      ) : null}
+
       <Tabs value={activeView} className="relative z-10">
         <TabsContent value="edit" className="mt-0">
           <EditorPanel
@@ -308,7 +608,11 @@ export function WritePageClient() {
         </TabsContent>
 
         <TabsContent value="preview" className="mt-0">
-          <PreviewPanel content={content} renderError={renderError} activeView={activeView} />
+          <PreviewPanel
+            content={content}
+            renderError={renderError}
+            activeView={activeView}
+          />
         </TabsContent>
 
         <TabsContent value="split" className="mt-0">
@@ -317,7 +621,7 @@ export function WritePageClient() {
               orientation="horizontal"
               className="min-h-[calc(100vh-16rem)]"
             >
-              <ResizablePanel defaultSize={'50%'} minSize={'32%'}>
+              <ResizablePanel defaultSize={"50%"} minSize={"32%"}>
                 <EditorPanel
                   value={value}
                   onChange={setValue}
@@ -328,8 +632,12 @@ export function WritePageClient() {
 
               <ResizableHandle withHandle />
 
-              <ResizablePanel defaultSize={'50%'} minSize={'28%'}>
-                <PreviewPanel content={content} renderError={renderError} activeView={activeView} />
+              <ResizablePanel defaultSize={"50%"} minSize={"28%"}>
+                <PreviewPanel
+                  content={content}
+                  renderError={renderError}
+                  activeView={activeView}
+                />
               </ResizablePanel>
             </ResizablePanelGroup>
           ) : (
@@ -346,8 +654,172 @@ export function WritePageClient() {
   );
 }
 
+function DevHeaderFileActions({
+  fileCount,
+  fileSaveStatus,
+  files,
+  hasSelectedFile,
+  hasUnsavedFileChanges,
+  isFileSystemSupported,
+  isLoadingFiles,
+  onConnectDirectory,
+  onSaveToFile,
+  onSelectFile,
+  selectedFileId,
+  selectedFileLabel,
+}: {
+  fileCount: number;
+  fileSaveStatus: FileSaveStatus;
+  files: EditablePostFile[];
+  hasSelectedFile: boolean;
+  hasUnsavedFileChanges: boolean;
+  isFileSystemSupported: boolean;
+  isLoadingFiles: boolean;
+  onConnectDirectory: () => Promise<void>;
+  onSaveToFile: () => Promise<void>;
+  onSelectFile: (fileId: string) => Promise<void>;
+  selectedFileId: string | null;
+  selectedFileLabel: string | null;
+}) {
+  const saveButtonLabel = !hasSelectedFile
+    ? "先选文件"
+    : fileSaveStatus === "saving"
+      ? "保存中"
+      : hasUnsavedFileChanges
+        ? "保存文件"
+        : "已同步";
+
+  return (
+    <div className="flex items-center gap-1.5">
+      <Button
+        type="button"
+        variant="outline"
+        size="sm"
+        className="rounded-full"
+        onClick={() => {
+          void onConnectDirectory();
+        }}
+        disabled={!isFileSystemSupported || isLoadingFiles}
+      >
+        <Icon
+          icon={
+            isLoadingFiles
+              ? "mingcute:loading-3-line"
+              : "mingcute:folder-open-line"
+          }
+          className={isLoadingFiles ? "animate-spin" : undefined}
+        />
+        连接 posts
+      </Button>
+
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button
+            type="button"
+            variant="outline"
+            size="sm"
+            className="max-w-[14rem] rounded-full"
+            disabled={!files.length}
+          >
+            <span className="truncate">{selectedFileLabel ?? "选择文章"}</span>
+            <Icon icon="ph:caret-down-bold" className="h-3.5 w-3.5 shrink-0" />
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end" className="min-w-[20rem]">
+          <DropdownMenuLabel>
+            {fileCount ? `共 ${fileCount} 个 MDX 文件` : "暂无可选文件"}
+          </DropdownMenuLabel>
+          <DropdownMenuRadioGroup
+            value={selectedFileId ?? ""}
+            onValueChange={(nextValue) => {
+              void onSelectFile(nextValue);
+            }}
+          >
+            {files.map((file) => (
+              <DropdownMenuRadioItem key={file.id} value={file.id}>
+                {file.relativePath}
+              </DropdownMenuRadioItem>
+            ))}
+          </DropdownMenuRadioGroup>
+        </DropdownMenuContent>
+      </DropdownMenu>
+
+      <Button
+        type="button"
+        size="sm"
+        className="rounded-full"
+        onClick={() => {
+          void onSaveToFile();
+        }}
+        disabled={!hasSelectedFile || fileSaveStatus === "saving"}
+      >
+        <Icon
+          icon={
+            fileSaveStatus === "saving"
+              ? "mingcute:loading-3-line"
+              : fileSaveStatus === "error"
+                ? "mingcute:warning-line"
+                : hasUnsavedFileChanges
+                  ? "mingcute:save-line"
+                  : "mingcute:check-line"
+          }
+          className={fileSaveStatus === "saving" ? "animate-spin" : undefined}
+        />
+        {saveButtonLabel}
+      </Button>
+    </div>
+  );
+}
+
+function DevWorkspaceStatus({
+  directoryLabel,
+  fileAccessError,
+  hasSelectedFile,
+  hasUnsavedFileChanges,
+  isFileSystemSupported,
+  selectedFileLabel,
+}: {
+  directoryLabel: string | null;
+  fileAccessError: string | null;
+  hasSelectedFile: boolean;
+  hasUnsavedFileChanges: boolean;
+  isFileSystemSupported: boolean;
+  selectedFileLabel: string | null;
+}) {
+  return (
+    <Card className="relative z-10 rounded-[1.25rem] border-[color-mix(in_srgb,var(--foreground)_10%,transparent)] bg-[color-mix(in_srgb,var(--background)_92%,transparent)] p-3">
+      <div className="flex flex-col gap-1 text-xs text-[color-mix(in_srgb,var(--foreground)_68%,transparent)]">
+        <p>
+          {directoryLabel
+            ? `已连接目录: ${directoryLabel}`
+            : "尚未连接 posts 目录"}
+          {hasSelectedFile && selectedFileLabel
+            ? ` · 当前文件: ${selectedFileLabel}`
+            : " · 当前为本地临时草稿"}
+        </p>
+        <p>
+          {hasUnsavedFileChanges
+            ? "检测到未写回文件的修改，使用 header 里的“保存文件”按钮即可覆盖原文件。"
+            : "当前内容与已打开文件保持同步。"}
+        </p>
+        {!isFileSystemSupported ? (
+          <p className="text-[color-mix(in_srgb,#ff7a00_85%,var(--foreground))]">
+            当前浏览器不支持目录访问 API，建议在 Chromium 系浏览器下使用。
+          </p>
+        ) : null}
+        {fileAccessError ? (
+          <p className="text-[color-mix(in_srgb,#ff3b30_82%,var(--foreground))]">
+            {fileAccessError}
+          </p>
+        ) : null}
+      </div>
+    </Card>
+  );
+}
+
 function WriteHeaderControls({
   activeView,
+  devFileActions,
   isDesktop,
   onChangeView,
   onCopy,
@@ -359,6 +831,7 @@ function WriteHeaderControls({
   charCount,
 }: {
   activeView: ViewMode;
+  devFileActions?: ReactNode;
   isDesktop: boolean;
   onChangeView: (value: ViewMode) => void;
   onCopy: () => void;
@@ -377,6 +850,8 @@ function WriteHeaderControls({
 
   return (
     <div className="flex min-w-0 items-center gap-2 overflow-x-auto">
+      {devFileActions}
+
       <div className="inline-flex items-center rounded-full border border-[color-mix(in_srgb,var(--foreground)_12%,transparent)] bg-[color-mix(in_srgb,var(--foreground)_4%,transparent)] p-0.5">
         {viewOptions.map((view) => (
           <button
@@ -461,7 +936,7 @@ function EditorPanel({
   value,
   onChange,
   theme,
-  activeView
+  activeView,
 }: {
   value: string;
   onChange: (value: string) => void;
@@ -469,7 +944,9 @@ function EditorPanel({
   activeView: ViewMode;
 }) {
   return (
-    <Card className={`relative h-[62vh] overflow-hidden ${activeView === 'split' ? 'rounded-l-3xl! rounded-r-none' : 'rounded-3xl'} border-[color-mix(in_srgb,var(--foreground)_10%,transparent)] bg-[color-mix(in_srgb,var(--background)_94%,transparent)] p-0 shadow-[0_18px_48px_-34px_color-mix(in_srgb,var(--foreground)_35%,transparent)] backdrop-blur-xl lg:h-[calc(100vh-16rem)]`}>
+    <Card
+      className={`relative h-[62vh] overflow-hidden ${activeView === "split" ? "rounded-l-3xl! rounded-r-none" : "rounded-3xl"} border-[color-mix(in_srgb,var(--foreground)_10%,transparent)] bg-[color-mix(in_srgb,var(--background)_94%,transparent)] p-0 shadow-[0_18px_48px_-34px_color-mix(in_srgb,var(--foreground)_35%,transparent)] backdrop-blur-xl lg:h-[calc(100vh-16rem)]`}
+    >
       <CodeMirror
         value={value}
         height="100%"
@@ -490,14 +967,16 @@ function EditorPanel({
 function PreviewPanel({
   content,
   renderError,
-  activeView
+  activeView,
 }: {
   content: ReactNode;
   renderError: string | null;
   activeView: ViewMode;
 }) {
   return (
-    <Card className={`h-[62vh] overflow-auto ${activeView === 'split' ? 'rounded-r-3xl rounded-l-none' : 'rounded-3xl'} border-[color-mix(in_srgb,var(--foreground)_10%,transparent)] bg-[color-mix(in_srgb,var(--background)_95%,transparent)] p-5 shadow-[0_18px_48px_-34px_color-mix(in_srgb,var(--foreground)_35%,transparent)] backdrop-blur-xl lg:h-[calc(100vh-16rem)] lg:p-8`}>
+    <Card
+      className={`h-[62vh] overflow-auto ${activeView === "split" ? "rounded-r-3xl rounded-l-none" : "rounded-3xl"} border-[color-mix(in_srgb,var(--foreground)_10%,transparent)] bg-[color-mix(in_srgb,var(--background)_95%,transparent)] p-5 shadow-[0_18px_48px_-34px_color-mix(in_srgb,var(--foreground)_35%,transparent)] backdrop-blur-xl lg:h-[calc(100vh-16rem)] lg:p-8`}
+    >
       {renderError ? (
         <div className="flex items-start gap-2 rounded-xl border border-[color-mix(in_srgb,#ff3b30_36%,transparent)] bg-[color-mix(in_srgb,#ff3b30_12%,transparent)] px-4 py-3 text-sm text-[color-mix(in_srgb,#ff3b30_80%,var(--foreground))]">
           <Icon icon="mingcute:warning-line" className="mt-0.5 shrink-0" />
