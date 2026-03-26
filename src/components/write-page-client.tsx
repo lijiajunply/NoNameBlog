@@ -556,7 +556,7 @@ export function WritePageClient() {
   }, [headerContent, setHeaderContent, clearHeaderContent]);
 
   return (
-    <div className="relative flex flex-col gap-4">
+    <div className="relative flex flex-col h-full">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-x-0 -top-10 z-0 h-56 rounded-[2.5rem] bg-[radial-gradient(ellipse_at_top,color-mix(in_srgb,var(--foreground)_9%,transparent),transparent_65%)] blur-3xl"
@@ -606,7 +606,7 @@ export function WritePageClient() {
               orientation="horizontal"
               className="min-h-[calc(100vh-16rem)]"
             >
-              <ResizablePanel defaultSize={"50%"} minSize={"32%"}>
+              <ResizablePanel defaultSize={"50%"} minSize={"36%"}>
                 <EditorPanel
                   value={value}
                   onChange={setValue}
@@ -617,7 +617,7 @@ export function WritePageClient() {
 
               <ResizableHandle withHandle />
 
-              <ResizablePanel defaultSize={"50%"} minSize={"28%"}>
+              <ResizablePanel defaultSize={"50%"} minSize={"36%"}>
                 <PreviewPanel
                   content={content}
                   renderError={renderError}
@@ -703,7 +703,7 @@ function DevHeaderFileActions({
             type="button"
             variant="outline"
             size="sm"
-            className="max-w-[14rem] rounded-full"
+            className="max-w-56 rounded-full"
             disabled={!files.length}
           >
             <span className="truncate">{selectedFileLabel ?? "选择文章"}</span>
@@ -753,52 +753,6 @@ function DevHeaderFileActions({
         {saveButtonLabel}
       </Button>
     </div>
-  );
-}
-
-function DevWorkspaceStatus({
-  directoryLabel,
-  fileAccessError,
-  hasSelectedFile,
-  hasUnsavedFileChanges,
-  isFileSystemSupported,
-  selectedFileLabel,
-}: {
-  directoryLabel: string | null;
-  fileAccessError: string | null;
-  hasSelectedFile: boolean;
-  hasUnsavedFileChanges: boolean;
-  isFileSystemSupported: boolean;
-  selectedFileLabel: string | null;
-}) {
-  return (
-    <Card className="relative z-10 rounded-[1.25rem] border-[color-mix(in_srgb,var(--foreground)_10%,transparent)] bg-[color-mix(in_srgb,var(--background)_92%,transparent)] p-3">
-      <div className="flex flex-col gap-1 text-xs text-[color-mix(in_srgb,var(--foreground)_68%,transparent)]">
-        <p>
-          {directoryLabel
-            ? `已连接目录: ${directoryLabel}`
-            : "尚未连接 posts 目录"}
-          {hasSelectedFile && selectedFileLabel
-            ? ` · 当前文件: ${selectedFileLabel}`
-            : " · 当前为本地临时草稿"}
-        </p>
-        <p>
-          {hasUnsavedFileChanges
-            ? "检测到未写回文件的修改，使用 header 里的“保存文件”按钮即可覆盖原文件。"
-            : "当前内容与已打开文件保持同步。"}
-        </p>
-        {!isFileSystemSupported ? (
-          <p className="text-[color-mix(in_srgb,#ff7a00_85%,var(--foreground))]">
-            当前浏览器不支持目录访问 API，建议在 Chromium 系浏览器下使用。
-          </p>
-        ) : null}
-        {fileAccessError ? (
-          <p className="text-[color-mix(in_srgb,#ff3b30_82%,var(--foreground))]">
-            {fileAccessError}
-          </p>
-        ) : null}
-      </div>
-    </Card>
   );
 }
 
@@ -909,7 +863,7 @@ function HeaderActionButton({
     <button
       type="button"
       onClick={onClick}
-      className="inline-flex items-center gap-1 rounded-full border border-[color-mix(in_srgb,var(--foreground)_12%,transparent)] px-2 py-1 text-xs text-[color-mix(in_srgb,var(--foreground)_72%,transparent)] transition-colors hover:bg-[color:color-mix(in_srgb,var(--foreground)_6%,transparent)] hover:text-foreground"
+      className="inline-flex items-center gap-1 rounded-full border border-[color-mix(in_srgb,var(--foreground)_12%,transparent)] px-2 py-1 text-xs text-[color-mix(in_srgb,var(--foreground)_72%,transparent)] transition-colors hover:bg-[color-mix(in_srgb,var(--foreground)_6%,transparent)] hover:text-foreground"
     >
       <Icon icon={icon} />
       {label}

@@ -250,6 +250,62 @@ className: my-8 border border-emerald-200/60 bg-gradient-to-r from-emerald-50/80
 你可以把总结、提示、结果等信息放在这个区域，让页面结构更有层次。
 ::
 
+### 时间线
+
+现在也支持使用 `::timeline` 加 YAML 数组数据来渲染时间线：
+
+```yaml
+::timeline
+title: 项目里程碑
+description: 用一段 YAML 数据描述阶段节点
+data:
+  - date: 2025.11
+    title: 需求拆解
+    badge: 已完成
+    description: 确认页面结构、自定义块语法和数据模型。
+    tags:
+      - MDX
+      - YAML
+  - date: 2025.12
+    title: 组件实现
+    badge: 进行中
+    icon: ph:rocket-launch-duotone
+    description: 完成 Timeline 组件和 `::timeline` 渲染支持。
+    tags:
+      - React
+      - Tailwind
+  - date: 2026.01
+    title: 内容接入
+    description: 在文章里直接维护时间线数据，不再手写 JSX。
+::
+```
+
+实际渲染效果：
+
+::timeline
+title: 项目里程碑
+description: 用一段 YAML 数据描述阶段节点
+data:
+  - date: 2025.11
+    title: 需求拆解
+    badge: 已完成
+    description: 确认页面结构、自定义块语法和数据模型。
+    tags:
+      - MDX
+      - YAML
+  - date: 2025.12
+    title: 组件实现
+    badge: 进行中
+    icon: ph:rocket-launch-duotone
+    description: 完成 Timeline 组件和 `::timeline` 渲染支持。
+    tags:
+      - React
+      - Tailwind
+  - date: 2026.01
+    title: 内容接入
+    description: 在文章里直接维护时间线数据，不再手写 JSX。
+::
+
 ### Inline 语法
 
 除了 `::组件名` 这种块级写法，现在也支持统一的行内扩展语法：

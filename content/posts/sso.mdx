@@ -100,6 +100,73 @@ const response = await fetch(url, {
 2. API 重定向到通用的前端接口
 3. 登录成功后携带着 token 重定向回第三方应用
 
-
-
 这个其实也就是 OAuth 2 的基本操作了，但就是会麻烦一些。
+
+说实话，OAuth2 的方案其实很多，但是我只讲一个我认为最安全的方案。
+
+### Authorization Code 授权码
+
+根据我们上面的想法，我们可以结合一下：
+
+1. 在第三方网站点击“SSO 登录”。此时访问 SSO 的 authorize 接口（这个接口一般就叫authorize这个名字），同时携带：
+    - response_type：表示授权类型，必选项，此处的值固定为"code"
+    - client_id：表示客户端的ID，必选项
+    - redirect_uri：表示重定向URI，可选项
+    - scope：表示申请的权限范围，可选项
+    - state：表示客户端的当前状态，可以指定任意值，认证服务器会原封不动地返回这个值。
+2. SSO 的 authorize 会重定向到 SSO 的登录页面。然后用户身份验证成功（并同意授权）后，系统会生成一个临时的 授权码 (Authorization Code)。
+3. 后端将浏览器重定向回第三方应用的回调地址，并附带授权码和最初的 state 参数
+4. 第三方应用拿到 code 后，通过后台向 SSO 平台发起请求以换取真实令牌（access_token）。这个接口一般是 /token
+    - grant_type=authorization_code
+    - code
+    - client_id：客户端 Id
+    - client_secret：客户端密钥
+    - redirect_uri：回调 URL
+5. 拿到access_token之后，一般还要拿用户的数据。这里需要使用到最开始给的那个scope，根据scope和access_token进行拿取。这个接口一般是 /userinfo
+
+```mermaid
+sequenceDiagram
+    autonumber
+    participant U as 👤 用户/浏览器
+    participant App as 🌐 第三方应用
+    participant SSO as 🔐 SSO 服务器
+
+    rect rgb(230, 240, 255)
+        Note over U, SSO: 第一步：发起授权请求
+        U ->> App: 点击「SSO 登录」
+        App ->> SSO: GET /authorize<br/>?response_type=code<br/>&client_id=CLIENT_ID<br/>&redirect_uri=REDIRECT_URI<br/>&scope=SCOPE<br/>&state=STATE
+    end
+
+    rect rgb(255, 243, 224)
+        Note over U, SSO: 第二步：用户登录 & 授权，生成授权码
+        SSO -->> U: 重定向到 SSO 登录页面
+        U ->> SSO: 输入用户名 / 密码，完成身份验证
+        U ->> SSO: 同意授权
+        SSO ->> SSO: ✅ 验证通过，生成临时授权码（Authorization Code）
+    end
+
+    rect rgb(232, 245, 233)
+        Note over U, SSO: 第三步：携带授权码回调第三方应用
+        SSO -->> U: 302 重定向到 redirect_uri<br/>?code=AUTH_CODE&state=STATE
+        U ->> App: 浏览器跟随重定向，携带 code + state
+    end
+
+    rect rgb(243, 229, 245)
+        Note over U, SSO: 第四步：用授权码换取令牌（后端 → 后端）
+        App ->> SSO: POST /token<br/>grant_type=authorization_code<br/>&code=AUTH_CODE<br/>&client_id=CLIENT_ID<br/>&client_secret=CLIENT_SECRET<br/>&redirect_uri=REDIRECT_URI
+        SSO ->> SSO: 校验 code、client_id、client_secret
+        SSO -->> App: 返回 access_token（+ refresh_token 等）
+    end
+
+    rect rgb(255, 235, 238)
+        Note over U, SSO: 第五步：使用令牌获取用户信息
+        App ->> SSO: GET /userinfo<br/>Authorization: Bearer ACCESS_TOKEN<br/>（按 scope 返回对应字段）
+        SSO -->> App: 返回用户数据（如 sub, name, email …）
+    end
+
+    App -->> U: 🎉 登录成功，展示用户信息
+```
+
+> 我感觉还是看图会稍微能看懂点
+
+到此为止其实已经结束了。说实话其实还是有点复杂的。但是这里面很明显就变得很安全了 —— 例如这里在过程中使用了两个钥匙：code 和 state。这两个钥匙并不是
