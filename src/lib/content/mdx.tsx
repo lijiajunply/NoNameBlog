@@ -16,6 +16,7 @@ import { LinkCard } from "@/components/mdx/link-card";
 import { MermaidDiagram } from "@/components/mdx/mermaid-diagram";
 import { MusicScore } from "@/components/mdx/music-score";
 import { Timeline } from "@/components/mdx/timeline";
+import { Tip } from "@/components/mdx/tip";
 import { ZoomableImage } from "@/components/mdx/zoomable-image";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
@@ -239,6 +240,7 @@ const mdxComponents: Record<string, any> = {
   ChartBlock: withDecodedProps(ChartBlock),
   Timeline: withDecodedProps(Timeline),
   timeline: withDecodedProps(Timeline),
+  Tip: withDecodedProps(Tip),
 };
 
 const prettyCodeOptions = {
