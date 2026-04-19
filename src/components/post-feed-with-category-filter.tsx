@@ -180,6 +180,7 @@ export function PostFeedWithCategoryFilter({
         </div>
         <div className="flex gap-2">
           <ToggleGroup
+            className="hidden md:block"
             variant="outline"
             type="single"
             size="sm"

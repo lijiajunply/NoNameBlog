@@ -675,7 +675,7 @@ function DevHeaderFileActions({
         : "已同步";
 
   return (
-    <div className="flex items-center gap-1.5">
+    <div className="hidden md:flex items-center gap-1.5">
       <Button
         type="button"
         variant="outline"

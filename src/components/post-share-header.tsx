@@ -61,7 +61,7 @@ function PostShareHeaderActions({
   }
 
   return (
-    <div className="flex min-w-0 items-center gap-1 overflow-x-auto">
+    <div className="hidden md:flex min-w-0 items-center gap-1 overflow-x-auto">
       <HeaderActionButton
         icon={<Link2 className="size-3.5" />}
         label="复制链接"

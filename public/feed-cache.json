@@ -1,11 +1,91 @@
 [
   {
+    "title": "洪绘压图发布！批量转图片格式，批量压缩图片工具（Mac/Windows）",
+    "link": "https://blog.zhheo.com/p/bp85fpdb.html",
+    "description": "这篇文章介绍了作者常用的图片压缩工具“图压”已经停更且官网失效，但其在 Apple 芯片兼容、WebP 拖拽支持和功能细节上存在不少遗憾。基于这些痛点，作者决定自行复刻并推出全新的 Mac 图片压缩工具“洪绘压图”，延续经典界面与拖拽压缩逻辑，同时支持深色模式、0 压缩仅转格式，以及 AVIF、HEIC 等更多格式，提升了兼容性与实用性。文章最后说明软件免费提供，Mac 用户可回复“图片压缩”获取下载，Windows 用户则可继续获取原版图压。",
+    "pubDate": "Wed, 15 Apr 2026 04:52:52 GMT",
+    "name": "张洪Heo",
+    "avatar": "https://img.zhheo.com/i/67d8fa75943e4.webp"
+  },
+  {
+    "title": "视频压缩软件 CompressO 3.0 MacOS 免费汉化版下载",
+    "link": "https://blog.zhheo.com/p/9ekjlgs4.html",
+    "description": "这篇文章介绍了博主 HaoUp 汉化开源视频压缩工具 CompressO 的经过。软件原版不支持中文，博主因同事有视频压缩需求便顺手将其汉化，鉴于软件更新频率低，汉化后直接开源共享。项目托管于 GitHub（compressO-CN），由于博主仅拥有 Mac 环境，无法打包 Windows 版本，因此提供了 M 芯片和 Intel 芯片两个 Mac 版本的下载链接。如有用户打包了 Windows 版本，也欢迎分享。项目体现了博主实用主义的开源精神——从自身需求出发，快速汉化并开源普惠他人。",
+    "pubDate": "Thu, 09 Apr 2026 09:33:22 GMT",
+    "name": "张洪Heo",
+    "avatar": "https://img.zhheo.com/i/67d8fa75943e4.webp"
+  },
+  {
+    "title": "我将我最初接触 Vibe Coding 的飞机大战重写了，飞机大战2.0登场",
+    "link": "https://blog.zhheo.com/p/ulmdpqpw.html",
+    "description": "这篇文章介绍了作者三年前作为代码小白，通过复制粘贴大法艰难完成飞机大战游戏的经历。三年后，作者和AI能力都大幅提升，花一天时间重构出飞机大战2.0版本，采用肉鸽玩法、宝石三选一技能、鼠标拖拽操作等新特性，展示了Vibe Coding的成长成果。",
+    "pubDate": "Thu, 09 Apr 2026 02:38:51 GMT",
+    "name": "张洪Heo",
+    "avatar": "https://img.zhheo.com/i/67d8fa75943e4.webp"
+  },
+  {
+    "title": "如何让OpenClaw控制智能家居，OpenClaw连接HomeAssistant教程",
+    "link": "https://blog.zhheo.com/p/v5h8ojrd.html",
+    "description": "本文介绍如何用 OpenClaw 替代 HomePod Siri 来控制智能家居。具体步骤包括：1）安装 openclaw-homeassistant 技能；2）在 Home Assistant 中生成长期访问令牌；3）将 HA 地址和令牌配置到 OpenClaw。集成后可实现用自然语言控制灯光、空调等设备，以及设置复杂的定时自动化任务（如晚间关灯提醒）。作者认为复杂的自动化可直接在 OpenClaw 执行，而简单场景仍可保留米家 app 本地配置以确保稳定性。",
+    "pubDate": "Wed, 08 Apr 2026 09:47:23 GMT",
+    "name": "张洪Heo",
+    "avatar": "https://img.zhheo.com/i/67d8fa75943e4.webp"
+  },
+  {
+    "title": "抖音iframe代码生成器：将抖音链接转为可嵌入网页的iframe代码",
+    "link": "https://blog.zhheo.com/p/53f66bm1.html",
+    "description": "这篇文章介绍了作者为了简化在博客中插入抖音视频的流程，开发了一个在线小工具。通过输入抖音分享链接，工具自动提取视频ID并生成可直接嵌入博客的iframe代码，省去了手动浏览器操作提取ID的繁琐步骤。工具已上线至作者的个人工具站，方便有同样需求的用户快速使用。",
+    "pubDate": "Tue, 07 Apr 2026 05:59:22 GMT",
+    "name": "张洪Heo",
+    "avatar": "https://img.zhheo.com/i/67d8fa75943e4.webp"
+  },
+  {
+    "title": "Apple Watch + AirPods 真实体验分享：那些意外里的小惊喜与小教训",
+    "link": "https://blog.zhheo.com/p/vcao5jjb.html",
+    "description": "这篇文章介绍了作者通过亲身经历对智能穿戴设备认知的转变。从Apple Watch的睡眠评分功能潜移默化改善生活习惯，到与AirPods的联动体验，再到AirPods掉入火锅后奇迹恢复、Apple Watch长期闲置后\"电池饿死\"的解决方法。作者分享了三个实用经验：一是健康数据量化能影响行为，二是设备掉水后应静置挥发再尝试充电，三是Apple Watch长期不用需关机避免亏电保护。这些经历让作者认识到智能设备不仅是工具，更是生活中的贴心伙伴。",
+    "pubDate": "Tue, 07 Apr 2026 05:22:59 GMT",
+    "name": "张洪Heo",
+    "avatar": "https://img.zhheo.com/i/67d8fa75943e4.webp"
+  },
+  {
+    "title": "使用 Magsafe 磁吸保护壳，但是磁力比较低，怎么办",
+    "link": "https://blog.zhheo.com/p/idp0qt15.html",
+    "description": "这篇文章介绍了通过自行更换高吸力磁铁解决廉价MagSafe手机壳磁力不足的方法。作者首先分享了自己日常使用MagSafe支架、泡泡骚、磁吸环等多种磁吸配件的体验，随后指出廉价手机壳普遍存在磁力弱的问题，通常只能退货处理。核心解决方案是单独购买MagSafe接收端磁铁替换壳内劣质磁铁。操作要点包括：推荐55毫米和70毫米两种常用尺寸，N52材质磁铁吸力可达2000高斯，搭配单面麦拉可增强磁力且让磁铁隐形，实现廉价手机壳与MagSafe配件的完美兼容，大幅提升性价比。",
+    "pubDate": "Sun, 05 Apr 2026 00:41:04 GMT",
+    "name": "张洪Heo",
+    "avatar": "https://img.zhheo.com/i/67d8fa75943e4.webp"
+  },
+  {
+    "title": "OpenClaw喧嚣过后，我最终选择了QClaw",
+    "link": "https://blog.zhheo.com/p/bublpdof.html",
+    "description": "这篇文章介绍了作者从早期探索到最终选择腾讯QClaw作为主力AI助手的心路历程。作者曾是Coze用户，因长任务和实体设备操作的局限性转而尝试各种OpenClaw方案，最终锁定QClaw。其核心推荐理由为：免费且Token充足、支持微信接入、安装便捷。最终促使作者下定决心的关键在于\"UU远程\"——可远程操控Mac且支持盒盖不休眠，让龙虾在后台稳定运行。文章后半部分总结了龙虾的核心应用场景：每日签到等琐碎任务自动化、超长信息收集任务（如整理某领域抖音博主表格）、跨平台搜索skill迁移等，并推荐\"UU远程+QClaw\"组合作为完整解决方案。",
+    "pubDate": "Thu, 02 Apr 2026 07:13:58 GMT",
+    "name": "张洪Heo",
+    "avatar": "https://img.zhheo.com/i/67d8fa75943e4.webp"
+  },
+  {
+    "title": "洪绘存图发布：保存浏览器图片为指定格式、提取网页所有图片、屏幕截图插件",
+    "link": "https://blog.zhheo.com/p/drqm39ob.html",
+    "description": "这篇文章介绍了作者因常用图片保存插件被检测为恶意软件而卸载后，自行开发了一款名为《洪绘存图》的浏览器插件。该插件集成了存图、抓图、截图三大功能，成为三合一工具。作者展示了多张插件界面截图，展示了从初步开发到最终完善的过程。这个自研插件不仅解决了作者的存图需求，还通过不断迭代优化，将多个功能整合在一起，提供了一个安全可靠的图片保存解决方案。",
+    "pubDate": "Sun, 29 Mar 2026 06:41:52 GMT",
+    "name": "张洪Heo",
+    "avatar": "https://img.zhheo.com/i/67d8fa75943e4.webp"
+  },
+  {
     "title": "洪绘星空发布：一个值得逛的博客友链朋友圈",
     "link": "https://blog.zhheo.com/p/iu5f3hvj.html",
     "description": "这篇文章介绍了博客在社交媒体和AI冲击下面临的衰落现状，以及作者对博客文化的坚守。文章指出，虽然写博客的人越来越少，但作者仍以记录生活和思考为目的坚持博客写作。为了解决博客互动不足的问题，作者重新开发了\"洪绘星空\"独立站，通过iframe方式展示友链文章，提供点赞、关注、推荐等功能，旨在为坚守博客的人创造更多交流机会。",
     "pubDate": "Fri, 20 Mar 2026 02:12:20 GMT",
     "name": "张洪Heo",
     "avatar": "https://img.zhheo.com/i/67d8fa75943e4.webp"
+  },
+  {
+    "title": "北京实习300天",
+    "link": "https://blog.zhilu.site/2026/beijing-intern",
+    "description": "从西安到北京，从校园到大厂实习，「300天」不只工作本身，有迁移也有变化。秩序常新，但内核与长期的事情不会变。",
+    "pubDate": "2026-03-18T16:31:04Z",
+    "name": "纸鹿本鹿",
+    "avatar": "https://www.zhilu.site/api/avatar.png"
   },
   {
     "title": "腾讯QClaw上手：打通微信很方便，但是性能上略有不足",
@@ -108,78 +188,6 @@
     "link": "https://blog.zhheo.com/p/tw9uwtki.html",
     "description": "这篇文章介绍了因抠图需求激增，相比 PS，用豆包抠图更便捷，复制粘贴图片并指令 “抠图” 即可，但保存图片有水印。为去除水印，可使用 doubao - downloader 工具，它支持油猴插件和浏览器插件两种安装方式。文中给出项目及安装地址，还详细说明了不同网络环境下油猴脚本和浏览器插件的具体安装步骤。",
     "pubDate": "Wed, 14 Jan 2026 05:31:42 GMT",
-    "name": "张洪Heo",
-    "avatar": "https://img.zhheo.com/i/67d8fa75943e4.webp"
-  },
-  {
-    "title": "Mac中罗技鼠标键盘近期失灵问题解决方法，Logi Options 打不开",
-    "link": "https://blog.zhheo.com/p/9jbu7q9r.html",
-    "description": "这篇文章介绍了作者在用的logi master 3s鼠标前进和后退按钮失灵，驱动打不开，发现是罗技外设Mac用户普遍遇到的问题，因应用程序所需证书过期，且影响应用内更新程序。罗技官方提供解决方法，针对Options+、G HUB分别给出下载链接及操作步骤，macOS 12 Monterey用户还有专用补丁工具。作者发文旨在分享解决办法。",
-    "pubDate": "Mon, 12 Jan 2026 07:42:24 GMT",
-    "name": "张洪Heo",
-    "avatar": "https://img.zhheo.com/i/67d8fa75943e4.webp"
-  },
-  {
-    "title": "Mac如何将纯图片PDF转换成嵌入文字的PDF？让纯图PDF支持选中复制",
-    "link": "https://blog.zhheo.com/p/9vtjebeo.html",
-    "description": "这篇文章介绍了纯图PDF操作困难，如发给AI读取耗时久。发现Mac预览app自带嵌入文字功能，利用`macOS Monterey`后空格预览图片可选中复制的特性实现。具体操作是用预览app打开PDF，选择文件 - 导出，勾选“嵌入文本”，存储后等待计算，大文件需耐心等待，完成后即可得到嵌入文本的PDF，方便选中文本。",
-    "pubDate": "Mon, 12 Jan 2026 04:26:04 GMT",
-    "name": "张洪Heo",
-    "avatar": "https://img.zhheo.com/i/67d8fa75943e4.webp"
-  },
-  {
-    "title": "我在2026年推荐的Mac软件",
-    "link": "https://blog.zhheo.com/p/vtyyrfd3.html",
-    "description": "这篇文章分享作者正在使用的Mac软件。AI对话选豆包与ChatGPT；即梦用于AI出图；Ice免费管理菜单栏；Folo做信息订阅；SyncTime同步重要文件；Keka解压缩；Upscayl无损放大图片；Bitwarden管理密码。还列举此前推荐且仍在用的如Pixpin截图等软件，文末给出历史Mac软件推荐文章链接。",
-    "pubDate": "Thu, 25 Dec 2025 10:39:00 GMT",
-    "name": "张洪Heo",
-    "avatar": "https://img.zhheo.com/i/67d8fa75943e4.webp"
-  },
-  {
-    "title": "在Mac上使用快捷指令解决：已损坏，无法打开。你应该将它移到废纸篓",
-    "link": "https://blog.zhheo.com/p/tsk1v2fy.html",
-    "description": "这篇文章介绍了在Mac上安装软件时，常遇“已损坏，无法打开，应移到废纸篓”的情况。通常需用 sudo xattr -r -d com.apple.quarantine 解决签名问题，但记忆或现场查找该命令较费劲。作者将其打包成快捷指令，右键单击选择执行即可，还提供了快捷指令地址。",
-    "pubDate": "Wed, 24 Dec 2025 02:41:58 GMT",
-    "name": "张洪Heo",
-    "avatar": "https://img.zhheo.com/i/67d8fa75943e4.webp"
-  },
-  {
-    "title": "如何移除Mac中访达多余的菜单项？还你一个清爽的访达右键菜单",
-    "link": "https://blog.zhheo.com/p/hiubxt8w.html",
-    "description": "这篇文章介绍了作者在 Mac 上因常使用右键菜单进行文件操作脚本，安装软件后右键菜单被添加许多多余菜单项，如豆包、百度网盘、WPS 等。文章提供两种清理方法：一是阻止访达扩展，进入系统偏好设置搜索扩展，关闭文件提供程序或访达扩展中不需要的软件；二是移除服务，在系统偏好设置搜索 “键盘快捷键”，取消服务里文件或文件夹中相关项的勾选。",
-    "pubDate": "Tue, 23 Dec 2025 09:35:43 GMT",
-    "name": "张洪Heo",
-    "avatar": "https://img.zhheo.com/i/67d8fa75943e4.webp"
-  },
-  {
-    "title": "提示 SMS Fee 无法登录怎么办，跳过 SMS Fee 方法",
-    "link": "https://blog.zhheo.com/p/41n5tavc.html",
-    "description": "这篇文章介绍了作者更换到 17 设备时，某聊天软件登录遇坑，提示 SMS Fee 要求付费，国区号付不了，美区要一美元多。尝试第三方客户端可用其他设备验证码登录。还发现网络不好时官方客户端有通行密钥登录方式，建议大家绑定通行密钥。并分享在旧手机重置情况下，通过设备 code 登录第三方客户端，借助 Bitwarden 测试版客户端等一系列操作保留通行密钥实现登录的过程。",
-    "pubDate": "Tue, 23 Dec 2025 01:51:02 GMT",
-    "name": "张洪Heo",
-    "avatar": "https://img.zhheo.com/i/67d8fa75943e4.webp"
-  },
-  {
-    "title": "从iPhone13Pro换到iPhone17，我的iPhone17上手体验",
-    "link": "https://blog.zhheo.com/p/1rb05exh.html",
-    "description": "这篇文章介绍了作者因心仪已久且趁国补恢复，在京东冲动消费购买iPhone 17，2小时送达，入手价5499元。作者建议非淘宝、抖音官方旗舰店等购买者录制开箱视频，先激活手机完成国补，后恢复出厂设置重新激活以迁移旧手机数据。还分享了新手机直观体验，如滑动适应后不错、更轻、支持息屏显示等，以及相机控制、静音按键等功能设置，最后总结新手机体验超13 Pro，对旧手机调侃“吃掉” 。",
-    "pubDate": "Mon, 22 Dec 2025 02:36:59 GMT",
-    "name": "张洪Heo",
-    "avatar": "https://img.zhheo.com/i/67d8fa75943e4.webp"
-  },
-  {
-    "title": "宝塔安装应用提示：指定日志文件不存在解决方法",
-    "link": "https://blog.zhheo.com/p/uiddzdni.html",
-    "description": "这篇文章介绍了作者因之前服务器常崩溃死机而进行升级，在项目迁移时装宝塔插件时提示报错。经查看报错信息，发现是找不到 /etc/redhat - release 文件。因作者使用Ubuntu24系统，通过创建一个假的该文件，成功解决插件安装问题 。",
-    "pubDate": "Thu, 18 Dec 2025 06:18:02 GMT",
-    "name": "张洪Heo",
-    "avatar": "https://img.zhheo.com/i/67d8fa75943e4.webp"
-  },
-  {
-    "title": "一口气拔了3个智齿，分享一下拔智齿的经历",
-    "link": "https://blog.zhheo.com/p/h6gaomlz.html",
-    "description": "这篇文章介绍了作者一次性拔除三颗智齿的经历，包括术前的心理准备、拔牙当天的饮食安排及拔牙过程中的情况。作者详细描述了拔牙后医生给出的注意事项，并分享了自己术后恢复的一些方法，如使用退热贴和冰袋进行冰敷以减轻肿胀。此外，还提到了拔牙当天的饮食选择，主要是冷食和饮料。",
-    "pubDate": "Mon, 15 Dec 2025 08:57:53 GMT",
     "name": "张洪Heo",
     "avatar": "https://img.zhheo.com/i/67d8fa75943e4.webp"
   },
@@ -480,14 +488,6 @@
     "avatar": "https://www.zhilu.site/api/avatar.png"
   },
   {
-    "title": "使用Github Action来进行CI/CD",
-    "link": "https://blog.borry.org/article/github-action-ci",
-    "description": "使用Github Action来进行自动部署到服务器",
-    "pubDate": "Tue, 12 Mar 2024 00:00:00 GMT",
-    "name": "Borry",
-    "avatar": "https://img.notionusercontent.com/s3/prod-files-secure%2Fa5a46c38-63f0-4f6a-ab7a-2cd059e716c8%2F391a20ae-0430-4fbe-8d16-3861cfab2148%2FT5IEfGy2_400x400.jpg/size/w=1080?exp=1774368734&sig=M7P5icoRJ6HA5VJ2SsAzgPO8b3GgYhp9ZDFPhvrXSG0&id=07e87827-a1ad-4410-91ec-62eaa010ce6d&table=collection&userId=a98f818c-e509-4579-9121-7897441ca9ff"
-  },
-  {
     "title": "今日无事，除了一些技术咨询",
     "link": "https://blog.zhilu.site/2024/helping-day",
     "description": "一天中帮助朋友们解决各类问题，如软件警告甄别、平板选购咨询、远程协作实现、签到操作指导、下载文件查找、卸载工具推荐、AI代码探讨，展现技术分享与互助的价值。",
@@ -608,14 +608,6 @@
     "avatar": "https://cravatar.cn/avatar/646331BFF8F19A0E05679C3CC0FC54D6"
   },
   {
-    "title": "Tailscale 杂谈NAT",
-    "link": "https://blog.borry.org/article/tailscale-net",
-    "description": "NAT是什么，Tailscale是怎么实现的异地组网和端到端连接",
-    "pubDate": "Mon, 20 Nov 2023 00:00:00 GMT",
-    "name": "Borry",
-    "avatar": "https://img.notionusercontent.com/s3/prod-files-secure%2Fa5a46c38-63f0-4f6a-ab7a-2cd059e716c8%2F391a20ae-0430-4fbe-8d16-3861cfab2148%2FT5IEfGy2_400x400.jpg/size/w=1080?exp=1774368734&sig=M7P5icoRJ6HA5VJ2SsAzgPO8b3GgYhp9ZDFPhvrXSG0&id=07e87827-a1ad-4410-91ec-62eaa010ce6d&table=collection&userId=a98f818c-e509-4579-9121-7897441ca9ff"
-  },
-  {
     "title": "Termux 简单指南",
     "link": "https://blog.zhilu.site/2023/termux-guide",
     "description": "Termux 安装、配置 SSH，切换国内源，安装 ZSH、X11 图形界面，探索更多可能性。",
@@ -640,22 +632,6 @@
     "avatar": "https://www.zhilu.site/api/avatar.png"
   },
   {
-    "title": "HTTP分块编码传输",
-    "link": "https://blog.borry.org/article/http-chunked",
-    "description": "关于HTTP的长连接、短连接和如何使用fiber来实现chunked分块编码传输",
-    "pubDate": "Thu, 14 Sep 2023 00:00:00 GMT",
-    "name": "Borry",
-    "avatar": "https://img.notionusercontent.com/s3/prod-files-secure%2Fa5a46c38-63f0-4f6a-ab7a-2cd059e716c8%2F391a20ae-0430-4fbe-8d16-3861cfab2148%2FT5IEfGy2_400x400.jpg/size/w=1080?exp=1774368734&sig=M7P5icoRJ6HA5VJ2SsAzgPO8b3GgYhp9ZDFPhvrXSG0&id=07e87827-a1ad-4410-91ec-62eaa010ce6d&table=collection&userId=a98f818c-e509-4579-9121-7897441ca9ff"
-  },
-  {
-    "title": "Nginx配置反向代理",
-    "link": "https://blog.borry.org/article/nginx-reverse-proxy",
-    "description": "反向代理和正向代理，如何复用端口等",
-    "pubDate": "Tue, 12 Sep 2023 00:00:00 GMT",
-    "name": "Borry",
-    "avatar": "https://img.notionusercontent.com/s3/prod-files-secure%2Fa5a46c38-63f0-4f6a-ab7a-2cd059e716c8%2F391a20ae-0430-4fbe-8d16-3861cfab2148%2FT5IEfGy2_400x400.jpg/size/w=1080?exp=1774368734&sig=M7P5icoRJ6HA5VJ2SsAzgPO8b3GgYhp9ZDFPhvrXSG0&id=07e87827-a1ad-4410-91ec-62eaa010ce6d&table=collection&userId=a98f818c-e509-4579-9121-7897441ca9ff"
-  },
-  {
     "title": "Arch Linux 易用性及美化",
     "link": "https://blog.zhilu.site/2023/archlinux-beautify",
     "description": "Plasma 桌面环境下优化小键盘、触摸板行为，配置字体。",
@@ -664,28 +640,12 @@
     "avatar": "https://www.zhilu.site/api/avatar.png"
   },
   {
-    "title": "使用环境变量存储SSH私钥格式错误",
-    "link": "https://blog.borry.org/article/ssh-environment-key",
-    "description": "在使用Zeabur等托管平台时，使用环境变量来存储Key遇到的问题",
-    "pubDate": "Wed, 19 Jul 2023 00:00:00 GMT",
-    "name": "Borry",
-    "avatar": "https://img.notionusercontent.com/s3/prod-files-secure%2Fa5a46c38-63f0-4f6a-ab7a-2cd059e716c8%2F391a20ae-0430-4fbe-8d16-3861cfab2148%2FT5IEfGy2_400x400.jpg/size/w=1080?exp=1774368734&sig=M7P5icoRJ6HA5VJ2SsAzgPO8b3GgYhp9ZDFPhvrXSG0&id=07e87827-a1ad-4410-91ec-62eaa010ce6d&table=collection&userId=a98f818c-e509-4579-9121-7897441ca9ff"
-  },
-  {
     "title": "Arch Linux 初步配置",
     "link": "https://blog.zhilu.site/2023/archlinux-configure",
     "description": "在 Arch Linux 系统上安装配置必备软件，如蓝牙、Yay、Zsh、输入法等。",
     "pubDate": "2023-06-24T01:31:15Z",
     "name": "纸鹿本鹿",
     "avatar": "https://www.zhilu.site/api/avatar.png"
-  },
-  {
-    "title": "深澜自助服务中心分析",
-    "link": "https://blog.borry.org/article/srun-analyse",
-    "description": "校园网自助服务中心模拟登陆",
-    "pubDate": "Fri, 23 Jun 2023 00:00:00 GMT",
-    "name": "Borry",
-    "avatar": "https://img.notionusercontent.com/s3/prod-files-secure%2Fa5a46c38-63f0-4f6a-ab7a-2cd059e716c8%2F391a20ae-0430-4fbe-8d16-3861cfab2148%2FT5IEfGy2_400x400.jpg/size/w=1080?exp=1774368734&sig=M7P5icoRJ6HA5VJ2SsAzgPO8b3GgYhp9ZDFPhvrXSG0&id=07e87827-a1ad-4410-91ec-62eaa010ce6d&table=collection&userId=a98f818c-e509-4579-9121-7897441ca9ff"
   },
   {
     "title": "使用 ArchInstall 安装 Arch Linux",
@@ -724,14 +684,6 @@
     "link": "https://blog.zhilu.site/2021/classroom-pc-2",
     "description": "本文为 GuuGuai 所作的一篇影射性作品，文章记录了一位前来维修监控的师傅却因整顿校门而遭到反对的故事。而现实中，也发生过类似的事件。高中的IT凤师傅来到某班维修展台画面时断时续问题，但可能受到之前“展台卡顿——系统问题却误修展台本体”一事的影响，他将“扳手”伸向了电脑……",
     "pubDate": "2021-07-08T16:00:00Z",
-    "name": "纸鹿本鹿",
-    "avatar": "https://www.zhilu.site/api/avatar.png"
-  },
-  {
-    "title": "电脑是你修坏的吗",
-    "link": "https://blog.zhilu.site/2021/classroom-pc-1",
-    "description": "教室一体机性能孱弱，19班教室电脑被其他班的学生换了系统，视频展台程序打开就卡死，于是被喊来帮忙的纸鹿正好与前来维修的高中的IT凤师傅撞见……",
-    "pubDate": "2021-04-05T16:00:00Z",
     "name": "纸鹿本鹿",
     "avatar": "https://www.zhilu.site/api/avatar.png"
   },
