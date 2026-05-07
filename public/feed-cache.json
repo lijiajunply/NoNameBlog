@@ -1,5 +1,53 @@
 [
   {
+    "title": "中国传统色上线！快速寻找和使用具有文化气息和韵味的中国传统色",
+    "link": "https://blog.zhheo.com/p/hv4xgjxl.html",
+    "description": "这篇文章介绍了一个中国传统色在线工具，作者在页面设计选色时发现现有项目\"中国传统色\"虽有完整颜色整理和预览页面，但全屏展示方式不利于快速识别，且背景色会干扰视觉判断。为此，作者在 HeoTools 平台开发了新的传统色查询工具，支持按色系筛选，方便用户在需要特定色系颜色时快速定位合适的中国传统色。",
+    "pubDate": "Wed, 29 Apr 2026 06:28:12 GMT",
+    "name": "张洪Heo",
+    "avatar": "https://img.zhheo.com/i/67d8fa75943e4.webp"
+  },
+  {
+    "title": "如何将小米CodingPlan的Mimo模型接入到OpenClaw",
+    "link": "https://blog.zhheo.com/p/920gpt1r.html",
+    "description": "这篇文章介绍了小米 MiMo 模型接入 OpenClaw（龙虾）的配置方法与实际使用体验。作者通过小米 Token Plan 获得免费额度后，将 MiMo V2.5 系列模型配置到 OpenClaw 中。文章详细说明了配置步骤：需要在 openclaw.json 中新增 provider（建议命名为 xiaomi-coding 以区分预置网关），删除 auth 字段，并配置对应的模型 ID 和参数。作者测试发现，除首次连接较慢外，整体响应速度与 GPT-5.4 相当，任务执行能力稳定，已有的 skill 任务也能正常运行，目前将其作为主力模型使用。",
+    "pubDate": "Wed, 29 Apr 2026 02:10:08 GMT",
+    "name": "张洪Heo",
+    "avatar": "https://img.zhheo.com/i/67d8fa75943e4.webp"
+  },
+  {
+    "title": "清灰。然后笔记本坏了",
+    "link": "https://blog.guuguai.site/2026/laptop-repair-postmortem",
+    "description": "日常清灰换相变片，不知道为什么翻车了....",
+    "pubDate": "2026-04-27T16:35:30Z",
+    "name": "GuuGuai",
+    "avatar": "https://cravatar.cn/avatar/646331BFF8F19A0E05679C3CC0FC54D6"
+  },
+  {
+    "title": "洪绘切图发布！如何将一个图片平均切图？按照固定距离或者网格切图？",
+    "link": "https://blog.zhheo.com/p/zg5upnsy.html",
+    "description": "这篇文章介绍了在制作公众号长文、电商详情等场景的大长图时，如何通过先完成整张长图设计、再进行切片的方式兼顾展示效果与加载性能。文章指出，Photoshop 自带切片工具在频繁调整长图尺寸和复杂修改时不够顺手，因此推荐使用“洪绘切图”这类更轻量的工具，支持平均切图、按距离切图以及自定义图片格式。整体流程简单直观，适合快速将大长图无缝拆分并导出，提高长图制作效率。",
+    "pubDate": "Mon, 27 Apr 2026 06:54:33 GMT",
+    "name": "张洪Heo",
+    "avatar": "https://img.zhheo.com/i/67d8fa75943e4.webp"
+  },
+  {
+    "title": "ChatGPT Image-2 上手：杀死比赛！设计师这下子真的可以解放双手了",
+    "link": "https://blog.zhheo.com/p/qysi5xhu.html",
+    "description": "这篇文章介绍了 ChatGPT Image2 在中文设计场景中的实际表现，重点展示了其在表情包制作、产品宣传图生成、旧海报改版以及局部改字等任务中的高可用性。作者通过多组案例认为，该模型在中文文字准确率、版式逻辑、细节还原和风格切换上都已接近可直接商用，许多原本需要设计师数小时甚至数天完成的工作，如今一句提示词即可完成。文章最终认为，除高度定制和批量化场景外，大多数平面设计流程都可能被 AI 重构。",
+    "pubDate": "Tue, 21 Apr 2026 08:18:59 GMT",
+    "name": "张洪Heo",
+    "avatar": "https://img.zhheo.com/i/67d8fa75943e4.webp"
+  },
+  {
+    "title": "龙虾与微信聊天记录结合：群内容总结、整理和提取关键内容实在是太方便",
+    "link": "https://blog.zhheo.com/p/2muck4bk.html",
+    "description": "这篇文章介绍了如何借助 wechat-cli 把本地微信聊天记录变成可检索的命令行能力，用来快速梳理工作群里海量且杂乱的信息流。作者的核心痛点是微信群消息常被屏蔽，等到被艾特做海报时往往完全缺乏上下文，因此需要 AI 快速对齐背景、提炼任务线索。文章展示了 wechat-cli 在内容整理、任务脉络分析上的实用效果，并说明可进一步让 AI 学习项目文档、整合成 skill，形成微信聊天记录阅读能力。安装方面支持 npm、pip 和源码三种方式，其中 macOS arm64 推荐 npm。使用前需初始化，并特别强调 macOS 下要开启“完全磁盘访问权限”，若遇到 task_for_pid failed，可通过自动或手动重签名微信解决。完成后即可用 sessions、history、search 等命令查询聊天记录。",
+    "pubDate": "Mon, 20 Apr 2026 04:47:22 GMT",
+    "name": "张洪Heo",
+    "avatar": "https://img.zhheo.com/i/67d8fa75943e4.webp"
+  },
+  {
     "title": "洪绘压图发布！批量转图片格式，批量压缩图片工具（Mac/Windows）",
     "link": "https://blog.zhheo.com/p/bp85fpdb.html",
     "description": "这篇文章介绍了作者常用的图片压缩工具“图压”已经停更且官网失效，但其在 Apple 芯片兼容、WebP 拖拽支持和功能细节上存在不少遗憾。基于这些痛点，作者决定自行复刻并推出全新的 Mac 图片压缩工具“洪绘压图”，延续经典界面与拖拽压缩逻辑，同时支持深色模式、0 压缩仅转格式，以及 AVIF、HEIC 等更多格式，提升了兼容性与实用性。文章最后说明软件免费提供，Mac 用户可回复“图片压缩”获取下载，Windows 用户则可继续获取原版图压。",
@@ -128,22 +176,6 @@
     "avatar": "https://img.zhheo.com/i/67d8fa75943e4.webp"
   },
   {
-    "title": "如何创作AI歌曲？从生成歌词、歌曲创作、专辑封面到音乐发行",
-    "link": "https://blog.zhheo.com/p/cpw1bogx.html",
-    "description": "这篇文章介绍了作者分享的AI音乐创作全流程，将AI音乐创作比作抽卡，分为歌词抽卡和作曲抽卡。作者使用扣子工具通过技能调用生成歌词，以华夏文明风格rap为例展示创作成果，还提供了调好的技能链接。作曲用suno工具，免费用户可同时创作4首，可选择声音性别，下载音乐后可通过抖音创作实验室AI作曲功能进行洗歌优化。最后通过抖音创作实验室AI编辑器混音，完成原创歌曲发布，审核需数小时。作者认为AI创作重在过程乐趣，不必过度追求商业收益。",
-    "pubDate": "Tue, 03 Mar 2026 02:22:12 GMT",
-    "name": "张洪Heo",
-    "avatar": "https://img.zhheo.com/i/67d8fa75943e4.webp"
-  },
-  {
-    "title": "洪绘历史记录发布！无限存储你的浏览器历史记录，防止历史记录被自动删除",
-    "link": "https://blog.zhheo.com/p/0tr5lmby.html",
-    "description": "这篇文章介绍了作者开发的浏览器插件“洪绘历史记录”。该插件旨在替代UI不佳、操作反人类且不支持中文的History Trends Unlimited插件，解决浏览器仅能保存三个月历史记录的痛点，方便用户查找更早的网页记录。插件加入了“简约”模式，可将相同网站的历史记录折叠显示，提升查找效率。同时，它支持导入History Trends Unlimited导出的历史记录，用户可在Google Chrome和Edge应用商店下载安装。",
-    "pubDate": "Wed, 25 Feb 2026 03:13:58 GMT",
-    "name": "张洪Heo",
-    "avatar": "https://img.zhheo.com/i/67d8fa75943e4.webp"
-  },
-  {
     "title": "实习后买了一堆东西",
     "link": "https://blog.zhilu.site/2026/buy-right",
     "description": "键盘鼠标显示器，手环VR小东西。可以买贵的，但不能买贵了。",
@@ -152,17 +184,17 @@
     "avatar": "https://www.zhilu.site/api/avatar.png"
   },
   {
-    "title": "红包封面：祝大家新的一年发大财啦！",
-    "link": "https://blog.zhheo.com/p/ulnwjohw.html",
-    "description": "这篇文章介绍了又到一年一度的Guli封面发放时刻，向大家表达过去支持的感谢，提前拜年祝大家新年发大财。还展示了红包封面样式，推出全新财神版本Guli，呼吁大家赶快到公众号领取。",
-    "pubDate": "Wed, 04 Feb 2026 04:06:54 GMT",
-    "name": "张洪Heo",
-    "avatar": "https://img.zhheo.com/i/67d8fa75943e4.webp"
+    "title": "考研劝退指北其二：要考研吗？",
+    "link": "https://blog.guuguai.site/2026/kaoyan-guide-2",
+    "description": "考研复盘文章第二篇，我考研的原因、考砸的原因，以及对是否需要考研的一点见解。",
+    "pubDate": "2026-02-10T15:09:34Z",
+    "name": "GuuGuai",
+    "avatar": "https://cravatar.cn/avatar/646331BFF8F19A0E05679C3CC0FC54D6"
   },
   {
-    "title": "未上岸指北：考研常识篇其一",
+    "title": "考研劝退指北其一：考研常识篇",
     "link": "https://blog.guuguai.site/2026/kaoyan-guide-1",
-    "description": "2025年考研复盘。既然无法分享成功经验，那就聊聊失败者（没出成绩，目前预计是）的视角。本文作为系列第一篇，重点梳理考研流程、志愿规则与一些其它常识。",
+    "description": "2025年考研复盘。既然无法分享成功经验，那就聊聊失败者的视角。本文作为系列第一篇，重点梳理考研流程、志愿规则与一些其它常识。",
     "pubDate": "2026-02-01T13:54:33Z",
     "name": "GuuGuai",
     "avatar": "https://cravatar.cn/avatar/646331BFF8F19A0E05679C3CC0FC54D6"
@@ -174,22 +206,6 @@
     "pubDate": "2026-01-23T02:44:27Z",
     "name": "GuuGuai",
     "avatar": "https://cravatar.cn/avatar/646331BFF8F19A0E05679C3CC0FC54D6"
-  },
-  {
-    "title": "如何将 FinalcutPro的fcpxml文件转换为srt字幕？导出srt字幕方法",
-    "link": "https://blog.zhheo.com/p/obo78geq.html",
-    "description": "这篇文章提到作者有将 finalcutpro 字幕转换为 srt 格式的需求，发现市面上此类软件价格昂贵。作者经研究，把原本用脚本实现的功能做成转换网页，方便自用及后续使用。若存在 bug 欢迎反馈，使用地址为https://fcpxml.zhheo.com/ ，用户直接拖拽 fcpxml 文件到网页，即可下载 srt 字幕文件 。",
-    "pubDate": "Thu, 22 Jan 2026 04:19:17 GMT",
-    "name": "张洪Heo",
-    "avatar": "https://img.zhheo.com/i/67d8fa75943e4.webp"
-  },
-  {
-    "title": "如何免水印下载豆包生成的图片？豆包AI图去水印，无水印下载",
-    "link": "https://blog.zhheo.com/p/tw9uwtki.html",
-    "description": "这篇文章介绍了因抠图需求激增，相比 PS，用豆包抠图更便捷，复制粘贴图片并指令 “抠图” 即可，但保存图片有水印。为去除水印，可使用 doubao - downloader 工具，它支持油猴插件和浏览器插件两种安装方式。文中给出项目及安装地址，还详细说明了不同网络环境下油猴脚本和浏览器插件的具体安装步骤。",
-    "pubDate": "Wed, 14 Jan 2026 05:31:42 GMT",
-    "name": "张洪Heo",
-    "avatar": "https://img.zhheo.com/i/67d8fa75943e4.webp"
   },
   {
     "title": "谈谈不受欢迎的博客技术特征",

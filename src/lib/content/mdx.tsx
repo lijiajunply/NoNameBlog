@@ -1,10 +1,13 @@
+import {
+  createMarkdownPreset,
+  YAML_PROP_PREFIX,
+} from "@luckyfishes/markdown-core";
 import { compileMDX } from "next-mdx-remote/rsc";
 import { createElement, type ReactNode } from "react";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeKatex from "rehype-katex";
 import rehypePrettyCode from "rehype-pretty-code";
 import rehypeSlug from "rehype-slug";
-import remarkGfm from "remark-gfm";
 import { remarkAlert } from "remark-github-blockquote-alert";
 import remarkMath from "remark-math";
 import { ChartBlock } from "@/components/mdx/chart-block";
@@ -21,15 +24,6 @@ import { ZoomableImage } from "@/components/mdx/zoomable-image";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { rehypeChart } from "@/lib/content/rehype-chart";
-import { rehypeFootnotesHeading } from "@/lib/content/rehype-footnotes-heading";
-import { rehypeMermaid } from "@/lib/content/rehype-mermaid";
-import { rehypeMusic } from "@/lib/content/rehype-music";
-import {
-  createCustomSyntaxRemarkPlugin,
-  YAML_PROP_PREFIX,
-} from "@/lib/content/remark-colon-components";
-import { remarkSuperSub } from "@/lib/content/remark-supersub";
 import { cn } from "@/lib/utils";
 
 type MdxComponentProps = {
@@ -251,7 +245,13 @@ const prettyCodeOptions = {
   keepBackground: true,
 };
 
+const markdownPreset = createMarkdownPreset();
+
 export async function renderMdx(source: string) {
+  const [customSyntaxPlugin, remarkGfmPlugin, remarkSuperSubPlugin] =
+    markdownPreset.remarkPlugins;
+  const [codeFencePlugin, footnotesPlugin] = markdownPreset.rehypePlugins;
+
   const { content } = await compileMDX({
     source,
     components: mdxComponents,
@@ -259,19 +259,17 @@ export async function renderMdx(source: string) {
       parseFrontmatter: false,
       mdxOptions: {
         remarkPlugins: [
-          createCustomSyntaxRemarkPlugin,
-          [remarkGfm, { singleTilde: false }],
+          customSyntaxPlugin,
+          remarkGfmPlugin,
           remarkAlert,
           remarkMath,
-          remarkSuperSub,
+          remarkSuperSubPlugin,
         ],
         rehypePlugins: [
           rehypeSlug,
           rehypeKatex,
-          rehypeChart,
-          rehypeMermaid,
-          rehypeMusic,
-          rehypeFootnotesHeading,
+          codeFencePlugin,
+          footnotesPlugin,
           [rehypeAutolinkHeadings, { behavior: "append" }],
           [rehypePrettyCode, prettyCodeOptions],
         ],

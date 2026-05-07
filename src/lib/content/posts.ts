@@ -1,10 +1,10 @@
 import fs from "node:fs";
 import path from "node:path";
+import { extractHeadings } from "@luckyfishes/markdown-core";
 import matter from "gray-matter";
 import readingTime from "reading-time";
 import type { MonthlyCumulativeStat, Post } from "@/types/content";
 import { postFrontmatterSchema } from "./schema";
-import { extractHeadings } from "./toc";
 
 const postsDir = path.join(process.cwd(), "content/posts");
 const aboutPath = path.join(process.cwd(), "content/pages/about.mdx");
@@ -67,7 +67,7 @@ function readPostFile(entry: PostEntry): Post {
     frontmatter,
     content,
     readingTime: readingTime(content).text,
-    headings: extractHeadings(content),
+    headings: extractHeadings(content) as Post["headings"],
   };
 }
 
