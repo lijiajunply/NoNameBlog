@@ -13,7 +13,7 @@
     "format": "biome format --write"
   },
   "dependencies": {
-    "@luckyfishes/markdown-core": "^0.1.0",
+    "@luckyfishes/markdown-core": "^0.2.0",
     "@codemirror/lang-markdown": "^6.5.0",
     "@codemirror/language-data": "^6.5.2",
     "@iconify/react": "^6.0.2",
