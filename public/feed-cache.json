@@ -1,5 +1,13 @@
 [
   {
+    "title": "洪绘响度发布：测量视频LUFS工具，并支持转换视频到指定LUFS",
+    "link": "https://blog.zhheo.com/p/bvj6caeg.html",
+    "description": "这篇文章介绍了作者开发的一款 macOS 视频响度调节工具\"洪绘响度\"。作者此前科普过 LUFS（响度单位）的概念，并分享了 ffmpeg 命令来调整视频响度，但每次手动执行代码过于繁琐。为此，他开发了这款免费小工具，界面简洁，支持拖拽导入视频，可直观显示视频响度数值，内置常用响度标准（如 -14 LUFS、-16 LUFS 等）并支持自定义标准，点击转换即可快速完成响度调整。目前仅支持 macOS，Windows 版本视需求决定是否推出，可通过公众号获取下载。",
+    "pubDate": "Mon, 11 May 2026 06:40:33 GMT",
+    "name": "张洪Heo",
+    "avatar": "https://img.zhheo.com/i/67d8fa75943e4.webp"
+  },
+  {
     "title": "中国传统色上线！快速寻找和使用具有文化气息和韵味的中国传统色",
     "link": "https://blog.zhheo.com/p/hv4xgjxl.html",
     "description": "这篇文章介绍了一个中国传统色在线工具，作者在页面设计选色时发现现有项目\"中国传统色\"虽有完整颜色整理和预览页面，但全屏展示方式不利于快速识别，且背景色会干扰视觉判断。为此，作者在 HeoTools 平台开发了新的传统色查询工具，支持按色系筛选，方便用户在需要特定色系颜色时快速定位合适的中国传统色。",
@@ -66,7 +74,7 @@
   {
     "title": "我将我最初接触 Vibe Coding 的飞机大战重写了，飞机大战2.0登场",
     "link": "https://blog.zhheo.com/p/ulmdpqpw.html",
-    "description": "这篇文章介绍了作者三年前作为代码小白，通过复制粘贴大法艰难完成飞机大战游戏的经历。三年后，作者和AI能力都大幅提升，花一天时间重构出飞机大战2.0版本，采用肉鸽玩法、宝石三选一技能、鼠标拖拽操作等新特性，展示了Vibe Coding的成长成果。",
+    "description": "这篇文章介绍了博主时隔三年用 Vibe Coding 重构飞机大战游戏的经历。三年前博主作为代码小白，通过复制粘贴的方式用 GPT4 完成了初版飞机大战。如今经过三年积累，博主的 Vibe Coding 能力和 AI 水平都有了大幅提升，仅用一天时间就用更好的技术栈重构了游戏。2.0 版本加入了肉鸽玩法，玩家吃到宝石后可从三个技能中选择一个，并支持鼠标拖拽移动，操作更灵活、更具微操性。游戏美术仍待完善，但核心玩法已初具雏形。 Coding的成长成果。",
     "pubDate": "Thu, 09 Apr 2026 02:38:51 GMT",
     "name": "张洪Heo",
     "avatar": "https://img.zhheo.com/i/67d8fa75943e4.webp"
@@ -164,14 +172,6 @@
     "link": "https://blog.zhheo.com/p/yynnxi2c.html",
     "description": "这篇文章介绍了一款名为“超级制图”的AI图片编辑应用，特别适合设计师处理文字修改需求。该应用的核心功能“无痕改字”能够智能替换图片中的文字内容，以修改微信余额数字为例，用户只需框选文本区域并输入新内容，AI就能自动调整文字的位置、大小和粗细，实现较为自然的修改效果。虽然部分情况下效果仍需反复尝试，但作为免费功能已能满足日常改字需求，为处理图片文字修改提供了便捷的AI解决方案。",
     "pubDate": "Wed, 11 Mar 2026 02:46:25 GMT",
-    "name": "张洪Heo",
-    "avatar": "https://img.zhheo.com/i/67d8fa75943e4.webp"
-  },
-  {
-    "title": "用虚拟机养龙虾，在Mac上通过Lume使用虚拟机的隔离环境安装OpenClaw",
-    "link": "https://blog.zhheo.com/p/h6k74j9o.html",
-    "description": "作者在主力机直接部署OpenClaw时因指令失误险些改全文件权限，遂弃用本地电脑，转而采用虚拟机在Mac上搭建安全环境，并详细给出安装Lume、部署OpenClaw及后台运行、接入QQ的完整步骤，提醒要在独立环境中“养”好AI。",
-    "pubDate": "Tue, 10 Mar 2026 03:30:41 GMT",
     "name": "张洪Heo",
     "avatar": "https://img.zhheo.com/i/67d8fa75943e4.webp"
   },
@@ -504,6 +504,14 @@
     "avatar": "https://www.zhilu.site/api/avatar.png"
   },
   {
+    "title": "使用Github Action来进行CI/CD",
+    "link": "https://blog.borry.org/article/github-action-ci",
+    "description": "使用Github Action来进行自动部署到服务器",
+    "pubDate": "Tue, 12 Mar 2024 00:00:00 GMT",
+    "name": "Borry",
+    "avatar": "https://img.notionusercontent.com/s3/prod-files-secure%2Fa5a46c38-63f0-4f6a-ab7a-2cd059e716c8%2F391a20ae-0430-4fbe-8d16-3861cfab2148%2FT5IEfGy2_400x400.jpg/size/w=1080?exp=1774368734&sig=M7P5icoRJ6HA5VJ2SsAzgPO8b3GgYhp9ZDFPhvrXSG0&id=07e87827-a1ad-4410-91ec-62eaa010ce6d&table=collection&userId=a98f818c-e509-4579-9121-7897441ca9ff"
+  },
+  {
     "title": "今日无事，除了一些技术咨询",
     "link": "https://blog.zhilu.site/2024/helping-day",
     "description": "一天中帮助朋友们解决各类问题，如软件警告甄别、平板选购咨询、远程协作实现、签到操作指导、下载文件查找、卸载工具推荐、AI代码探讨，展现技术分享与互助的价值。",
@@ -624,6 +632,14 @@
     "avatar": "https://cravatar.cn/avatar/646331BFF8F19A0E05679C3CC0FC54D6"
   },
   {
+    "title": "Tailscale 杂谈NAT",
+    "link": "https://blog.borry.org/article/tailscale-net",
+    "description": "NAT是什么，Tailscale是怎么实现的异地组网和端到端连接",
+    "pubDate": "Mon, 20 Nov 2023 00:00:00 GMT",
+    "name": "Borry",
+    "avatar": "https://img.notionusercontent.com/s3/prod-files-secure%2Fa5a46c38-63f0-4f6a-ab7a-2cd059e716c8%2F391a20ae-0430-4fbe-8d16-3861cfab2148%2FT5IEfGy2_400x400.jpg/size/w=1080?exp=1774368734&sig=M7P5icoRJ6HA5VJ2SsAzgPO8b3GgYhp9ZDFPhvrXSG0&id=07e87827-a1ad-4410-91ec-62eaa010ce6d&table=collection&userId=a98f818c-e509-4579-9121-7897441ca9ff"
+  },
+  {
     "title": "Termux 简单指南",
     "link": "https://blog.zhilu.site/2023/termux-guide",
     "description": "Termux 安装、配置 SSH，切换国内源，安装 ZSH、X11 图形界面，探索更多可能性。",
@@ -648,6 +664,22 @@
     "avatar": "https://www.zhilu.site/api/avatar.png"
   },
   {
+    "title": "HTTP分块编码传输",
+    "link": "https://blog.borry.org/article/http-chunked",
+    "description": "关于HTTP的长连接、短连接和如何使用fiber来实现chunked分块编码传输",
+    "pubDate": "Thu, 14 Sep 2023 00:00:00 GMT",
+    "name": "Borry",
+    "avatar": "https://img.notionusercontent.com/s3/prod-files-secure%2Fa5a46c38-63f0-4f6a-ab7a-2cd059e716c8%2F391a20ae-0430-4fbe-8d16-3861cfab2148%2FT5IEfGy2_400x400.jpg/size/w=1080?exp=1774368734&sig=M7P5icoRJ6HA5VJ2SsAzgPO8b3GgYhp9ZDFPhvrXSG0&id=07e87827-a1ad-4410-91ec-62eaa010ce6d&table=collection&userId=a98f818c-e509-4579-9121-7897441ca9ff"
+  },
+  {
+    "title": "Nginx配置反向代理",
+    "link": "https://blog.borry.org/article/nginx-reverse-proxy",
+    "description": "反向代理和正向代理，如何复用端口等",
+    "pubDate": "Tue, 12 Sep 2023 00:00:00 GMT",
+    "name": "Borry",
+    "avatar": "https://img.notionusercontent.com/s3/prod-files-secure%2Fa5a46c38-63f0-4f6a-ab7a-2cd059e716c8%2F391a20ae-0430-4fbe-8d16-3861cfab2148%2FT5IEfGy2_400x400.jpg/size/w=1080?exp=1774368734&sig=M7P5icoRJ6HA5VJ2SsAzgPO8b3GgYhp9ZDFPhvrXSG0&id=07e87827-a1ad-4410-91ec-62eaa010ce6d&table=collection&userId=a98f818c-e509-4579-9121-7897441ca9ff"
+  },
+  {
     "title": "Arch Linux 易用性及美化",
     "link": "https://blog.zhilu.site/2023/archlinux-beautify",
     "description": "Plasma 桌面环境下优化小键盘、触摸板行为，配置字体。",
@@ -656,12 +688,28 @@
     "avatar": "https://www.zhilu.site/api/avatar.png"
   },
   {
+    "title": "使用环境变量存储SSH私钥格式错误",
+    "link": "https://blog.borry.org/article/ssh-environment-key",
+    "description": "在使用Zeabur等托管平台时，使用环境变量来存储Key遇到的问题",
+    "pubDate": "Wed, 19 Jul 2023 00:00:00 GMT",
+    "name": "Borry",
+    "avatar": "https://img.notionusercontent.com/s3/prod-files-secure%2Fa5a46c38-63f0-4f6a-ab7a-2cd059e716c8%2F391a20ae-0430-4fbe-8d16-3861cfab2148%2FT5IEfGy2_400x400.jpg/size/w=1080?exp=1774368734&sig=M7P5icoRJ6HA5VJ2SsAzgPO8b3GgYhp9ZDFPhvrXSG0&id=07e87827-a1ad-4410-91ec-62eaa010ce6d&table=collection&userId=a98f818c-e509-4579-9121-7897441ca9ff"
+  },
+  {
     "title": "Arch Linux 初步配置",
     "link": "https://blog.zhilu.site/2023/archlinux-configure",
     "description": "在 Arch Linux 系统上安装配置必备软件，如蓝牙、Yay、Zsh、输入法等。",
     "pubDate": "2023-06-24T01:31:15Z",
     "name": "纸鹿本鹿",
     "avatar": "https://www.zhilu.site/api/avatar.png"
+  },
+  {
+    "title": "深澜自助服务中心分析",
+    "link": "https://blog.borry.org/article/srun-analyse",
+    "description": "校园网自助服务中心模拟登陆",
+    "pubDate": "Fri, 23 Jun 2023 00:00:00 GMT",
+    "name": "Borry",
+    "avatar": "https://img.notionusercontent.com/s3/prod-files-secure%2Fa5a46c38-63f0-4f6a-ab7a-2cd059e716c8%2F391a20ae-0430-4fbe-8d16-3861cfab2148%2FT5IEfGy2_400x400.jpg/size/w=1080?exp=1774368734&sig=M7P5icoRJ6HA5VJ2SsAzgPO8b3GgYhp9ZDFPhvrXSG0&id=07e87827-a1ad-4410-91ec-62eaa010ce6d&table=collection&userId=a98f818c-e509-4579-9121-7897441ca9ff"
   },
   {
     "title": "使用 ArchInstall 安装 Arch Linux",

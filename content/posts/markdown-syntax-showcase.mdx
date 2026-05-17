@@ -19,6 +19,10 @@ category: 技术
 - 上标：`x^2^` -> x^2^
 - 下标：`H~2~O` -> H~2~O
 
+还有 Ruby 注音：
+
+[汉字]{はんじ}
+
 链接写法：
 
 - 普通链接：[Vercel](https://vercel.com)
@@ -116,7 +120,9 @@ $$
 \sum_{i=1}^{n} i = \frac{n(n+1)}{2}
 $$
 
-## 6. Mermaid 图表
+## 6. 图表
+
+### Mermaid
 
 > Mermaid 的语法说实话我是一点不会，反正自带着有，不需要我去专门写语法，也蛮不错的。要是让我写的话那我就要拿 json 或者 yaml 来写了。具体参考我下面自制的组件语法
 
@@ -133,6 +139,47 @@ flowchart TD
   U[用户打开文章] --> M[MDX 编译]
   M --> R[React 组件渲染]
   R --> S[页面展示]
+```
+
+### PlantUML
+
+> 这也是个我不会的图表语法，支持 UML 各种图表：
+
+```plantuml
+@startuml
+Alice -> Bob: 你好，Bob！
+Bob --> Alice: 你好，Alice！很高兴见到你。
+Alice -> Bob: 你最近怎么样？
+```
+
+### Infographic
+
+infographic 是 [Antv](https://infographic.antv.vision/) 开发的一个信息图语法，支持多种图表类型。
+
+> 从创意上讲，跟我后面自制组件有异曲同工之妙。说实话我也是前几天翻网站发现的这个东西。说实话要是单看图片基础的话我那个也是 ok 的，但是这个用来写 PPT 很爽了。我打算基于这个和之前看到的 Markdown to PPT 项目，结合一下
+
+```infographic
+infographic chart-bar-plain-text
+data
+  title 年度营收增长
+  desc 展示近三年及本年目标营收对比（单位：亿元）
+  values
+    - label 2021年
+      value 120
+      desc 转型初期，稳步试水
+      icon lucide/sprout
+    - label 2022年
+      value 150
+      desc 平台优化，效率显著提升
+      icon lucide/zap
+    - label 2023年
+      value 190
+      desc 深化数智融合，全面增长
+      icon lucide/brain-circuit
+    - label 2024年
+      value 240
+      desc 拓展生态协同，冲击新高
+      icon lucide/trophy
 ```
 
 ## 7. 图片与脚注
@@ -656,7 +703,7 @@ data:
 ```
 ````
 
-> 我发现这个世界地图上，藏南地区是“给“了印度的，所以我再次不贴
+> 我发现这个世界地图上，藏南地区是“给“了印度的，所以我在这里就不贴了
 
 ### 聊天框
 

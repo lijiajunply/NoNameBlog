@@ -2,8 +2,9 @@ import {
   createMarkdownPreset,
   YAML_PROP_PREFIX,
 } from "@luckyfishes/markdown-core";
+import type { MDXRemoteProps } from "next-mdx-remote/rsc";
 import { compileMDX } from "next-mdx-remote/rsc";
-import { createElement, type ReactNode } from "react";
+import { type ComponentType, type ReactNode } from "react";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeKatex from "rehype-katex";
 import rehypePrettyCode from "rehype-pretty-code";
@@ -15,9 +16,11 @@ import { Chat } from "@/components/mdx/chat";
 import { CodeBlockFigure } from "@/components/mdx/code-block-figure";
 import { GitHubCalendarCard } from "@/components/mdx/github-calendar-card";
 import { Icon } from "@/components/mdx/icon";
+import { InfographicDiagram } from "@/components/mdx/infographic-diagram";
 import { LinkCard } from "@/components/mdx/link-card";
 import { MermaidDiagram } from "@/components/mdx/mermaid-diagram";
 import { MusicScore } from "@/components/mdx/music-score";
+import { PlantUMLDiagram } from "@/components/mdx/plantuml-diagram";
 import { Timeline } from "@/components/mdx/timeline";
 import { Tip } from "@/components/mdx/tip";
 import { ZoomableImage } from "@/components/mdx/zoomable-image";
@@ -29,7 +32,8 @@ import { cn } from "@/lib/utils";
 type MdxComponentProps = {
   className?: string;
   children?: ReactNode;
-  [key: string]: any;
+  alt?: string;
+  [key: string]: unknown;
 };
 
 function decodeYamlPropValue(value: unknown): unknown {
@@ -44,7 +48,7 @@ function decodeYamlPropValue(value: unknown): unknown {
   }
 }
 
-function decodeYamlProps<T extends Record<string, any>>(props: T): T {
+function decodeYamlProps<T extends Record<string, unknown>>(props: T): T {
   const decodedEntries = Object.entries(props).map(([key, value]) => [
     key,
     decodeYamlPropValue(value),
@@ -52,13 +56,16 @@ function decodeYamlProps<T extends Record<string, any>>(props: T): T {
   return Object.fromEntries(decodedEntries) as T;
 }
 
-function withDecodedProps<T extends MdxComponentProps>(
-  Component: (props: T) => ReactNode,
-) {
-  return (props: T) => createElement(Component, decodeYamlProps(props));
+function withDecodedProps<T extends object>(Component: (props: T) => ReactNode) {
+  const DecodedComponent = Component as unknown as ComponentType<T>;
+  return (props: T) => (
+    <DecodedComponent
+      {...(decodeYamlProps(props as Record<string, unknown>) as T)}
+    />
+  );
 }
 
-const mdxComponents: Record<string, any> = {
+const mdxComponents: NonNullable<MDXRemoteProps["components"]> = {
   h1: ({ className, children, ...props }: MdxComponentProps) => (
     <h1
       className={cn(
@@ -218,11 +225,35 @@ const mdxComponents: Record<string, any> = {
       {children}
     </kbd>
   ),
+  ruby: ({ className, children, ...props }: MdxComponentProps) => (
+    <ruby
+      className={cn(
+        "font-medium text-neutral-900 [ruby-position:over] dark:text-neutral-100",
+        className,
+      )}
+      {...props}
+    >
+      {children}
+    </ruby>
+  ),
+  rt: ({ className, children, ...props }: MdxComponentProps) => (
+    <rt
+      className={cn(
+        "text-[0.65em] font-medium tracking-[0.08em] text-neutral-500 dark:text-neutral-400",
+        className,
+      )}
+      {...props}
+    >
+      {children}
+    </rt>
+  ),
   Icon: withDecodedProps(Icon),
   Image: withDecodedProps(ZoomableImage),
   GitHubCalendarCard: withDecodedProps(GitHubCalendarCard),
+  InfographicDiagram: withDecodedProps(InfographicDiagram),
   MermaidDiagram: withDecodedProps(MermaidDiagram),
   MusicScore: withDecodedProps(MusicScore),
+  PlantUMLDiagram: withDecodedProps(PlantUMLDiagram),
   Badge: withDecodedProps(Badge),
   Card: withDecodedProps(Card),
   Tabs: withDecodedProps(Tabs),
