@@ -19,3 +19,53 @@ draft: false
 在最开始 gpt 3.5 问世的时候，同样出现了一种用户自定义的方式：使用 提示词(Prompt)。这个提示词其实也可以叫成 “设定“ 。他决定了用户对于大模型输入的期望和要求。
 
 于是 Agent 概念就这么出来了 — 根据预设词进行 AI 操作
+
+直到 Funtion Calling 和 RAG 的出现，Agent 得到了极大的进步 —— AI 真的可以去干活了
+
+Function Calling ，翻译过来就是 函数调用 。他让 AI 可以直接调用 AI 平台包装好的函数。例如天气查询、日期查询，甚至于可以让 AI 获取定位数据等等等等。
+
+在 Function Calling 出现之前，AI 只能当一个 “缸中之脑“ —— 只能根据自己的知识和用户的输入来进行回答，对除此之外的各种信息都是不知道的。Function Calling 相当于给 AI 披上了皮肤，加上了手臂，让 AI 真正可以去感知外面的数据世界。
+
+而 RAG ，也就是增强生成索引，这个技术在于让 AI 可以通过向量的形式进行外部知识库文本检索，拿取，以及基于拿到的新数据进行回答。RAG 让 AI 具有了更多的知识来源，甚至可以让 AI 具备一定的记忆功能。
+
+> [!TIP]
+> RAG 的本质其实还是预设词
+
+从这两点出发，AI Agent 就真正诞生了 —— 之前都是小打小闹，现在 AI 真正具备了干活的能力。
+
+至于后面的故事，例如 MCP、Skill、Memory、ReAct 等等，都是在Function Call 和 Prompt 这两个基础上进行的，但是又不止于此，此为后话
+
+## 创建一个 Agent 项目
+
+我们这次打算写一个 Wiki 的 Agent，来帮助我们查询百科项目的知识。我们这次使用 LangGraph 和 LangChain 来进行开发。LangGragh 用来进行 AI 工作流 的开发；LangChain 用来进行 Agent 的开发。
+
+这次我们使用 Python + uv 来进行开发。
+
+uv 是一个 Python 的包管理工具。uv 可以帮助我们快速创建一个 Python 项目，并且安装我们需要的依赖。重点是 uv 的依赖管理很舒服，且写好了 Python 版本使用哪个。
+
+我们先下载一下 uv:
+
+::tabs
+tabs: ["macOS / Linux","Windows"]
+
+---
+
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+---
+
+```bash
+powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+```
+::
+
+我们使用 uv 来创建一个 Python 项目:
+
+```bash
+uv init wiki_agent
+cd wiki_agent
+uv add langchain langgraph langchain-embeddings sentence-transformers langchain-openai
+```
+
+到现在，我们成功创建了一个 Python 项目，并且安装好了我们需要的依赖。接下来我们就可以开始进行 Agent 的开发了。
