@@ -4,7 +4,7 @@ import {
 } from "@luckyfishes/markdown-core";
 import type { MDXRemoteProps } from "next-mdx-remote/rsc";
 import { compileMDX } from "next-mdx-remote/rsc";
-import { type ComponentType, type ReactNode } from "react";
+import type { ComponentType, ReactNode } from "react";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeKatex from "rehype-katex";
 import rehypePrettyCode from "rehype-pretty-code";
@@ -28,6 +28,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
+import { preprocessRubySyntax } from "./remark-ruby";
 
 type MdxComponentProps = {
   className?: string;
@@ -56,7 +57,9 @@ function decodeYamlProps<T extends Record<string, unknown>>(props: T): T {
   return Object.fromEntries(decodedEntries) as T;
 }
 
-function withDecodedProps<T extends object>(Component: (props: T) => ReactNode) {
+function withDecodedProps<T extends object>(
+  Component: (props: T) => ReactNode,
+) {
   const DecodedComponent = Component as unknown as ComponentType<T>;
   return (props: T) => (
     <DecodedComponent
@@ -282,9 +285,10 @@ export async function renderMdx(source: string) {
   const [customSyntaxPlugin, remarkGfmPlugin, remarkSuperSubPlugin] =
     markdownPreset.remarkPlugins;
   const [codeFencePlugin, footnotesPlugin] = markdownPreset.rehypePlugins;
+  const transformedSource = preprocessRubySyntax(source);
 
   const { content } = await compileMDX({
-    source,
+    source: transformedSource,
     components: mdxComponents,
     options: {
       parseFrontmatter: false,
