@@ -65,7 +65,6 @@ function buildBreadcrumb(
 
   const rootChildren: CrumbOption[] = [
     { label: "主页", href: `${base}/` },
-    { label: "搜索", href: `${base}/search` },
     { label: "统计", href: `${base}/stats` },
     { label: "关于", href: `${base}/about` },
     { label: "友链", href: `${base}/friends` },
@@ -85,7 +84,6 @@ function buildBreadcrumb(
 
   const staticLabels: Record<string, string> = {
     [base || "/"]: "主页",
-    [`${base}/search`]: "搜索",
     [`${base}/stats`]: "统计",
     [`${base}/about`]: "关于",
     [`${base}/friends`]: "友链",

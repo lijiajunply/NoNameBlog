@@ -15,7 +15,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import {
   Sidebar,
@@ -26,7 +26,6 @@ import {
   SidebarGroupContent,
   SidebarGroupLabel,
   SidebarHeader,
-  SidebarInput,
   SidebarMenu,
   SidebarMenuBadge,
   SidebarMenuButton,
@@ -35,6 +34,7 @@ import {
 } from "@/components/ui/sidebar";
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
+import { SearchCommand } from "./search-command";
 import { ThemeToggle } from "./theme-toggle";
 import { Button } from "./ui/button";
 import { ButtonGroup } from "./ui/button-group";
@@ -115,27 +115,16 @@ export function SidebarNav({
   routeBase = "",
 }: SidebarNavProps) {
   const pathname = usePathname();
-  const router = useRouter();
   const base = normalizeRouteBase(routeBase);
   const navItems = createNavItems(base);
   const homeHref = withRouteBase(base, "/");
-  const searchHref = withRouteBase(base, "/search");
   const categoriesPrefix = `${base}/categories/`;
   const tagsPrefix = `${base}/tags/`;
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchOpen, setSearchOpen] = useState(false);
   const isCategoryRoute = pathname.startsWith(categoriesPrefix);
   const isTagRoute = pathname.startsWith(tagsPrefix);
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
   const [isTagOpen, setIsTagOpen] = useState(false);
-
-  useEffect(() => {
-    if (pathname === searchHref) {
-      const params = new URLSearchParams(window.location.search);
-      setSearchQuery(params.get("q") ?? params.get("p") ?? "");
-    } else {
-      setSearchQuery("");
-    }
-  }, [pathname]);
 
   useEffect(() => {
     if (isCategoryRoute) {
@@ -171,48 +160,34 @@ export function SidebarNav({
           </SidebarMenuItem>
         </SidebarMenu>
 
-        <form
-          className="group-data-[collapsible=icon]:hidden mt-2"
-          onSubmit={(e) => {
-            e.preventDefault();
-            const nextQuery = searchQuery.trim();
-            const nextHref = nextQuery
-              ? `${searchHref}?q=${encodeURIComponent(nextQuery)}`
-              : searchHref;
-            router.push(nextHref);
-          }}
-        >
+        <div className="group-data-[collapsible=icon]:hidden mt-2">
           <SidebarGroup className="py-0 px-0">
             <SidebarGroupContent className="relative">
-              <label htmlFor="search" className="sr-only">
-                搜索
-              </label>
-              <SidebarInput
-                id="search"
-                placeholder="搜索..."
-                className="pl-8 bg-neutral-100/50 dark:bg-neutral-800/50 focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:border-neutral-300 dark:focus-visible:border-neutral-700"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-              />
+              <button
+                type="button"
+                onClick={() => setSearchOpen(true)}
+                className="flex h-8 w-full items-center rounded-md border border-neutral-200 bg-neutral-100/50 pl-8 pr-3 text-sm text-neutral-500 dark:border-neutral-800 dark:bg-neutral-800/50 dark:text-neutral-400"
+              >
+                搜索...
+              </button>
               <SearchIcon className="pointer-events-none absolute left-2 top-1/2 size-4 -translate-y-1/2 select-none opacity-50" />
             </SidebarGroupContent>
           </SidebarGroup>
-        </form>
+        </div>
 
         <SidebarMenu className="hidden group-data-[collapsible=icon]:flex mt-2">
           <SidebarMenuItem>
             <SidebarMenuButton
-              asChild
               tooltip="搜索"
-              isActive={pathname === searchHref}
+              onClick={() => setSearchOpen(true)}
             >
-              <Link href={searchHref}>
-                <SearchIcon />
-                <span>搜索</span>
-              </Link>
+              <SearchIcon />
+              <span>搜索</span>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
+
+        <SearchCommand open={searchOpen} onOpenChange={setSearchOpen} />
       </SidebarHeader>
 
       <SidebarContent>
