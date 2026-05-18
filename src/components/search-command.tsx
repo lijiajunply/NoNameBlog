@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import {
   Command,
   CommandEmpty,
@@ -53,10 +54,15 @@ type SearchCommandProps = {
 
 export function SearchCommand({ open, onOpenChange }: SearchCommandProps) {
   const router = useRouter();
+  const [mounted, setMounted] = useState(false);
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<SearchResult[]>([]);
   const [isSearching, setIsSearching] = useState(false);
   const pagefindRef = useRef<PagefindModule | null>(null);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Reset state when opening
   useEffect(() => {
@@ -161,9 +167,9 @@ export function SearchCommand({ open, onOpenChange }: SearchCommandProps) {
     return () => document.removeEventListener("keydown", handler);
   }, [open, onOpenChange]);
 
-  if (!open) return null;
+  if (!mounted || !open) return null;
 
-  return (
+  return createPortal(
     <div
       className="fixed inset-0 z-50"
       role="dialog"
@@ -219,6 +225,7 @@ export function SearchCommand({ open, onOpenChange }: SearchCommandProps) {
           </CommandList>
         </Command>
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }
