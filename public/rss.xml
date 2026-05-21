@@ -5,6 +5,14 @@
     <link>https://blog.luckyfishes.site</link>
     <description>一个简约的静态技术博客，记录开发与思考。</description>
       <item>
+        <title>闲聊 1</title>
+        <link>https://blog.luckyfishes.site/posts/talks-1/</link>
+        <guid>https://blog.luckyfishes.site/posts/talks-1/</guid>
+        <pubDate>Thu, 21 May 2026 00:00:00 GMT</pubDate>
+        <description>一点小小的聊天</description>
+      </item>
+
+      <item>
         <title>关于草台班子与屎山代码</title>
         <link>https://blog.luckyfishes.site/posts/my_work_1/</link>
         <guid>https://blog.luckyfishes.site/posts/my_work_1/</guid>
@@ -458,6 +466,54 @@
         <guid>https://blog.luckyfishes.site/posts/social-darwinism/</guid>
         <pubDate>Sun, 02 Jul 2023 00:00:00 GMT</pubDate>
         <description>围绕社会达尔文主义的个人思考。</description>
+      </item>
+
+      <item>
+        <title>噩梦</title>
+        <link>https://blog.luckyfishes.site/posts/emeng/</link>
+        <guid>https://blog.luckyfishes.site/posts/emeng/</guid>
+        <pubDate>Sun, 21 May 2023 00:00:00 GMT</pubDate>
+        <description>自己以前写的，就当记录了</description>
+      </item>
+
+      <item>
+        <title>今夜</title>
+        <link>https://blog.luckyfishes.site/posts/jinye/</link>
+        <guid>https://blog.luckyfishes.site/posts/jinye/</guid>
+        <pubDate>Sun, 21 May 2023 00:00:00 GMT</pubDate>
+        <description>自己以前写的，就当记录了</description>
+      </item>
+
+      <item>
+        <title>念南，忆北</title>
+        <link>https://blog.luckyfishes.site/posts/niannan/</link>
+        <guid>https://blog.luckyfishes.site/posts/niannan/</guid>
+        <pubDate>Sun, 21 May 2023 00:00:00 GMT</pubDate>
+        <description>自己以前写的，就当记录了</description>
+      </item>
+
+      <item>
+        <title>灯塔</title>
+        <link>https://blog.luckyfishes.site/posts/dengta/</link>
+        <guid>https://blog.luckyfishes.site/posts/dengta/</guid>
+        <pubDate>Fri, 21 May 2021 00:00:00 GMT</pubDate>
+        <description>自己以前写的，就当记录了</description>
+      </item>
+
+      <item>
+        <title>我爱你</title>
+        <link>https://blog.luckyfishes.site/posts/love/</link>
+        <guid>https://blog.luckyfishes.site/posts/love/</guid>
+        <pubDate>Fri, 21 May 2021 00:00:00 GMT</pubDate>
+        <description>自己以前写的，就当记录了</description>
+      </item>
+
+      <item>
+        <title>田野</title>
+        <link>https://blog.luckyfishes.site/posts/tiaoye/</link>
+        <guid>https://blog.luckyfishes.site/posts/tiaoye/</guid>
+        <pubDate>Thu, 21 May 2020 00:00:00 GMT</pubDate>
+        <description>自己以前写的，就当记录了</description>
       </item>
   </channel>
 </rss>
