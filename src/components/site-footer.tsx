@@ -14,11 +14,11 @@ export function SiteFooter() {
         <div className="flex items-center gap-4">
           <Link href="https://www.travellings.cn/go.html" target="_blank" rel="noopener" title="开往-友链接力" className="flex gap-0.5 justify-center items-center hover:text-neutral-900 dark:hover:text-white">
             <Icon icon="fa7-solid:train-subway" width="16" height="16" />
-            <span className="text-sm">开往</span>
+            <span className="text-sm hidden md:inline">开往</span>
           </Link>
           <Link href="https://github.com/lijiajunply/NoNameBlog" target="_blank" rel="noopener" title="GitHub" className="flex gap-0.5 justify-center items-center hover:text-neutral-900 dark:hover:text-white">
             <Icon icon="lucide:github" width="16" height="16" />
-            <span className="text-sm">GitHub Repo</span>
+            <span className="text-sm hidden md:inline">GitHub Repo</span>
           </Link>
           <Link
             href="/rss.xml"

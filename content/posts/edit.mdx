@@ -1,0 +1,102 @@
+---
+title: 网站使用须知
+date: '2026-05-24'
+summary: 给博客部署和书写的一些建议
+tags:
+  - Markdown
+  - MDX
+category: 技术
+---
+
+## 基本介绍
+
+本博客使用的是 Next.js + SSG，直接编译成的静态网站。使用 TailwindCSS + shadcn
+
+## 部署时需要注意的
+
+本博客使用 GISCUS 进行评论，如果要开启则需要配置以下变量：
+
+```
+NEXT_PUBLIC_GISCUS_REPO=owner/repo
+NEXT_PUBLIC_GISCUS_REPO_ID=R_kgDOXXXXXXX
+NEXT_PUBLIC_GISCUS_CATEGORY=Announcements
+NEXT_PUBLIC_GISCUS_CATEGORY_ID=DIC_kwDOXXXXXXX4CXXXX
+NEXT_PUBLIC_VERCEL_ANALYTICS_ENABLED=false
+```
+
+然后就是网站名称和图标了。
+
+图标只需要更换 `src/app/facicon.ico` 即可，所有的图标都是用的这个
+
+而网站名称需要更改一些，这个其实 AI 一下就行，倒不是什么难事
+
+## 创建文章
+
+所有文章放在 `content/posts/` 目录下，文件名为 `.mdx` 格式。每篇文章的开头需要包含 frontmatter 元数据：
+
+```yaml
+---
+title: 文章标题
+date: '2026-05-24'
+summary: 文章摘要，会显示在列表和 RSS 中
+tags:
+  - 标签1
+  - 标签2
+category: 分类名称
+draft: false        # 可选，设为 true 则不会出现在文章列表中
+cover: /path/to/image.png  # 可选，文章封面图
+---
+```
+
+Frontmatter 字段说明：
+
+| 字段 | 必填 | 说明 |
+| --- | --- | --- |
+| `title` | 是 | 文章标题 |
+| `date` | 是 | 发布日期，格式 `YYYY-MM-DD` |
+| `summary` | 否 | 文章摘要 |
+| `tags` | 否 | 标签列表，默认空数组 |
+| `category` | 否 | 分类，默认 `Uncategorized` |
+| `draft` | 否 | 是否为草稿，默认 `false` |
+| `cover` | 否 | 封面图路径 |
+
+当然你也可以把文件放在 `content/posts/draft` 文件夹中。这个文件夹是被忽略的，所以可以把想在本地展示又不想在服务器中展示的内容放在这里。
+
+### 其实还可以使用 CLI
+
+当运行 `pnpm cli` 时，会出现一段文本：
+
+```
+Blog CLI
+
+Usage:
+  pnpm cli <command> [options]
+
+Commands:
+  new           Create a new post interactively
+  categories    List categories with post counts
+  tags          List tags with post counts
+  help          Show this help message
+
+Options for "new":
+  --title <text>
+  --slug <text>
+  --date <YYYY-MM-DD>
+  --summary <text>
+  --category <text>
+  --tags <a,b,c>
+  --draft
+  --published
+
+Examples:
+  pnpm cli new
+  pnpm cli new --title "My Post" --category "技术" --tags "开发,CSharp"
+  pnpm cli categories
+  pnpm cli tags
+```
+
+可以选择使用 CLI 进行文章的创建，例如 `pnpm cli new --title "My Post" --category "技术" --tags "开发,CSharp"`，当然如果只是进行 new 操作，也会一步一步进行提示，从而方便快速的创建
+
+### 编辑时，其实可以使用网站自带的编辑器
+
+如果你是在开发模式中进入 "写作" 页，你可以看到有个编辑的按钮，之后就可以直接在网站编辑本地文件了。

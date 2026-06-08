@@ -39,8 +39,8 @@ export function PostFeedWithCategoryFilter({
   const router = useRouter();
   const [selectedCategory, setSelectedCategory] = useState(initialCategory);
   const [currentPage, setCurrentPage] = useState(initialPage);
-  const [contextListShow, setContextListShow] = useState(() =>
-    typeof window !== "undefined" && window.innerWidth < 1024 ? "list" : "grid",
+  const [contextListShow, setContextListShow] = useState<"list" | "grid">(
+    "grid",
   );
   useEffect(() => {
     if (typeof window === "undefined") {
@@ -237,7 +237,7 @@ export function PostFeedWithCategoryFilter({
 
       {visiblePosts.length > 0 ? (
         <div
-          className={`grid gap-6 ${contextListShow === "list" ? "grid-cols-1" : "grid-cols-2"}`}
+          className={`grid gap-6 ${contextListShow === "list" ? "grid-cols-1" : "grid-cols-1 lg:grid-cols-2"}`}
         >
           {visiblePosts.map((post) => (
             <div

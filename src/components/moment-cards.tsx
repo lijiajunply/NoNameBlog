@@ -61,7 +61,7 @@ export function MomentsContent() {
         <div className="flex items-center justify-between">
           <h2 className="text-2xl font-bold">朋友圈</h2>
         </div>
-        <div className="mt-4 grid grid-cols-2 gap-4">
+        <div className="mt-4 grid grid-cols-1 gap-4 lg:grid-cols-2">
           {MOMENT_SKELETON_KEYS.map((key) => (
             <div
               key={key}
@@ -93,8 +93,8 @@ export function MomentsCard({ items }: { items: FriendFeedItem[] }) {
   const router = useRouter();
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [contextListShow, setContextListShow] = useState<"list" | "grid">(() =>
-    typeof window !== "undefined" && window.innerWidth < 1024 ? "list" : "grid",
+  const [contextListShow, setContextListShow] = useState<"list" | "grid">(
+    "grid",
   );
 
   // sync layout with window width
@@ -163,7 +163,7 @@ export function MomentsCard({ items }: { items: FriendFeedItem[] }) {
       </div>
 
       <div
-        className={`grid gap-4 ${contextListShow === "list" ? "grid-cols-1" : "grid-cols-2"}`}
+        className={`grid gap-4 ${contextListShow === "list" ? "grid-cols-1" : "grid-cols-1 lg:grid-cols-2"}`}
       >
         {visibleItems.map((item) => {
           const itemKey =
