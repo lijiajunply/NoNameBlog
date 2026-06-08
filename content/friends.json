@@ -31,6 +31,14 @@
     "order": 4,
     "category": "个人博客"
   },
+    {
+    "name": "殇恋社区",
+    "url": "https://me.moe5200.com/",
+    "description": "一个分享技术笔记与生活记录小站。实用软件与工具推荐，偶尔也写写日常随想，留存一些数字生活的痕迹",
+    "avatar": "https://me.moe5200.com/logo.png",
+    "order": 4,
+    "category": "个人博客"
+  },
   {
     "name": "西建大iOS Club",
     "url": "https://www.xauat.site/",

@@ -5,6 +5,14 @@
     <link>https://blog.luckyfishes.site</link>
     <description>一个简约的静态技术博客，记录开发与思考。</description>
       <item>
+        <title>网站使用须知</title>
+        <link>https://blog.luckyfishes.site/posts/edit/</link>
+        <guid>https://blog.luckyfishes.site/posts/edit/</guid>
+        <pubDate>Sun, 24 May 2026 00:00:00 GMT</pubDate>
+        <description>给博客部署和书写的一些建议</description>
+      </item>
+
+      <item>
         <title>闲聊 1</title>
         <link>https://blog.luckyfishes.site/posts/talks-1/</link>
         <guid>https://blog.luckyfishes.site/posts/talks-1/</guid>
