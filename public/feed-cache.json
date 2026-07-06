@@ -160,14 +160,6 @@
     "avatar": "https://img.zhheo.com/i/67d8fa75943e4.webp"
   },
   {
-    "title": "清灰。然后笔记本坏了",
-    "link": "https://blog.guuguai.site/2026/laptop-repair-postmortem",
-    "description": "日常清灰换相变片，不知道为什么翻车了....",
-    "pubDate": "2026-04-27T16:35:30Z",
-    "name": "GuuGuai",
-    "avatar": "https://cravatar.cn/avatar/646331BFF8F19A0E05679C3CC0FC54D6"
-  },
-  {
     "title": "北京实习300天",
     "link": "https://blog.zhilu.site/2026/beijing-intern",
     "description": "从西安到北京，从校园到大厂实习，「300天」不只工作本身，有迁移也有变化。秩序常新，但内核与长期的事情不会变。",
@@ -182,30 +174,6 @@
     "pubDate": "2026-02-23T03:02:12Z",
     "name": "纸鹿本鹿",
     "avatar": "https://www.zhilu.site/api/avatar.png"
-  },
-  {
-    "title": "考研劝退指北其二：要考研吗？",
-    "link": "https://blog.guuguai.site/2026/kaoyan-guide-2",
-    "description": "考研复盘文章第二篇，我考研的原因、考砸的原因，以及对是否需要考研的一点见解。",
-    "pubDate": "2026-02-10T15:09:34Z",
-    "name": "GuuGuai",
-    "avatar": "https://cravatar.cn/avatar/646331BFF8F19A0E05679C3CC0FC54D6"
-  },
-  {
-    "title": "考研劝退指北其一：考研常识篇",
-    "link": "https://blog.guuguai.site/2026/kaoyan-guide-1",
-    "description": "2025年考研复盘。既然无法分享成功经验，那就聊聊失败者的视角。本文作为系列第一篇，重点梳理考研流程、志愿规则与一些其它常识。",
-    "pubDate": "2026-02-01T13:54:33Z",
-    "name": "GuuGuai",
-    "avatar": "https://cravatar.cn/avatar/646331BFF8F19A0E05679C3CC0FC54D6"
-  },
-  {
-    "title": "如何获取GCP6位验证码:中行借记卡预授权记录查询",
-    "link": "https://blog.guuguai.site/2026/boc-google-cloud",
-    "description": "双信息交易模式的简单介绍，以及中行借记卡查询预授权记录的方法",
-    "pubDate": "2026-01-23T02:44:27Z",
-    "name": "GuuGuai",
-    "avatar": "https://cravatar.cn/avatar/646331BFF8F19A0E05679C3CC0FC54D6"
   },
   {
     "title": "谈谈不受欢迎的博客技术特征",
@@ -312,14 +280,6 @@
     "avatar": "https://www.zhilu.site/api/avatar.png"
   },
   {
-    "title": "MC扫盲之版本/启动器/正盗版/外置登录",
-    "link": "https://blog.guuguai.site/2024/minecraft-version",
-    "description": "为仙建世界社团的新同学准备的入坑指南，解析Java版与基岩版的区别、正版购买渠道、启动器选择建议，以及正版登录、离线登录与外置登录（皮肤站）背后的验证原理。",
-    "pubDate": "2024-10-08T11:45:48Z",
-    "name": "GuuGuai",
-    "avatar": "https://cravatar.cn/avatar/646331BFF8F19A0E05679C3CC0FC54D6"
-  },
-  {
     "title": "配置并差点运行不了 Java Applet",
     "link": "https://blog.zhilu.site/2024/run-java-applets",
     "description": "为了完成大学《Java 语言程序设计》课程的实验报告，尝试配置旧版 Java 环境并成功运行 Java Applet，最终认为实际应用价值有限。",
@@ -350,14 +310,6 @@
     "pubDate": "2024-08-24T22:46:54Z",
     "name": "纸鹿本鹿",
     "avatar": "https://www.zhilu.site/api/avatar.png"
-  },
-  {
-    "title": "Java版的译名是Mojang官方翻译的吗？",
-    "link": "https://blog.guuguai.site/2024/minecraft-translations-new",
-    "description": "为仙建世界社团的同学们简单介绍Minecraft Java版基于Crowdin平台的社区翻译机制，解释为何Java版翻译既非Mojang官方制作也非外包，并简单叙述译名从讨论到采纳的流程。",
-    "pubDate": "2024-08-07T03:09:03Z",
-    "name": "GuuGuai",
-    "avatar": "https://cravatar.cn/avatar/646331BFF8F19A0E05679C3CC0FC54D6"
   },
   {
     "title": "Linux 下通过 Samba 共享文件夹",
@@ -416,14 +368,6 @@
     "avatar": "https://www.zhilu.site/api/avatar.png"
   },
   {
-    "title": "上课不带电脑之：我走了多少弯路？",
-    "link": "https://blog.guuguai.site/2024/no-computer-to-class",
-    "description": "记录我在尝试用安卓平板代替笔记本电脑上课的折腾过程。从 Moonlight 串流、Termux 跑 Linux 容器，到 VSCode 远程隧道、本地运行 Jupyter，最终定格在服务器部署 code-server 的多次尝试与总结。",
-    "pubDate": "2024-05-28T08:00:10Z",
-    "name": "GuuGuai",
-    "avatar": "https://cravatar.cn/avatar/646331BFF8F19A0E05679C3CC0FC54D6"
-  },
-  {
     "title": "从 CSS 排序折腾到 Stylelint 和 pnpm",
     "link": "https://blog.zhilu.site/2024/css-sort",
     "description": "试图不走寻常路，通过 pnpm 全局安装 Stylelint 实现 CSS 排序，却遭遇诸多挑战。理想的方案是否真的可行？",
@@ -438,22 +382,6 @@
     "pubDate": "2024-05-11T08:05:40Z",
     "name": "纸鹿本鹿",
     "avatar": "https://www.zhilu.site/api/avatar.png"
-  },
-  {
-    "title": "VScode更换Vtuber风格LOGO",
-    "link": "https://blog.guuguai.site/2024/vscode-vtuber-logo",
-    "description": "介绍使用 Custom CSS and JS Loader 扩展修改 VSCode 默认背景 LOGO 的方法，实现编辑器界面的个性化定制。",
-    "pubDate": "2024-05-05T02:39:42Z",
-    "name": "GuuGuai",
-    "avatar": "https://cravatar.cn/avatar/646331BFF8F19A0E05679C3CC0FC54D6"
-  },
-  {
-    "title": "MATLAB如何导入Word文档中的表格数据",
-    "link": "https://blog.guuguai.site/2024/math-model-word-input",
-    "description": "24年西建大数模校赛C题中，题目数据以表格的形式放进了word文档之中，部分同学被这个数据导入给卡住了，对着word里面的数据无从下手，其实MATLAB提供了从word中导入表格数据的函数。",
-    "pubDate": "2024-05-04T03:17:03Z",
-    "name": "GuuGuai",
-    "avatar": "https://cravatar.cn/avatar/646331BFF8F19A0E05679C3CC0FC54D6"
   },
   {
     "title": "今日有「假」",
@@ -486,14 +414,6 @@
     "pubDate": "2024-04-01T15:14:39Z",
     "name": "纸鹿本鹿",
     "avatar": "https://www.zhilu.site/api/avatar.png"
-  },
-  {
-    "title": "第一次海淘-日淘市集与筋斗云专线",
-    "link": "https://blog.guuguai.site/2024/haitao-ritao",
-    "description": "记录了我第一次通过日淘市集代购平台在煤炉（Mercari）入手《白箱》设定集的全过程。涵盖了放弃其它平台的原因、日淘市集各项手续费明细、筋斗云专线的备案与清关流程，并附带了长达 21 天的完整物流时间线供参考。",
-    "pubDate": "2024-03-29T11:42:36Z",
-    "name": "GuuGuai",
-    "avatar": "https://cravatar.cn/avatar/646331BFF8F19A0E05679C3CC0FC54D6"
   },
   {
     "title": "在延长今天和期待明天之间",
@@ -536,14 +456,6 @@
     "avatar": "https://www.zhilu.site/api/avatar.png"
   },
   {
-    "title": "Mifare classic 1k卡片笔记",
-    "link": "https://blog.guuguai.site/2024/mifare-class-1k",
-    "description": "由于一些原因折腾了一段时间M1卡，留下一些笔记备忘。",
-    "pubDate": "2024-02-29T13:29:35Z",
-    "name": "GuuGuai",
-    "avatar": "https://cravatar.cn/avatar/646331BFF8F19A0E05679C3CC0FC54D6"
-  },
-  {
     "title": "运营商又想多收话费了",
     "link": "https://blog.zhilu.site/2024/carrier-overbilling",
     "description": "亲身经历的三个电信服务案例，揭示了三大运营商诱导扣费的问题。",
@@ -552,60 +464,12 @@
     "avatar": "https://www.zhilu.site/api/avatar.png"
   },
   {
-    "title": "我的银行卡",
-    "link": "https://blog.guuguai.site/2024/my-card",
-    "description": "盘点我持有的各大银行借记卡，展示中国银行洛天依、CCG、Bilibili、招商银行花嫁卡等二次元联名卡面，分享各张卡片的申请途径、申请经历、卡bin、有效期等基本信息。",
-    "pubDate": "2024-02-20T08:14:29Z",
-    "name": "GuuGuai",
-    "avatar": "https://cravatar.cn/avatar/646331BFF8F19A0E05679C3CC0FC54D6"
-  },
-  {
-    "title": "如何查找二次元插画原图以及作者",
-    "link": "https://blog.guuguai.site/2024/pic-search",
-    "description": "介绍了 SauceNAO、ascii2d 以及 Google 识图等搜图工具的使用方法和技巧，通过实际案例演示如何从一张残缺的图片找到原图。",
-    "pubDate": "2024-02-09T07:23:17Z",
-    "name": "GuuGuai",
-    "avatar": "https://cravatar.cn/avatar/646331BFF8F19A0E05679C3CC0FC54D6"
-  },
-  {
     "title": "电脑连接手机，手机给电脑传文件……",
     "link": "https://blog.zhilu.site/2024/link-util",
     "description": "在同一局域网下，电脑与手机之间互传文件、屏幕投影和远程控制的各种方法。",
     "pubDate": "2024-01-31T16:28:48Z",
     "name": "纸鹿本鹿",
     "avatar": "https://www.zhilu.site/api/avatar.png"
-  },
-  {
-    "title": "MATLAB-笔记1",
-    "link": "https://blog.guuguai.site/2024/matlab-note1",
-    "description": "MATLAB学习笔记，为数学建模竞赛的一点准备。",
-    "pubDate": "2024-01-29T07:29:45Z",
-    "name": "GuuGuai",
-    "avatar": "https://cravatar.cn/avatar/646331BFF8F19A0E05679C3CC0FC54D6"
-  },
-  {
-    "title": "过去一年薅的羊毛",
-    "link": "https://blog.guuguai.site/2024/clip-coupons-2023",
-    "description": "2023年我到底薅了多少羊毛？一些薅羊毛经历的总结，涵盖了各大平台各种类型的羊毛。",
-    "pubDate": "2024-01-22T15:00:51Z",
-    "name": "GuuGuai",
-    "avatar": "https://cravatar.cn/avatar/646331BFF8F19A0E05679C3CC0FC54D6"
-  },
-  {
-    "title": "Github22端口被占用",
-    "link": "https://blog.guuguai.site/2024/github-22-timeout",
-    "description": "发文章的时候发现Github 22端口被占用，写一篇文章备忘。",
-    "pubDate": "2024-01-21T05:22:23Z",
-    "name": "GuuGuai",
-    "avatar": "https://cravatar.cn/avatar/646331BFF8F19A0E05679C3CC0FC54D6"
-  },
-  {
-    "title": "数学建模初步认知",
-    "link": "https://blog.guuguai.site/2024/math-model-note",
-    "description": "学习数学建模的一点笔记，描述了对数学建模论文写作套路的初步认知。",
-    "pubDate": "2024-01-20T16:29:33Z",
-    "name": "GuuGuai",
-    "avatar": "https://cravatar.cn/avatar/646331BFF8F19A0E05679C3CC0FC54D6"
   },
   {
     "title": "Moonlight 串流指南",
@@ -622,14 +486,6 @@
     "pubDate": "2023-12-25T08:15:00Z",
     "name": "纸鹿本鹿",
     "avatar": "https://www.zhilu.site/api/avatar.png"
-  },
-  {
-    "title": "Spacedesk串流指南",
-    "link": "https://blog.guuguai.site/2023/spacedesk-streaming-guide",
-    "description": "介绍 Spacedesk 屏幕串流方案，利用局域网将手机、平板等设备变为电脑的第二显示器，支持音频同步与触摸操作，适合低成本组建双屏环境。",
-    "pubDate": "2023-12-13T14:57:08Z",
-    "name": "GuuGuai",
-    "avatar": "https://cravatar.cn/avatar/646331BFF8F19A0E05679C3CC0FC54D6"
   },
   {
     "title": "Tailscale 杂谈NAT",
@@ -734,14 +590,6 @@
     "pubDate": "2021-12-05T03:03:00Z",
     "name": "纸鹿本鹿",
     "avatar": "https://www.zhilu.site/api/avatar.png"
-  },
-  {
-    "title": "修监控",
-    "link": "https://blog.guuguai.site/2021/story-about-feng",
-    "description": "初稿曾发布于野生技协QQ群，本文以一场荒诞的“监控维修”为隐喻，影射高中时期某位信息老师在修理希沃展台时的离奇操作：放着正经故障不顾，反倒对班级电脑指点江山，进行了一系列难以理解的“无效优化”。",
-    "pubDate": "2021-07-08T16:00:00Z",
-    "name": "GuuGuai",
-    "avatar": "https://cravatar.cn/avatar/646331BFF8F19A0E05679C3CC0FC54D6"
   },
   {
     "title": "修监控 (授权转载)",
